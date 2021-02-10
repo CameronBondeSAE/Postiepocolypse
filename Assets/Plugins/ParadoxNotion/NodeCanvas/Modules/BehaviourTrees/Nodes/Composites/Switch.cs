@@ -1,112 +1,132 @@
+using System.Collections.Generic;
 using NodeCanvas.Framework;
 using NodeCanvas.Framework.Internal;
+using ParadoxNotion;
 using ParadoxNotion.Design;
 using UnityEngine;
 
+namespace NodeCanvas.BehaviourTrees
+{
 
-namespace NodeCanvas.BehaviourTrees{
+    [Category("Composites")]
+    [Description("Executes one child based on the provided int or enum and return it's status. If set to Dynamic and 'case' change while a child is running, that child will be interrupted before the new child is executed.")]
+    [Icon("IndexSwitcher")]
+    [Color("b3ff7f")]
+    public class Switch : BTComposite
+    {
 
-	[Category("Composites")]
-	[Description("Executes ONE child based on the provided int or enum and return it's status. If 'case' change while a child is running, that child will be interrupted before the new child is executed")]
-	[Icon("IndexSwitcher")]
-	public class Switch : BTComposite {
+        public enum CaseSelectionMode
+        {
+            IndexBased = 0,
+            EnumBased = 1
+        }
 
-		public enum CaseSelectionMode
-		{
-			IndexBased,
-			EnumBased
-		}
+        public enum OutOfRangeMode
+        {
+            ReturnFailure,
+            LoopIndex
+        }
 
-		public enum OutOfRangeMode
-		{
-			ReturnFailure,
-			LoopIndex
-		}
+        public bool dynamic;
+        public CaseSelectionMode selectionMode = CaseSelectionMode.IndexBased;
 
-		[BlackboardOnly]
-		public BBObjectParameter enumCase = new BBObjectParameter(typeof(System.Enum));
-		public BBParameter<int> intCase;
-		public CaseSelectionMode selectionMode = CaseSelectionMode.EnumBased;
-		public OutOfRangeMode outOfRangeMode;
+        [ShowIf("selectionMode", 0)]
+        public BBParameter<int> intCase;
+        [ShowIf("selectionMode", 0)]
+        public OutOfRangeMode outOfRangeMode = OutOfRangeMode.LoopIndex;
 
-		private int current;
-		private int runningIndex;
+        [ShowIf("selectionMode", 1), BlackboardOnly]
+        public BBObjectParameter enumCase = new BBObjectParameter(typeof(System.Enum));
+        private Dictionary<int, int> enumCasePairing;
 
-		public override string name{
-			get{return string.Format("<color=#b3ff7f>{0}</color>", base.name.ToUpper());}
-		}
+        private int current;
+        private int runningIndex;
 
-		protected override Status OnExecute(Component agent, IBlackboard blackboard){
+        public override void OnGraphStarted() {
+            if ( selectionMode == CaseSelectionMode.EnumBased ) {
+                enumCasePairing = new Dictionary<int, int>();
+                var enumValues = System.Enum.GetValues(enumCase.value.GetType());
+                for ( var i = 0; i < enumValues.Length; i++ ) {
+                    enumCasePairing[(int)enumValues.GetValue(i)] = i;
+                }
+            }
+        }
 
-			if (outConnections.Count == 0)
-				return Status.Failure;
+        protected override Status OnExecute(Component agent, IBlackboard blackboard) {
 
-			if (selectionMode == CaseSelectionMode.IndexBased){
+            if ( outConnections.Count == 0 ) {
+                return Status.Optional;
+            }
 
-				current = intCase.value;
-				if (outOfRangeMode == OutOfRangeMode.LoopIndex)
-					current = Mathf.Abs(current) % outConnections.Count;
+            if ( status == Status.Resting || dynamic ) {
 
-			} else {
+                if ( selectionMode == CaseSelectionMode.IndexBased ) {
+                    current = intCase.value;
+                    if ( outOfRangeMode == OutOfRangeMode.LoopIndex ) {
+                        current = Mathf.Abs(current) % outConnections.Count;
+                    }
 
-				//current = (int)System.Enum.Parse(enumCase.value.GetType(), enumCase.value.ToString());
-				current = (int)enumCase.value;
-			}
+                } else {
+                    current = enumCasePairing[(int)enumCase.value];
+                }
 
-			if (runningIndex != current)
-				outConnections[runningIndex].Reset();
+                if ( runningIndex != current ) {
+                    outConnections[runningIndex].Reset();
+                }
 
-			if (current < 0 || current >= outConnections.Count)
-				return Status.Failure;
+                if ( current < 0 || current >= outConnections.Count ) {
+                    return Status.Failure;
+                }
+            }
 
-			status = outConnections[current].Execute(agent, blackboard);
+            status = outConnections[current].Execute(agent, blackboard);
 
-			if (status == Status.Running)
-				runningIndex = current;
+            if ( status == Status.Running ) {
+                runningIndex = current;
+            }
 
-			return status;
-		}
+            return status;
+        }
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
 
-		public override string GetConnectionInfo(int i){
-			if (selectionMode == CaseSelectionMode.EnumBased){
-				if (enumCase.value == null)
-					return "*Null Enum*";
-				var enumNames = System.Enum.GetNames(enumCase.value.GetType());
-				if (i >= enumNames.Length)
-					return "*Never*";
-				return enumNames[i];
-			}
-			return i.ToString();
-		}
-		
-		protected override void OnNodeGUI(){
-			GUILayout.Label( selectionMode == CaseSelectionMode.IndexBased? ("Current = " + intCase.ToString()) : enumCase.ToString() );
-		}
+        ///----------------------------------------------------------------------------------------------
+        ///---------------------------------------UNITY EDITOR-------------------------------------------
+#if UNITY_EDITOR
 
-		protected override void OnNodeInspectorGUI(){
-			selectionMode = (CaseSelectionMode)UnityEditor.EditorGUILayout.EnumPopup("Selection Mode", selectionMode);
-			if (selectionMode == CaseSelectionMode.IndexBased)
-			{
-				intCase = (BBParameter<int>)EditorUtils.BBParameterField("Int", intCase);
-				outOfRangeMode = (OutOfRangeMode)UnityEditor.EditorGUILayout.EnumPopup("When Out Of Range", outOfRangeMode);
-			}
-			else
-			{
-				enumCase = (BBObjectParameter)EditorUtils.BBParameterField("Enum", enumCase, true);
-				if (enumCase.value != null){
-					GUILayout.BeginVertical("box");
-					foreach (var s in System.Enum.GetNames(enumCase.value.GetType()) )
-						GUILayout.Label(s);
-					GUILayout.EndVertical();
-				}
-			}
-		}
-		
-		#endif
-	}
+        public override string GetConnectionInfo(int i) {
+            if ( selectionMode == CaseSelectionMode.EnumBased ) {
+                if ( enumCase.value == null ) {
+                    return "Null Enum".FormatError();
+                }
+                var enumNames = System.Enum.GetNames(enumCase.value.GetType());
+                if ( i >= enumNames.Length ) {
+                    return "Never".FormatError();
+                }
+                return enumNames[i];
+            }
+            return i.ToString();
+        }
+
+        protected override void OnNodeGUI() {
+            if ( dynamic ) {
+                GUILayout.Label("<b>DYNAMIC</b>");
+            }
+            GUILayout.Label(selectionMode == CaseSelectionMode.IndexBased ? ( "Current = " + intCase.ToString() ) : enumCase.ToString());
+        }
+
+        protected override void OnNodeInspectorGUI() {
+            base.OnNodeInspectorGUI();
+            if ( selectionMode == CaseSelectionMode.EnumBased ) {
+                if ( enumCase.value != null ) {
+                    GUILayout.BeginVertical("box");
+                    foreach ( var s in System.Enum.GetNames(enumCase.value.GetType()) ) {
+                        GUILayout.Label(s);
+                    }
+                    GUILayout.EndVertical();
+                }
+            }
+        }
+
+#endif
+    }
 }

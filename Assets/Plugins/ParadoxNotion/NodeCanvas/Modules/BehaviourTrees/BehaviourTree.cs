@@ -3,97 +3,112 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace NodeCanvas.BehaviourTrees{
+namespace NodeCanvas.BehaviourTrees
+{
 
-	/// <summary>
-	/// BehaviourTrees are used to create advanced AI and logic based on simple rules.
-	/// </summary>
-	[GraphInfo(
-		packageName = "NodeCanvas",
-		docsURL = "http://nodecanvas.paradoxnotion.com/documentation/",
-		resourcesURL = "http://nodecanvas.paradoxnotion.com/downloads/",
-		forumsURL = "http://nodecanvas.paradoxnotion.com/forums-page/"
-		)]
-	public class BehaviourTree : Graph {
+    /// BehaviourTrees are used to create advanced AI and logic based on simple rules.
+    [GraphInfo(
+        packageName = "NodeCanvas",
+        docsURL = "https://nodecanvas.paradoxnotion.com/documentation/",
+        resourcesURL = "https://nodecanvas.paradoxnotion.com/downloads/",
+        forumsURL = "https://nodecanvas.paradoxnotion.com/forums-page/"
+        )]
+    [CreateAssetMenu(menuName = "ParadoxNotion/NodeCanvas/Behaviour Tree Asset")]
+    public class BehaviourTree : Graph
+    {
 
-		///Should the tree repeat forever?
-		public bool repeat = true;
-		///The frequency in seconds for the tree to repeat if set to repeat.
-		public float updateInterval = 0;
-		
-		///This event is called when the root status of the behaviour is changed
-		public event System.Action<BehaviourTree, Status> onRootStatusChanged;
+        ///----------------------------------------------------------------------------------------------
+        [System.Serializable]
+        class DerivedSerializationData
+        {
+            public bool repeat;
+            public float updateInterval;
+        }
 
-		private float intervalCounter = 0;
-		private Status _rootStatus = Status.Resting;
+        public override object OnDerivedDataSerialization() {
+            var data = new DerivedSerializationData();
+            data.repeat = this.repeat;
+            data.updateInterval = this.updateInterval;
+            return data;
+        }
 
-		///The last status of the root
-		public Status rootStatus{
-			get{return _rootStatus;}
-			private set
-			{
-				if (_rootStatus != value){
-					_rootStatus = value;
-					if (onRootStatusChanged != null){
-						onRootStatusChanged(this, value);
-					}
-				}
-			}
-		}
+        public override void OnDerivedDataDeserialization(object data) {
+            if ( data is DerivedSerializationData ) {
+                this.repeat = ( (DerivedSerializationData)data ).repeat;
+                this.updateInterval = ( (DerivedSerializationData)data ).updateInterval;
+            }
+        }
+        ///----------------------------------------------------------------------------------------------
 
-		public override System.Type baseNodeType{ get {return typeof(BTNode);} }
-		public override bool requiresAgent{	get {return true;} }
-		public override bool requiresPrimeNode { get {return true;} }
-		public override bool autoSort{ get {return true;} }
-		public override bool useLocalBlackboard{get {return false;}}
+        ///Should the tree repeat forever?
+        [System.NonSerialized] public bool repeat = true;
+        ///The frequency in seconds for the tree to repeat if set to repeat.
+        [System.NonSerialized] public float updateInterval = 0;
 
-		protected override void OnGraphStarted(){
-			intervalCounter = updateInterval;
-			rootStatus = primeNode.status;
-		}
+        ///Raised when the root status of the behaviour is changed
+        public static event System.Action<BehaviourTree, Status> onRootStatusChanged;
 
-		protected override void OnGraphUpdate(){
+        private float intervalCounter;
+        private Status _rootStatus = Status.Resting;
 
-			if (intervalCounter >= updateInterval){
-				intervalCounter = 0;
-				if ( Tick(agent, blackboard) != Status.Running && !repeat){
-					Stop( rootStatus == Status.Success );
-				}
-			}
+        ///The last status of the root node
+        public Status rootStatus {
+            get { return _rootStatus; }
+            private set
+            {
+                if ( _rootStatus != value ) {
+                    _rootStatus = value;
+                    if ( onRootStatusChanged != null ) {
+                        onRootStatusChanged(this, value);
+                    }
+                }
+            }
+        }
 
-			if (updateInterval > 0){
-				intervalCounter += Time.deltaTime;
-			}
-		}
+        ///----------------------------------------------------------------------------------------------
+        public override System.Type baseNodeType => typeof(BTNode);
+        public override bool requiresAgent => true;
+        public override bool requiresPrimeNode => true;
+        public override bool isTree => true;
+        public override bool allowBlackboardOverrides => true;
+        sealed public override bool canAcceptVariableDrops => false;
+        ///----------------------------------------------------------------------------------------------
 
-		///Tick the tree once for the provided agent and with the provided blackboard
-		public Status Tick(Component agent, IBlackboard blackboard){
+        protected override void OnGraphStarted() {
+            intervalCounter = updateInterval;
+            rootStatus = primeNode.status;
+        }
 
-			if (rootStatus != Status.Running){
-				primeNode.Reset();
-			}
+        protected override void OnGraphUpdate() {
 
-			rootStatus = primeNode.Execute(agent, blackboard);
-			return rootStatus;
-		}
+            if ( intervalCounter >= updateInterval ) {
+                intervalCounter = 0;
+                if ( Tick(agent, blackboard) != Status.Running && !repeat ) {
+                    Stop(rootStatus == Status.Success);
+                }
+            }
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
-		[UnityEditor.MenuItem("Tools/ParadoxNotion/NodeCanvas/Create/Behaviour Tree", false, 0)]
-		public static void Editor_CreateGraph(){
-			var newGraph = EditorUtils.CreateAsset<BehaviourTree>(true);
-			UnityEditor.Selection.activeObject = newGraph;
-		}
+            if ( updateInterval > 0 ) {
+                intervalCounter += Time.deltaTime;
+            }
+        }
+
+        ///Tick the tree once for the provided agent and with the provided blackboard
+        Status Tick(Component agent, IBlackboard blackboard) {
+            if ( rootStatus != Status.Running ) { primeNode.Reset(); }
+            return rootStatus = primeNode.Execute(agent, blackboard);
+        }
 
 
-		[UnityEditor.MenuItem("Assets/Create/ParadoxNotion/NodeCanvas/Behaviour Tree")]
-		public static void Editor_CreateGraphFix(){
-			var path = EditorUtils.GetAssetUniquePath("BehaviourTree.asset");
-			var newGraph = EditorUtils.CreateAsset<BehaviourTree>(path);
-			UnityEditor.Selection.activeObject = newGraph;
-		}	
-		#endif
-	}
+        ///----------------------------------------------------------------------------------------------
+        ///---------------------------------------UNITY EDITOR-------------------------------------------
+#if UNITY_EDITOR
+        [UnityEditor.MenuItem("Tools/ParadoxNotion/NodeCanvas/Create/Behaviour Tree Asset", false, 0)]
+        static void Editor_CreateGraph() {
+            var newGraph = EditorUtils.CreateAsset<BehaviourTree>();
+            UnityEditor.Selection.activeObject = newGraph;
+        }
+#endif
+
+    }
 }

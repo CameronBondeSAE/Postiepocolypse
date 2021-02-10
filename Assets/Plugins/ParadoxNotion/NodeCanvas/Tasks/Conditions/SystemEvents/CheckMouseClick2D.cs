@@ -4,31 +4,42 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace NodeCanvas.Tasks.Conditions{
+namespace NodeCanvas.Tasks.Conditions
+{
 
-	[Category("System Events")]
-	[Name("Check Mouse Click 2D")]
-	[EventReceiver("OnMouseDown", "OnMouseUp")]
-	public class CheckMouseClick2D : ConditionTask<Collider2D> {
+    [Category("System Events")]
+    [Name("Check Mouse Click 2D")]
+    public class CheckMouseClick2D : ConditionTask<Collider2D>
+    {
 
-		public MouseClickEvent checkType = MouseClickEvent.MouseDown;
+        public MouseClickEvent checkType = MouseClickEvent.MouseDown;
 
-		protected override string info{
-			get{ return checkType.ToString();}
-		}
+        protected override string info {
+            get { return checkType.ToString(); }
+        }
 
-		protected override bool OnCheck(){
-			return false;
-		}
+        protected override bool OnCheck() { return false; }
 
-		public void OnMouseDown(){
-			if (checkType == MouseClickEvent.MouseDown)
-				YieldReturn(true);
-		}
+        protected override void OnEnable() {
+            router.onMouseDown += OnMouseDown;
+            router.onMouseUp += OnMouseUp;
+        }
 
-		public void OnMouseUp(){
-			if (checkType == MouseClickEvent.MouseUp)
-				YieldReturn(true);
-		}
-	}
+        protected override void OnDisable() {
+            router.onMouseDown -= OnMouseDown;
+            router.onMouseUp -= OnMouseUp;
+        }
+
+        void OnMouseDown(ParadoxNotion.EventData msg) {
+            if ( checkType == MouseClickEvent.MouseDown ) {
+                YieldReturn(true);
+            }
+        }
+
+        void OnMouseUp(ParadoxNotion.EventData msg) {
+            if ( checkType == MouseClickEvent.MouseUp ) {
+                YieldReturn(true);
+            }
+        }
+    }
 }

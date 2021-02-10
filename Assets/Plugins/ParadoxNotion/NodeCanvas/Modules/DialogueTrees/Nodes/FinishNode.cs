@@ -1,44 +1,45 @@
 using NodeCanvas.Framework;
+using ParadoxNotion;
 using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace NodeCanvas.DialogueTrees{
+namespace NodeCanvas.DialogueTrees
+{
 
-	[Name("Finish")]
-	[Description("End the dialogue in Success or Failure.\nNote: A Dialogue will anyway End in Succcess if it has reached a node without child connections.")]
-	public class FinishNode : DTNode {
+    [Name("FINISH")]
+    [Category("Control")]
+    [Description("End the dialogue in Success or Failure.\nNote: A Dialogue will anyway End in Succcess if it has reached a node without child connections. Thus this node is mostly useful if you want to end a Dialogue in Failure.")]
+    [Icon("Halt")]
+    [Color("00b9e8")]
+    public class FinishNode : DTNode
+    {
 
-		public bool finishState = true;
+        public CompactStatus finishState = CompactStatus.Success;
 
-		public override string name{
-			get {return "FINISH";}
-		}
+        public override int maxOutConnections { get { return 0; } }
+        public override bool requireActorSelection { get { return false; } }
 
-		public override int maxOutConnections{
-			get {return 0;}
-		}
-
-		protected override Status OnExecute(Component agent, IBlackboard bb){
-			status = finishState? Status.Success : Status.Failure;
-			DLGTree.Stop( finishState );
-			return status;
-		}
+        protected override Status OnExecute(Component agent, IBlackboard bb) {
+            status = (Status)finishState;
+            DLGTree.Stop(finishState == CompactStatus.Success ? true : false);
+            return status;
+        }
 
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
-		
-		protected override void OnNodeGUI(){
-			GUILayout.Label("<b>" + (finishState? "Success" : "Failure") + "</b>");
-		}
+        ////////////////////////////////////////
+        ///////////GUI AND EDITOR STUFF/////////
+        ////////////////////////////////////////
+#if UNITY_EDITOR
 
-		protected override void OnNodeInspectorGUI(){
-			DrawDefaultInspector();
-		}
+        protected override void OnNodeGUI() {
+            GUILayout.Label("<b>" + finishState.ToString() + "</b>");
+        }
 
-		#endif
-	}
+        protected override void OnNodeInspectorGUI() {
+            DrawDefaultInspector();
+        }
+
+#endif
+    }
 }

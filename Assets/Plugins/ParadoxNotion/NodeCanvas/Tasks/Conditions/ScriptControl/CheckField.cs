@@ -1,106 +1,132 @@
 ﻿using System.Reflection;
 using NodeCanvas.Framework;
+using NodeCanvas.Framework.Internal;
 using ParadoxNotion;
 using ParadoxNotion.Design;
+using ParadoxNotion.Serialization;
+using ParadoxNotion.Serialization.FullSerializer;
 using UnityEngine;
 using System.Linq;
 
-namespace NodeCanvas.Tasks.Conditions{
+namespace NodeCanvas.Tasks.Conditions
+{
 
-	[Category("✫ Script Control/Common")]
-	[Description("Check a field on a script and return if it's equal or not to a value")]
-	public class CheckField : ConditionTask {
+    //previous versions
+    class CheckField_0
+    {
+        [SerializeField] public BBParameter checkValue = null;
+        [SerializeField] public System.Type targetType = null;
+        [SerializeField] public string fieldName = null;
+    }
 
-		[SerializeField]
-		protected BBParameter checkValue;
-		[SerializeField]
-		protected System.Type targetType;
-		[SerializeField]
-		protected string fieldName;
-		[SerializeField]
-		protected CompareMethod comparison;
+    ///----------------------------------------------------------------------------------------------
 
-		private FieldInfo field;
+    [Name("Check Field", 8)]
+    [Category("✫ Reflected")]
+    [Description("Check a field on a script and return if it's equal or not to a value")]
+    [fsMigrateVersions(typeof(CheckField_0))]
+    public class CheckField : ConditionTask, IReflectedWrapper, IMigratable<CheckField_0>
+    {
+        ///----------------------------------------------------------------------------------------------
+        void IMigratable<CheckField_0>.Migrate(CheckField_0 model) {
+            try { this.field = new SerializedFieldInfo(model.targetType?.RTGetField(model.fieldName)); }
+            finally { this.checkValue = new BBObjectParameter(model.checkValue); }
+        }
+        ///----------------------------------------------------------------------------------------------
 
-		public override System.Type agentType{
-			get {return targetType != null? targetType : typeof(Transform);}
-		}
+        [SerializeField] protected BBObjectParameter checkValue;
+        [SerializeField] protected CompareMethod comparison;
+        [SerializeField] protected SerializedFieldInfo field;
 
-		protected override string info{
-			get
-			{
-				if (string.IsNullOrEmpty(fieldName))
-					return "No Field Selected";
-				return string.Format("{0}.{1}{2}", agentInfo, fieldName, checkValue.varType == typeof(bool)? "" : OperationTools.GetCompareString(comparison) + checkValue.ToString());
-			}
-		}
+        private FieldInfo targetField => field;
 
-		//store the field info on agent set for performance
-		protected override string OnInit(){
-			field = agentType.RTGetField(fieldName);
-			if (field == null)
-				return "Missing Field Info";
-			return null;
-		}
+        public override System.Type agentType {
+            get
+            {
+                if ( targetField == null ) { return typeof(Transform); }
+                return targetField.IsStatic ? null : targetField.RTReflectedOrDeclaredType();
+            }
+        }
 
-		//do it by invoking field
-		protected override bool OnCheck(){
+        protected override string info {
+            get
+            {
+                if ( field == null ) { return "No Field Selected"; }
+                if ( targetField == null ) { return field.AsString().FormatError(); }
+                var mInfo = targetField.IsStatic ? targetField.RTReflectedOrDeclaredType().FriendlyName() : agentInfo;
+                return string.Format("{0}.{1}{2}{3}", mInfo, targetField.Name, OperationTools.GetCompareString(comparison), checkValue);
+            }
+        }
 
-			if (checkValue.varType == typeof(float))
-				return OperationTools.Compare( (float)field.GetValue(agent), (float)checkValue.value, comparison, 0.05f );
+        ISerializedReflectedInfo IReflectedWrapper.GetSerializedInfo() { return field; }
 
-			if (checkValue.varType == typeof(int))
-				return OperationTools.Compare( (int)field.GetValue(agent), (int)checkValue.value, comparison );			
+        //store the field info on agent set for performance
+        protected override string OnInit() {
+            if ( field == null ) { return "No Field Selected"; }
+            if ( targetField == null ) { return field.AsString().FormatError(); }
+            return null;
+        }
 
-			return object.Equals( field.GetValue(agent), checkValue.value );
-		}
+        //do it by invoking field
+        protected override bool OnCheck() {
+            if ( checkValue.varType == typeof(float) ) {
+                return OperationTools.Compare((float)targetField.GetValue(agent), (float)checkValue.value, comparison, 0.05f);
+            }
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
+            if ( checkValue.varType == typeof(int) ) {
+                return OperationTools.Compare((int)targetField.GetValue(agent), (int)checkValue.value, comparison);
+            }
 
-		protected override void OnTaskInspectorGUI(){
+            return ObjectUtils.AnyEquals(targetField.GetValue(agent), checkValue.value);
+        }
 
-			if (!Application.isPlaying && GUILayout.Button("Select Field")){
-				
-				System.Action<FieldInfo> FieldSelected = (field)=> {
-					targetType = field.DeclaringType;
-					fieldName = field.Name;
-					checkValue = BBParameter.CreateInstance(field.FieldType, blackboard);
-					comparison = CompareMethod.EqualTo;
-				};
+        void SetTargetField(FieldInfo newField) {
+            if ( newField != null ) {
+                field = new SerializedFieldInfo(newField);
+                checkValue.SetType(newField.FieldType);
+                comparison = CompareMethod.EqualTo;
+            }
+        }
 
+        ////////////////////////////////////////
+        ///////////GUI AND EDITOR STUFF/////////
+        ////////////////////////////////////////
+#if UNITY_EDITOR
 
-				var menu = new UnityEditor.GenericMenu();
-				if (agent != null){
-					foreach(var comp in agent.GetComponents(typeof(Component)).Where(c => c.hideFlags == 0) ){
-						menu = EditorUtils.GetFieldSelectionMenu(comp.GetType(), typeof(object), FieldSelected, menu);
-					}
-					menu.AddSeparator("/");
-				}
-				foreach (var t in UserTypePrefs.GetPreferedTypesList(typeof(Component), true)){
-					menu = EditorUtils.GetFieldSelectionMenu(t, typeof(object), FieldSelected, menu);
-				}
+        protected override void OnTaskInspectorGUI() {
+            if ( !Application.isPlaying && GUILayout.Button("Select Field") ) {
+                var menu = new UnityEditor.GenericMenu();
+                if ( agent != null ) {
+                    foreach ( var comp in agent.GetComponents(typeof(Component)).Where(c => c.hideFlags != HideFlags.HideInInspector) ) {
+                        menu = EditorUtils.GetInstanceFieldSelectionMenu(comp.GetType(), typeof(object), SetTargetField, menu);
+                    }
+                    menu.AddSeparator("/");
+                }
+                foreach ( var t in TypePrefs.GetPreferedTypesList(typeof(object)) ) {
+                    menu = EditorUtils.GetStaticFieldSelectionMenu(t, typeof(object), SetTargetField, menu);
+                    if ( typeof(Component).IsAssignableFrom(t) ) {
+                        menu = EditorUtils.GetInstanceFieldSelectionMenu(t, typeof(object), SetTargetField, menu);
+                    }
+                }
+                menu.ShowAsBrowser("Select Field", this.GetType());
+                Event.current.Use();
+            }
 
-				if ( NodeCanvas.Editor.NCPrefs.useBrowser){ menu.ShowAsBrowser("Select Field", this.GetType()); }
-				else { menu.ShowAsContext(); }
-				Event.current.Use();
-			}
+            if ( targetField != null ) {
+                GUILayout.BeginVertical("box");
+                UnityEditor.EditorGUILayout.LabelField("Type", targetField.RTReflectedOrDeclaredType().FriendlyName());
+                UnityEditor.EditorGUILayout.LabelField("Field", targetField.Name);
+                UnityEditor.EditorGUILayout.LabelField("Field Type", targetField.FieldType.FriendlyName());
+                UnityEditor.EditorGUILayout.HelpBox(DocsByReflection.GetMemberSummary(targetField), UnityEditor.MessageType.None);
+                GUILayout.EndVertical();
 
-			if (agentType != null && !string.IsNullOrEmpty(fieldName)){
-				GUILayout.BeginVertical("box");
-				UnityEditor.EditorGUILayout.LabelField("Type", agentType.FriendlyName());
-				UnityEditor.EditorGUILayout.LabelField("Field", fieldName);
-				GUILayout.EndVertical();
+                GUI.enabled = checkValue.varType == typeof(float) || checkValue.varType == typeof(int);
+                comparison = (CompareMethod)UnityEditor.EditorGUILayout.EnumPopup("Comparison", comparison);
+                GUI.enabled = true;
+                NodeCanvas.Editor.BBParameterEditor.ParameterField("Value", checkValue);
+            }
+        }
+#endif
 
-				GUI.enabled = checkValue.varType == typeof(float) || checkValue.varType == typeof(int);
-				comparison = (CompareMethod)UnityEditor.EditorGUILayout.EnumPopup("Comparison", comparison);
-				GUI.enabled = true;
-				EditorUtils.BBParameterField("Value", checkValue);
-			}
-		}
-
-		#endif
-	}
+    }
 }

@@ -5,91 +5,115 @@ using ParadoxNotion;
 using ParadoxNotion.Design;
 using UnityEngine;
 using System.Linq;
+using ParadoxNotion.Serialization;
+using ParadoxNotion.Serialization.FullSerializer;
 
+namespace NodeCanvas.Tasks.Actions
+{
 
-namespace NodeCanvas.Tasks.Actions{
+    //previous versions
+    class SetField_0
+    {
+        [SerializeField] public System.Type targetType = null;
+        [SerializeField] public string fieldName = null;
+    }
 
-	[Category("✫ Script Control/Common")]
-	[Description("Set a variable on a script")]
-	public class SetField : ActionTask {
+    ///----------------------------------------------------------------------------------------------
 
-		[SerializeField]
-		protected BBObjectParameter setValue;
-		[SerializeField]
-		protected System.Type targetType;
-		[SerializeField]
-		protected string fieldName;
+    [Category("✫ Reflected")]
+    [Description("Set a variable on a script")]
+    [Name("Set Field", 5)]
+    [fsMigrateVersions(typeof(SetField_0))]
+    public class SetField : ActionTask, IReflectedWrapper, IMigratable<SetField_0>
+    {
 
-		private FieldInfo field;
+        ///----------------------------------------------------------------------------------------------
+        void IMigratable<SetField_0>.Migrate(SetField_0 model) {
+            this.field = new SerializedFieldInfo(model.targetType?.RTGetField(model.fieldName));
+        }
+        ///----------------------------------------------------------------------------------------------
 
-		public override System.Type agentType{
-			get {return targetType?? typeof(Transform);}
-		}
+        [SerializeField]
+        protected SerializedFieldInfo field;
+        [SerializeField]
+        protected BBObjectParameter setValue;
 
+        private FieldInfo targetField => field;
 
-		protected override string info{
-			get
-			{
-				if (string.IsNullOrEmpty(fieldName))
-					return "No Field Selected";
-				return string.Format("{0}.{1} = {2}", agentInfo, fieldName, setValue);
-			}
-		}
+        public override System.Type agentType {
+            get
+            {
+                if ( targetField == null ) { return typeof(Transform); }
+                return targetField.IsStatic ? null : targetField.RTReflectedOrDeclaredType();
+            }
+        }
 
-		protected override string OnInit(){
-			field = agentType.RTGetField(fieldName);
-			if (field == null)
-				return "Missing Field: " + fieldName;
-			return null;
-		}
+        protected override string info {
+            get
+            {
+                if ( field == null ) { return "No Field Selected"; }
+                if ( targetField == null ) { return field.AsString().FormatError(); }
+                var mInfo = targetField.IsStatic ? targetField.RTReflectedOrDeclaredType().FriendlyName() : agentInfo;
+                return string.Format("{0}.{1} = {2}", mInfo, targetField.Name, setValue);
+            }
+        }
 
-		protected override void OnExecute(){
-			field.SetValue(agent, setValue.value);
-			EndAction();
-		}
+        ISerializedReflectedInfo IReflectedWrapper.GetSerializedInfo() { return field; }
 
+        protected override string OnInit() {
+            if ( field == null ) { return "No Field Selected"; }
+            if ( targetField == null ) { return field.AsString().FormatError(); }
+            return null;
+        }
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
+        protected override void OnExecute() {
+            targetField.SetValue(targetField.IsStatic ? null : agent, setValue.value);
+            EndAction();
+        }
 
-		protected override void OnTaskInspectorGUI(){
+        void SetTargetField(FieldInfo newField) {
+            if ( newField != null ) {
+                field = new SerializedFieldInfo(newField);
+                setValue.SetType(newField.FieldType);
+            }
+        }
 
-			if (!Application.isPlaying && GUILayout.Button("Select Field")){
+        ////////////////////////////////////////
+        ///////////GUI AND EDITOR STUFF/////////
+        ////////////////////////////////////////
+#if UNITY_EDITOR
 
-				System.Action<FieldInfo> FieldSelected = (field)=>{
-					targetType = field.DeclaringType;
-					fieldName = field.Name;
-					setValue.SetType(field.FieldType);
-				};
+        protected override void OnTaskInspectorGUI() {
 
-				var menu = new UnityEditor.GenericMenu();
-				if (agent != null){
-					foreach(var comp in agent.GetComponents(typeof(Component)).Where(c => c.hideFlags == 0) ){
-						menu = EditorUtils.GetFieldSelectionMenu(comp.GetType(), typeof(object), FieldSelected, menu);
-					}
-					menu.AddSeparator("/");
-				}
-				foreach (var t in UserTypePrefs.GetPreferedTypesList(typeof(Component), true)){
-					menu = EditorUtils.GetFieldSelectionMenu(t, typeof(object), FieldSelected, menu);
-				}
-				if ( NodeCanvas.Editor.NCPrefs.useBrowser){ menu.ShowAsBrowser("Select Field", this.GetType()); }
-				else { menu.ShowAsContext(); }
-				Event.current.Use();
-			}
+            if ( !Application.isPlaying && GUILayout.Button("Select Field") ) {
+                var menu = new UnityEditor.GenericMenu();
+                if ( agent != null ) {
+                    foreach ( var comp in agent.GetComponents(typeof(Component)).Where(c => c.hideFlags != HideFlags.HideInInspector) ) {
+                        menu = EditorUtils.GetInstanceFieldSelectionMenu(comp.GetType(), typeof(object), SetTargetField, menu);
+                    }
+                    menu.AddSeparator("/");
+                }
+                foreach ( var t in TypePrefs.GetPreferedTypesList(typeof(object)) ) {
+                    menu = EditorUtils.GetStaticFieldSelectionMenu(t, typeof(object), SetTargetField, menu);
+                    if ( typeof(Component).IsAssignableFrom(t) ) {
+                        menu = EditorUtils.GetInstanceFieldSelectionMenu(t, typeof(object), SetTargetField, menu);
+                    }
+                }
+                menu.ShowAsBrowser("Select Field", this.GetType());
+                Event.current.Use();
+            }
 
+            if ( targetField != null ) {
+                GUILayout.BeginVertical("box");
+                UnityEditor.EditorGUILayout.LabelField("Type", targetField.RTReflectedOrDeclaredType().FriendlyName());
+                UnityEditor.EditorGUILayout.LabelField("Field", targetField.Name);
+                UnityEditor.EditorGUILayout.LabelField("Field Type", targetField.FieldType.FriendlyName());
+                UnityEditor.EditorGUILayout.HelpBox(DocsByReflection.GetMemberSummary(targetField), UnityEditor.MessageType.None);
+                GUILayout.EndVertical();
+                NodeCanvas.Editor.BBParameterEditor.ParameterField("Set Value", setValue);
+            }
+        }
+#endif
 
-			if (agentType != null && !string.IsNullOrEmpty(fieldName)){
-				GUILayout.BeginVertical("box");
-				UnityEditor.EditorGUILayout.LabelField("Type", agentType.Name);
-				UnityEditor.EditorGUILayout.LabelField("Field", fieldName);
-				UnityEditor.EditorGUILayout.LabelField("Field Type", setValue.varType.FriendlyName() );
-				GUILayout.EndVertical();
-				EditorUtils.BBParameterField("Set Value", setValue);
-			}
-		}
-
-		#endif
-	}
+    }
 }

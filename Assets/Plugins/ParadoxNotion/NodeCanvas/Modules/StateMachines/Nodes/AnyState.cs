@@ -1,74 +1,122 @@
 using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using UnityEngine;
 
+namespace NodeCanvas.StateMachines
+{
 
-namespace NodeCanvas.StateMachines{
+    [Name("Any State")]
+    [Description("The Transitions of this node will constantly be checked. If any becomes true, the target connected State will Enter regardless of the current State. This node can have no incomming transitions.")]
+    [Color("b3ff7f")]
+    public class AnyState : FSMNode, IUpdatable
+    {
 
-	[Name("Any State")]
-	[Description("The Transitions of this node will constantly be checked. If any becomes true, the target connected State will Enter regardless of the current State. This node can have no incomming transitions.")]
-	public class AnyState : FSMState, IUpdatable{
+        public bool dontRetriggerStates = false;
 
-		public bool dontRetriggerStates = false;
+        public override string name { //yei for caps
+            get { return "FROM ANY STATE"; }
+        }
 
-		public override string name{
-			get {return string.Format("<color=#b3ff7f>{0}</color>", base.name.ToUpper());}
-		}
+        public override int maxInConnections { get { return 0; } }
+        public override int maxOutConnections { get { return -1; } }
+        public override bool allowAsPrime { get { return false; } }
 
-		public override int maxInConnections{ get {return 0;} }
-		public override int maxOutConnections{ get{return -1;} }
-		public override bool allowAsPrime{ get {return false;} }
+        public override void OnGraphStarted() {
+            for ( var i = 0; i < outConnections.Count; i++ ) {
+                ( outConnections[i] as FSMConnection ).EnableCondition(graphAgent, graphBlackboard);
+            }
+        }
 
-		new public void Update(){
+        public override void OnGraphStoped() {
+            for ( var i = 0; i < outConnections.Count; i++ ) {
+                ( outConnections[i] as FSMConnection ).DisableCondition();
+            }
+        }
 
-			if (outConnections.Count == 0)
-				return;
+        void IUpdatable.Update() {
 
-			status = Status.Running;
+            if ( outConnections.Count == 0 ) {
+                return;
+            }
 
-			for (var i = 0; i < outConnections.Count; i++){
+            status = Status.Running;
 
-				var connection = (FSMConnection)outConnections[i];
-				var condition = connection.condition;
+            for ( var i = 0; i < outConnections.Count; i++ ) {
 
-				if (!connection.isActive || connection.condition == null)
-					continue;
+                var connection = (FSMConnection)outConnections[i];
+                var condition = connection.condition;
 
-				if (dontRetriggerStates && FSM.currentState == (FSMState)connection.targetNode){
-					continue;
-				}
+                if ( !connection.isActive || condition == null ) {
+                    continue;
+                }
 
-				if (condition.CheckCondition(graphAgent, graphBlackboard)){
-					FSM.EnterState( (FSMState)connection.targetNode );
-					connection.connectionStatus = Status.Success;
-					return;
-				}
+                if ( dontRetriggerStates ) {
+                    if ( FSM.currentState == (FSMState)connection.targetNode && FSM.currentState.status == Status.Running ) {
+                        continue;
+                    }
+                }
 
-				connection.connectionStatus = Status.Failure;
-			}
-		}
+                if ( condition.Check(graphAgent, graphBlackboard) ) {
+                    FSM.EnterState((FSMState)connection.targetNode, connection.transitionCallMode);
+                    connection.status = Status.Success; //editor vis
+                    return;
+                }
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
+                connection.status = Status.Failure; //editor vis
+            }
+        }
 
-		protected override void OnNodeGUI(){
-			base.OnNodeGUI();
-			if (dontRetriggerStates){
-				UnityEngine.GUILayout.Label("<b>[NO RETRIGGER]</b>");
-			}
-		}
+        ////////////////////////////////////////
+        ///////////GUI AND EDITOR STUFF/////////
+        ////////////////////////////////////////
+#if UNITY_EDITOR
 
-		protected override void OnNodeInspectorGUI(){
+        protected override void OnNodeGUI() {
+            base.OnNodeGUI();
+            if ( dontRetriggerStates ) {
+                UnityEngine.GUILayout.Label("<b>[NO RETRIGGER]</b>");
+            }
+        }
 
-			ShowBaseFSMInspectorGUI();
-			if (outConnections.Find(c => (c as FSMConnection).condition == null ) != null){
-				UnityEditor.EditorGUILayout.HelpBox("This is not a state and as such it never finish and no OnFinish transitions are ever called.\nAdd a condition in all transitions of this node", UnityEditor.MessageType.Warning);
-			}
+        public override string GetConnectionInfo(int index) {
+            if ( ( outConnections[index] as FSMConnection ).condition == null ) {
+                return "* Never Triggered *";
+            }
+            return null;
+        }
 
-			dontRetriggerStates = UnityEditor.EditorGUILayout.ToggleLeft("Dont Retrigger Running States", dontRetriggerStates);
-		}
+        protected override void OnNodeInspectorGUI() {
+            EditorUtils.CoolLabel("Transitions");
+            if ( outConnections.Count == 0 ) {
+                UnityEditor.EditorGUILayout.HelpBox("No Transition", UnityEditor.MessageType.None);
+            }
 
-		#endif
-	}
+            var anyNullCondition = false;
+            EditorUtils.ReorderableList(outConnections, (i, picked) =>
+            {
+                var connection = (FSMConnection)outConnections[i];
+                GUILayout.BeginHorizontal("box");
+                if ( connection.condition != null ) {
+                    GUILayout.Label(connection.condition.summaryInfo, GUILayout.MinWidth(0), GUILayout.ExpandWidth(true));
+                } else {
+                    GUILayout.Label("OnFinish (This is never triggered)", GUILayout.MinWidth(0), GUILayout.ExpandWidth(true));
+                    anyNullCondition = true;
+                }
+
+                GUILayout.FlexibleSpace();
+                GUILayout.Label("► '" + connection.targetNode.name + "'");
+                GUILayout.EndHorizontal();
+            });
+
+            EditorUtils.BoldSeparator();
+
+            if ( anyNullCondition ) {
+                UnityEditor.EditorGUILayout.HelpBox("This is not a state and as such it never finish, thus OnFinish transitions are never called.\nPlease add a condition in all transitions of this node.", UnityEditor.MessageType.Warning);
+            }
+
+            dontRetriggerStates = UnityEditor.EditorGUILayout.ToggleLeft("Don't Retrigger Running States", dontRetriggerStates);
+        }
+#endif
+
+    }
 }

@@ -6,9 +6,8 @@ labels:
 - FSM
 - state
 - flow
-timeCreated: 1456283753
-licenseType: Store
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0

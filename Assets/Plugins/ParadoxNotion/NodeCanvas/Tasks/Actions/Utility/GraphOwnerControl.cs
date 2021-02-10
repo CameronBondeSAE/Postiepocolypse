@@ -1,66 +1,67 @@
 ﻿using NodeCanvas.Framework;
 using ParadoxNotion.Design;
+using System.Collections;
 
+namespace NodeCanvas.Tasks.Actions
+{
 
-namespace NodeCanvas.Tasks.Actions{
+    [Name("Control Graph Owner")]
+    [Category("✫ Utility")]
+    [Description("Start, Resume, Pause, Stop a GraphOwner's behaviour")]
+    public class GraphOwnerControl : ActionTask<GraphOwner>
+    {
 
-	[Name("Control Graph Owner")]
-	[Category("✫ Utility")]
-	[Description("Start, Resume, Pause, Stop a GraphOwner's behaviour")]
-	public class GraphOwnerControl : ActionTask<GraphOwner> {
+        public enum Control
+        {
+            StartBehaviour,
+            StopBehaviour,
+            PauseBehaviour
+        }
 
-		public enum Control
-		{
-			StartBehaviour,
-			StopBehaviour,
-			PauseBehaviour
-		}
+        public Control control = Control.StartBehaviour;
+        public bool waitActionFinish = true;
 
-		public Control control = Control.StartBehaviour;
-		public bool waitActionFinish = true;
+        protected override string info {
+            get { return agentInfo + "." + control.ToString(); }
+        }
 
-		private bool isFinished = false;
+        protected override void OnExecute() {
 
-		protected override string info{
-			get {return agentInfo + "." + control.ToString();}
-		}
+            if ( control == Control.StartBehaviour ) {
+                if ( waitActionFinish ) {
+                    agent.StartBehaviour((s) => { EndAction(s); });
+                } else {
+                    agent.StartBehaviour();
+                    EndAction();
+                }
+                return;
+            }
 
-		protected override void OnExecute(){
-			if (control == Control.StartBehaviour){
-				isFinished = false;
-				if (waitActionFinish){
-					agent.StartBehaviour( delegate {isFinished = true;} );
-				} else {
-					agent.StartBehaviour();
-					EndAction();
-				}
-			}
-		}
+            //in case target is this owner, we must yield 1 frame before pausing/stoppping
+            if ( agent == ownerSystemAgent ) { StartCoroutine(YieldDo()); } else { Do(); }
+        }
 
-		protected override void OnStop(){
-			if (waitActionFinish && control == Control.StartBehaviour){
-				agent.StopBehaviour();
-			}
-		}
+        IEnumerator YieldDo() {
+            yield return null;
+            Do();
+        }
 
-		//These should take place here to be called 1 frame later, in case target is the same agent.
-		protected override void OnUpdate(){
+        void Do() {
+            if ( control == Control.StopBehaviour ) {
+                EndAction(null);
+                agent.StopBehaviour();
+            }
 
-			if (control == Control.StartBehaviour){
-			
-				if (isFinished)
-					EndAction();
-			
-			} else if (control == Control.StopBehaviour){
+            if ( control == Control.PauseBehaviour ) {
+                EndAction(null);
+                agent.PauseBehaviour();
+            }
+        }
 
-				agent.StopBehaviour();
-				EndAction();
-
-			} else if (control == Control.PauseBehaviour){
-
-				agent.PauseBehaviour();
-				EndAction();
-			}
-		}
-	}
+        protected override void OnStop() {
+            if ( waitActionFinish && control == Control.StartBehaviour ) {
+                agent.StopBehaviour();
+            }
+        }
+    }
 }

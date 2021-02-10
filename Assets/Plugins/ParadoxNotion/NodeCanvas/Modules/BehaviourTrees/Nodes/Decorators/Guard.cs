@@ -4,79 +4,93 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace NodeCanvas.BehaviourTrees{
+namespace NodeCanvas.BehaviourTrees
+{
 
-	[Name("Guard")]
-	[Category("Decorators")]
-	[Icon("Shield")]
-	[Description("Protect the decorated child from running if another Guard with the same token is already guarding (Running) that token.\nGuarding is global for all of the agent's Behaviour Trees.")]
-	public class Guard : BTDecorator {
+    [Name("Guard")]
+    [Category("Decorators")]
+    [Icon("Shield")]
+    [Description("Protect the decorated child from running if another Guard with the same token is already guarding (Running) that token.\nGuarding is global for all of the agent's Behaviour Trees.")]
+    public class Guard : BTDecorator
+    {
 
-		public enum GuardMode
-		{
-			ReturnFailure,
-			WaitUntilReleased
-		}
+        public enum GuardMode
+        {
+            ReturnFailure,
+            WaitUntilReleased
+        }
 
-		public BBParameter<string> token;
-		public GuardMode ifGuarded = GuardMode.ReturnFailure;
+        public BBParameter<string> token;
+        public GuardMode ifGuarded = GuardMode.ReturnFailure;
 
-		private bool isGuarding;
+        private bool isGuarding;
 
-		private static readonly Dictionary<GameObject, List<Guard>> guards = new Dictionary<GameObject, List<Guard>>();
-		private static List<Guard> AgentGuards(Component agent){
-			return guards[agent.gameObject];
-		}
+        private static readonly Dictionary<GameObject, List<Guard>> guards = new Dictionary<GameObject, List<Guard>>();
+        private static List<Guard> AgentGuards(Component agent) { return guards[agent.gameObject]; }
 
-		public override void OnGraphStarted(){
-			SetGuards(graphAgent);
-		}
+        public override void OnGraphStarted() {
+            SetGuards(graphAgent);
+        }
 
-		protected override Status OnExecute(Component agent, IBlackboard blackboard){
+        public override void OnGraphStoped() {
+            foreach ( var runningGraph in Graph.runningGraphs ) {
+                if ( runningGraph.agent != null && runningGraph.agent.gameObject == this.graphAgent.gameObject ) {
+                    return;
+                }
+            }
+            guards.Remove(graphAgent.gameObject);
+        }
 
-			if (decoratedConnection == null)
-				return Status.Failure;
+        protected override Status OnExecute(Component agent, IBlackboard blackboard) {
 
-			if (agent != graphAgent)
-				SetGuards(agent);
+            if ( decoratedConnection == null ) {
+                return Status.Optional;
+            }
 
-			for (var i = 0; i < AgentGuards(agent).Count; i++){
-				var guard = AgentGuards(agent)[i];
-				if (guard != this && guard.isGuarding && guard.token.value == this.token.value)
-					return ifGuarded == GuardMode.ReturnFailure? Status.Failure : Status.Running;
-			}
+            if ( agent != graphAgent ) {
+                SetGuards(agent);
+            }
 
-			status = decoratedConnection.Execute(agent, blackboard);
-			if (status == Status.Running){
-				isGuarding = true;
-				return Status.Running;
-			}
+            for ( var i = 0; i < AgentGuards(agent).Count; i++ ) {
+                var guard = AgentGuards(agent)[i];
+                if ( guard != this && guard.isGuarding && guard.token.value == this.token.value ) {
+                    return ifGuarded == GuardMode.ReturnFailure ? Status.Failure : Status.Running;
+                }
+            }
 
-			isGuarding = false;
-			return status;
-		}
+            status = decoratedConnection.Execute(agent, blackboard);
+            if ( status == Status.Running ) {
+                isGuarding = true;
+                return Status.Running;
+            }
 
-		protected override void OnReset(){
-			isGuarding = false;
-		}
+            isGuarding = false;
+            return status;
+        }
 
-		void SetGuards(Component guardAgent){
-			if (!guards.ContainsKey(guardAgent.gameObject))
-				guards[guardAgent.gameObject] = new List<Guard>();
+        protected override void OnReset() {
+            isGuarding = false;
+        }
 
-			if (!AgentGuards(guardAgent).Contains(this) && !string.IsNullOrEmpty(token.value))
-				AgentGuards(guardAgent).Add(this);
-		}
+        void SetGuards(Component guardAgent) {
+            if ( !guards.ContainsKey(guardAgent.gameObject) ) {
+                guards[guardAgent.gameObject] = new List<Guard>();
+            }
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
-		
-		protected override void OnNodeGUI(){
-			GUILayout.Label(string.Format("<b>' {0} '</b>", string.IsNullOrEmpty(token.value)? "NONE" : token.value));
-		}
-		
-		#endif
-	}
+            if ( !AgentGuards(guardAgent).Contains(this) && !string.IsNullOrEmpty(token.value) ) {
+                AgentGuards(guardAgent).Add(this);
+            }
+        }
+
+        ////////////////////////////////////////
+        ///////////GUI AND EDITOR STUFF/////////
+        ////////////////////////////////////////
+#if UNITY_EDITOR
+
+        protected override void OnNodeGUI() {
+            GUILayout.Label(string.Format("<b>' {0} '</b>", string.IsNullOrEmpty(token.value) ? "NONE" : token.value));
+        }
+
+#endif
+    }
 }

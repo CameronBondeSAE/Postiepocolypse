@@ -4,107 +4,114 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace NodeCanvas.BehaviourTrees{
+namespace NodeCanvas.BehaviourTrees
+{
 
-	[Name("Filter")]
-	[Category("Decorators")]
-	[Description("Filters the access of it's child node either a specific number of times, or every specific amount of time. By default the node is 'Treated as Inactive' to it's parent when child is Filtered. Unchecking this option will instead return Failure when Filtered.")]
-	[Icon("Lock")]
-	public class Filter : BTDecorator {
+    [Name("Filter")]
+    [Category("Decorators")]
+    [Description("Filters the access of it's child node either a specific number of times, or every specific amount of time. By default the node is 'Treated as Inactive' to it's parent when child is Filtered. Unchecking this option will instead return Failure when Filtered.")]
+    [Icon("Filter")]
+    public class Filter : BTDecorator
+    {
 
-		public enum FilterMode
-		{
-			LimitNumberOfTimes,
-			CoolDown
-		}
+        public enum FilterMode
+        {
+            LimitNumberOfTimes = 0,
+            CoolDown = 1
+        }
 
-		public FilterMode filterMode = FilterMode.CoolDown;
-		public BBParameter<int> maxCount = new BBParameter<int>{value = 1};
-		public BBParameter<float> coolDownTime = new BBParameter<float>{value = 5};
-		public bool inactiveWhenLimited = true;
+        public enum Policy
+        {
+            SuccessOrFailure,
+            SuccessOnly,
+            FailureOnly
+        }
 
-		private int executedCount;
-		private float currentTime;
+        public FilterMode filterMode = FilterMode.CoolDown;
+        [ShowIf("filterMode", 0)]
+        [Name("Max Times")]
+        public BBParameter<int> maxCount = 1;
+        [ShowIf("filterMode", 0)]
+        [Name("Increase Count When")]
+        public Policy policy = Policy.SuccessOrFailure;
+        [ShowIf("filterMode", 1)]
+        public BBParameter<float> coolDownTime = 5f;
+        public bool inactiveWhenLimited = true;
 
-		public override void OnGraphStarted(){
-			executedCount = 0;
-			currentTime = 0;
-		}
+        private int executedCount;
+        private float currentTime;
 
-		protected override Status OnExecute(Component agent, IBlackboard blackboard){
+        public override void OnGraphStoped() {
+            executedCount = 0;
+            currentTime = 0;
+        }
 
-			if (decoratedConnection == null)
-				return Status.Resting;
+        protected override Status OnExecute(Component agent, IBlackboard blackboard) {
 
-			switch(filterMode)
-            {
+            if ( decoratedConnection == null ) {
+                return Status.Optional;
+            }
+
+            switch ( filterMode ) {
                 case FilterMode.CoolDown:
 
-			        if (currentTime > 0)
-			            return inactiveWhenLimited? Status.Resting : Status.Failure;
+                    if ( currentTime > 0 ) {
+                        return inactiveWhenLimited ? Status.Optional : Status.Failure;
+                    }
 
-			        status = decoratedConnection.Execute(agent, blackboard);
-			        if (status == Status.Success || status == Status.Failure)
-			            StartCoroutine(Cooldown());
-			        break;
-			    
+                    status = decoratedConnection.Execute(agent, blackboard);
+                    if ( status == Status.Success || status == Status.Failure ) {
+                        StartCoroutine(Cooldown());
+                    }
+                    break;
+
                 case FilterMode.LimitNumberOfTimes:
 
-			        if (executedCount >= maxCount.value)
-			            return inactiveWhenLimited? Status.Resting : Status.Failure;
+                    if ( executedCount >= maxCount.value ) {
+                        return inactiveWhenLimited ? Status.Optional : Status.Failure;
+                    }
 
-			        status = decoratedConnection.Execute(agent, blackboard);
-			        if (status == Status.Success || status == Status.Failure)
-			            executedCount += 1;
-			        break;
-			}
+                    status = decoratedConnection.Execute(agent, blackboard);
+                    if
+                    (
+                        ( status == Status.Success && policy == Policy.SuccessOnly ) ||
+                        ( status == Status.Failure && policy == Policy.FailureOnly ) ||
+                        ( ( status == Status.Success || status == Status.Failure ) && policy == Policy.SuccessOrFailure )
+                    ) {
+                        executedCount += 1;
+                    }
+                    break;
+            }
 
-			return status;
-		}
+            return status;
+        }
 
 
-		IEnumerator Cooldown(){
+        IEnumerator Cooldown() {
+            currentTime = coolDownTime.value;
+            while ( currentTime > 0 ) {
+                yield return null;
+                currentTime -= Time.deltaTime;
+            }
+        }
 
-			currentTime = coolDownTime.value;
-			while (currentTime > 0){
-				yield return null;
-				currentTime -= Time.deltaTime;
-			}
-		}
 
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
-		
-		protected override void OnNodeGUI(){
+        ///----------------------------------------------------------------------------------------------
+        ///---------------------------------------UNITY EDITOR-------------------------------------------
+#if UNITY_EDITOR
 
-			if (filterMode == FilterMode.CoolDown){
-				GUILayout.Space(25);
-				var pRect = new Rect(5, GUILayoutUtility.GetLastRect().y, nodeRect.width - 10, 20);
-				UnityEditor.EditorGUI.ProgressBar(pRect, currentTime/coolDownTime.value, currentTime > 0? "Cooling..." : "Cooled");
-			}
-			else
-			if (filterMode == FilterMode.LimitNumberOfTimes){
-				GUILayout.Label(executedCount + " / " + maxCount.value + " Accessed Times");
-			}
-		}
+        protected override void OnNodeGUI() {
 
-		protected override void OnNodeInspectorGUI(){
+            if ( filterMode == FilterMode.CoolDown ) {
+                GUILayout.Space(25);
+                var pRect = new Rect(5, GUILayoutUtility.GetLastRect().y, rect.width - 10, 20);
+                UnityEditor.EditorGUI.ProgressBar(pRect, currentTime / coolDownTime.value, currentTime > 0 ? "Cooling..." : "Cooled");
+            } else
+            if ( filterMode == FilterMode.LimitNumberOfTimes ) {
+                GUILayout.Label(executedCount + " / " + maxCount.value + " Accessed Times");
+            }
+        }
 
-			filterMode = (FilterMode)UnityEditor.EditorGUILayout.EnumPopup("Mode", filterMode);
-
-			if (filterMode == FilterMode.CoolDown){
-				coolDownTime = (BBParameter<float>)EditorUtils.BBParameterField("CoolDown Time", coolDownTime);
-			}
-			else
-			if (filterMode == FilterMode.LimitNumberOfTimes){
-				maxCount = (BBParameter<int>)EditorUtils.BBParameterField("Max Times", maxCount);
-			}
-
-			inactiveWhenLimited = UnityEditor.EditorGUILayout.Toggle("Inactive When Limited", inactiveWhenLimited);
-		}
-		
-		#endif
-	}
+#endif
+    }
 }

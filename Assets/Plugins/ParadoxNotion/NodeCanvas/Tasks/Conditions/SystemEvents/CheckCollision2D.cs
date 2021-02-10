@@ -4,56 +4,129 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace NodeCanvas.Tasks.Conditions{
+namespace NodeCanvas.Tasks.Conditions
+{
 
-	[Category("System Events")]
-	[Name("Check Collision 2D")]
-	[EventReceiver("OnCollisionEnter2D", "OnCollisionExit2D")]
-	public class CheckCollision2D : ConditionTask<Collider2D> {
+    [Category("System Events")]
+    [Name("Check Collision 2D")]
+    public class CheckCollision2D_Rigidbody : ConditionTask<Rigidbody2D>
+    {
 
-		public CollisionTypes checkType = CollisionTypes.CollisionEnter;
-		public bool specifiedTagOnly;
-		[TagField]
-		public string objectTag = "Untagged";
-		
-		[BlackboardOnly]
-		public BBParameter<GameObject> saveGameObjectAs;
-		[BlackboardOnly]
-		public BBParameter<Vector3> saveContactPoint;
+        public CollisionTypes checkType = CollisionTypes.CollisionEnter;
+        public bool specifiedTagOnly;
+        [TagField]
+        public string objectTag = "Untagged";
 
-		private bool stay;
+        [BlackboardOnly]
+        public BBParameter<GameObject> saveGameObjectAs;
+        [BlackboardOnly]
+        public BBParameter<Vector3> saveContactPoint;
+        [BlackboardOnly]
+        public BBParameter<Vector3> saveContactNormal;
 
-		protected override string info{
-			get {return checkType.ToString() + ( specifiedTagOnly? (" '" + objectTag + "' tag") : "" );}
-		}
+        private bool stay;
 
-		protected override bool OnCheck(){
-			if (checkType == CollisionTypes.CollisionStay)
-				return stay;
-			return false;
-		}
+        protected override string info {
+            get { return checkType.ToString() + ( specifiedTagOnly ? ( " '" + objectTag + "' tag" ) : "" ); }
+        }
 
-		public void OnCollisionEnter2D(Collision2D info){
-			
-			if (!specifiedTagOnly || info.gameObject.tag == objectTag){
-				stay = true;
-				if (checkType == CollisionTypes.CollisionEnter || checkType == CollisionTypes.CollisionStay){
-					saveGameObjectAs.value = info.gameObject;
-					saveContactPoint.value = info.contacts[0].point;
-					YieldReturn(true);
-				}
-			}
-		}
+        protected override bool OnCheck() {
+            return checkType == CollisionTypes.CollisionStay ? stay : false;
+        }
 
-		public void OnCollisionExit2D(Collision2D info){
-			
-			if (!specifiedTagOnly || info.gameObject.tag == objectTag){
-				stay = false;
-				if (checkType == CollisionTypes.CollisionExit){
-					saveGameObjectAs.value = info.gameObject;
-					YieldReturn(true);
-				}
-			}
-		}
-	}
+        protected override void OnEnable() {
+            router.onCollisionEnter2D += OnCollisionEnter2D;
+            router.onCollisionExit2D += OnCollisionExit2D;
+        }
+
+        protected override void OnDisable() {
+            router.onCollisionEnter2D -= OnCollisionEnter2D;
+            router.onCollisionExit2D -= OnCollisionExit2D;
+        }
+
+        void OnCollisionEnter2D(ParadoxNotion.EventData<Collision2D> data) {
+            if ( !specifiedTagOnly || data.value.gameObject.CompareTag(objectTag) ) {
+                stay = true;
+                if ( checkType == CollisionTypes.CollisionEnter || checkType == CollisionTypes.CollisionStay ) {
+                    saveGameObjectAs.value = data.value.gameObject;
+                    saveContactPoint.value = data.value.contacts[0].point;
+                    saveContactNormal.value = data.value.contacts[0].normal;
+                    YieldReturn(true);
+                }
+            }
+        }
+
+        void OnCollisionExit2D(ParadoxNotion.EventData<Collision2D> data) {
+            if ( !specifiedTagOnly || data.value.gameObject.CompareTag(objectTag) ) {
+                stay = false;
+                if ( checkType == CollisionTypes.CollisionExit ) {
+                    saveGameObjectAs.value = data.value.gameObject;
+                    YieldReturn(true);
+                }
+            }
+        }
+    }
+
+    ///----------------------------------------------------------------------------------------------
+
+    [Category("System Events")]
+    [Name("Check Collision 2D")]
+    [DoNotList]
+    public class CheckCollision2D : ConditionTask<Collider2D>
+    {
+
+        public CollisionTypes checkType = CollisionTypes.CollisionEnter;
+        public bool specifiedTagOnly;
+        [TagField]
+        public string objectTag = "Untagged";
+
+        [BlackboardOnly]
+        public BBParameter<GameObject> saveGameObjectAs;
+        [BlackboardOnly]
+        public BBParameter<Vector3> saveContactPoint;
+        [BlackboardOnly]
+        public BBParameter<Vector3> saveContactNormal;
+
+        private bool stay;
+
+        protected override string info {
+            get { return checkType.ToString() + ( specifiedTagOnly ? ( " '" + objectTag + "' tag" ) : "" ); }
+        }
+
+        protected override bool OnCheck() {
+            return checkType == CollisionTypes.CollisionStay ? stay : false;
+        }
+
+        protected override void OnEnable() {
+            router.onCollisionEnter2D += OnCollisionEnter2D;
+            router.onCollisionExit2D += OnCollisionExit2D;
+        }
+
+        protected override void OnDisable() {
+            router.onCollisionEnter2D -= OnCollisionEnter2D;
+            router.onCollisionExit2D -= OnCollisionExit2D;
+        }
+
+        void OnCollisionEnter2D(ParadoxNotion.EventData<Collision2D> data) {
+            if ( !specifiedTagOnly || data.value.gameObject.CompareTag(objectTag) ) {
+                stay = true;
+                if ( checkType == CollisionTypes.CollisionEnter || checkType == CollisionTypes.CollisionStay ) {
+                    saveGameObjectAs.value = data.value.gameObject;
+                    saveContactPoint.value = data.value.contacts[0].point;
+                    saveContactNormal.value = data.value.contacts[0].normal;
+                    YieldReturn(true);
+                }
+            }
+        }
+
+        void OnCollisionExit2D(ParadoxNotion.EventData<Collision2D> data) {
+            if ( !specifiedTagOnly || data.value.gameObject.CompareTag(objectTag) ) {
+                stay = false;
+                if ( checkType == CollisionTypes.CollisionExit ) {
+                    saveGameObjectAs.value = data.value.gameObject;
+                    YieldReturn(true);
+                }
+            }
+        }
+    }
 }

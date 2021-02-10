@@ -1,219 +1,221 @@
 using System.Linq;
+using System.Collections.Generic;
 using NodeCanvas.Framework;
-using ParadoxNotion;
 using ParadoxNotion.Design;
 using UnityEngine;
+using Logger = ParadoxNotion.Services.Logger;
+
+namespace NodeCanvas.StateMachines
+{
+
+    /// Use FSMs to create state like behaviours
+    [GraphInfo(
+        packageName = "NodeCanvas",
+        docsURL = "http://nodecanvas.paradoxnotion.com/documentation/",
+        resourcesURL = "http://nodecanvas.paradoxnotion.com/downloads/",
+        forumsURL = "http://nodecanvas.paradoxnotion.com/forums-page/"
+        )]
+    [CreateAssetMenu(menuName = "ParadoxNotion/NodeCanvas/FSM Asset")]
+    public class FSM : Graph
+    {
+        ///Transition Calling Mode (see "EnterState")
+        public enum TransitionCallMode
+        {
+            Normal = 0,
+            Stacked = 1,
+            Clean = 2,
+        }
+
+        private List<IUpdatable> updatableNodes;
+        private IStateCallbackReceiver[] callbackReceivers;
+        private Stack<FSMState> stateStack;
+
+        public event System.Action<IState> onStateEnter;
+        public event System.Action<IState> onStateUpdate;
+        public event System.Action<IState> onStateExit;
+        public event System.Action<IState> onStateTransition;
+
+        ///The current FSM state
+        public FSMState currentState { get; private set; }
+        ///The previous FSM state
+        public FSMState previousState { get; private set; }
+
+        ///The current state name. Null if none
+        public string currentStateName => currentState != null ? currentState.name : null;
+
+        ///The previous state name. Null if none
+        public string previousStateName => previousState != null ? previousState.name : null;
+
+        public override System.Type baseNodeType => typeof(FSMNode);
+        public override bool requiresAgent => true;
+        public override bool requiresPrimeNode => true;
+        public override bool isTree => false;
+        public override bool allowBlackboardOverrides => true;
+        sealed public override bool canAcceptVariableDrops => false;
+
+        ///----------------------------------------------------------------------------------------------
+
+        protected override void OnGraphInitialize() {
+            //we may be loading in async
+            ThreadSafeInitCall(GatherCallbackReceivers);
+            updatableNodes = new List<IUpdatable>();
+            for ( var i = 0; i < allNodes.Count; i++ ) {
+                if ( allNodes[i] is IUpdatable ) {
+                    updatableNodes.Add((IUpdatable)allNodes[i]);
+                }
+            }
+        }
+
+        protected override void OnGraphStarted() {
+            stateStack = new Stack<FSMState>();
+            EnterState((FSMState)primeNode, TransitionCallMode.Normal);
+        }
+
+        protected override void OnGraphUpdate() {
+
+            if ( currentState != null ) {
+
+                //Update defer updatables (basically AnyStates and ConcurentStates)
+                for ( var i = 0; i < updatableNodes.Count; i++ ) {
+                    updatableNodes[i].Update();
+                }
+
+                //this can only happen if FSM stoped just now (from the above update)
+                if ( currentState == null ) { Stop(false); return; }
+
+                //Update current state
+                currentState.Update();
+                if ( onStateUpdate != null && currentState.status == Status.Running ) {
+                    onStateUpdate(currentState);
+                }
+
+                //this can only happen if FSM stoped just now (from the above update)
+                if ( currentState == null ) { Stop(false); return; }
+
+                //state has nowhere to go..
+                if ( currentState.status != Status.Running && currentState.outConnections.Count == 0 ) {
+                    //...but we have a stacked state -> pop return to it
+                    if ( stateStack.Count > 0 ) {
+                        var popState = stateStack.Pop();
+                        EnterState(popState, TransitionCallMode.Normal);
+                        return;
+                    }
+
+                    //...and no updatables -> stop
+                    if ( !updatableNodes.Any(n => n.status == Status.Running) ) {
+                        Stop(true);
+                        return;
+                    }
+                }
+            }
+
+            //if null state, stop.
+            if ( currentState == null ) {
+                Stop(false);
+                return;
+            }
+        }
+
+        protected override void OnGraphStoped() {
+            if ( currentState != null ) {
+                if ( onStateExit != null ) {
+                    onStateExit(currentState);
+                }
+            }
+
+            previousState = null;
+            currentState = null;
+            stateStack = null;
+        }
+
+        ///Enter a state providing the state itself
+        public bool EnterState(FSMState newState, TransitionCallMode callMode) {
+
+            if ( !isRunning ) {
+                Logger.LogWarning("Tried to EnterState on an FSM that was not running", LogTag.EXECUTION, this);
+                return false;
+            }
+
+            if ( newState == null ) {
+                Logger.LogWarning("Tried to Enter Null State", LogTag.EXECUTION, this);
+                return false;
+            }
+
+            if ( currentState != null ) {
+                if ( onStateExit != null ) { onStateExit(currentState); }
+                currentState.Reset(false);
+                if ( callMode == TransitionCallMode.Stacked ) {
+                    stateStack.Push(currentState);
+                    if ( stateStack.Count > 5 ) {
+                        Logger.LogWarning("State stack exceeds 5. Ensure that you are not cycling stack calls", LogTag.EXECUTION, this);
+                    }
+                }
+            }
+
+            if ( callMode == TransitionCallMode.Clean ) {
+                stateStack.Clear();
+            }
+
+            previousState = currentState;
+            currentState = newState;
+
+            if ( onStateTransition != null ) { onStateTransition(currentState); }
+            if ( onStateEnter != null ) { onStateEnter(currentState); }
+            currentState.Execute(agent, blackboard);
+            return true;
+        }
+
+        ///Trigger a state to enter by it's name. Returns the state found and entered if any
+        public FSMState TriggerState(string stateName, TransitionCallMode callMode) {
+
+            var state = GetStateWithName(stateName);
+            if ( state != null ) {
+                EnterState(state, callMode);
+                return state;
+            }
+
+            Logger.LogWarning("No State with name '" + stateName + "' found on FSM '" + name + "'", LogTag.EXECUTION, this);
+            return null;
+        }
+
+        ///Get all State Names
+        public string[] GetStateNames() {
+            return allNodes.Where(n => n is FSMState).Select(n => n.name).ToArray();
+        }
+
+        ///Get a state by it's name
+        public FSMState GetStateWithName(string name) {
+            return (FSMState)allNodes.Find(n => n is FSMState && n.name == name);
+        }
+
+        //Gather IStateCallbackReceivers and subscribe them to state events
+        void GatherCallbackReceivers() {
+
+            if ( agent == null ) { return; }
+
+            callbackReceivers = agent.gameObject.GetComponents<IStateCallbackReceiver>();
+            if ( callbackReceivers.Length > 0 ) {
+                onStateEnter += (x) => { foreach ( var m in callbackReceivers ) m.OnStateEnter(x); };
+                onStateUpdate += (x) => { foreach ( var m in callbackReceivers ) m.OnStateUpdate(x); };
+                onStateExit += (x) => { foreach ( var m in callbackReceivers ) m.OnStateExit(x); };
+            }
+        }
+
+        public FSMState PeekStack() {
+            return stateStack != null && stateStack.Count > 0 ? stateStack.Peek() : null;
+        }
 
 
-namespace NodeCanvas.StateMachines{
+        ///----------------------------------------------------------------------------------------------
+        ///---------------------------------------UNITY EDITOR-------------------------------------------
+#if UNITY_EDITOR
 
-	/// <summary>
-	/// Use FSMs to create state like behaviours
-	/// </summary>
-	[GraphInfo(
-		packageName = "NodeCanvas",
-		docsURL = "http://nodecanvas.paradoxnotion.com/documentation/",
-		resourcesURL = "http://nodecanvas.paradoxnotion.com/downloads/",
-		forumsURL = "http://nodecanvas.paradoxnotion.com/forums-page/"
-		)]
-	public class FSM : Graph{
+        [UnityEditor.MenuItem("Tools/ParadoxNotion/NodeCanvas/Create/State Machine Asset", false, 0)]
+        static void Editor_CreateGraph() {
+            var newGraph = EditorUtils.CreateAsset<FSM>();
+            UnityEditor.Selection.activeObject = newGraph;
+        }
+#endif
 
-		private IUpdatable[] updatableNodes;
-
-		private event System.Action<IState> CallbackEnter;
-		private event System.Action<IState> CallbackStay;
-		private event System.Action<IState> CallbackExit;
-
-		public FSMState currentState{get; private set;}
-		public FSMState previousState{get; private set;}
-
-		///The current state name. Null if none
-		public string currentStateName{
-			get {return currentState != null? currentState.name : null; }
-		}
-
-		///The previous state name. Null if none
-		public string previousStateName{
-			get	{return previousState != null? previousState.name : null; }
-		}
-
-		public override System.Type baseNodeType{ get {return typeof(FSMState);} }
-		public override bool requiresAgent{	get {return true;} }
-		public override bool requiresPrimeNode { get {return true;} }
-		public override bool autoSort{ get {return false;} }
-		public override bool useLocalBlackboard{get {return false;}}
-
-
-		protected override void OnGraphStarted(){
-
-			GatherDelegates();
-
-			//collect AnyStates and ConcurentStates
-			updatableNodes = allNodes.OfType<IUpdatable>().ToArray();
-			//enable AnyStates
-			foreach(var anyState in allNodes.OfType<AnyState>()){
-				anyState.Execute(agent, blackboard);
-			}
-			//enable ConcurentStates
-			foreach(var conc in allNodes.OfType<ConcurrentState>()){
-				conc.Execute(agent, blackboard);
-			}
-
-			//enter the last or start state
-			EnterState(previousState == null? (FSMState)primeNode : previousState);
-		}
-
-		protected override void OnGraphUpdate(){
-
-			if (currentState == null){
-				//Debug.LogError("Current FSM State is or became null. Stopping FSM...");
-				Stop(false);
-				return;
-			}
-
-			//do this first. This automaticaly stops the graph if the current state is finished and has no transitions
-			if (currentState.status != Status.Running && currentState.outConnections.Count == 0){
-				Stop(true);
-				return;
-			}
-
-			//Update AnyStates and ConcurentStates
-			for (var i = 0; i < updatableNodes.Length; i++)
-				updatableNodes[i].Update();
-
-			//Update current state
-			currentState.Update();
-			
-			if (CallbackStay != null && currentState != null && currentState.status == Status.Running){
-				CallbackStay(currentState);
-			}
-		}
-
-		protected override void OnGraphStoped(){
-			if (currentState != null){
-				if (CallbackExit != null){
-					CallbackExit(currentState);
-				}
-				currentState.Finish();
-				currentState.Reset();
-			}
-
-			previousState = null;
-			currentState = null;
-		}
-
-		protected override void OnGraphPaused(){
-			previousState = currentState;
-			currentState = null;
-		}
-
-		///Enter a state providing the state itself
-		public bool EnterState(FSMState newState){
-
-			if (!isRunning){
-				Debug.LogWarning("Tried to EnterState on an FSM that was not running", this);
-				return false;
-			}
-
-			if (newState == null){
-				Debug.LogWarning("Tried to Enter Null State");
-				return false;
-			}
-
-			if (currentState != null){	
-
-				if (CallbackExit != null){
-					CallbackExit(currentState);
-				}
-
-				currentState.Finish();
-				currentState.Reset();
-
-				#if UNITY_EDITOR //Done for visualizing in editor
-				for (var i = 0; i < currentState.inConnections.Count; i++)
-					currentState.inConnections[i].connectionStatus = Status.Resting;
-				#endif
-			}
-
-			previousState = currentState;
-			currentState = newState;
-
-			if (CallbackEnter != null){
-				CallbackEnter(currentState);
-			}
-
-			currentState.Execute(agent, blackboard);
-			return true;
-		}
-
-		///Trigger a state to enter by it's name. Returns the state found and entered if any
-		public FSMState TriggerState(string stateName){
-
-			var state = GetStateWithName(stateName);
-			if (state != null){
-				EnterState(state);
-				return state;
-			}
-
-			Debug.LogWarning("No State with name '" + stateName + "' found on FSM '" + name + "'");
-			return null;
-		}
-
-		///Get all State Names
-		public string[] GetStateNames(){
-			return allNodes.Where(n => n.allowAsPrime).Select(n => n.name).ToArray();
-		}
-
-		///Get a state by it's name
-		public FSMState GetStateWithName(string name){
-			return (FSMState)allNodes.Find(n => n.allowAsPrime && n.name == name);
-		}
-
-		//Gather and creates delegates from MonoBehaviours on agents that implement required methods
-		void GatherDelegates(){
-
-			foreach (var _mono in agent.gameObject.GetComponents<MonoBehaviour>()){
-                
-				var mono = _mono;
-				var enterMethod = mono.GetType().RTGetMethod("OnStateEnter");
-				var stayMethod = mono.GetType().RTGetMethod("OnStateUpdate");
-				var exitMethod = mono.GetType().RTGetMethod("OnStateExit");
-
-				if (enterMethod != null){
-					try { CallbackEnter += enterMethod.RTCreateDelegate<System.Action<IState>>(mono); } //JIT
-					catch { CallbackEnter += (m)=>{ enterMethod.Invoke(mono, new object[]{m}); }; } //AOT
-				}
-
-				if (stayMethod != null){
-					try { CallbackStay += stayMethod.RTCreateDelegate<System.Action<IState>>(mono); } //JIT
-					catch { CallbackStay += (m)=>{ stayMethod.Invoke(mono, new object[]{m}); }; } //AOT
-				}
-
-				if (exitMethod != null){
-					try { CallbackExit += exitMethod.RTCreateDelegate<System.Action<IState>>(mono); } //JIT
-					catch { CallbackExit += (m)=>{ exitMethod.Invoke(mono, new object[]{m}); }; } //AOT
-				}
-			}
-		}
-
-		////////////////////////////////////////
-		///////////GUI AND EDITOR STUFF/////////
-		////////////////////////////////////////
-		#if UNITY_EDITOR
-		
-		[UnityEditor.MenuItem("Tools/ParadoxNotion/NodeCanvas/Create/State Machine", false, 0)]
-		public static void Editor_CreateGraph(){
-			var newGraph = EditorUtils.CreateAsset<FSM>(true);
-			UnityEditor.Selection.activeObject = newGraph;
-		}
-
-		[UnityEditor.MenuItem("Assets/Create/ParadoxNotion/NodeCanvas/State Machine")]
-		public static void Editor_CreateGraphFix(){
-			var path = EditorUtils.GetAssetUniquePath("FSM.asset");
-			var newGraph = EditorUtils.CreateAsset<FSM>(path);
-			UnityEditor.Selection.activeObject = newGraph;
-		}
-		
-		#endif
-	}
+    }
 }

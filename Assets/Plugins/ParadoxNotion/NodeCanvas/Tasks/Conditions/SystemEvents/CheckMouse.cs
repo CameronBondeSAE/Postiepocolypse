@@ -4,35 +4,49 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace NodeCanvas.Tasks.Conditions{
+namespace NodeCanvas.Tasks.Conditions
+{
 
-	[Category("System Events")]
-	[EventReceiver("OnMouseEnter", "OnMouseExit", "OnMouseOver")]
-	public class CheckMouse : ConditionTask<Collider> {
+    [Category("System Events")]
+    public class CheckMouse : ConditionTask<Collider>
+    {
 
-		public MouseInteractionTypes checkType = MouseInteractionTypes.MouseEnter;
+        public MouseInteractionTypes checkType = MouseInteractionTypes.MouseEnter;
 
-		protected override string info{
-			get {return checkType.ToString();}
-		}
+        protected override string info {
+            get { return checkType.ToString(); }
+        }
 
-		protected override bool OnCheck(){
-			return false;
-		}
+        protected override bool OnCheck() { return false; }
 
-		public void OnMouseEnter(){
-			if (checkType == MouseInteractionTypes.MouseEnter)
-				YieldReturn(true);
-		}
+        protected override void OnEnable() {
+            router.onMouseEnter += OnMouseEnter;
+            router.onMouseExit += OnMouseExit;
+            router.onMouseOver += OnMouseOver;
+        }
 
-		public void OnMouseExit(){
-			if (checkType == MouseInteractionTypes.MouseExit)
-				YieldReturn(true);
-		}
+        protected override void OnDisable() {
+            router.onMouseEnter -= OnMouseEnter;
+            router.onMouseExit -= OnMouseExit;
+            router.onMouseOver -= OnMouseOver;
+        }
 
-		public void OnMouseOver(){
-			if (checkType == MouseInteractionTypes.MouseOver)
-				YieldReturn(true);
-		}
-	}
+        void OnMouseEnter(ParadoxNotion.EventData msg) {
+            if ( checkType == MouseInteractionTypes.MouseEnter ) {
+                YieldReturn(true);
+            }
+        }
+
+        void OnMouseExit(ParadoxNotion.EventData msg) {
+            if ( checkType == MouseInteractionTypes.MouseExit ) {
+                YieldReturn(true);
+            }
+        }
+
+        void OnMouseOver(ParadoxNotion.EventData msg) {
+            if ( checkType == MouseInteractionTypes.MouseOver ) {
+                YieldReturn(true);
+            }
+        }
+    }
 }
