@@ -76,12 +76,12 @@ MonoBehaviour:
     - id: 3
       value: 1
   worldStates:
-  - position: {x: 43, y: 443}
+  - position: {x: 38, y: 475}
     list:
     - id: 0
       value: 0
     - id: 1
-      value: 0
+      value: 1
     - id: 2
       value: 0
     - id: 3
