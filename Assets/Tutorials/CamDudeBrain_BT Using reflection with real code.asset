@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a686a47eee2fa44cb0a34b5d86e4d5e, type: 3}
+  m_Name: CamDudeBrain_BT Using reflection with real code
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"_position":{"x":5805.0,"y":4980.0},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"0"},{"_tag":"Attack","_position":{"x":5535.0,"y":5100.0},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"1"},{"_condition":{"valueA":{"_name":"Ammo","_targetVariableID":"0b4855d1-13e1-4552-99b0-d2e9115ae73f"},"checkType":1,"valueB":{"_value":20},"$type":"NodeCanvas.Tasks.Conditions.CheckInt"},"_position":{"x":5280.0,"y":5265.0},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"2"},{"_condition":{"valueA":{"_name":"Distance","_targetVariableID":"1d20bff1-6dbb-4e13-90f2-bd7b1cd3549b"},"checkType":2,"valueB":{"_value":10.0},"$type":"NodeCanvas.Tasks.Conditions.CheckFloat"},"_position":{"x":5430.0,"y":5265.0},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"3"},{"_condition":{"valueA":{"_name":"Health","_targetVariableID":"873abb7c-c2f3-4908-af79-017e85c66b95"},"checkType":1,"valueB":{"_value":50},"$type":"NodeCanvas.Tasks.Conditions.CheckInt"},"_position":{"x":5595.0,"y":5265.0},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"4"},{"_action":{"log":{"_value":"Attack!"},"labelYOffset":1.0,"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_name":"","_tag":"Attack","_position":{"x":5715.0,"y":5265.0},"_comment":"","$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"5"},{"_name":"","_tag":"Find
+    health","_position":{"x":6045.0,"y":5100.0},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"6"},{"_condition":{"valueA":{"_name":"Health","_targetVariableID":"873abb7c-c2f3-4908-af79-017e85c66b95"},"checkType":2,"valueB":{"_value":30},"$type":"NodeCanvas.Tasks.Conditions.CheckInt"},"_position":{"x":5925.0,"y":5265.0},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"7"},{"_condition":{"method":{"_baseInfo":"FakeHealth|ReturnBoolForConditionTest|System.Boolean","_paramsInfo":""},"parameters":[],"checkValue":{"_type":"System.Boolean","_value":{"$content":false,"$type":"System.Boolean"}},"$type":"NodeCanvas.Tasks.Conditions.CheckFunction_Multiplatform"},"_position":{"x":5955.0,"y":5355.0},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"8"},{"_action":{"log":{"_value":"Run
+    away!"},"labelYOffset":1.0,"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_name":"","_tag":"Find
+    health","_position":{"x":6150.0,"y":5265.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"9"},{"_action":{"method":{"_baseInfo":"FakeHealth|ReturnParameter|System.Int32","_paramsInfo":""},"parameters":[],"returnValue":{"_type":"System.Int32","_name":"Distance","_targetVariableID":"1d20bff1-6dbb-4e13-90f2-bd7b1cd3549b"},"$type":"NodeCanvas.Tasks.Actions.ExecuteFunction_Multiplatform"},"_position":{"x":6345.0,"y":5265.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"10"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"6"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"7"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"8"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"9"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"10"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{"One
+    or the other":{"_value":true,"_name":"One or the other","_id":"b6d9b2c7-c163-452b-9ef3-2b7fb8d18de1","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.18
+    _category: 
+    _comments: 
+    _translation: {x: -5286, y: -4722}
+    _zoomFactor: 1
+  _haltSerialization: 0
