@@ -519,8 +519,9 @@ GameObject:
   - component: {fileID: 2041186752}
   - component: {fileID: 2041186751}
   - component: {fileID: 2041186750}
+  - component: {fileID: 2041186756}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -541,7 +542,10 @@ MonoBehaviour:
   _parentBlackboard: {fileID: 0}
   _serializedBlackboard: '{"_variables":{"Distance":{"_value":500.0,"_name":"Distance","_id":"ee56489a-53d4-4686-a076-b236f600931b","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
     mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"InVision":{"_name":"InVision","_id":"877a94b7-2ee1-4b30-bd6d-d8824e7ce7a7","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
-    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}}}'
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"distanceToPlayer":{"_propertyPath":"MonsterScare.distanceToPlayer","_name":"distanceToPlayer","_id":"8084d5e7-37c8-4fd1-9620-634753eaeb02","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"isScared":{"_propertyPath":"MonsterScare.isScared","_name":"isScared","_id":"71b835dd-cea9-4184-a92b-1ad93748cca7","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+    mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"},"forward":{"_propertyPath":"UnityEngine.Transform.forward","_name":"forward","_id":"e6a776f7-90b1-4b64-b7c2-120efba83e62","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
+    UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences: []
   _serializedVariables:
   - _json: '{"_value":500.0,"_name":"Distance","_id":"ee56489a-53d4-4686-a076-b236f600931b","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
@@ -549,6 +553,15 @@ MonoBehaviour:
     _references: []
   - _json: '{"_name":"InVision","_id":"877a94b7-2ee1-4b30-bd6d-d8824e7ce7a7","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"MonsterScare.distanceToPlayer","_name":"distanceToPlayer","_id":"8084d5e7-37c8-4fd1-9620-634753eaeb02","$type":"NodeCanvas.Framework.Variable`1[[System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"MonsterScare.isScared","_name":"isScared","_id":"71b835dd-cea9-4184-a92b-1ad93748cca7","$type":"NodeCanvas.Framework.Variable`1[[System.Boolean,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]"}'
+    _references: []
+  - _json: '{"_propertyPath":"UnityEngine.Transform.forward","_name":"forward","_id":"e6a776f7-90b1-4b64-b7c2-120efba83e62","$type":"NodeCanvas.Framework.Variable`1[[UnityEngine.Vector3,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references: []
 --- !u!114 &2041186751
 MonoBehaviour:
@@ -655,3 +668,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041186756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041186749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f72332f8fe72d4e9b29aaa9a6016d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1281768418}
+  distanceToPlayer: 0
+  isScared: 0
