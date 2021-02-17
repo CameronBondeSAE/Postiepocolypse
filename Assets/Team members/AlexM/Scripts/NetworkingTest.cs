@@ -14,27 +14,65 @@ namespace AlexM
 
         public Light[] lights;
 
-
+        public bool lightState;
+        public bool StopLoop;
         private void Start()
         {
             if (isServer)
             {
-                InvokeRepeating("rpcToggleLight", 1f, 1f);
+                //InvokeRepeating("RpcLightState", 1f, 1f);
+                StartCoroutine(Repeater());
             }
         }
 
-        [ClientRpc]
-        void rpcToggleLight()
+    #region ServerStuff
+
+        void ToggleLightState()
         {
-            foreach (var light in lights)
+            if (isServer)
             {
-                if (light.gameObject.activeSelf)
+                foreach (var _light in lights)
                 {
-                    light.gameObject.SetActive(false);
+                    if (_light.gameObject.activeSelf)
+                    {
+                        _light.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        _light.gameObject.SetActive(true);
+                    }
                 }
-                else
+            } 
+        }
+
+    #endregion
+
+    #region ClientStuff
+
+        [ClientRpc]
+        void RpcLightState(bool _lightState)
+        {
+            foreach (var _light in lights)
+            {
+                _light.gameObject.SetActive(_lightState);
+            }
+        }
+
+    #endregion
+
+        IEnumerator Repeater()
+        {
+            while (true)
+            {
+                lightState = true;
+                RpcLightState(lightState);
+                yield return new WaitForSeconds(0.5f);
+                lightState = false;
+                RpcLightState(lightState);
+                yield return new WaitForSeconds(0.5f);
+                if (StopLoop)
                 {
-                    light.gameObject.SetActive(true);
+                    break;
                 }
             }
         }
