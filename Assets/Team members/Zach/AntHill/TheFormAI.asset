@@ -1,0 +1,195 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: TheFormAI
+  m_EditorClassIdentifier: 
+  conditions:
+    position: {x: 252, y: 124}
+    list:
+    - id: 0
+      name: Alone
+    - id: 1
+      name: InFormation
+    - id: 2
+      name: ChangeFormation
+    - id: 3
+      name: LookingForPlayer
+    - id: 4
+      name: PlayerSpotted
+    - id: 5
+      name: MovingToPlayer
+    - id: 6
+      name: MeleeAttack
+    - id: 7
+      name: RangedAttack
+    - id: 8
+      name: MovingAwayFromPlayer
+    - id: 9
+      name: PlayerDamage
+  actions:
+  - name: JoinUpWithOthers
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 535, y: 137}
+    pre:
+    - id: 0
+      value: 1
+    post:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 1
+    - id: 3
+      value: 1
+  - name: ChangeFormation
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 1
+    position: {x: 749, y: 136}
+    pre:
+    - id: 1
+      value: 1
+    post:
+    - id: 2
+      value: 1
+    - id: 1
+      value: 1
+    - id: 3
+      value: 1
+  - name: LookingForPlayer
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 966, y: 140}
+    pre:
+    - id: 1
+      value: 1
+    - id: 3
+      value: 1
+    post:
+    - id: 3
+      value: 0
+    - id: 4
+      value: 1
+  - name: MovingToPlayer
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1163, y: 141}
+    pre:
+    - id: 4
+      value: 1
+    post:
+    - id: 5
+      value: 1
+    - id: 4
+      value: 0
+  - name: MeleePlayer
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 1
+    position: {x: 1372, y: 144}
+    pre:
+    - id: 5
+      value: 1
+    post:
+    - id: 6
+      value: 1
+    - id: 8
+      value: 1
+    - id: 5
+      value: 0
+  - name: RangedAttack
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 2
+    position: {x: 1575, y: 151}
+    pre:
+    - id: 5
+      value: 1
+    post:
+    - id: 7
+      value: 1
+  - name: MovingToPlayerAfterAttack
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1133, y: 368}
+    pre:
+    - id: 8
+      value: 1
+    post:
+    - id: 5
+      value: 1
+  - name: PlayerDamaged
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1401, y: 460}
+    pre:
+    - id: 6
+      value: 1
+    post:
+    - id: 9
+      value: 1
+    - id: 6
+      value: 0
+  - name: PlayerDamaged
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1618, y: 462}
+    pre:
+    - id: 7
+      value: 1
+    post:
+    - id: 9
+      value: 1
+    - id: 7
+      value: 0
+  goals:
+  - name: DamagePlayer
+    isDefault: 1
+    position: {x: 215, y: 451}
+    conditions:
+    - id: 9
+      value: 1
+  - name: RangedAttack
+    isDefault: 0
+    position: {x: 204, y: 588}
+    conditions:
+    - id: 7
+      value: 1
+  worldStates:
+  - position: {x: 190, y: 724}
+    list:
+    - id: 0
+      value: 1
+    - id: 1
+      value: 0
+    - id: 2
+      value: 0
+    - id: 3
+      value: 0
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0
+    - id: 7
+      value: 0
+    - id: 8
+      value: 0
+    - id: 9
+      value: 0
