@@ -30,6 +30,12 @@ namespace AJ
             }
         }
 
+        [ClientRpc]
+        void RpcSetLight(bool lightEnabled)
+        {
+            _light.enabled = lightEnabled;
+        }
+
         void FlickerLight()
         {
             if (isServer)
@@ -41,7 +47,8 @@ namespace AJ
 
                 if (Timer <= 0)
                 {
-                    _light.enabled = !_light.enabled;
+                    _light.enabled = !_light.enabled; 
+                    RpcSetLight(_light.enabled);
                     Timer = Random.Range(MinTime, MaxTime);
                 }
             }
