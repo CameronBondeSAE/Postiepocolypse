@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: timtestScenario
+  m_EditorClassIdentifier: 
+  conditions:
+    position: {x: 167, y: 139}
+    list:
+    - id: 0
+      name: HasAmmo
+    - id: 1
+      name: AttackPlayer
+    - id: 2
+      name: FindTarget
+    - id: 3
+      name: Damagetoplayer
+  actions:
+  - name: FindAmmo
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 403, y: 131}
+    pre:
+    - id: 0
+      value: 0
+    post:
+    - id: 0
+      value: 1
+  - name: AttackPlayer
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 607, y: 130}
+    pre:
+    - id: 2
+      value: 1
+    - id: 0
+      value: 1
+    post:
+    - id: 3
+      value: 1
+  - name: Searching
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 811, y: 130}
+    pre:
+    - id: 2
+      value: 0
+    - id: 0
+      value: 1
+    post:
+    - id: 2
+      value: 1
+  - name: Damage
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1008, y: 130}
+    pre:
+    - id: 0
+      value: 1
+    - id: 2
+      value: 1
+    - id: 1
+      value: 1
+    post:
+    - id: 3
+      value: 1
+  goals:
+  - name: KillPlayer
+    isDefault: 1
+    position: {x: 158, y: 317}
+    conditions:
+    - id: 3
+      value: 1
+  worldStates:
+  - position: {x: 138, y: 477}
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
+    - id: 2
+      value: 1
+    - id: 3
+      value: 0
