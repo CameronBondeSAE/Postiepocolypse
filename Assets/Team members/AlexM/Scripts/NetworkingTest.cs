@@ -36,7 +36,7 @@ namespace AlexM
 		{
 			if (InputSystem.GetDevice<Keyboard>().tKey.wasPressedThisFrame)
 			{
-				CmdFirstCommand();
+				CmdFirstCommand(netIdentity);
 			}
 
 			if (InputSystem.GetDevice<Keyboard>().lKey.wasPressedThisFrame)
@@ -101,9 +101,9 @@ namespace AlexM
 
 
 		[Command(ignoreAuthority = true)]
-		void CmdFirstCommand()
+		void CmdFirstCommand(NetworkIdentity networkIdentity)
 		{
-			Debug.Log("Client command sent! "); //+ netId.ToString());
+			Debug.Log("Client command sent! " + networkIdentity.ToString());
 			RpcRespondToCommand();
 		}
 
