@@ -3,53 +3,84 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CubeCar : MonoBehaviour
+
+namespace Zach
 {
-    public Rigidbody Rigidbody;
 
-    public float XSpeed;
 
-    public float YSpeed;
-
-    public Vector3 localVelocity;
-
-    public float friction = 1; 
-    
-    // Start is called before the first frame update
-    void Start()
+    public class CubeCar : MonoBehaviour
     {
-        XSpeed = 1;
-        YSpeed = 5;
-    }
+        public Rigidbody Rigidbody;
 
-    // Update is called once per frame
-    void Update()
-    {
+        public float XSpeed;
 
-        localVelocity = transform.InverseTransformDirection(Rigidbody.velocity);
-        Rigidbody.AddRelativeForce(-localVelocity.x * friction,0,0);
+        public float YSpeed;
+
+        public Vector3 localVelocity;
+
+        public float friction = 1;
+
+        public Vector3 Origin;
+
+        public float rayCastDistance = 10;
+
+        public float maxForce = 2;
+
+        // Start is called before the first frame update
+
+        void Start()
+        {
+            XSpeed = 1;
+            YSpeed = 5;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            //Raycast for the height of car/spring 
+            Origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             
-        //Front and Back Driving
-        if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
-        {
-            Rigidbody.AddRelativeForce(0,0,XSpeed);
-        }
-        if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
-        {
-            Rigidbody.AddRelativeForce(0,0,-XSpeed);
-        }
-        
-        //Left and Right turning 
-        if (InputSystem.GetDevice<Keyboard>().wKey.isPressed || InputSystem.GetDevice<Keyboard>().sKey.isPressed)
-        {
-            if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
+            localVelocity = transform.InverseTransformDirection(Rigidbody.velocity);
+            Rigidbody.AddRelativeForce(-localVelocity.x * friction, 0, 0);
+
+            RaycastHit hitinfo;
+            hitinfo = new RaycastHit();
+            Physics.Raycast(transform.position, -transform.up, out hitinfo, rayCastDistance, 255,
+                QueryTriggerInteraction.Ignore);
+            
+            //draw line when something is hit
+            if (hitinfo.collider)
             {
-                Rigidbody.AddRelativeTorque(0,-YSpeed,0);
+                Debug.DrawLine(transform.position,hitinfo.point,Color.green);
             }
-            if (InputSystem.GetDevice<Keyboard>().dKey.isPressed)
+
+            Rigidbody.AddRelativeForce(0,maxForce - hitinfo.distance,0);
+
+
+            //Front and Back Driving
+            if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
             {
-                Rigidbody.AddRelativeTorque(0,YSpeed,0);
-            } 
+                Rigidbody.AddRelativeForce(0, 0, XSpeed);
+            }
+
+            if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
+            {
+                Rigidbody.AddRelativeForce(0, 0, -XSpeed);
+            }
+
+            //Left and Right turning 
+            if (InputSystem.GetDevice<Keyboard>().wKey.isPressed || InputSystem.GetDevice<Keyboard>().sKey.isPressed)
+            {
+                if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
+                {
+                    Rigidbody.AddRelativeTorque(0, -YSpeed, 0);
+                }
+
+                if (InputSystem.GetDevice<Keyboard>().dKey.isPressed)
+                {
+                    Rigidbody.AddRelativeTorque(0, YSpeed, 0);
+                }
+            }
         }
     }
 }
