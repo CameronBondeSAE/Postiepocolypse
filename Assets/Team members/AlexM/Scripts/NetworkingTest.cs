@@ -7,103 +7,125 @@ using UnityEngine.InputSystem;
 
 namespace AlexM
 {
-    public class NetworkingTest : NetworkBehaviour
-    {
+	public class NetworkingTest : NetworkBehaviour
+	{
+	#region Variables
 
-        private float count;
-        private bool DoCount = true;
+		private float count;
+		private bool  DoCount = true;
 
-        public Light[] lights;
+		public Light[] lights;
 
-        public bool lightState;
-        public bool StopLoop;
-        private void Start()
-        {
-            if (isServer)
-            {
-                //InvokeRepeating("RpcLightState", 1f, 1f);
-                StartCoroutine(Repeater());
-            }
-        }
+		public bool lightState;
+		public bool StopLoop;
 
-        private void Update()
-        {
-            if (InputSystem.GetDevice<Keyboard>().tKey.wasPressedThisFrame)
-            {
-                CmdFirstCommand();
-            }
-        }
+	#endregion
 
-    #region ServerStuff
+	#region LocalStuff
 
-        void ToggleLightState()
-        {
-            if (isServer)
-            {
-                foreach (var _light in lights)
-                {
-                    if (_light.gameObject.activeSelf)
-                    {
-                        _light.gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        _light.gameObject.SetActive(true);
-                    }
-                }
-            } 
-        }
+		private void Start()
+		{
+			if (isServer)
+			{
+				//InvokeRepeating("RpcLightState", 1f, 1f);
+				StartCoroutine(Repeater());
+			}
+		}
 
-    #endregion
+		private void Update()
+		{
+			if (InputSystem.GetDevice<Keyboard>().tKey.wasPressedThisFrame)
+			{
+				CmdFirstCommand(netIdentity);
+			}
 
-    #region ClientStuff
+			if (InputSystem.GetDevice<Keyboard>().lKey.wasPressedThisFrame)
+			{
+				StartCoroutine(Repeater());
+			}
+		}
 
-        [ClientRpc]
-        void RpcLightState(bool _lightState)
-        {
-            foreach (var _light in lights)
-            {
-                _light.gameObject.SetActive(_lightState);
-            }
-        }
+		IEnumerator Repeater()
+		{
+			while (true)
+			{
+				lightState = true;
+				RpcLightState(lightState);
+				yield return new WaitForSeconds(1f);
+				lightState = false;
+				RpcLightState(lightState);
+				yield return new WaitForSeconds(0.5f);
+				if (StopLoop)
+				{
+					break;
+				}
+			}
+		}
 
-        [Command(ignoreAuthority = true)]
-        void CmdFirstCommand()
-        {
-            Debug.Log("Client command sent! " + netId.ToString());
-        }
+		IEnumerator Count(float time)
+		{
+			if (DoCount)
+			{
+				count++;
+				Debug.Log("P: " + count);
+				DoCount = false;
+			}
 
-    #endregion
+			yield return new WaitForSeconds(time);
+			DoCount = true;
+			StartCoroutine(Count(1f));
+		}
 
-        IEnumerator Repeater()
-        {
-            while (true)
-            {
-                lightState = true;
-                RpcLightState(lightState);
-                yield return new WaitForSeconds(0.5f);
-                lightState = false;
-                RpcLightState(lightState);
-                yield return new WaitForSeconds(0.5f);
-                if (StopLoop)
-                {
-                    break;
-                }
-            }
-        }
-        
-        IEnumerator Count(float time)
-        {
-            if (DoCount)
-            {
-                count++;
-                Debug.Log("P: " + count);
-                DoCount = false;
-            }
+	#endregion
 
-            yield return new WaitForSeconds(time);
-            DoCount = true;
-            StartCoroutine(Count(1f));
-        }
-    }
+
+	#region ServerStuff
+
+		void ToggleLightState()
+		{
+			if (isServer)
+			{
+				foreach (var _light in lights)
+				{
+					if (_light.gameObject.activeSelf)
+					{
+						_light.gameObject.SetActive(false);
+					}
+					else
+					{
+						_light.gameObject.SetActive(true);
+					}
+				}
+			}
+		}
+
+
+		[Command(ignoreAuthority = true)]
+		void CmdFirstCommand(NetworkIdentity networkIdentity)
+		{
+			Debug.Log("Client command sent! " + networkIdentity.ToString());
+			RpcRespondToCommand();
+		}
+
+	#endregion
+
+	#region ClientStuff
+
+		[ClientRpc]
+		void RpcLightState(bool _lightState)
+		{
+			foreach (var _light in lights)
+			{
+				_light.gameObject.SetActive(_lightState);
+			}
+		}
+
+		[ClientRpc]
+		void RpcRespondToCommand()
+		{
+			Debug.Log("Server responding to client command!!");
+		}
+
+	#endregion
+	}
 }
