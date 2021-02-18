@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AlexM
 {
@@ -22,6 +23,14 @@ namespace AlexM
             {
                 //InvokeRepeating("RpcLightState", 1f, 1f);
                 StartCoroutine(Repeater());
+            }
+        }
+
+        private void Update()
+        {
+            if (InputSystem.GetDevice<Keyboard>().tKey.wasPressedThisFrame)
+            {
+                CmdFirstCommand();
             }
         }
 
@@ -56,6 +65,12 @@ namespace AlexM
             {
                 _light.gameObject.SetActive(_lightState);
             }
+        }
+
+        [Command(ignoreAuthority = true)]
+        void CmdFirstCommand()
+        {
+            Debug.Log("Client command sent! " + netId.ToString());
         }
 
     #endregion

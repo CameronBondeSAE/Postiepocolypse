@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemoScript : MonoBehaviour
+namespace John
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class DemoScript : MonoBehaviour
     {
+       public void ColourRed()
+        {
+            GetComponent<Renderer> ().material.color = Color.red;
+        }
         
+        public void ColourBlue()
+        {
+            GetComponent<Renderer> ().material.color = Color.blue;
+        }
     }
 }

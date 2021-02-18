@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AJ
 {
@@ -28,6 +29,23 @@ namespace AJ
             {
                 FlickerLight();
             }
+
+            if (InputSystem.GetDevice<Keyboard>().tKey.wasPressedThisFrame)
+            {
+                CmdFirstCommand();
+            }
+        }
+
+        [Command(ignoreAuthority = true)]
+        void CmdFirstCommand()
+        {
+            Debug.Log("Client command sent!");
+        }
+
+        [ClientRpc]
+        void RpcSetLight(bool lightEnabled)
+        {
+            _light.enabled = lightEnabled;
         }
 
         void FlickerLight()
@@ -41,7 +59,8 @@ namespace AJ
 
                 if (Timer <= 0)
                 {
-                    _light.enabled = !_light.enabled;
+                    _light.enabled = !_light.enabled; 
+                    RpcSetLight(_light.enabled);
                     Timer = Random.Range(MinTime, MaxTime);
                 }
             }
