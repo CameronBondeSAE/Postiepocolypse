@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TheFormAI
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 252, y: 124}
+    position: {x: 305, y: 96}
     list:
     - id: 0
       name: Alone
@@ -40,7 +40,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 535, y: 137}
+    position: {x: 566, y: 99}
     pre:
     - id: 0
       value: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 1
-    position: {x: 749, y: 136}
+    position: {x: 787, y: 102}
     pre:
     - id: 1
       value: 1
@@ -70,7 +70,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 966, y: 140}
+    position: {x: 1012, y: 106}
     pre:
     - id: 1
       value: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1163, y: 141}
+    position: {x: 1230, y: 111}
     pre:
     - id: 4
       value: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 1
-    position: {x: 1372, y: 144}
+    position: {x: 819, y: 348}
     pre:
     - id: 5
       value: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 2
-    position: {x: 1575, y: 151}
+    position: {x: 1045, y: 361}
     pre:
     - id: 5
       value: 1
@@ -124,7 +124,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1133, y: 368}
+    position: {x: 583, y: 343}
     pre:
     - id: 8
       value: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1401, y: 460}
+    position: {x: 1276, y: 356}
     pre:
     - id: 6
       value: 1
@@ -148,7 +148,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1618, y: 462}
+    position: {x: 589, y: 569}
     pre:
     - id: 7
       value: 1
@@ -160,18 +160,18 @@ MonoBehaviour:
   goals:
   - name: DamagePlayer
     isDefault: 1
-    position: {x: 215, y: 451}
+    position: {x: 296, y: 371}
     conditions:
     - id: 9
       value: 1
   - name: RangedAttack
     isDefault: 0
-    position: {x: 204, y: 588}
+    position: {x: 291, y: 494}
     conditions:
     - id: 7
       value: 1
   worldStates:
-  - position: {x: 190, y: 724}
+  - position: {x: 277, y: 623}
     list:
     - id: 0
       value: 1
