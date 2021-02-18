@@ -13,6 +13,7 @@ public class Driver : MonoBehaviour
     public Vector3 localVelocity;
     public float rayLength;
     public LayerMask layer;
+    public float maxSpringForce;
 
     void Update()
     {
@@ -57,6 +58,8 @@ public class Driver : MonoBehaviour
         {
             //apply spring resistance here
             Debug.Log("push back");
+            float force = 1 - rayLength;
+            force *= maxSpringForce;
         }
     }
 }
