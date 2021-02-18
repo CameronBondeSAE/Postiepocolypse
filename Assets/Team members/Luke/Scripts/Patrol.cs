@@ -6,22 +6,10 @@ namespace Luke
 {
     public class Patrol : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-        
-        //find defogged areas
         public IEnumerator FindDefoggedArea()
         {
-            yield break;
+            yield return new WaitForSeconds(1f);
+            Debug.Log("Search defogged area");
         }
     }
 }
