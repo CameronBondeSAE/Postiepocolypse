@@ -14,11 +14,12 @@ public class Driver : MonoBehaviour
     public float rayLength;
     public LayerMask layer;
     public float maxSpringForce;
-
+    public float springResistance;
+    public Transform[] Wheels;
+    
     void Update()
     {
         //to keep off the ground 
-        Debug.DrawRay(transform.position,Vector3.down,Color.green);
         RaycastOut();
 
         //to get the current relative force and apply it to the x axis
@@ -49,17 +50,25 @@ public class Driver : MonoBehaviour
     public void RaycastOut()
     {
         //ray stuff
-        Ray ray = new Ray();
-        ray.origin = transform.position;
-        ray.direction = Vector3.down;
-        RaycastHit raycastHit = new RaycastHit();
-
-        if (Physics.Raycast(ray, out raycastHit, rayLength, layer))
+        foreach (Transform wheel in Wheels)
         {
-            //apply spring resistance here
-            Debug.Log("push back");
-            float force = 1 - rayLength;
-            force *= maxSpringForce;
+            Ray ray = new Ray();
+            ray.origin = wheel.transform.position;
+            ray.direction = -wheel.transform.up;
+            RaycastHit raycastHit = new RaycastHit();
+            
+            Debug.DrawRay(wheel.transform.position,-wheel.transform.up,Color.yellow);
+            
+            if (Physics.Raycast(ray, out raycastHit, rayLength, layer))
+            {
+                //apply spring resistance here
+                float force = springResistance - rayLength;
+                force *= maxSpringForce;
+
+                rb.AddForceAtPosition(transform.up * force, wheel.transform.position);
+            }
         }
+
+        
     }
 }
