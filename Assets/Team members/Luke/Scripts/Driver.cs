@@ -16,7 +16,7 @@ namespace Luke
         public Vector3 localVelocity;
         public float springRayLength;
         public float maxSpringForce;
-        public CurveField springForceCurve;
+        public AnimationCurve springForceCurve;
         public float springResistance;
         public float wheelFriction;
         public float steering;
@@ -30,38 +30,35 @@ namespace Luke
             Springs();
         }
 
+        ///TODO: Movement isn't quite working yet??
         public void CarMovement()
         {
             foreach (Transform wheel in wheels)
             {
-                Vector3 wheelPos = wheel.transform.position;
+                Vector3 wheelPos = transform.InverseTransformPoint(wheel.transform.position);
                 
-                //getting the local velocity to apply it as a lateral friction
-                localVelocity = wheel.transform.InverseTransformDirection(rb.velocity);
-                rb.AddRelativeForce(-localVelocity.x,0,0);
+                //getting the world velocity of wheel to apply it as a lateral friction
+                localVelocity = rb.GetPointVelocity(wheel.transform.TransformPoint(wheelPos));
+                
+                //wheel friction
+                rb.AddForceAtPosition(wheel.transform.InverseTransformDirection(-localVelocity.x,0,0) * wheelFriction,
+                    transform.TransformPoint(wheelPos));
 
                 //Acceleration
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
                 {
                     rb.AddForceAtPosition(wheel.transform.InverseTransformDirection(wheel.transform.forward) * speed,
-                        wheelPos);
-
-                    //wheel friction
-                    rb.AddForceAtPosition(localVelocity * -wheelFriction,
-                        wheelPos);
+                        transform.TransformPoint(wheelPos));
                 }
 
                 //Reverse
                 if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
                 {
                     rb.AddForceAtPosition(wheel.transform.InverseTransformDirection(-wheel.transform.forward) * reverseSpeed,
-                        wheelPos);
-
-                    //wheel friction
-                    rb.AddForceAtPosition(localVelocity * wheelFriction,
-                        wheelPos);
+                        transform.TransformPoint(wheelPos));
                 }
 
+                ///TODO: need to add gradual turning of wheels
                 //Steering left
                 if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
                 {
@@ -92,15 +89,14 @@ namespace Luke
             {
                 //ray stuff
                 RaycastHit hitInfo = new RaycastHit();
-
-                //not sure how to get a curve of the spring strength going
-                float springDistance = Vector3.Distance(wheel.transform.position, hitInfo.point);
-                float force = springResistance - springDistance;
-                force *= maxSpringForce;
+                
+                /// TODO: I'm not sure if this is working or not???
+                float springDistance = Vector3.Distance(transform.InverseTransformPoint(wheel.transform.position), hitInfo.point);
+                float force = springResistance - springForceCurve.Evaluate(springDistance/springRayLength);
 
                 //this is where the spring happens
                 //255 in the layer means everything
-                if (Physics.Raycast(wheel.transform.position,-wheel.transform.up, out hitInfo,springRayLength , 255))
+                if (Physics.Raycast(wheel.transform.position,-wheel.transform.up, out hitInfo, springRayLength, 255))
                 {
                     Debug.DrawLine(wheel.transform.position,hitInfo.point,Color.yellow);
                     rb.AddForceAtPosition(transform.InverseTransformDirection(wheel.transform.up) * force,
