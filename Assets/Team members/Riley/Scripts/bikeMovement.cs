@@ -8,10 +8,13 @@ public class bikeMovement : MonoBehaviour
     public Rigidbody rb;
     private float turnSpeed;
     public float carSpeed;
-    private float turningCircle;
     private float drift;
     public int maxSpeed;
     public Vector3 localVelocity;
+    public float springHeight;
+    public float maxSpringHeight;
+    private float force;
+    public int rayLength;
     
     //raycast
     private float distanceToGround;
@@ -21,28 +24,25 @@ public class bikeMovement : MonoBehaviour
     
     void Start()
     {
-        turningCircle = 0.000001f;
-        drift = 0.1f;
-        
+        drift = 0.1f;        
     }
     
     void Update()
     {
         //Raycast
         raycast = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(raycast, out raycastToGround, 1f))
+        if (Physics.Raycast(raycast, out raycastToGround, rayLength))
         {
-            Debug.DrawLine(raycast.origin, raycastToGround.point, Color.green);
+            force = springHeight - rayLength;
+            force *= maxSpringHeight;
+            rb.AddRelativeForce(0, force, 0);
         }
-        else
-        {
-            Debug.DrawLine(raycast.origin, raycast.origin + raycast.direction * redRayDistance, Color.red);
-        }
+        
         distanceToGround = raycastToGround.distance;
         
         //Variables
         localVelocity = transform.InverseTransformDirection(rb.velocity);
-        turnSpeed = localVelocity.z/7f;
+        turnSpeed = localVelocity.z*15f;
         rb.AddRelativeForce(-localVelocity.x, 0,0);
         
         //Inputs
