@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TheFormAI
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 305, y: 96}
+    position: {x: 9, y: 6}
     list:
     - id: 0
       name: Alone
@@ -35,12 +35,14 @@ MonoBehaviour:
       name: MovingAwayFromPlayer
     - id: 9
       name: PlayerDamage
+    - id: 10
+      name: Roam
   actions:
   - name: JoinUpWithOthers
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 566, y: 99}
+    position: {x: 490, y: 35}
     pre:
     - id: 0
       value: 1
@@ -55,7 +57,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 1
-    position: {x: 787, y: 102}
+    position: {x: 711, y: 38}
     pre:
     - id: 1
       value: 1
@@ -70,9 +72,11 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1012, y: 106}
+    position: {x: 936, y: 42}
     pre:
     - id: 1
+      value: 1
+    - id: 10
       value: 1
     - id: 3
       value: 1
@@ -85,7 +89,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1230, y: 111}
+    position: {x: 1154, y: 47}
     pre:
     - id: 4
       value: 1
@@ -98,7 +102,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 1
-    position: {x: 819, y: 348}
+    position: {x: 743, y: 284}
     pre:
     - id: 5
       value: 1
@@ -113,7 +117,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 2
-    position: {x: 1045, y: 361}
+    position: {x: 969, y: 297}
     pre:
     - id: 5
       value: 1
@@ -124,7 +128,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 583, y: 343}
+    position: {x: 507, y: 279}
     pre:
     - id: 8
       value: 1
@@ -135,7 +139,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1276, y: 356}
+    position: {x: 1200, y: 292}
     pre:
     - id: 6
       value: 1
@@ -148,7 +152,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 589, y: 569}
+    position: {x: 270, y: 281}
     pre:
     - id: 7
       value: 1
@@ -157,21 +161,34 @@ MonoBehaviour:
       value: 1
     - id: 7
       value: 0
+  - name: Roaming
+    isDefault: 0
+    state: {fileID: 8214237559972243880, guid: 8114affc24bbd6644b70d1c98dfc1228, type: 3}
+    cost: 0
+    position: {x: 244, y: 27}
+    pre:
+    - id: 1
+      value: 1
+    post:
+    - id: 3
+      value: 1
+    - id: 10
+      value: 1
   goals:
   - name: DamagePlayer
     isDefault: 1
-    position: {x: 296, y: 371}
+    position: {x: 19, y: 282}
     conditions:
     - id: 9
       value: 1
   - name: RangedAttack
     isDefault: 0
-    position: {x: 291, y: 494}
+    position: {x: 18, y: 383}
     conditions:
     - id: 7
       value: 1
   worldStates:
-  - position: {x: 277, y: 623}
+  - position: {x: 28, y: 489}
     list:
     - id: 0
       value: 1
@@ -192,4 +209,6 @@ MonoBehaviour:
     - id: 8
       value: 0
     - id: 9
+      value: 0
+    - id: 10
       value: 0

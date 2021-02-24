@@ -228,7 +228,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1143345280}
-  - component: {fileID: 1143345281}
   m_Layer: 0
   m_Name: BL
   m_TagString: Untagged
@@ -250,31 +249,6 @@ Transform:
   m_Father: {fileID: 1148108238}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1143345281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143345279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7649735043757634791e7b4673859b7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 1148108233}
-  XSpeed: 0
-  YSpeed: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  friction: 1
-  Origin: {x: 0, y: 0, z: 0}
-  rayCastDistance: 10
-  maxForce: 2
---- !u!54 &1148108233 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 4625412284901861677, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
-  m_PrefabInstance: {fileID: 4625412283571976061}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1148108238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4625412284901861672, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
@@ -289,7 +263,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1330878698}
-  - component: {fileID: 1330878699}
   m_Layer: 0
   m_Name: FR
   m_TagString: Untagged
@@ -311,26 +284,6 @@ Transform:
   m_Father: {fileID: 1148108238}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1330878699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330878697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7649735043757634791e7b4673859b7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 1148108233}
-  XSpeed: 0
-  YSpeed: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  friction: 1
-  Origin: {x: 0, y: 0, z: 0}
-  rayCastDistance: 10
-  maxForce: 2
 --- !u!1 &1337797304
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,7 +504,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1446345013}
-  - component: {fileID: 1446345014}
   m_Layer: 0
   m_Name: BR
   m_TagString: Untagged
@@ -573,26 +525,6 @@ Transform:
   m_Father: {fileID: 1148108238}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1446345014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1446345012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7649735043757634791e7b4673859b7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 1148108233}
-  XSpeed: 0
-  YSpeed: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  friction: 1
-  Origin: {x: 0, y: 0, z: 0}
-  rayCastDistance: 10
-  maxForce: 2
 --- !u!1 &1488587675
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +739,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1811337396}
-  - component: {fileID: 1811337397}
   m_Layer: 0
   m_Name: FL
   m_TagString: Untagged
@@ -829,26 +760,6 @@ Transform:
   m_Father: {fileID: 1148108238}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1811337397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811337395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7649735043757634791e7b4673859b7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 1148108233}
-  XSpeed: 0
-  YSpeed: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  friction: 1
-  Origin: {x: 0, y: 0, z: 0}
-  rayCastDistance: 10
-  maxForce: 2
 --- !u!1 &1814563040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,6 +929,74 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: wheels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: wheels.Array.data[0]
+      value: 
+      objectReference: {fileID: 1811337396}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: wheels.Array.data[1]
+      value: 
+      objectReference: {fileID: 1330878698}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: wheels.Array.data[2]
+      value: 
+      objectReference: {fileID: 1446345013}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: wheels.Array.data[3]
+      value: 
+      objectReference: {fileID: 1143345280}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[1].time
+      value: 0.72820103
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[1].value
+      value: 0.2816476
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[1].inSlope
+      value: 1.2030547
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[2].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[1].outSlope
+      value: 1.2030547
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[2].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861676, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: springCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625412284901861679, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4625412284901861682, guid: ad286ab56064342458d91fc96c451fcd, type: 3}
