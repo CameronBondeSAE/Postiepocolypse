@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExampleWorldScenario
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 52, y: 73}
+    position: {x: 58, y: 71}
     list:
     - id: 0
       name: canConvert
@@ -28,7 +28,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 291, y: 140}
+    position: {x: 297, y: 138}
     pre:
     - id: 1
       value: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 522, y: 128}
+    position: {x: 528, y: 126}
     pre:
     - id: 3
       value: 0
@@ -54,9 +54,9 @@ MonoBehaviour:
       value: 1
   - name: Recharge
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 3739488329902857689, guid: 3e7499a545db9c44ba0b8a377e983f29, type: 3}
     cost: 0
-    position: {x: 728, y: 128}
+    position: {x: 734, y: 126}
     pre:
     - id: 2
       value: 1
@@ -69,9 +69,9 @@ MonoBehaviour:
       value: 1
   - name: Wander
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 445444917551864119, guid: 8f1296043b658db438b4d888637eeaa0, type: 3}
     cost: 0
-    position: {x: 951, y: 124}
+    position: {x: 957, y: 122}
     pre:
     - id: 0
       value: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
   goals:
   - name: Convert
     isDefault: 1
-    position: {x: 51, y: 436}
+    position: {x: 57, y: 434}
     conditions:
     - id: 0
       value: 1
@@ -96,13 +96,13 @@ MonoBehaviour:
     - id: 2
       value: 0
   worldStates:
-  - position: {x: 40, y: 608}
+  - position: {x: 66, y: 612}
     list:
     - id: 1
-      value: 0
-    - id: 0
       value: 0
     - id: 2
       value: 1
     - id: 3
+      value: 1
+    - id: 0
       value: 1

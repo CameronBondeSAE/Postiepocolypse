@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.Serialization;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.InputSystem;
 
 namespace Luke
@@ -35,27 +36,36 @@ namespace Luke
         {
             foreach (Transform wheel in wheels)
             {
-                Vector3 wheelPos = transform.InverseTransformPoint(wheel.transform.position);
+                Vector3 wheelLocalPos = wheel.transform.InverseTransformPoint(wheel.transform.position);
+                Vector3 wheelLocalFwd = wheel.transform.InverseTransformDirection(wheel.transform.forward);
                 
                 //getting the world velocity of wheel to apply it as a lateral friction
-                localVelocity = rb.GetPointVelocity(wheel.transform.TransformPoint(wheelPos));
+                localVelocity = rb.GetPointVelocity(wheel.transform.TransformPoint(wheelLocalPos));
                 
+                Debug.DrawRay(wheel.transform.TransformPoint(wheelLocalPos),localVelocity, Color.blue);
+
                 //wheel friction
                 rb.AddForceAtPosition(wheel.transform.InverseTransformDirection(-localVelocity.x,0,0) * wheelFriction,
-                    transform.TransformPoint(wheelPos));
+                    wheel.transform.TransformPoint(wheelLocalPos));
+                
+                Debug.DrawRay(wheel.transform.TransformPoint(wheelLocalPos),wheel.transform.InverseTransformDirection(-localVelocity.x,0,0) * wheelFriction, Color.red);
 
                 //Acceleration
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
                 {
-                    rb.AddForceAtPosition(wheel.transform.InverseTransformDirection(wheel.transform.forward) * speed,
-                        transform.TransformPoint(wheelPos));
+                    rb.AddForceAtPosition(wheelLocalFwd * speed,
+                        wheel.transform.TransformPoint(wheelLocalPos));
+                    
+                    Debug.DrawRay(wheel.transform.TransformPoint(wheelLocalPos),wheelLocalFwd);
                 }
 
                 //Reverse
                 if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
                 {
-                    rb.AddForceAtPosition(wheel.transform.InverseTransformDirection(-wheel.transform.forward) * reverseSpeed,
-                        transform.TransformPoint(wheelPos));
+                    rb.AddForceAtPosition(-wheelLocalFwd * reverseSpeed,
+                        transform.TransformPoint(wheelLocalPos));
+                    
+                    Debug.DrawRay(wheel.transform.TransformPoint(wheelLocalPos),-wheelLocalFwd);
                 }
 
                 ///TODO: need to add gradual turning of wheels

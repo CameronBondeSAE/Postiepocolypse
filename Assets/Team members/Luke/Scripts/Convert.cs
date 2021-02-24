@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Anthill.AI;
 using UnityEngine;
 
 namespace Luke
 {
-    public class CreateFog : MonoBehaviour
+    public class Convert : AntAIState
     {
-        public IEnumerator MakeFog()
+        public override void Enter()
         {
-            yield return new WaitForSeconds(1f);
             Debug.Log("Making Fog");
         }
     }
