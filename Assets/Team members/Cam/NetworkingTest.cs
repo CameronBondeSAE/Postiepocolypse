@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace Cam
@@ -60,6 +61,9 @@ namespace Cam
 		public void ChangeToBlue()
 		{
 			GetComponent<MeshRenderer>().material.color = Color.blue;
+
+			// Rigidbody r;
+			// r.addrel
 		}
 
 		#endregion
