@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Anthill.AI;
 using UnityEngine;
+using Anthill.AI;
 
 namespace Luke
 {
-    public class Recharge : AntAIState
+    public class AvoidPlayer : AntAIState
     {
         
     }
-} 
+}

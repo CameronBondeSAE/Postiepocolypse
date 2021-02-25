@@ -17,10 +17,10 @@ namespace Luke
         {
             aWorldState.BeginUpdate(aAgent.planner);
             {
-                // aWorldState.Set(ExampleWorldScenario.canConvert, fakeCanConvert);
-                // aWorldState.Set(ExampleWorldScenario.playerIsNear, fakePlayerIsNear);
-                // aWorldState.Set(ExampleWorldScenario.fakeNeedRecharge, fakeNeedRecharge);
-                // aWorldState.Set(ExampleWorldScenario.fakeFoundConvertTarget, fakeFoundConvertTarget);
+                aWorldState.Set(ExampleWorldScenario.canConvert, fakeCanConvert);
+                aWorldState.Set(ExampleWorldScenario.playerIsNear, fakePlayerIsNear);
+                aWorldState.Set(ExampleWorldScenario.needRecharge, fakeNeedRecharge);
+                aWorldState.Set(ExampleWorldScenario.foundConvertTarget, fakeFoundConvertTarget);
             }
             aWorldState.EndUpdate();
         }
