@@ -1,17 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class CamCreature : MonoBehaviour
+namespace CameronBonde
 {
-	public NavMeshAgent navMeshAgent;
-	public Transform    target;
-
-    // Start is called before the first frame update
-    void Start()
+	public class CamCreature : MonoBehaviour
 	{
-		navMeshAgent = GetComponent<NavMeshAgent>();
-		navMeshAgent.SetDestination(target.position);
+		public NavMeshAgent navMeshAgent;
+		public Transform    target;
+
+		public static float energy;
+
+		// Start is called before the first frame update
+		void Start()
+		{
+			navMeshAgent = GetComponent<NavMeshAgent>();
+			navMeshAgent.SetDestination(target.position);
+		}
+
+		void Update()
+		{
+			Debug.Log(FakeManagerUsingStatic.numberOfCreatures);
+			FakeManagerUsingStatic.KillEverything();
+
+			Debug.Log(FakeManagerUsingSingleton.Instance.numberOfCreatures);
+			FakeManagerUsingSingleton.Instance.KillEverything();
+		}
 	}
 }
