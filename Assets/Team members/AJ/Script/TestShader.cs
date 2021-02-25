@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AJ
 {
-    public class AJShader : MonoBehaviour
+    public class TestShader : MonoBehaviour
     {
         //private Renderer renderer;
         //public Gradient gradient;
