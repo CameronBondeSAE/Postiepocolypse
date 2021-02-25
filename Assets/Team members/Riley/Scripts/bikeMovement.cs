@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class bikeMovement : MonoBehaviour
+public class BikeMovement : MonoBehaviour
 {
     public Rigidbody rb;
     private float turnSpeed;
