@@ -17,20 +17,17 @@ namespace HealthComponent
         
         [Tooltip("Toggle on to make object invinsible (not die).")]
         public bool invincible;
-
+        
         //Allows us to call the object to die
         public event Action<HealthComponent> killObject;
-
         void Start()
         {
             //Sync our health
             health = startingHealth;
         }
-
-        //Take a DoDamage Function to do damage, then take the value as an int.
+        //DoDamage function to record damage then apply it
         public void DoDamage(int damageDelt)
         {
-            //Minus the damage from before
             if (invincible != true)
             {
                 health -= damageDelt;
@@ -38,13 +35,18 @@ namespace HealthComponent
         }
         void Update()
         {
-            //If we take damage that makes the objects health 0 then invoke the event
+            //If we take damage that makes the objects health 0 then invoke death
             if (health <= 0 && invincible != true)
             {
-                if (killObject != null)
-                {
-                    killObject.Invoke(this);
-                }
+                DestroyObject();
+            }
+        }
+        //Separated death function for editor
+        public void DestroyObject()
+        {
+            if (killObject != null)
+            {
+                killObject.Invoke(this);
             }
         }
     }

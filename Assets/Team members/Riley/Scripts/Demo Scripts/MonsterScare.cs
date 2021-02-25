@@ -12,6 +12,7 @@ public class MonsterScare : MonoBehaviour
     public float distanceToPlayer;
     public bool isScared;
     public Transform playerScareLo;
+    public bool inVision;
 
     //Nav
     public NavMeshAgent monsterNavMesh;
@@ -47,9 +48,20 @@ public class MonsterScare : MonoBehaviour
         {
             //Stops player on distance closed
             monsterNavMesh.SetDestination(transform.position);
-            /// use for setting past location : activeDestination = false;
+            ///Can be used for setting past location : activeDestination = false;
         }
 
+        ///Code to linecast
+        if (Physics.Linecast(transform.position, player.position))
+        {
+            inVision = false;
+        }
+        else
+        {
+            inVision = true;
+        }
+        ///Code to linecast
+        
         /*Old code for scaring and moving
         if (isScared == true)
         {
@@ -62,6 +74,6 @@ public class MonsterScare : MonoBehaviour
     //Kill our monster
     void OnKillObject(HealthComponent.HealthComponent healthComponent)
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 1281768416}
   - component: {fileID: 1281768415}
   - component: {fileID: 1281768419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2078,6 +2078,7 @@ MonoBehaviour:
   distanceToPlayer: 0
   isScared: 0
   playerScareLo: {fileID: 606664967}
+  inVision: 0
   monsterNavMesh: {fileID: 2041186757}
   navSafeDistance: 1.5
 --- !u!195 &2041186757
@@ -2116,6 +2117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   health: 0
+  invincible: 0
 --- !u!1001 &6502315278736901995
 PrefabInstance:
   m_ObjectHideFlags: 0
