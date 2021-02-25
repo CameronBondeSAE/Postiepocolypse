@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Luke
+namespace John
 {
-    public class CreatureManager : MonoBehaviour
+
+    public class Inventory : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

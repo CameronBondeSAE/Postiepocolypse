@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Luke
+namespace John
 {
-    public class CreatureManager : MonoBehaviour
+    public class Item : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()
         {
-
+        
         }
 
         // Update is called once per frame
         void Update()
         {
-
+        
         }
-    }
+    } 
 }
+
