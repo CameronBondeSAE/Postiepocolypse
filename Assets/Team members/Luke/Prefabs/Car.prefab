@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8373218265869093888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.691, y: -0.88, z: -1.4972732}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.79483, y: 0.9120563, z: 1.9954}
   m_Children: []
   m_Father: {fileID: 0}
@@ -128,10 +128,18 @@ MonoBehaviour:
   rb: {fileID: 8373218265869093890}
   speed: 8
   reverseSpeed: 2
-  torque: 2
   localVelocity: {x: 0, y: 0, z: 0}
-  rayLength: 50
-  layer:
-    serializedVersion: 2
-    m_Bits: 1
+  springRayLength: 0
   maxSpringForce: 0
+  springForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  springResistance: 0
+  wheelFriction: 0
+  steering: 0
+  steeringAngle: 0
+  wheels: []
+  steeringWheels: []

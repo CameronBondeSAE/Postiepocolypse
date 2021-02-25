@@ -7,6 +7,6 @@ namespace Luke
 {
     public class Convert : AntAIState
     {
-
+        
     }
 }
