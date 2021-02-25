@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 //Namespace use cause why not keep it out of the way of other components
-namespace healthComponent
+namespace HealthComponent
 {
     public class HealthComponent : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyComponent : MonoBehaviour
+public class Energy : MonoBehaviour
 {
     [Range(0f,100f)]
     public float Amount;
