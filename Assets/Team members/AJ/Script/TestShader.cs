@@ -39,17 +39,17 @@ namespace AJ
         // Update is called once per frame
         void Update()
         {
-            var ratio = (Time.time - lastColorChangeTime) / FadeDuration;
+            float ratio = (Time.time - lastColorChangeTime) / FadeDuration;
             ratio = Mathf.Clamp01(ratio);
             material.color = Color.Lerp(startColor, endColor, ratio);
             
 
-            if (ratio == 1f)
+            if (ratio >= 1f)
             {
                 lastColorChangeTime = Time.time;
 
                 // Switch colors
-                var temp = startColor;
+                Color temp = startColor;
                 startColor = endColor;
                 endColor = temp;
             }
