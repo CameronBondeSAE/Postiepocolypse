@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Zach
+namespace ZachFrench
 {
     public class Smell : MonoBehaviour
     {
@@ -18,19 +18,24 @@ namespace Zach
         private void Awake()
         {
             smellRadius = gameObject.AddComponent<SphereCollider>();
+            smellRadius.isTrigger = true;
         }
-
-
-        // Start is called before the first frame update
-        void Start()
-        {
-           
-        }
+        
 
         // Update is called once per frame
         void Update()
         {
             smellRadius.radius = radius;
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Nose nose = other.GetComponent<Nose>();
+            if (nose)
+            {
+                nose.Smelling(other.transform.position);
+            }
         }
     }
 }
