@@ -13,5 +13,21 @@ public class HealthEditor : Editor
         {
             (target as HealthComponent.HealthComponent)?.DestroyObject();
         }
+        if (GUILayout.Button("Max Health"))
+        {
+            (target as HealthComponent.HealthComponent)?.MaxHealth();
+        }
+        if (GUILayout.Button("Starting Health"))
+        {
+            (target as HealthComponent.HealthComponent)?.StartingHealth();
+        }
+        if (GUILayout.Button("Damage Object by 10"))
+        {
+            (target as HealthComponent.HealthComponent)?.DoDamage(10);
+        }
+        if (GUILayout.Button("Heal Object by 10"))
+        {
+            (target as HealthComponent.HealthComponent)?.DoHeal(10);
+        }
     }
 }
