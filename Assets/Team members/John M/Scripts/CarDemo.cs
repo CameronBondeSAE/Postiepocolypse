@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-namespace John
+namespace JonathonMiles
     {
 
-        public class CarDemoJM : MonoBehaviour
+        public class CarDemo : MonoBehaviour
         {
             private Rigidbody rb;
 

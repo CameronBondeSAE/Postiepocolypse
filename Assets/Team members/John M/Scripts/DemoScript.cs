@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace John
+namespace JonathonMiles
 {
-
     public class DemoScript : MonoBehaviour
     {
        public void ColourRed()

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,10 +24,9 @@ namespace JonathonMiles
         #endregion
 
         public delegate void OnItemChanged();
-
-        public OnItemChanged onItemChangedCallBack;
+        public OnItemChanged onItemChangedCallback;
         
-        public int inventorySpace = 2;
+        public int inventorySpace = 20;
         public int coinCount = 0;
         public Text coinText;
         public List<ItemBase> items = new List<ItemBase>();
@@ -53,16 +49,16 @@ namespace JonathonMiles
             }
             
             items.Add(item);
-            if (onItemChangedCallBack != null)
-                onItemChangedCallBack.Invoke();
+            if (onItemChangedCallback != null)
+                onItemChangedCallback.Invoke();
             return true;
         }
 
         public void Remove(ItemBase item)
         {
             items.Remove(item);
-            if (onItemChangedCallBack != null)
-                onItemChangedCallBack.Invoke();
+            if (onItemChangedCallback != null)
+                onItemChangedCallback.Invoke();
         }
     }
 }
