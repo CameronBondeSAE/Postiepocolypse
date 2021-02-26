@@ -7,9 +7,6 @@ namespace Luke
 {
     public class Convert : AntAIState
     {
-        public override void Enter()
-        {
-            Debug.Log("Making Fog");
-        }
+        
     }
 }

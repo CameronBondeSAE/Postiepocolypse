@@ -32,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463503189928046655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.57968044, y: -0.7215724, z: -0.07426262}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   _lockBoundGraphPrefabOverrides: 1
   _preInitializeSubGraphs: 0
   _updateMode: 0
-  _graph: {fileID: 11400000, guid: 9fc8be6000c3f8444bff8a3e3fb8ce57, type: 2}
+  _graph: {fileID: 11400000, guid: bf6dcfeb03f31084cad975c8add5809c, type: 2}
   _blackboard: {fileID: 463503189928046652}
 --- !u!114 &463503189928046652
 MonoBehaviour:

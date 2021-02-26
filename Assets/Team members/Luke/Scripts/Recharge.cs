@@ -7,9 +7,6 @@ namespace Luke
 {
     public class Recharge : AntAIState
     {
-        public override void Enter()
-        {
-            Debug.Log("recharge");
-        }
+        
     }
 } 

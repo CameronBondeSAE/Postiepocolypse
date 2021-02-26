@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 1281768416}
   - component: {fileID: 1281768415}
   - component: {fileID: 1281768419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1901,6 +1901,7 @@ GameObject:
   - component: {fileID: 2041186750}
   - component: {fileID: 2041186756}
   - component: {fileID: 2041186757}
+  - component: {fileID: 2041186758}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -2077,6 +2078,7 @@ MonoBehaviour:
   distanceToPlayer: 0
   isScared: 0
   playerScareLo: {fileID: 606664967}
+  inVision: 0
   monsterNavMesh: {fileID: 2041186757}
   navSafeDistance: 1.5
 --- !u!195 &2041186757
@@ -2101,6 +2103,21 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2041186758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041186749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa9c6b89cc10c244b8456d698dae7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  health: 0
+  invincible: 0
 --- !u!1001 &6502315278736901995
 PrefabInstance:
   m_ObjectHideFlags: 0

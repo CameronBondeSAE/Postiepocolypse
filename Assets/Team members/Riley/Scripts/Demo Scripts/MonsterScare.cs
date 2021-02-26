@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NodeCanvas.Tasks.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,12 +12,23 @@ public class MonsterScare : MonoBehaviour
     public float distanceToPlayer;
     public bool isScared;
     public Transform playerScareLo;
-    
+    public bool inVision;
+
     //Nav
     public NavMeshAgent monsterNavMesh;
     public float navSafeDistance;
-    /// use for setting past location : private bool activeDestination;
 
+    /// use for setting past location : private bool activeDestination;
+    
+    //Subscribe to Death
+    private void OnEnable()
+    {
+        GetComponent<HealthComponent.HealthComponent>().killObject += OnKillObject;
+    }
+    private void OnDisable()
+    {
+        GetComponent<HealthComponent.HealthComponent>().killObject -= OnKillObject;
+    }
     private void Start()
     {
         monsterNavMesh = GetComponent<NavMeshAgent>();
@@ -31,12 +43,25 @@ public class MonsterScare : MonoBehaviour
             monsterNavMesh.SetDestination(player.position);
             /// use for setting past location : activeDestination = true;
         }
+
         if (distanceToPlayer < navSafeDistance)
         {
             //Stops player on distance closed
             monsterNavMesh.SetDestination(transform.position);
-            /// use for setting past location : activeDestination = false;
+            ///Can be used for setting past location : activeDestination = false;
         }
+
+        ///Code to linecast
+        if (Physics.Linecast(transform.position, player.position))
+        {
+            inVision = false;
+        }
+        else
+        {
+            inVision = true;
+        }
+        ///Code to linecast
+        
         /*Old code for scaring and moving
         if (isScared == true)
         {
@@ -44,5 +69,11 @@ public class MonsterScare : MonoBehaviour
             transform.LookAt(playerTransform);
         }
         */
+    }
+
+    //Kill our monster
+    void OnKillObject(HealthComponent.HealthComponent healthComponent)
+    {
+        Destroy(gameObject);
     }
 }
