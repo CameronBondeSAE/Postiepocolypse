@@ -12,7 +12,7 @@ namespace HealthComponent
         [Tooltip("Starting Health between 1-100 is reasonable.")]
         public int startingHealth;
 
-        [Tooltip("Expected to be the same as startingHealth on start.")]
+        [Tooltip("Expected to be the same as startingHealth on start. If no value set default 999999.")]
         public int maxHealth;
 
         [Tooltip("This is current health, do not edit unless for testing.")]
@@ -26,6 +26,10 @@ namespace HealthComponent
         void Start()
         {
             StartingHealth();
+            if (maxHealth == 0)
+            {
+                maxHealth = 999999;
+            }
         }
         void Update()
         {
@@ -44,8 +48,8 @@ namespace HealthComponent
             {
                 health -= damageDelt;
             }
-        }
-        //DoHeal function to apply healing to the object
+        }        
+        //DoHeal function to apply healing to the object until max
         public void DoHeal(int healApply)
         {
             if (health + healApply <= maxHealth && invincible != true)
@@ -60,7 +64,16 @@ namespace HealthComponent
                 }
             }
         }
-
+        
+        //Simple add and remove max health
+        public void DecreaseMaxHealth(int removeHealthMax)
+        {
+            maxHealth -= removeHealthMax;
+        }
+        public void IncreaseMaxHealth(int addHealthMax)
+        {
+            maxHealth += addHealthMax;
+        }
         /// DO DAMAGE AND HEALING ///
 
         //
