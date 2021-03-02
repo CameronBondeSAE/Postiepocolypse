@@ -23,11 +23,11 @@ public class MonsterScare : MonoBehaviour
     //Subscribe to Death
     private void OnEnable()
     {
-        GetComponent<HealthComponent.HealthComponent>().killObject += OnKillObject;
+        GetComponent<RileyMcGowan.Health>().killObject += OnKillObject;
     }
     private void OnDisable()
     {
-        GetComponent<HealthComponent.HealthComponent>().killObject -= OnKillObject;
+        GetComponent<RileyMcGowan.Health>().killObject -= OnKillObject;
     }
     private void Start()
     {
@@ -72,7 +72,7 @@ public class MonsterScare : MonoBehaviour
     }
 
     //Kill our monster
-    void OnKillObject(HealthComponent.HealthComponent healthComponent)
+    void OnKillObject(RileyMcGowan.Health health)
     {
         Destroy(gameObject);
     }

@@ -2,12 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 //Namespace use cause why not keep it out of the way of other components
-namespace HealthComponent
+namespace RileyMcGowan
 {
-    public class HealthComponent : MonoBehaviour
+    public class Health : MonoBehaviour
     {
         [Tooltip("Starting Health between 1-100 is reasonable.")]
         public int startingHealth;
@@ -22,7 +21,7 @@ namespace HealthComponent
         public bool invincible;
         
         //Allows us to call the object to die
-        public event Action<HealthComponent> killObject;
+        public event Action<Health> killObject;
         void Start()
         {
             StartingHealth();
@@ -36,6 +35,7 @@ namespace HealthComponent
             //If we take damage that makes the objects health 0 then invoke death
             if (health <= 0 && invincible != true)
             {
+                health = 0;
                 DestroyObject();
             }
             if (health > maxHealth)

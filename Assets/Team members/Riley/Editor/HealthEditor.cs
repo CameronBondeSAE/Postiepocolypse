@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(HealthComponent.HealthComponent))] //We are controlling the HealthComponent with this script
+[CustomEditor(typeof(RileyMcGowan.Health))] //We are controlling the HealthComponent with this script
 public class HealthEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -11,23 +11,23 @@ public class HealthEditor : Editor
         base.OnInspectorGUI();
         if (GUILayout.Button("Kill Object"))
         {
-            (target as HealthComponent.HealthComponent)?.DestroyObject();
+            (target as RileyMcGowan.Health)?.DestroyObject();
         }
         if (GUILayout.Button("Max Health"))
         {
-            (target as HealthComponent.HealthComponent)?.MaxHealth();
+            (target as RileyMcGowan.Health)?.MaxHealth();
         }
         if (GUILayout.Button("Starting Health"))
         {
-            (target as HealthComponent.HealthComponent)?.StartingHealth();
+            (target as RileyMcGowan.Health)?.StartingHealth();
         }
         if (GUILayout.Button("Damage Object by 10"))
         {
-            (target as HealthComponent.HealthComponent)?.DoDamage(10);
+            (target as RileyMcGowan.Health)?.DoDamage(10);
         }
         if (GUILayout.Button("Heal Object by 10"))
         {
-            (target as HealthComponent.HealthComponent)?.DoHeal(10);
+            (target as RileyMcGowan.Health)?.DoHeal(10);
         }
     }
 }
