@@ -3,10 +3,12 @@ using UnityEngine.AI;
 
 namespace CameronBonde
 {
-	public class CamCreature : MonoBehaviour
+	public class CamCreature : CreatureBase
 	{
 		public NavMeshAgent navMeshAgent;
 		public Transform    target;
+
+		// public Health health;
 
 		public static float energy;
 
