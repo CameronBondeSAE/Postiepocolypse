@@ -1,17 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Mirror;
 using UnityEngine;
 
-public class CubeShader : NetworkBehaviour
+public class SplineTest : MonoBehaviour
 {
-    public Renderer renderer;
-
-    public Texture tex;
     // Start is called before the first frame update
     void Start()
     {
-        renderer.material.SetTexture("_Texture2D", tex);
+        //use for loops to see how many splines can be handled in game without crashing
     }
 
     // Update is called once per frame

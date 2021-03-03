@@ -1,4 +1,5 @@
 using System;
+using Mirror;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
@@ -6,7 +7,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 {
     [RequireComponent(typeof (Rigidbody))]
     [RequireComponent(typeof (CapsuleCollider))]
-    public class RigidbodyFirstPersonController : MonoBehaviour
+    public class RigidbodyFirstPersonController : NetworkBehaviour
     {
         [Serializable]
         public class MovementSettings
@@ -130,12 +131,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 
-            if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+            if (isLocalPlayer)
             {
-                m_Jump = true;
+                if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+                {
+                    CmdJump();
+                }
             }
         }
 
+        [Command]
+        void CmdJump()
+        {
+            RpcJump();
+        }
+
+        [ClientRpc]
+        void RpcJump()
+        {
+            m_Jump = true;
+        }
 
         private void FixedUpdate()
         {

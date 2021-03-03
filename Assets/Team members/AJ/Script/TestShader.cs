@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 namespace AJ
 {
-    public class TestShader : MonoBehaviour
+    public class TestShader : NetworkBehaviour
     {
         //private Renderer renderer;
         //public Gradient gradient;
