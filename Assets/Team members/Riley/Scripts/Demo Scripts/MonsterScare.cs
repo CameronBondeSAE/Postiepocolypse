@@ -23,11 +23,11 @@ public class MonsterScare : MonoBehaviour
     //Subscribe to Death
     private void OnEnable()
     {
-        GetComponent<RileyMcGowan.Health>().killObject += OnKillObject;
+        GetComponent<RileyMcGowan.Health>().deathEvent += OnKillObject;
     }
     private void OnDisable()
     {
-        GetComponent<RileyMcGowan.Health>().killObject -= OnKillObject;
+        GetComponent<RileyMcGowan.Health>().deathEvent -= OnKillObject;
     }
     private void Start()
     {
