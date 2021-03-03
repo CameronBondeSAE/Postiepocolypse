@@ -1241,6 +1241,7 @@ GameObject:
   - component: {fileID: 1281768419}
   - component: {fileID: 1281768420}
   - component: {fileID: 1281768421}
+  - component: {fileID: 1281768422}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -1354,7 +1355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 0
   maxHealth: 0
-  health: 0
+  currentHealth: 0
   invincible: 0
 --- !u!54 &1281768421
 Rigidbody:
@@ -1372,6 +1373,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1281768422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281768414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9ed3975245b8c43b2edda3a9e35e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1293426350
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,7 +2276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   maxHealth: 0
-  health: 0
+  currentHealth: 0
   invincible: 0
 --- !u!1001 &6502315278736901995
 PrefabInstance:

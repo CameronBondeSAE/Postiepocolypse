@@ -15,17 +15,19 @@ namespace RileyMcGowan
         public int maxHealth;
 
         [Tooltip("This is current health, do not edit unless for testing.")]
-        public int health;
+        public int currentHealth;
         
         [Tooltip("Toggle on to make object invinsible (not die).")]
         public bool invincible;
         
-        //Allows us to call the object to die
-        public event Action<Health> killObject;
+        //Events for recognising
+        public event Action<Health> deathEvent;
+        public event Action<Health> damagedEvent;
+        public event Action<Health> healedEvent;
         void Start()
         {
-            StartingHealth();
-            if (maxHealth == 0)
+            ResetStartingHealth();
+            if (maxHealth <= 0)
             {
                 maxHealth = 100;
             }
@@ -33,14 +35,14 @@ namespace RileyMcGowan
         void Update()
         {
             //If we take damage that makes the objects health 0 then invoke death
-            if (health <= 0 && invincible != true)
+            if (currentHealth <= 0 && invincible != true)
             {
-                health = 0;
+                currentHealth = 0;
                 DestroyObject();
             }
-            if (health > maxHealth)
+            if (currentHealth > maxHealth)
             {
-                health = maxHealth;
+                currentHealth = maxHealth;
             }
         }
         
@@ -50,21 +52,24 @@ namespace RileyMcGowan
         {
             if (invincible != true)
             {
-                health -= damageDelt;
+                currentHealth -= damageDelt;
+                damagedEvent?.Invoke(this);
             }
         }
         //DoHeal function to apply healing to the object until max
         public void DoHeal(int healApply)
         {
-            if (health + healApply <= maxHealth && invincible != true)
+            if (currentHealth + healApply <= maxHealth && invincible != true)
             {
-                health += healApply;
+                currentHealth += healApply;
+                healedEvent?.Invoke(this);
             }
             else
             {
-                if (health < maxHealth && invincible != true)
+                if (currentHealth < maxHealth && invincible != true)
                 {
-                    health = maxHealth;
+                    currentHealth = maxHealth;
+                    healedEvent?.Invoke(this);
                 }
             }
         }
@@ -81,28 +86,25 @@ namespace RileyMcGowan
         /// DO DAMAGE AND HEALING ///
 
         //
-        public void StartingHealth()
+        public void ResetStartingHealth()
         {
             if (startingHealth == 0)
             {
                 startingHealth = 100;
             }
-            health = startingHealth;
+            currentHealth = startingHealth;
         }
         
         //Separate health trigger for editor and functionality
-        public void MaxHealth()
+        public void ResetMaxHealth()
         {
-            health = maxHealth;
+            currentHealth = maxHealth;
         }
         
         //Separated death function for editor
         public void DestroyObject()
         {
-            if (killObject != null)
-            {
-                killObject.Invoke(this);
-            }
+            deathEvent?.Invoke(this);
         }
     }
 }

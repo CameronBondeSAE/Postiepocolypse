@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 446434032109274436}
   - component: {fileID: 446434032109274437}
   - component: {fileID: 446434032109274434}
-  - component: {fileID: 446434032109274435}
+  - component: {fileID: 7276515531252730030}
   m_Layer: 0
   m_Name: SmellMan
   m_TagString: Untagged
@@ -97,7 +97,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &446434032109274435
+--- !u!114 &7276515531252730030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,7 +106,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 446434032109274432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef727060511b912429354769095fbea5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b9d295fd1f920446a3dc480e1270774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
+  smellObject: {fileID: 0}
+  smellTimer: 0
+  smellCreate: 10
