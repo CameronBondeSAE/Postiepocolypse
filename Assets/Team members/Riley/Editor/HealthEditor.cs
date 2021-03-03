@@ -13,13 +13,13 @@ public class HealthEditor : Editor
         {
             (target as RileyMcGowan.Health)?.DestroyObject();
         }
-        if (GUILayout.Button("Max Health"))
+        if (GUILayout.Button("Reset Max Health"))
         {
-            (target as RileyMcGowan.Health)?.MaxHealth();
+            (target as RileyMcGowan.Health)?.ResetMaxHealth();
         }
-        if (GUILayout.Button("Starting Health"))
+        if (GUILayout.Button("Reset Starting Health"))
         {
-            (target as RileyMcGowan.Health)?.StartingHealth();
+            (target as RileyMcGowan.Health)?.ResetStartingHealth();
         }
         if (GUILayout.Button("Damage Object by 10"))
         {
