@@ -12,13 +12,14 @@ namespace ZachFrench
         //Uses SphereCollider
 
         private SphereCollider smellRadius;
-        public float radius = 1;
+        public float radius;
         
 
         private void Awake()
         {
             smellRadius = gameObject.AddComponent<SphereCollider>();
             smellRadius.isTrigger = true;
+            radius = 5;
         }
         
 
