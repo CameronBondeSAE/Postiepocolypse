@@ -593,6 +593,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1965562891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6094274128131773606, guid: 0baed8055eb28b841b6690cc1dd80d30, type: 3}
+  m_PrefabInstance: {fileID: 6094274127497257771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1965562898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965562891}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bab9dc10836bb74686a67837462a1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 0
+  Boost: 0
+  energy: 10
+  decreaseSpeed: 1
 --- !u!1001 &6094274127497257771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -600,6 +621,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6094274128131773605, guid: 0baed8055eb28b841b6690cc1dd80d30, type: 3}
+      propertyPath: Turn
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094274128131773605, guid: 0baed8055eb28b841b6690cc1dd80d30, type: 3}
+      propertyPath: Boost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094274128131773605, guid: 0baed8055eb28b841b6690cc1dd80d30, type: 3}
+      propertyPath: energy
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094274128131773605, guid: 0baed8055eb28b841b6690cc1dd80d30, type: 3}
+      propertyPath: decreaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6094274128131773606, guid: 0baed8055eb28b841b6690cc1dd80d30, type: 3}
       propertyPath: m_Name
       value: timtestcar

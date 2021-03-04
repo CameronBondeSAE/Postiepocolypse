@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class testcarscript : MonoBehaviour
+public class Sprinter : MonoBehaviour
 {
-    public Rigidbody rb;
     public float Speed;
-    public float Turn;
-    public Vector3 localVelocity;
     private bool isBoosting = false;
     
     public float Boost;
@@ -25,27 +20,6 @@ public class testcarscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        localVelocity = transform.InverseTransformDirection(rb.velocity);
-        rb.AddRelativeForce(-localVelocity.x,0,0);
-        if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
-        {
-            rb.AddRelativeForce(Speed,0,0);
-        }
-        if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
-        {
-            rb.AddRelativeForce(-Speed,0,0);
-        }
-        if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
-        {
-            rb.AddRelativeTorque(0,Turn,0);
-        }
-        if (InputSystem.GetDevice<Keyboard>().dKey.isPressed)
-        {
-            rb.AddRelativeTorque(0,-Turn,0);
-        }
-        
-        
-        
         Vector2 mi = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Speed = (mi.normalized * Boost).magnitude;
 
@@ -77,4 +51,5 @@ public class testcarscript : MonoBehaviour
             energy += decreaseSpeed * Time.deltaTime;
         }
     }
+   
 }
