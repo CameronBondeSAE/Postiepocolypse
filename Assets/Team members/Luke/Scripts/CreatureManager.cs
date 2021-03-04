@@ -7,15 +7,17 @@ namespace Luke
 {
     public class CreatureManager : MonoBehaviour
     {
-        public List<CreatureBase> creatures;
+        public List<CreatureBase[]> creatures;
+        public int creatureAmountInScene;
         
-        private static CreatureManager instance;
+        static CreatureManager instance;
         
         public static CreatureManager Instance
         {
             get
             {
-                new GameObject("CreatureManager");
+                GameObject go = new GameObject("Creature Manager");
+                instance = go.AddComponent<CreatureManager>();
                 return instance;
             }
         }
@@ -40,7 +42,8 @@ namespace Luke
 
         public void Update()
         {
-            throw new NotImplementedException();
+            // creatures.AddRange();
+            creatureAmountInScene = creatures.Count;
         }
     }
 }

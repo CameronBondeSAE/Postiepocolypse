@@ -32,7 +32,6 @@ namespace Luke
                 //spawn
                 Instantiate(currentPrefab, currentSpawnPoint);
             }
-
         }
     }
 }

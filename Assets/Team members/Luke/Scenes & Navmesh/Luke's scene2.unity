@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &437210885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,30 +208,30 @@ MonoBehaviour:
   - position: {x: 0, y: -0.2510605, z: 0.8942354}
     direction: {x: 0, y: -0.2510605, z: 0.8942354}
     up: {x: 0, y: 1, z: 0}
-    scale: {x: 0.73999774, y: 0.73999774}
+    scale: {x: 0.93967927, y: 0.93967927}
     roll: 0
-  - position: {x: -2.6721606, y: 3.5852337, z: 2.7821395}
-    direction: {x: -1.8804064, y: 3.5852337, z: 5.78214}
+  - position: {x: 5.972432, y: 3.5852337, z: 2.7821395}
+    direction: {x: 6.7641864, y: 3.5852337, z: 5.78214}
     up: {x: 0, y: 1, z: 0}
-    scale: {x: -0.26000226, y: -0.26000226}
+    scale: {x: -0.060320735, y: -0.060320735}
     roll: 0
   curves:
   - n1:
       position: {x: 0, y: -0.2510605, z: 0.8942354}
       direction: {x: 0, y: -0.2510605, z: 0.8942354}
       up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.73999774, y: 0.73999774}
+      scale: {x: 0.93967927, y: 0.93967927}
       roll: 0
     n2:
-      position: {x: -2.6721606, y: 3.5852337, z: 2.7821395}
-      direction: {x: -1.8804064, y: 3.5852337, z: 5.78214}
+      position: {x: 5.972432, y: 3.5852337, z: 2.7821395}
+      direction: {x: 6.7641864, y: 3.5852337, z: 5.78214}
       up: {x: 0, y: 1, z: 0}
-      scale: {x: -0.26000226, y: -0.26000226}
+      scale: {x: -0.060320735, y: -0.060320735}
       roll: 0
     Changed:
       m_PersistentCalls:
         m_Calls: []
-  Length: 6.02598
+  Length: 7.969122
   isLoop: 0
   CurveChanged:
     m_PersistentCalls:
