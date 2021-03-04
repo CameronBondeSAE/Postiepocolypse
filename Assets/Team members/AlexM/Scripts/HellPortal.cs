@@ -22,7 +22,6 @@ namespace AlexM
 
 
 	#region ServerStuff
-
 		public void PulseScale()
 		{
 			if (isServer)
@@ -41,15 +40,11 @@ namespace AlexM
 	#endregion
 
 	#region ClientStuff
-
 		[ClientRpc]
 		public void RpcSetScale(Vector3 _scale)
 		{
 			transform.localScale = _scale;
 		}
-		
-		
-
 	#endregion
 	}
 
