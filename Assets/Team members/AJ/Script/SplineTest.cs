@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class SplineTest : MonoBehaviour
 {
+    
+    //int spawnSpline = 10;
     // Start is called before the first frame update
-    void Start()
+    
+    //public GameObject Spline;
+
+    
+    /*void Start()
     {
-        //use for loops to see how many splines can be handled in game without crashing
-    }
+        for (int i = 0; i < spawnSpline; i++)
+        {
+            
+        }
+    }*/
 
     // Update is called once per frame
     void Update()
