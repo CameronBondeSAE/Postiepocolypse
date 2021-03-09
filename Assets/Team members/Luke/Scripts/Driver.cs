@@ -16,11 +16,9 @@ namespace Luke
         public float reverseSpeed;
         public Vector3 localVelocity;
         public float springRayLength;
-        public float maxSpringForce;
         public AnimationCurve springForceCurve;
         public float springResistance;
         public float wheelFriction;
-        public float steering;
         public float steeringAngle;
         public Transform[] wheels;
         public Transform[] steeringWheels;
@@ -38,12 +36,13 @@ namespace Luke
             {
                 Vector3 wheelLocalPos = wheel.transform.InverseTransformPoint(wheel.transform.position);
                 Vector3 wheelLocalFwd = wheel.transform.InverseTransformDirection(wheel.transform.forward);
-                
+
                 //getting the world velocity of wheel to apply it as a lateral friction
                 localVelocity = rb.GetPointVelocity(wheel.transform.TransformPoint(wheelLocalPos));
                 
                 Debug.DrawRay(wheel.transform.TransformPoint(wheelLocalPos),localVelocity, Color.blue);
 
+                //something wrong here????
                 //wheel friction
                 rb.AddForceAtPosition(wheel.transform.InverseTransformDirection(-localVelocity.x,0,0) * wheelFriction,
                     wheel.transform.TransformPoint(wheelLocalPos));
@@ -63,7 +62,7 @@ namespace Luke
                 if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
                 {
                     rb.AddForceAtPosition(-wheelLocalFwd * reverseSpeed,
-                        transform.TransformPoint(wheelLocalPos));
+                        wheel.transform.TransformPoint(wheelLocalPos));
                     
                     Debug.DrawRay(wheel.transform.TransformPoint(wheelLocalPos),-wheelLocalFwd);
                 }
@@ -100,7 +99,7 @@ namespace Luke
                 //ray stuff
                 RaycastHit hitInfo = new RaycastHit();
                 
-                /// TODO: I'm not sure if this is working or not???
+                /// TODO: I'm not sure if the implemented springForceCurve is working or not???
                 float springDistance = Vector3.Distance(transform.InverseTransformPoint(wheel.transform.position), hitInfo.point);
                 float force = springResistance - springForceCurve.Evaluate(springDistance/springRayLength);
 

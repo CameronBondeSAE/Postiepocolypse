@@ -5,60 +5,60 @@ using UnityEngine;
 
 namespace Luke
 {
+    //put in what information you want from a node (bool for example)
+    //TODO: Don't know how to put the gridNodeRef in here properly
+    public class Node
+    {
+        public bool isBlocked;
+    }
     public class WorldScanner : MonoBehaviour
     {
-        public Vector3Int gridSize;
+        public Vector3Int nodeSize;
+        public Transform gridSize;
+        public LayerMask groundLayer;
         public Node[,] gridNodeRef;
 
-        //put in what information you want from a node (bool for example)
-        public class Node
-        {
-            private bool isBlocked;
-        }
-        
         // Start is called before the first frame update
         void Start()
         {
-            gridNodeRef = new Node[gridSize.x,gridSize.z];
+            gridNodeRef = new Node[nodeSize.x, nodeSize.z];
+            WorldScan();
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
-        }
-
+        
+        /// <summary>
+        /// TODO: Still need to figure out how to find a starting position for the scan and a finish point
+        /// </summary>
         public void WorldScan()
         {
-            for (int x = 0; x < gridSize.x; x++)
+            for (int x = 0; x < nodeSize.x; x++)
             {
-                for (int z = 0; z < gridSize.z; z++)
+                for (int z = 0; z < nodeSize.z; z++)
                 {
-                    if (Physics.CheckBox(new Vector3(x * gridSize.x, 0, z * gridSize.z),gridSize))
+                    if (Physics.CheckBox(new Vector3(x, 0, z),Vector3.one, Quaternion.identity, groundLayer))
                     {
-                        gridNodeRef[x, z] = new Node();
+                        gridNodeRef[x, z].isBlocked = false;
                     }
                 }
             }
         }
-
+        
+        //Just for visualization
         private void OnDrawGizmos()
         {
-            for (int x = 0; x < gridSize.x; x++)
+            for (int x = 0; x < nodeSize.x; x++)
             {
-                for (int z = 0; z < gridSize.y; z++)
+                for (int z = 0; z < nodeSize.z; z++)
                 {
-                    if (Physics.CheckBox(new Vector3(x * gridSize.x, 0, z * gridSize.z),gridSize))
+                    if (Physics.CheckBox(new Vector3(x, 0, z),Vector3.one, Quaternion.identity, groundLayer))
                     {
-                        Gizmos.color = Color.red;
-                        Gizmos.DrawWireCube(new Vector3(x * gridSize.x, 0, z * gridSize.z), gridSize);
+                        Gizmos.color = Color.green;
+                        Gizmos.DrawWireCube(new Vector3(x, 0, z), Vector3.one);
                     }
                     else
                     {
-                        Gizmos.color = Color.green;
-                        Gizmos.DrawWireCube(new Vector3(x * gridSize.x, 0, z * gridSize.z), gridSize);
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawWireCube(new Vector3(x , 0, z ), Vector3.one);
                     }
-                    
                 }
             }
         }
