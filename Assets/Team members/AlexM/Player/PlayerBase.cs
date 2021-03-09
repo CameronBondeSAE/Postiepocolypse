@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class InputManager
+{
+	public Vector2 moveDirection;
+	
+}
+
 public class PlayerBase : MonoBehaviour
 {
 	private int health;
 
 
-	[HideInInspector]
+	//[HideInInspector]
 	public InputManager   _inputManager;
 	[HideInInspector]
 	public Rigidbody      _rb;

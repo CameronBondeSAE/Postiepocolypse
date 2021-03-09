@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 namespace CameronBonde
 {
@@ -21,10 +23,10 @@ namespace CameronBonde
 
 		void Update()
 		{
-			Debug.Log(FakeManagerUsingStatic.numberOfCreatures);
+			// Debug.Log(FakeManagerUsingStatic.numberOfCreatures);
 			FakeManagerUsingStatic.KillEverything();
 
-			Debug.Log(FakeManagerUsingSingleton.Instance.numberOfCreatures);
+			// Debug.Log(FakeManagerUsingSingleton.Instance.numberOfCreatures);
 			FakeManagerUsingSingleton.Instance.KillEverything();
 		}
 	}
