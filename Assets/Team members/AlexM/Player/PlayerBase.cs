@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using AlexM;
+using Mirror;
 using UnityEngine;
 
 // public class InputManager
@@ -9,7 +10,7 @@ using UnityEngine;
 // 	
 // }
 
-public class PlayerBase : MonoBehaviour
+public class PlayerBase : NetworkBehaviour
 {
 	private int health;
 

@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f53e4bb47a8d44cb7594279aac1fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputManager: {fileID: 580642317967517823}
   _rb: {fileID: 0}
   _movementInput: {x: 0, y: 0}
   _movement: {x: 0, y: 0, z: 0}
@@ -356,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613cd3e103542354c97893ca5e6aa5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputManager: {fileID: 580642317967517823}
   _rb: {fileID: 0}
   _movementInput: {x: 0, y: 0}
   _movement: {x: 0, y: 0, z: 0}

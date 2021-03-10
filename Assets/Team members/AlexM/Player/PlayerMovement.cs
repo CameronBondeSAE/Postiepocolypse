@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using AlexM;
+using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -148,57 +149,75 @@ public class PlayerMovement : PlayerBase
 		}
 	}
 
-	public void Jump(InputAction.CallbackContext obj)
+	public void JumpInput(InputAction.CallbackContext obj)
 	{
-		if (obj.performed)
+		if (isLocalPlayer)
 		{
-			//Debug.LogWarning("Jump Performed.");
-			if (_isGrounded)
+			if (obj.performed)
 			{
-				//Debug.Log("Jumping");
-				_rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+				//Debug.LogWarning("JumpInput Performed.");
+				if (_isGrounded)
+				{
+					CmdJump();
+				}
+			}
+
+			if (obj.canceled)
+			{
+				//Debug.LogWarning("JumpInput Cancelled.");
 			}
 		}
+	}
 
-		if (obj.canceled)
-		{
-			//Debug.LogWarning("Jump Cancelled.");
-		}
+	[Command]
+	public void CmdJump()
+	{
+		RpcJump();
+	}
+
+	[ClientRpc]
+	public void RpcJump()
+	{
+		//Debug.Log("Jumping");
+		_rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
 	}
 
 	private void ApplyMovement()
 	{
-		_movement = (_inputManager.moveDirection.y * _fwdDirection) + (_inputManager.moveDirection.x * _rightDirection);
-		//if (_isGrounded)
+		if (isLocalPlayer)
 		{
-			// if (_groundAngleOffset > 0)
-			// {
-			// 	maxSpeed = (maxSpeed + _groundAngleOffset / 50f);
-			// }
-			// else if (_groundAngleOffset <= 0)
-			// {
-			// 	maxSpeed = originalSpeed;
-			// }
+			_movement = (_inputManager.moveDirection.y * _fwdDirection) + (_inputManager.moveDirection.x * _rightDirection);
+			//if (_isGrounded)
+			{
+				// if (_groundAngleOffset > 0)
+				// {
+				// 	maxSpeed = (maxSpeed + _groundAngleOffset / 50f);
+				// }
+				// else if (_groundAngleOffset <= 0)
+				// {
+				// 	maxSpeed = originalSpeed;
+				// }
 
-			if (_isSprinting)
-			{
-				if (GetSpeed() < 25)
+				if (_isSprinting)
 				{
-					_rb.AddForce(_movement.normalized * ((maxSpeed * 2) * Time.fixedDeltaTime),
-						ForceMode.VelocityChange);
-					//_rb.velocity = _movement * maxSpeed;
+					if (GetSpeed() < 25)
+					{
+						_rb.AddForce(_movement.normalized * ((maxSpeed * 2) * Time.fixedDeltaTime),
+							ForceMode.VelocityChange);
+						//_rb.velocity = _movement * maxSpeed;
+					}
 				}
-			}
-			else
-			{
-				if (GetSpeed() < 10)
+				else
 				{
-					_rb.AddForce(_movement.normalized * ((maxSpeed / 2) * Time.fixedDeltaTime),
-						ForceMode.VelocityChange);
-					//_rb.velocity = (_movement * maxSpeed) / 2;
+					if (GetSpeed() < 10)
+					{
+						_rb.AddForce(_movement.normalized * ((maxSpeed / 2) * Time.fixedDeltaTime),
+							ForceMode.VelocityChange);
+						//_rb.velocity = (_movement * maxSpeed) / 2;
+					}
 				}
-			}
 			
+			}
 		}
 	}
 

@@ -27,7 +27,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""JumpInput"",
                     ""type"": ""Button"",
                     ""id"": ""db12ac36-cbfb-45d1-8f8b-8a91014774df"",
                     ""expectedControlType"": ""Button"",
@@ -130,7 +130,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""JumpInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -186,7 +186,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
-        m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
+        m_Movement_Jump = m_Movement.FindAction("JumpInput", throwIfNotFound: true);
         m_Movement_Sprint = m_Movement.FindAction("Sprint", throwIfNotFound: true);
         m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
         m_Movement_Menu = m_Movement.FindAction("Menu", throwIfNotFound: true);
