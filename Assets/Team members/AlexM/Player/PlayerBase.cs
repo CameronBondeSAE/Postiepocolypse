@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlexM;
 using UnityEngine;
 
-public class InputManager
-{
-	public Vector2 moveDirection;
-	
-}
+// public class InputManager
+// {
+// 	public Vector2 moveDirection;
+// 	
+// }
 
 public class PlayerBase : MonoBehaviour
 {
