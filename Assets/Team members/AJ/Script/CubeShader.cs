@@ -11,7 +11,11 @@ public class CubeShader : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer.material.SetTexture("_Texture2D", tex);
+        if (isServer)
+        {
+            renderer.material.SetTexture("_Texture2D", tex);
+        }
+        
     }
 
     // Update is called once per frame
