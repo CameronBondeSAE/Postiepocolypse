@@ -17,6 +17,11 @@ namespace JonathonMiles
         }
         void Update()
         {
+            Scanning();
+        }
+
+        void Scanning()
+        {
             for (int x = 0; x < gridSize.x; x++)
             {
                 for (int z = 0; z < gridSize.z; z++)
@@ -24,7 +29,7 @@ namespace JonathonMiles
                     grid[x, z] = new Node();
                     grid[x, z].gridPos = new Vector3Int(x,0,z);
                     
-                   if (Physics.CheckBox(new Vector3(x , 0, z ),Vector3.one))
+                    if (Physics.CheckBox(new Vector3(x , 0, z ),Vector3.one))
                     {
                         //doing a physics check along the grid to see if something 
                         //is in the way, checking for barriers along the path
