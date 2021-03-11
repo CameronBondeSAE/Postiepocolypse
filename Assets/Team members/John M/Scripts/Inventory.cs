@@ -7,23 +7,7 @@ namespace JonathonMiles
 
     public class Inventory : MonoBehaviour
     {
-        #region Singleton
-        public static Inventory instance;
-
-        private void Awake()
-        {
-            if (instance != null)
-            {
-                Debug.Log("More than one instance of Inventory found !!");
-                return;
-            }
-            instance = this;
-        }
-        
-
-        #endregion
-
-        public delegate void OnItemChanged();
+		public delegate void OnItemChanged();
         public OnItemChanged onItemChangedCallback;
         
         public int inventorySpace = 20;

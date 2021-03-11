@@ -9,6 +9,8 @@ namespace JonathonMiles
         public Image icon;			// Reference to the Icon image
         public Button removeButton;	// Reference to the remove button
 
+		public Inventory inventory;
+		
         ItemBase item;  // Current item in the slot
 
         // Add item to the slot
@@ -33,7 +35,7 @@ namespace JonathonMiles
 
         public void OnRemoveButton ()
         {
-            Inventory.instance.Remove(item);
+            inventory.Remove(item);
         }
 
         public void UseItem ()

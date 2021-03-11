@@ -6,18 +6,22 @@ namespace JonathonMiles
 {
     public class InventoryUI : MonoBehaviour
     {
-
-        public Transform ItemGrid;	
+		public Transform ItemGrid;	
         public GameObject inventoryUI;
         Inventory inventory;
         InventorySlot[] slots;	
 
         void Start () 
         {
-            inventory = Inventory.instance;
             inventory.onItemChangedCallback += UpdateUI;
             //fills the array of slots with all available items slots in inventory
             slots = ItemGrid.GetComponentsInChildren<InventorySlot>();
+
+			// Slots need to talk to the main inventory to add/remove themselves
+			for (int i = 0; i < slots.Length; i++)
+			{
+				slots[i].inventory = inventory;
+			}
         }
 	
         void FixedUpdate ()

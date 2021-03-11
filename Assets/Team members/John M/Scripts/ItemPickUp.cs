@@ -6,8 +6,7 @@ namespace  JonathonMiles
 {
     public class ItemPickUp : Interactable
     {
-
-        public ItemBase item;
+		public ItemBase  item;
        
         // When the player interacts with the item
         public override void Interact()
@@ -21,11 +20,11 @@ namespace  JonathonMiles
         void PickUp ()
         {
             Debug.Log("Picking up " + item.name);
-            bool wasPickedUp = Inventory.instance.Add(item);	// Add to inventory
+            // bool wasPickedUp = Inventory.instance.Add(item);	// Add to inventory
 
             // If successfully picked up
-            if (wasPickedUp)
-                Destroy(gameObject);	// Destroy item from scene
+            // if (wasPickedUp)
+            Destroy(gameObject);	// Destroy item from scene
         }
 
     }
