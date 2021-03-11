@@ -671,9 +671,10 @@ MonoBehaviour:
   flareAvailable: 0
   flareDelay: 5
   spawnDifference: 2
-  flareForce: 5
+  flareForce: 4
   currentFlares: 3
   flareHeight: 100
+  flareDecent: 10
 --- !u!65 &794260168
 BoxCollider:
   m_ObjectHideFlags: 0
