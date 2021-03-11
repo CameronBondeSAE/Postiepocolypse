@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class Sprinter : MonoBehaviour
+
+namespace TimPearson
+{
+    public class Sprinter : MonoBehaviour
 {
     public float Speed;
     private bool isBoosting = false;
@@ -52,4 +55,5 @@ public class Sprinter : MonoBehaviour
         }
     }
    
+}
 }
