@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ZachFrench
 {
-
+    [Serializable]
     public class Node
     {
         public bool isBlocked;
@@ -19,12 +19,11 @@ namespace ZachFrench
         private int gridSizeZ = 50;
         
         
-        private Node[,] grid;
-        
+        public Node[,] grid;
         
         
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             grid = new Node[gridSizeX,gridSizeZ];
         }
@@ -47,13 +46,15 @@ namespace ZachFrench
             }
         }
 
+        
+        
         private void OnDrawGizmos()
         {
             for (int x = 0; x < gridSizeX; x++)
             {
                 for (int z = 0; z < gridSizeZ; z++)
                 {
-                    if (grid[x,z] != null)
+                    if (grid != null && grid[x,z] != null)
                     {
                         if (grid[x,z].isBlocked)
                         {
