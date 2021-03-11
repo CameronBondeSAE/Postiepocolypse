@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 namespace CameronBonde
 {
 
+	[Serializable]
 	public class FakeNode
 	{
 		public bool   isBlocked;

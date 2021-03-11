@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430760f7f1899e34f85b6e30b35ac518, type: 3}
   m_Name: CamItem
   m_EditorClassIdentifier: 
-  name: Item Name
-  icon: {fileID: 0}
-  amount: 0
-  isConsumable: 0
+  name: Cam item
+  icon: {fileID: 3756271271421796404, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  amount: 183
+  isConsumable: 1
   isCoin: 0
