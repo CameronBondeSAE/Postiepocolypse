@@ -25,11 +25,6 @@ namespace Luke
             WorldScan();
         }
 
-        void Update()
-        {
-            
-        }
-
         /// <summary>
         /// TODO: Still need to figure out how to find a starting position for the scan and a finish point
         /// </summary>
