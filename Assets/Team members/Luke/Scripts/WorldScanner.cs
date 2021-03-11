@@ -6,7 +6,6 @@ using UnityEngine;
 namespace Luke
 {
     //put in what information you want from a node (bool for example)
-    //TODO: Don't know how to put the gridNodeRef in here properly
     [Serializable]
     public class Node
     {
@@ -15,31 +14,34 @@ namespace Luke
     }
     public class WorldScanner : MonoBehaviour
     {
-        public Vector3Int nodeSize;
+        public Vector3Int gridSize;
         public LayerMask obstacle;
         public Node[,] gridNodeRef;
 
         // Start is called before the first frame update
         void Awake()
         {
-            gridNodeRef = new Node[nodeSize.x, nodeSize.z];
-            
+            gridNodeRef = new Node[gridSize.x, gridSize.z];
+        }
+
+        void Update()
+        {
             WorldScan();
         }
-        
+
         /// <summary>
         /// TODO: Still need to figure out how to find a starting position for the scan and a finish point
         /// </summary>
         public void WorldScan()
         {
-            for (int x = 0; x < nodeSize.x; x++)
+            for (int x = 0; x < gridSize.x; x++)
             {
-                for (int z = 0; z < nodeSize.z; z++)
+                for (int z = 0; z < gridSize.z; z++)
                 {
                     gridNodeRef[x, z] = new Node();
                     gridNodeRef[x, z].gridPos = new Vector3Int(x,0,z);
-                    
-                    if (gridNodeRef != null && gridNodeRef[x,z] != null)
+
+                    if (gridNodeRef != null)
                     {
                         gridNodeRef[x, z].isBlocked = false;
                     }
@@ -58,9 +60,9 @@ namespace Luke
         //Just for debugging and visualization
         private void OnDrawGizmos()
         {
-            for (int x = 0; x < nodeSize.x; x++)
+            for (int x = 0; x < gridSize.x; x++)
             {
-                for (int z = 0; z < nodeSize.z; z++)
+                for (int z = 0; z < gridSize.z; z++)
                 {
                     if (Physics.CheckBox(new Vector3(x, 0, z),Vector3.one, Quaternion.identity, obstacle))
                     {

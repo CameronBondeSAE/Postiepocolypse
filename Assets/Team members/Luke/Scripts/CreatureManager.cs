@@ -7,7 +7,7 @@ namespace Luke
 {
     public class CreatureManager : MonoBehaviour
     {
-        public List<CreatureBase[]> creatures;
+        public List<CreatureBase> creatures;
         public int creatureAmountInScene;
         
         static CreatureManager instance;

@@ -7,17 +7,11 @@ namespace Luke
 {
     public class FloodPathFinding : MonoBehaviour
     {
-        public Node currentNode;
+        public Node startingNode;
+        public Node currentEvaluatingNode;
+        public Node neighbourNode;
         public List<Node> Open;
         public List<Node> Closed;
-
-        private WorldScanner worldScanner;
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
 
         // Update is called once per frame
         void Update()
@@ -32,25 +26,47 @@ namespace Luke
             {
                 for (int z = -1; z < 2; z++)
                 {
-                    currentNode = new Node();
-                    currentNode.gridPos = new Vector3Int(x,0,z);
-                    Open.Add(currentNode);
+                    //centre starting node 0,0,0 or desired starting position
+                    startingNode = new Node();
+                    startingNode.gridPos = new Vector3Int();
                     
-                    //not quite working
-                    Node neighbourNode = new Node();
-                    neighbourNode.gridPos = new Vector3Int(currentNode.gridPos.x + x,0,currentNode.gridPos.z + z);
-
-                    if (neighbourNode.isBlocked && worldScanner.gridNodeRef != null)
+                    if (startingNode.isBlocked)
                     {
-                        Closed.Add(neighbourNode);
+                        Debug.Log("Blocked startingNode");
+                    }
+
+                    else
+                    {
+                        Closed.Add(startingNode);
                     }
                     
-                    Open.Add(neighbourNode);
-                    
-                    // foreach (Node neighbourNodes in Open)
-                    // {
-                    //     PathFlooding();
-                    // }
+                    //creating the currentNode and adding to the open node list
+                    currentEvaluatingNode = new Node();
+                    currentEvaluatingNode.gridPos = new Vector3Int(startingNode.gridPos.x + x,0,startingNode.gridPos.z + z);
+
+                    if (currentEvaluatingNode.isBlocked == false)
+                    {
+                        Open.Add(currentEvaluatingNode);
+                    }
+
+                    else
+                    {
+                        Closed.Add(currentEvaluatingNode);
+                    }
+
+                    foreach (Node currentEvaluatingNodes in Open)
+                    {
+                        currentEvaluatingNodes.gridPos = currentEvaluatingNode.gridPos;
+                        
+                        neighbourNode = new Node();
+                        neighbourNode.gridPos = new Vector3Int(currentEvaluatingNodes.gridPos.x + x,0,currentEvaluatingNodes.gridPos.z + z);
+
+                        if (neighbourNode.isBlocked)
+                        {
+                            Open.Remove(currentEvaluatingNode);
+                            Closed.Add(currentEvaluatingNode);
+                        }
+                    }
                 }
             }
         }
@@ -62,21 +78,48 @@ namespace Luke
             {
                 for (int z = -1; z < 2; z++)
                 {
-                    //the open nodes
-                    Gizmos.color = Color.blue;
-                    Gizmos.DrawWireCube(new Vector3(x, 0, z),Vector3.one);
+                    startingNode = new Node();
+                    startingNode.gridPos = new Vector3Int();
+                    Gizmos.color = Color.white;
+                    Gizmos.DrawWireCube(startingNode.gridPos,Vector3.one);
                     
-
-                    if (currentNode.isBlocked && worldScanner.gridNodeRef != null)
+                    currentEvaluatingNode = new Node();
+                    currentEvaluatingNode.gridPos = new Vector3Int(startingNode.gridPos.x + x,0,startingNode.gridPos.z + z);
+                    
+                    if (currentEvaluatingNode.isBlocked)
                     {
+                        //the open nodes
+                        Gizmos.color = Color.blue;
+                        Gizmos.DrawWireCube(new Vector3(x, 0, z),Vector3.one);
+                    }
+
+                    else 
+                    {
+                        //closed nodes
                         Gizmos.color = Color.black;
                         Gizmos.DrawWireCube(new Vector3(x, 0, z),Vector3.one);
                     }
 
-                    // foreach (Node neighbourNodes in Open)
-                    // {
-                    //     OnDrawGizmos();
-                    // }
+                    foreach (Node currentEvaluatingNodes in Open)
+                    {
+                        currentEvaluatingNodes.gridPos = currentEvaluatingNode.gridPos;
+                        
+                        neighbourNode = new Node();
+                        neighbourNode.gridPos = new Vector3Int(currentEvaluatingNodes.gridPos.x + x,0,currentEvaluatingNodes.gridPos.z + z);
+
+                        if (neighbourNode.isBlocked)
+                        {
+                            Gizmos.color = Color.magenta;
+                            Gizmos.DrawWireCube(neighbourNode.gridPos, Vector3.one);
+                        }
+
+                        else
+                        {
+                            Gizmos.color = Color.cyan;
+                            Gizmos.DrawWireCube(neighbourNode.gridPos, Vector3.one);
+                        }
+                    }
+                    // repeat process??
                 }
             }
         }
