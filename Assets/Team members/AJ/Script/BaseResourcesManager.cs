@@ -4,43 +4,47 @@ using Mirror;
 using UnityEngine;
 using TMPro;
 
-public class BaseResourcesManager : NetworkBehaviour
+namespace AJ
 {
-    public int amount;
-    public TextMeshProUGUI amountUI;
-    public int food;
-    // Start is called before the first frame update
-    void Start()
+    public class BaseResourcesManager : NetworkBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (isServer)
+        public int amount;
+        public TextMeshProUGUI amountUI;
+        public int food;
+        // Start is called before the first frame update
+        void Start()
         {
-            if (amount < food)
+        
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (isServer)
             {
-                TallyFoodAmount(amount++);
+                if (amount < food)
+                {
+                    TallyFoodAmount(amount++);
+                }
+                else
+                {
+                    food++;
+                }
+                RpcText(amount.ToString());
+                //RpcText("Hey");
             }
-            else
-            {
-                food++;
-            }
-            RpcText(amount.ToString());
-            //RpcText("Hey");
+        }
+
+        public void TallyFoodAmount(int i)
+        {
+            amount++;
+        }
+
+        [ClientRpc]
+        public void RpcText(string text)
+        {
+            amountUI.text = text;
         }
     }
 
-    public void TallyFoodAmount(int i)
-    {
-        amount++;
-    }
-
-    [ClientRpc]
-    public void RpcText(string text)
-    {
-        amountUI.text = text;
-    }
 }
