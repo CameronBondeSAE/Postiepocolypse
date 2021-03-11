@@ -197,56 +197,43 @@ public class PlayerMovement : PlayerBase
 		_rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
 	}
 
-	[Command]
-	public void CmdMovementInput(Vector3 movement)
-	{
-		_movement = movement;
-	}
-
-	private void ApplyMovement()
+	private void Update()
 	{
 		if (isLocalPlayer)
 		{
 			_movement = (_inputManager.moveDirection.y * _fwdDirection) + (_inputManager.moveDirection.x * _rightDirection);
 			CmdMovementInput(_movement);
 		}
-		
-		if (isServer)
-		{
-			//if (_isGrounded)
-			{
-				// if (_groundAngleOffset > 0)
-				// {
-				// 	maxSpeed = (maxSpeed + _groundAngleOffset / 50f);
-				// }
-				// else if (_groundAngleOffset <= 0)
-				// {
-				// 	maxSpeed = originalSpeed;
-				// }
+	}
 
-				if (_isSprinting)
+	[Command]
+	public void CmdMovementInput(Vector3 movement)
+	{
+		_movement = movement;
+	}
+	
+	private void ApplyMovement()
+	{
+		if (isLocalPlayer)
+		{
+			if (_isSprinting)
+			{
+				if (GetSpeed() < 25)
 				{
-					if (GetSpeed() < 25)
-					{
-						_rb.AddForce(_movement.normalized * ((maxSpeed * 2) * Time.fixedDeltaTime),
-							ForceMode.VelocityChange);
-						//_rb.velocity = _movement * maxSpeed;
-					}
+					_rb.AddForce(_movement.normalized * ((maxSpeed * 2) * Time.fixedDeltaTime),
+						ForceMode.VelocityChange);
 				}
-				else
+			}
+			else
+			{
+				if (GetSpeed() < 10)
 				{
-					if (GetSpeed() < 10)
-					{
-						_rb.AddForce(_movement.normalized * ((maxSpeed / 2) * Time.fixedDeltaTime),
-							ForceMode.VelocityChange);
-						//_rb.velocity = (_movement * maxSpeed) / 2;
-					}
+					_rb.AddForce(_movement.normalized * ((maxSpeed / 2) * Time.fixedDeltaTime),
+						ForceMode.VelocityChange);
 				}
-			
 			}
 		}
 	}
-
 
 	private void FixedUpdate()
 	{

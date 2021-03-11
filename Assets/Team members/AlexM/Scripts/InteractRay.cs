@@ -10,7 +10,8 @@ namespace AlexM
 	{
 		private bool Ray;
 		private CamMouseLook _camera;
-
+		[HideInInspector]
+		public RaycastHit hit;
 		private void Awake()
 		{
 			_camera = GetComponentInChildren<CamMouseLook>();
@@ -18,14 +19,13 @@ namespace AlexM
 
 		private void FixedUpdate()
 		{
-			
+			SendRay();
 		}
 
-		public bool SendRay()
+		private void SendRay()
 		{
 			var t = _camera.transform;
-			//Ray = Physics.Raycast(t.position, t.forward, 3f, );
-			return Ray;
+			Ray = Physics.Raycast(t.position, t.forward, out hit );
 		}
 	}
 }
