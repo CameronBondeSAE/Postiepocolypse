@@ -22,11 +22,12 @@ namespace Luke
         void Awake()
         {
             gridNodeRef = new Node[gridSize.x, gridSize.z];
+            WorldScan();
         }
 
         void Update()
         {
-            WorldScan();
+            
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace Luke
             {
                 for (int z = 0; z < gridSize.z; z++)
                 {
-                    if (Physics.CheckBox(new Vector3(x, 0, z),Vector3.one, Quaternion.identity, obstacle))
+                    if (gridNodeRef != null && gridNodeRef[x,z].isBlocked)
                     {
                         Gizmos.color = Color.red;
                         Gizmos.DrawWireCube(new Vector3(x, 0, z), Vector3.one);

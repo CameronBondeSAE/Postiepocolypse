@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Luke
 {
@@ -13,10 +14,16 @@ namespace Luke
         public List<Node> Open;
         public List<Node> Closed;
 
+        public WorldScanner worldScanner;
+        
         // Update is called once per frame
-        void Update()
+        void Start()
         {
-            PathFlooding();
+            currentEvaluatingNode = new Node();
+            startingNode = new Node();
+            startingNode.gridPos = new Vector3Int(0, 0, 0);
+            InvokeRepeating("PathFlooding",0,1);
+            
         }
 
         public void PathFlooding()
@@ -26,100 +33,58 @@ namespace Luke
             {
                 for (int z = -1; z < 2; z++)
                 {
-                    //centre starting node 0,0,0 or desired starting position
-                    startingNode = new Node();
-                    startingNode.gridPos = new Vector3Int();
+                    //creating the currentNode and adding to the open node list
+                    int gridPosX = startingNode.gridPos.x + x;
+                    int gridPosZ = startingNode.gridPos.z + z;
+
+                    if (gridPosX >=0 && gridPosZ >=0 && worldScanner.gridSize.x > gridPosX && worldScanner.gridSize.z > gridPosZ)
+                    {
+                        currentEvaluatingNode = worldScanner.gridNodeRef[gridPosX,gridPosZ]; 
+                    }
+                    else
+                    {
+                        continue;
+                    }
                     
-                    if (startingNode.isBlocked)
+                    if (currentEvaluatingNode.isBlocked)
                     {
                         Debug.Log("Blocked startingNode");
                     }
-
-                    else
-                    {
-                        Closed.Add(startingNode);
-                    }
-                    
-                    //creating the currentNode and adding to the open node list
-                    currentEvaluatingNode = new Node();
-                    currentEvaluatingNode.gridPos = new Vector3Int(startingNode.gridPos.x + x,0,startingNode.gridPos.z + z);
-
-                    if (currentEvaluatingNode.isBlocked == false)
-                    {
-                        Open.Add(currentEvaluatingNode);
-                    }
-
                     else
                     {
                         Closed.Add(currentEvaluatingNode);
                     }
 
-                    foreach (Node currentEvaluatingNodes in Open)
+                    if (currentEvaluatingNode.isBlocked == false)
                     {
-                        currentEvaluatingNodes.gridPos = currentEvaluatingNode.gridPos;
-                        
-                        neighbourNode = new Node();
-                        neighbourNode.gridPos = new Vector3Int(currentEvaluatingNodes.gridPos.x + x,0,currentEvaluatingNodes.gridPos.z + z);
-
-                        if (neighbourNode.isBlocked)
-                        {
-                            Open.Remove(currentEvaluatingNode);
-                            Closed.Add(currentEvaluatingNode);
-                        }
+                        Open.Add(currentEvaluatingNode);
+                    }
+                    else
+                    {
+                        Closed.Add(currentEvaluatingNode);
                     }
                 }
             }
+            Closed.Add(startingNode);
+            startingNode = Open[Random.Range(0, Open.Count)];
         }
 
         public void OnDrawGizmos()
         {
             // x and z are the neighbouring x and z nodes along with their diagonals
-            for (int x = -1; x < 2; x++)
+
+            foreach (Node i in Open)
             {
-                for (int z = -1; z < 2; z++)
+                if (i.isBlocked)
                 {
-                    startingNode = new Node();
-                    startingNode.gridPos = new Vector3Int();
-                    Gizmos.color = Color.white;
-                    Gizmos.DrawWireCube(startingNode.gridPos,Vector3.one);
-                    
-                    currentEvaluatingNode = new Node();
-                    currentEvaluatingNode.gridPos = new Vector3Int(startingNode.gridPos.x + x,0,startingNode.gridPos.z + z);
-                    
-                    if (currentEvaluatingNode.isBlocked)
-                    {
-                        //the open nodes
-                        Gizmos.color = Color.blue;
-                        Gizmos.DrawWireCube(new Vector3(x, 0, z),Vector3.one);
-                    }
+                    Gizmos.color = Color.magenta;
+                    Gizmos.DrawWireCube(i.gridPos, Vector3.one);
+                }
 
-                    else 
-                    {
-                        //closed nodes
-                        Gizmos.color = Color.black;
-                        Gizmos.DrawWireCube(new Vector3(x, 0, z),Vector3.one);
-                    }
-
-                    foreach (Node currentEvaluatingNodes in Open)
-                    {
-                        currentEvaluatingNodes.gridPos = currentEvaluatingNode.gridPos;
-                        
-                        neighbourNode = new Node();
-                        neighbourNode.gridPos = new Vector3Int(currentEvaluatingNodes.gridPos.x + x,0,currentEvaluatingNodes.gridPos.z + z);
-
-                        if (neighbourNode.isBlocked)
-                        {
-                            Gizmos.color = Color.magenta;
-                            Gizmos.DrawWireCube(neighbourNode.gridPos, Vector3.one);
-                        }
-
-                        else
-                        {
-                            Gizmos.color = Color.cyan;
-                            Gizmos.DrawWireCube(neighbourNode.gridPos, Vector3.one);
-                        }
-                    }
-                    // repeat process??
+                else
+                {
+                    Gizmos.color = Color.cyan;
+                    Gizmos.DrawWireCube(i.gridPos, Vector3.one);
                 }
             }
         }
