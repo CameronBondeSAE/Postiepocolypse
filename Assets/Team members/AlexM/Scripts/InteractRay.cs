@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Tanks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AlexM
 {
@@ -12,6 +13,8 @@ namespace AlexM
 		private CamMouseLook _camera;
 		[HideInInspector]
 		public RaycastHit hit;
+
+		public Action<GameObject> hitObjEvent;
 		private void Awake()
 		{
 			_camera = GetComponentInChildren<CamMouseLook>();
@@ -19,13 +22,19 @@ namespace AlexM
 
 		private void FixedUpdate()
 		{
-			SendRay();
+			
 		}
 
-		private void SendRay()
+		public void SendRay(InputAction.CallbackContext obj)
 		{
-			var t = _camera.transform;
-			Ray = Physics.Raycast(t.position, t.forward, out hit );
+			if (obj.performed)
+			{
+				var t = _camera.transform;
+				Ray = Physics.Raycast(t.position, t.forward, out hit );
+				Debug.Log(hit.transform.name);
+				hitObjEvent.Invoke(hit.transform.gameObject);
+			}
 		}
+		
 	}
 }

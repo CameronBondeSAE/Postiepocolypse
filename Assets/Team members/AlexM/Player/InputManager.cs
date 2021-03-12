@@ -10,6 +10,7 @@ namespace AlexM
 		private Inputs         _controls;
 		private PlayerMovement _pMovement;
 		private CamMouseLook   _camScript;
+		private InteractRay _interactRay;
 
 		[HideInInspector]
 		public Vector2 moveDirection;
@@ -18,14 +19,15 @@ namespace AlexM
 		{
 			_pMovement = GetComponent<PlayerMovement>();
 			_camScript = GetComponentInChildren<CamMouseLook>();
+			_interactRay = GetComponent<InteractRay>();
 		}
 
 		private void ControlSetup()
 		{
 			_controls = new Inputs();
 			_controls.Enable();
-			_controls.Movement.Move.performed       += _pMovement.InputValue;
-			_controls.Movement.Move.canceled        += _pMovement.InputValue;
+			_controls.Movement.Move.performed       += _pMovement.MovementInput;
+			_controls.Movement.Move.canceled        += _pMovement.MovementInput;
 			_controls.Movement.Jump.performed       += _pMovement.JumpInput;
 			_controls.Movement.Jump.canceled        += _pMovement.JumpInput;
 			_controls.Movement.Flashlight.performed += _camScript.ToggleLight;
@@ -34,6 +36,9 @@ namespace AlexM
 			_controls.Movement.Sprint.canceled      += _pMovement.Sprint;
 			_controls.Movement.Crouch.performed     += _pMovement.Crouch;
 			_controls.Movement.Crouch.canceled      += _pMovement.Crouch;
+			_controls.Movement.Use.performed += _interactRay.SendRay;
+			_controls.Movement.Use.canceled += _interactRay.SendRay;
+			
 			// if (_gameManager)
 			// {
 			// 	_controls.Movement.Menu.performed += _gameManager.Pause;

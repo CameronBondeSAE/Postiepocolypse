@@ -27,7 +27,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""JumpInput"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""db12ac36-cbfb-45d1-8f8b-8a91014774df"",
                     ""expectedControlType"": ""Button"",
@@ -62,6 +62,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""name"": ""Flashlight"",
                     ""type"": ""Button"",
                     ""id"": ""78d02e40-e2ab-4294-a1df-0d71907db1cc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""80d81a3d-f0c3-4042-bbc1-b843e33e5245"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -130,7 +138,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""JumpInput"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -177,6 +185,17 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""action"": ""Flashlight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c515249d-f2d6-4707-9fc9-76f15da047dc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -186,11 +205,12 @@ public class @Inputs : IInputActionCollection, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
-        m_Movement_Jump = m_Movement.FindAction("JumpInput", throwIfNotFound: true);
+        m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         m_Movement_Sprint = m_Movement.FindAction("Sprint", throwIfNotFound: true);
         m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
         m_Movement_Menu = m_Movement.FindAction("Menu", throwIfNotFound: true);
         m_Movement_Flashlight = m_Movement.FindAction("Flashlight", throwIfNotFound: true);
+        m_Movement_Use = m_Movement.FindAction("Use", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +266,7 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Movement_Crouch;
     private readonly InputAction m_Movement_Menu;
     private readonly InputAction m_Movement_Flashlight;
+    private readonly InputAction m_Movement_Use;
     public struct MovementActions
     {
         private @Inputs m_Wrapper;
@@ -256,6 +277,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Movement_Crouch;
         public InputAction @Menu => m_Wrapper.m_Movement_Menu;
         public InputAction @Flashlight => m_Wrapper.m_Movement_Flashlight;
+        public InputAction @Use => m_Wrapper.m_Movement_Use;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +305,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Flashlight.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnFlashlight;
                 @Flashlight.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnFlashlight;
                 @Flashlight.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnFlashlight;
+                @Use.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnUse;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -305,6 +330,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Flashlight.started += instance.OnFlashlight;
                 @Flashlight.performed += instance.OnFlashlight;
                 @Flashlight.canceled += instance.OnFlashlight;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
             }
         }
     }
@@ -317,5 +345,6 @@ public class @Inputs : IInputActionCollection, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnFlashlight(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
 }

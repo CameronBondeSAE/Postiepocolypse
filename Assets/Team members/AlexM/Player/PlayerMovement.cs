@@ -98,7 +98,7 @@ public class PlayerMovement : PlayerBase
 		return _speed;
 	}
 
-	public void InputValue(InputAction.CallbackContext obj)
+	public void MovementInput(InputAction.CallbackContext obj)
 	{
 		if (obj.performed)
 		{

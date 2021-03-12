@@ -12,8 +12,6 @@ using UnityEngine;
 
 public class PlayerBase : NetworkBehaviour
 {
-	private int health;
-
 
 	//[HideInInspector]
 	public InputManager   _inputManager;
@@ -42,22 +40,4 @@ public class PlayerBase : NetworkBehaviour
 	[HideInInspector]
 	public float _groundAngle, _groundAngleOffset;
 
-	public int GetHealth()
-	{
-		return health;
-	}
-	public void SetHealth(int newVal)
-	{
-		health = newVal;
-	}
-
-	public void TakeHealth(int damage)
-	{
-		health = (health - damage);
-	}
-
-	public void RestoreHealth(int amount)
-	{
-		health = (health + amount);
-	}
 }
