@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class FindTargetState : AntAIState
 {
+	public AntAIAgent antAIAgent;
+	
 	public override void Enter()
 	{
 		base.Enter();
-		
-		Debug.Log("Find target");
 	}
 
 	public override void Execute(float aDeltaTime, float aTimeScale)
