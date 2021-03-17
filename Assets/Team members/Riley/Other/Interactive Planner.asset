@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: Interactive Planner
+  m_EditorClassIdentifier: 
+  conditions:
+    position: {x: 201, y: 218}
+    list:
+    - id: 0
+      name: Am I here
+    - id: 1
+      name: Target Picked
+  actions:
+  - name: Pick targett
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 517, y: 299}
+    pre:
+    - id: 1
+      value: 0
+    post:
+    - id: 1
+      value: 1
+  - name: Move
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 770, y: 292}
+    pre:
+    - id: 1
+      value: 1
+    post:
+    - id: 0
+      value: 1
+  - name: Inactive
+    isDefault: 1
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1016, y: 289}
+    pre: []
+    post: []
+  goals:
+  - name: At Target
+    isDefault: 1
+    position: {x: 203, y: 348}
+    conditions:
+    - id: 0
+      value: 1
+  worldStates:
+  - position: {x: 208, y: 497}
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
