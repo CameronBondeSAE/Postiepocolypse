@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BlockPlaneMat
-  m_Shader: {fileID: -6465566751694194690, guid: 02428b847887a6c488438461bad19388, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 98aa7b3cbf9916f4085aec0f5e2517b0, type: 3}
   m_ShaderKeywords: _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING _ENABLE_FOG_ON_TRANSPARENT
     _MATERIAL_FEATURE_TRANSMISSION _NORMALMAP_TANGENT_SPACE _REFRACTION_PLANE _SURFACE_TYPE_TRANSPARENT
     _TRANSPARENT_WRITES_MOTION_VEC
@@ -123,7 +123,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_646B35E9: 0.1
+    - Vector1_646B35E9: 0.42
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
