@@ -8,7 +8,8 @@ namespace Luke
     {
         public int numberOfCreatures;
         public GameObject[] creaturePrefabs;
-        public Transform[] creatureSpawnPoints;
+        public float      spawnRange;
+        public float    ySpawnOffset = 1f;
 
         public void Start()
         {
@@ -21,16 +22,25 @@ namespace Luke
             //position at each spawn point
             for (int i = 0; i < numberOfCreatures; i++)
             {
+                Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), 100, Random.Range(-spawnRange, spawnRange));
+                
                 //run through randoms
                 int randomPrefab = Random.Range(0, creaturePrefabs.Length);
-                int randomSpawnPoint = Random.Range(0, creatureSpawnPoints.Length);
 
                 //set current random on the loop
-                GameObject currentPrefab = creaturePrefabs[randomPrefab];
-                Transform currentSpawnPoint = creatureSpawnPoints[randomSpawnPoint];
+                GameObject currentPrefab = Instantiate(creaturePrefabs[randomPrefab], position, Quaternion.identity);
 
-                //spawn
-                Instantiate(currentPrefab, currentSpawnPoint);
+                //raycast hit spawn pos
+                RaycastHit hitInfo;
+                Physics.Raycast(new Ray(position, Vector3.down), out hitInfo, 200f);
+                if (hitInfo.collider)
+                {
+                    currentPrefab.transform.position = hitInfo.point + new Vector3(0,ySpawnOffset, 0);
+                }
+                else
+                {
+                    Destroy(currentPrefab);
+                }
             }
         }
     }

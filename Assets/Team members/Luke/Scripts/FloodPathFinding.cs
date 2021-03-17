@@ -18,7 +18,7 @@ namespace Luke
         {
             currentEvaluatingNode = new Node();
             startingNode = new Node();
-            startingNode.gridPos = new Vector3Int(0, 0, 0);
+            startingNode.gridPos = new Vector3Int();
             InvokeRepeating("PathFlooding",0,.1f);
             
         }
@@ -31,21 +31,21 @@ namespace Luke
             {
                 for (int z = -1; z < 2; z++)
                 {
-                    //variables for startingNode x and z pos
+                    //variables for currentEvaluatingNode x and z pos (neighbouring startingNode)
                     int gridPosX = startingNode.gridPos.x + x;
                     int gridPosZ = startingNode.gridPos.z + z;
 
                     // The array cannot take negative numbers so you have to check both the x and z is greater than zero and less than the grid size
                     if (gridPosX >=0 && gridPosZ >=0 && worldScanner.gridSize.x > gridPosX && worldScanner.gridSize.z > gridPosZ)
                     {
-                        currentEvaluatingNode = worldScanner.gridNodeRef[gridPosX,gridPosZ]; 
+                        currentEvaluatingNode = worldScanner.gridNodeRef[gridPosX,gridPosZ];
                     }
                     else
                     {
                         //breaks out of the current loop
                         continue;
                     }
-
+                    
                     //To see if the startingNode is a dud
                     if (startingNode.isBlocked)
                     {
@@ -58,11 +58,11 @@ namespace Luke
                         //ignore starting nodes because they should already be closed
                         if (currentEvaluatingNode.gridPos != startingNode.gridPos)
                         {
-                            //not sure how to ignore already existing nodes because they are duplicating in the open list
-                            Open.Remove(startingNode);
+                            //not sure how to ignore previous starting nodes because they are duplicating in the open list
                             Open.Add(currentEvaluatingNode);
                         }
                     }
+                    //if they are blocked
                     else
                     {
                         Open.Remove(currentEvaluatingNode);
@@ -70,6 +70,8 @@ namespace Luke
                     }
                 }
             }
+            //Making sure to finish the check to remove startingNode and make a new one in a neighbour position
+            Open.Remove(startingNode);
             Closed.Add(startingNode);
             startingNode = Open[Random.Range(0, Open.Count)];
         }
