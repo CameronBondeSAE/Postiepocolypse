@@ -20,8 +20,13 @@ namespace Niall
 
         public override void OnStartServer()
         {
-            StartCoroutine("Spawn");
+            SpawnCoroutine();
             base.OnStartServer();
+        }
+
+        void SpawnCoroutine()
+        {
+            StartCoroutine("Spawn");
         }
 
 
