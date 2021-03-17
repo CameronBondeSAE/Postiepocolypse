@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TheFormAI
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 9, y: 6}
+    position: {x: 70, y: 40}
     list:
     - id: 0
       name: Alone
@@ -42,7 +42,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 490, y: 35}
+    position: {x: 551, y: 69}
     pre:
     - id: 0
       value: 1
@@ -57,7 +57,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 1
-    position: {x: 711, y: 38}
+    position: {x: 772, y: 72}
     pre:
     - id: 1
       value: 1
@@ -72,7 +72,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 936, y: 42}
+    position: {x: 997, y: 76}
     pre:
     - id: 1
       value: 1
@@ -89,7 +89,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1154, y: 47}
+    position: {x: 1215, y: 81}
     pre:
     - id: 4
       value: 1
@@ -102,7 +102,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 1
-    position: {x: 743, y: 284}
+    position: {x: 804, y: 318}
     pre:
     - id: 5
       value: 1
@@ -117,7 +117,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 2
-    position: {x: 969, y: 297}
+    position: {x: 1021, y: 329}
     pre:
     - id: 5
       value: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 507, y: 279}
+    position: {x: 568, y: 313}
     pre:
     - id: 8
       value: 1
@@ -139,7 +139,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1200, y: 292}
+    position: {x: 1225, y: 314}
     pre:
     - id: 6
       value: 1
@@ -152,7 +152,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 270, y: 281}
+    position: {x: 331, y: 315}
     pre:
     - id: 7
       value: 1
@@ -165,7 +165,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 8214237559972243880, guid: 8114affc24bbd6644b70d1c98dfc1228, type: 3}
     cost: 0
-    position: {x: 244, y: 27}
+    position: {x: 305, y: 61}
     pre:
     - id: 1
       value: 1
@@ -177,18 +177,18 @@ MonoBehaviour:
   goals:
   - name: DamagePlayer
     isDefault: 1
-    position: {x: 19, y: 282}
+    position: {x: 80, y: 316}
     conditions:
     - id: 9
       value: 1
   - name: RangedAttack
     isDefault: 0
-    position: {x: 18, y: 383}
+    position: {x: 79, y: 417}
     conditions:
     - id: 7
       value: 1
   worldStates:
-  - position: {x: 28, y: 489}
+  - position: {x: 74, y: 527}
     list:
     - id: 0
       value: 1
