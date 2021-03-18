@@ -152,9 +152,9 @@ namespace AlexM
 			_isSprinting = status;
 		}
 
-		public void Crouch(InputAction.CallbackContext obj)
+		public void CrouchInput(InputAction.CallbackContext obj)
 		{
-			//This needs to be improved. gabrage rn. Need sleep.
+			//This needs to be split and networked.
 			var T = transform;
 
 			if (obj.performed)

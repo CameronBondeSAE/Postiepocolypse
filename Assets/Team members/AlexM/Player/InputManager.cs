@@ -41,8 +41,8 @@ namespace AlexM
 			_controls.Movement.Flashlight.canceled  += _torchController.FlashLightInput;
 			_controls.Movement.Sprint.performed     += _pMovement.Sprint;
 			_controls.Movement.Sprint.canceled      += _pMovement.Sprint;
-			_controls.Movement.Crouch.performed     += _pMovement.Crouch;
-			_controls.Movement.Crouch.canceled      += _pMovement.Crouch;
+			_controls.Movement.Crouch.performed     += _pMovement.CrouchInput;
+			_controls.Movement.Crouch.canceled      += _pMovement.CrouchInput;
 			_controls.Movement.Use.performed += _interactRay.SendRay;
 			_controls.Movement.Use.canceled += _interactRay.SendRay;
 			

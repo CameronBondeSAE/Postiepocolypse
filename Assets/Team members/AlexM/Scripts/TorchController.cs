@@ -27,7 +27,7 @@ public class TorchController : NetworkBehaviour
     }
     void ToggleLight()
     {
-       // if (isServer)
+        //if (isServer)
         {
             if (flashlight == null)
             {

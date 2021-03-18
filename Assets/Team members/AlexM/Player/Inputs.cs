@@ -43,7 +43,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Crouch"",
+                    ""name"": ""CrouchInput"",
                     ""type"": ""Button"",
                     ""id"": ""480335ae-ddb4-49c5-b19d-8a38e00b2ac0"",
                     ""expectedControlType"": ""Button"",
@@ -160,7 +160,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Crouch"",
+                    ""action"": ""CrouchInput"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -207,7 +207,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         m_Movement_Sprint = m_Movement.FindAction("Sprint", throwIfNotFound: true);
-        m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
+        m_Movement_Crouch = m_Movement.FindAction("CrouchInput", throwIfNotFound: true);
         m_Movement_Menu = m_Movement.FindAction("Menu", throwIfNotFound: true);
         m_Movement_Flashlight = m_Movement.FindAction("Flashlight", throwIfNotFound: true);
         m_Movement_Use = m_Movement.FindAction("Use", throwIfNotFound: true);

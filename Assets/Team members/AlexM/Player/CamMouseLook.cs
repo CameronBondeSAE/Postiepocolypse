@@ -75,11 +75,10 @@ namespace AlexM
 			
 			//Rotate the main body of the player on the horizontal axis
 			playerbody.Rotate(Vector3.up * (mouseXSpeed * mouseSensitivity));
-		
-			
-			
+
+
 			//client side prediction..
-			camera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
+			//camera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
 			lookAngle = Quaternion.Euler(pitch, 0, 0);
 			CmdLookAngle(lookAngle);
 			Cursor.visible = false;
