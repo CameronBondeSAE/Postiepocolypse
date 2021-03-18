@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6271187259181377452}
   - component: {fileID: 1575384290603975747}
   - component: {fileID: 1941906584391736464}
+  - component: {fileID: 6328616193561155415}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -89,8 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd17a6b5c1f1aa4fa6634359bf01827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   mouseSensitivity: 0.25
-  flashlight: {fileID: 6732787804643739882}
   playerbody: {fileID: 6271187260368080563}
   pitch: 0
   cursorVisible: 0
@@ -201,6 +203,22 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!114 &6328616193561155415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271187259181377446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &6271187259283767324
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +544,8 @@ GameObject:
   - component: {fileID: 271114681989653612}
   - component: {fileID: 6732787804643739882}
   - component: {fileID: 4110902543837761244}
+  - component: {fileID: 123701548263798781}
+  - component: {fileID: 8617372069523753631}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -541,7 +561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7271636079834535862}
   m_LocalRotation: {x: -0, y: -0.03787253, z: -0, w: 0.9992826}
-  m_LocalPosition: {x: 0.551, y: -0.716, z: 0.409}
+  m_LocalPosition: {x: 0.475, y: -0.716, z: 0.295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6271187259181377449}
@@ -719,3 +739,34 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+--- !u!114 &123701548263798781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271636079834535862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &8617372069523753631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7271636079834535862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c873623cdce9dd544a7830511ba3534c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  flashlight: {fileID: 0}
