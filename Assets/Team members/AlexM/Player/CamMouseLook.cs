@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class CamMouseLook : MonoBehaviour
 {
 	public float mouseSensitivity = 1f;
-	public Light flashlight;
 
 	public Transform playerbody;
 	
@@ -17,13 +16,7 @@ public class CamMouseLook : MonoBehaviour
 
 	[HideInInspector]
 	public float mouseX, mouseY;
-
-
-	private void Awake()
-	{
-		flashlight.enabled = false;
-	}
-
+	
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -61,26 +54,5 @@ public class CamMouseLook : MonoBehaviour
 		// {
 		// 	Cursor.visible = true;
 		// }
-	}
-
-	public void ToggleLight(InputAction.CallbackContext obj)
-	{
-		if (obj.performed)
-		{
-			if (flashlight == null)
-			{
-				Debug.Log("Please add the players light source to Cam_MouseLook");
-				return;
-			}
-
-			if (flashlight.enabled)
-			{
-				flashlight.enabled = false;
-			}
-			else if (!flashlight.enabled)
-			{
-				flashlight.enabled = true;
-			}
-		}
 	}
 }
