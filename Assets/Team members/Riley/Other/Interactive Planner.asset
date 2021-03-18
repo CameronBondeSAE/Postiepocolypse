@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Interactive Planner
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 201, y: 218}
+    position: {x: 157, y: 276}
     list:
     - id: 0
       name: Am I here
     - id: 1
       name: Target Picked
   actions:
-  - name: Pick targett
+  - name: Pick Target
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 2126619104131154009, guid: 70d67b5d0ab824e498905035ec03edc4, type: 3}
     cost: 0
-    position: {x: 517, y: 299}
+    position: {x: 473, y: 357}
     pre:
     - id: 1
       value: 0
@@ -33,9 +33,9 @@ MonoBehaviour:
       value: 1
   - name: Move
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 857565436825519571, guid: d6adc7555d2042b4cbe7a04ab0afc077, type: 3}
     cost: 0
-    position: {x: 770, y: 292}
+    position: {x: 726, y: 350}
     pre:
     - id: 1
       value: 1
@@ -44,20 +44,20 @@ MonoBehaviour:
       value: 1
   - name: Inactive
     isDefault: 1
-    state: {fileID: 0}
+    state: {fileID: 2295964584969949828, guid: 2ae8ce32cee75ff499fa1f4a27d103ed, type: 3}
     cost: 0
-    position: {x: 1016, y: 289}
+    position: {x: 972, y: 347}
     pre: []
     post: []
   goals:
   - name: At Target
     isDefault: 1
-    position: {x: 203, y: 348}
+    position: {x: 160, y: 395}
     conditions:
     - id: 0
       value: 1
   worldStates:
-  - position: {x: 208, y: 497}
+  - position: {x: 164, y: 555}
     list:
     - id: 0
       value: 0
