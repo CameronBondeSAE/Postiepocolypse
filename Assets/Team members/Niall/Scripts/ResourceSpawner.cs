@@ -20,8 +20,9 @@ namespace Niall
 
         public override void OnStartServer()
         {
-            SpawnCoroutine();
             base.OnStartServer();
+            SpawnCoroutine();
+            
         }
 
         void SpawnCoroutine()
@@ -29,12 +30,7 @@ namespace Niall
             StartCoroutine("Spawn");
         }
 
-
-        void Update()
-        {
-            RanX = Random.Range(minRange, maxRange);
-            RanZ = Random.Range(minRange, maxRange);
-        }
+        
 
         IEnumerator Spawn()
         {
@@ -42,15 +38,19 @@ namespace Niall
             {
                 for (int i = 0; i < resources; i++)
                 {
-                    Instantiate(resource, transform.position + new Vector3(RanX, 1, RanZ), Quaternion.identity);
-                    yield return new WaitForSeconds(0);
+                    RanX = Random.Range(minRange, maxRange);
+                    RanZ = Random.Range(minRange, maxRange);
+                    
+                   GameObject newGO = Instantiate(resource, transform.position + new Vector3(RanX, Random.Range(5,25), RanZ), Quaternion.identity);
+                   NetworkServer.Spawn(newGO);
+                   yield return new WaitForSeconds(0);
                 }
             }
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireCube(transform.position, new Vector3(maxRange, 1, maxRange));
+            Gizmos.DrawWireCube(transform.position, new Vector3(maxRange*2, 1, maxRange*2));
         }
     }
 }
