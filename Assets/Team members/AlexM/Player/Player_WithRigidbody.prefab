@@ -365,7 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  mouseSensitivity: 0.25
+  mouseSensitivity: 0.125
   camera: {fileID: 6271187259181377452}
   playerbody: {fileID: 6271187260368080563}
   pitch: 0

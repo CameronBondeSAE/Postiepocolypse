@@ -57,7 +57,7 @@ namespace AlexM
 		[ClientRpc]
 		void RpcLookAngle(Quaternion angle)
 		{
-			//DO THE THING HERE?
+			//Head's up/down movement
 			camera.transform.localRotation = angle;
 		}
 		
@@ -74,8 +74,10 @@ namespace AlexM
 			//Rotate the main body of the player on the horizontal axis
 			playerbody.Rotate(Vector3.up * (mouseXSpeed * mouseSensitivity));
 		
-			//Head's up/down movement
-			//camera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
+			
+			
+			//client side prediction..
+			camera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
 			lookAngle = Quaternion.Euler(pitch, 0, 0);
 			CmdLookAngle(lookAngle);
 			Cursor.visible = false;
