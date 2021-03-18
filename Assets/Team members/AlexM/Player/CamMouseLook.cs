@@ -23,9 +23,9 @@ namespace AlexM
 		private Quaternion lookAngle;
 		// Start is called before the first frame update
 
-		public override void OnStartServer()
+		public override void OnStartLocalPlayer()
 		{
-			base.OnStartServer();
+			base.OnStartLocalPlayer();
 			camera.enabled = isLocalPlayer;
 		}
 
