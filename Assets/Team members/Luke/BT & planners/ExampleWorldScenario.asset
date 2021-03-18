@@ -13,94 +13,197 @@ MonoBehaviour:
   m_Name: ExampleWorldScenario
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 72, y: 108}
+    position: {x: 55, y: 24}
     list:
     - id: 0
-      name: canConvert
+      name: gotResource
     - id: 1
-      name: playerIsNear
+      name: playerFound
     - id: 2
       name: needRecharge
     - id: 3
-      name: foundConvertTarget
+      name: foundResource
+    - id: 4
+      name: deliveredResource
+    - id: 5
+      name: atAttackRange
+    - id: 6
+      name: atResourcePos
+    - id: 7
+      name: foundRecharge
+    - id: 8
+      name: atRechargePos
   actions:
-  - name: AvoidPlayer
+  - name: Attack
     isDefault: 0
     state: {fileID: 6911060642076552306, guid: 6a3e6f29c8d11f747ac28d2ba3a27523, type: 3}
     cost: 0
-    position: {x: 359, y: 102}
+    position: {x: 325, y: 497}
     pre:
-    - id: 1
+    - id: 5
       value: 1
-    - id: 0
-      value: 0
     post:
     - id: 1
       value: 0
-    - id: 0
-      value: 1
-  - name: FindSubscriber
+  - name: Gathering
     isDefault: 0
     state: {fileID: 1225086207060466103, guid: 24ddd92000120ed41b6ebe53b3caebbf, type: 3}
     cost: 0
-    position: {x: 558, y: 103}
+    position: {x: 646, y: 467}
     pre:
     - id: 3
       value: 1
+    - id: 1
+      value: 0
+    - id: 2
+      value: 0
+    - id: 0
+      value: 0
     post:
+    - id: 0
+      value: 1
     - id: 3
       value: 0
   - name: Recharge
     isDefault: 0
     state: {fileID: 3739488329902857689, guid: 3e7499a545db9c44ba0b8a377e983f29, type: 3}
     cost: 0
-    position: {x: 763, y: 105}
+    position: {x: 1182, y: 471}
     pre:
     - id: 2
       value: 1
-    - id: 0
-      value: 0
+    - id: 8
+      value: 1
     post:
     - id: 2
       value: 0
-    - id: 0
-      value: 1
+    - id: 7
+      value: 0
   - name: Wander
     isDefault: 1
     state: {fileID: 445444917551864119, guid: 8f1296043b658db438b4d888637eeaa0, type: 3}
     cost: 0
-    position: {x: 967, y: 104}
-    pre:
-    - id: 1
-      value: 0
-    - id: 0
-      value: 0
-    - id: 2
-      value: 0
-    - id: 3
-      value: 0
+    position: {x: 53, y: 261}
+    pre: []
     post: []
-  goals:
-  - name: Convert
-    isDefault: 1
-    position: {x: 76, y: 397}
-    conditions:
+  - name: Deliver
+    isDefault: 0
+    state: {fileID: 915626821525863779, guid: 2e5eed031f13c854b915bb68f58b3e3e, type: 3}
+    cost: 0
+    position: {x: 844, y: 467}
+    pre:
     - id: 0
       value: 1
-    - id: 1
+    post:
+    - id: 0
+      value: 0
+    - id: 4
+      value: 1
+  - name: MoveToResource
+    isDefault: 0
+    state: {fileID: 8191465399672988679, guid: 6fa50c8f26d06c549a617366189e1008, type: 3}
+    cost: 0
+    position: {x: 745, y: 258}
+    pre:
+    - id: 6
+      value: 0
+    - id: 3
+      value: 1
+    post:
+    - id: 6
+      value: 1
+  - name: FindResource
+    isDefault: 0
+    state: {fileID: 4989078220545727644, guid: ec0597ae9f0cdbb45b294abd8029af94, type: 3}
+    cost: 0
+    position: {x: 746, y: 24}
+    pre:
+    - id: 3
+      value: 0
+    - id: 5
       value: 0
     - id: 2
       value: 0
+    post:
     - id: 3
+      value: 1
+  - name: FindRechargePos
+    isDefault: 0
+    state: {fileID: 644825408655154044, guid: 07712307c7e53fd41b5a29d55e368407, type: 3}
+    cost: 0
+    position: {x: 1180, y: 40}
+    pre:
+    - id: 2
+      value: 1
+    - id: 7
+      value: 0
+    post:
+    - id: 7
+      value: 1
+  - name: PlayerFound
+    isDefault: 0
+    state: {fileID: 4309787799354415424, guid: f27503ebff3c6ff4388654bbb882a938, type: 3}
+    cost: 0
+    position: {x: 325, y: 57}
+    pre:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
+    post:
+    - id: 1
+      value: 1
+  - name: MoveToRechargePos
+    isDefault: 0
+    state: {fileID: 924223750451694883, guid: f17e77130de78a44aa99b4b1d40836c4, type: 3}
+    cost: 0
+    position: {x: 1181, y: 255}
+    pre:
+    - id: 2
+      value: 1
+    - id: 8
+      value: 0
+    post:
+    - id: 8
+      value: 1
+  - name: MoveToPlayer
+    isDefault: 0
+    state: {fileID: 1740180386266013857, guid: db871798dbee8604c8e9a8b654d5e385, type: 3}
+    cost: 0
+    position: {x: 325, y: 270}
+    pre:
+    - id: 5
+      value: 0
+    - id: 1
+      value: 1
+    post:
+    - id: 5
+      value: 1
+  goals:
+  - name: ResourceDelivered
+    isDefault: 1
+    position: {x: 5, y: 686}
+    conditions:
+    - id: 4
       value: 1
   worldStates:
-  - position: {x: 76, y: 571}
+  - position: {x: 4, y: 803}
     list:
     - id: 0
-      value: 1
+      value: 0
     - id: 1
-      value: 1
+      value: 0
     - id: 2
-      value: 1
+      value: 0
     - id: 3
+      value: 0
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0
+    - id: 7
+      value: 0
+    - id: 8
       value: 0

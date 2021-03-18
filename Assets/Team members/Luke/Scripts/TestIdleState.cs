@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Luke
 {
-    public class Convert : AntAIState
+    public class TestIdleState : AntAIState
     {
         
     }
