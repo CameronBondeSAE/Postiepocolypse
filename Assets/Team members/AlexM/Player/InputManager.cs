@@ -30,8 +30,8 @@ namespace AlexM
 			_controls.Movement.Move.canceled        += _pMovement.MovementInput;
 			_controls.Movement.Jump.performed       += _pMovement.JumpInput;
 			_controls.Movement.Jump.canceled        += _pMovement.JumpInput;
-			_controls.Movement.Flashlight.performed += _camScript.ToggleLight;
-			_controls.Movement.Flashlight.canceled  += _camScript.ToggleLight;
+			// _controls.Movement.Flashlight.performed += _camScript.ToggleLight;
+			// _controls.Movement.Flashlight.canceled  += _camScript.ToggleLight;
 			_controls.Movement.Sprint.performed     += _pMovement.Sprint;
 			_controls.Movement.Sprint.canceled      += _pMovement.Sprint;
 			_controls.Movement.Crouch.performed     += _pMovement.Crouch;
