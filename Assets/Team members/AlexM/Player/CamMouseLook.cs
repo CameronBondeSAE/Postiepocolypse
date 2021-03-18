@@ -43,14 +43,14 @@ public class CamMouseLook : MonoBehaviour
 		float mouseYSpeed   = mouseDelta.y;
 		//mouseX = Mathf.Clamp(mouseX, -3, 3);
 		//mouseY = Mathf.Clamp(mouseY, -1, 1);
-		
-		pitch -= mouseYSpeed;
-		pitch =  Mathf.Clamp(pitch, -90f, 90f);
+
+		pitch -= mouseYSpeed * mouseSensitivity;
+		pitch = Mathf.Clamp(pitch, -89f, 89f);
 		//GameManagerDependance- Needs to be removed to be used universally
 		//if (!_gameManager.isPaused)
 		{
 			//Rotate the main body of the player on the horizontal axis
-			playerbody.Rotate(Vector3.up * mouseXSpeed);
+			playerbody.Rotate(Vector3.up * (mouseXSpeed * mouseSensitivity));
 			
 			//Head's up/down movement
 			transform.localRotation = Quaternion.Euler(pitch, 0, 0);
