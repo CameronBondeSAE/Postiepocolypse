@@ -5,8 +5,4 @@ using UnityEngine;
 
 public class EntityIdleDamien : AntAIState
 {
-    public override void Enter()
-    {
-        base.Enter();
-    }
 }

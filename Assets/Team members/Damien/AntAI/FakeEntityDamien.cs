@@ -6,6 +6,8 @@ using UnityEngine;
 public class FakeEntityDamien : MonoBehaviour
 {
     public AntAIAgent AntAIAgent;
+
+    public FakeTarget target;
     // Start is called before the first frame update
     void Start()
     {
