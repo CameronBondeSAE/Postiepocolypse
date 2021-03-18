@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Luke
 {
-    public class Recharge : AntAIState
+    public class MoveToPlayerState : AntAIState
     {
         
     }
-} 
+}

@@ -2,10 +2,12 @@
 {
     public enum ExampleWorldScenario
     {
-        canConvert = 0,
+        gotResource = 0,
         playerIsNear = 1,
         needRecharge = 2,
-        foundConvertTarget = 3
+        foundResource = 3,
+        deliveredResource = 4
     }
+    
 }
 

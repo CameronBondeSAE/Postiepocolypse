@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Luke
 {
-    public class Wander : AntAIState
+    public class FindRechargePosState : AntAIState
     {
         
     }
