@@ -8,14 +8,18 @@ namespace AlexM
 {
 	public class InputManager : PlayerBase
 	{
-		private Inputs         _controls;
-		private PlayerMovement _pMovement;
-		private CamMouseLook   _camScript;
-		private InteractRay _interactRay;
+	#region Variables
+
+		private Inputs          _controls;
+		private PlayerMovement  _pMovement;
+		private CamMouseLook    _camScript;
+		private InteractRay     _interactRay;
 		private TorchController _torchController;
 
 		[HideInInspector]
 		public Vector2 moveDirection;
+
+	#endregion
 
 		private void GetReferences()
 		{

@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using System;
+using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ namespace AlexM
 	public class CamMouseLook : NetworkBehaviour
 	{
 		public float mouseSensitivity = 1f;
-
+		public Camera camera;
 		public Transform playerbody;
 	
 		//public float mouseSensitivity;
@@ -18,7 +19,16 @@ namespace AlexM
 		public float mouseX, mouseY;
 
 		private Vector2 mouseDelta;
+
+		private Quaternion lookAngle;
 		// Start is called before the first frame update
+
+		public override void OnStartServer()
+		{
+			base.OnStartServer();
+			camera.enabled = isLocalPlayer;
+		}
+
 		void Start()
 		{
 			Cursor.lockState = CursorLockMode.Locked;
@@ -27,37 +37,48 @@ namespace AlexM
 
 		void FixedUpdate()
 		{
-			OldMouseMovement();
+			if (isLocalPlayer)
+			{
+				OldMouseMovement();
+			}
 		}
+
+		void MouseInput()
+		{
+			mouseDelta = Mouse.current.delta.ReadValue();
+		}
+
+		[Command]
+		void CmdLookAngle(Quaternion angle)
+		{
+			RpcLookAngle(angle);
+		}
+		
+		[ClientRpc]
+		void RpcLookAngle(Quaternion angle)
+		{
+			//DO THE THING HERE?
+			camera.transform.localRotation = angle;
+		}
+		
 		void OldMouseMovement()
 		{
-			//if (isLocalPlayer)
-			{
-				//Using the new Input System..
-				mouseDelta = Mouse.current.delta.ReadValue();
-			}
+			MouseInput();
+		
 			float mouseXSpeed = mouseDelta.x;
 			float mouseYSpeed = mouseDelta.y;
-			//mouseX = Mathf.Clamp(mouseX, -3, 3);
-			//mouseY = Mathf.Clamp(mouseY, -1, 1);
 
 			pitch -= mouseYSpeed * mouseSensitivity;
 			pitch =  Mathf.Clamp(pitch, -89f, 89f);
-			//GameManagerDependance- Needs to be removed to be used universally
-			//if (!_gameManager.isPaused)
-			{
-				//Rotate the main body of the player on the horizontal axis
-				playerbody.Rotate(Vector3.up * (mouseXSpeed * mouseSensitivity));
 			
-				//Head's up/down movement
-				transform.localRotation = Quaternion.Euler(pitch, 0, 0);
-
-				Cursor.visible = false;
-			}
-			// else
-			// {
-			// 	Cursor.visible = true;
-			// }
+			//Rotate the main body of the player on the horizontal axis
+			playerbody.Rotate(Vector3.up * (mouseXSpeed * mouseSensitivity));
+		
+			//Head's up/down movement
+			//camera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
+			lookAngle = Quaternion.Euler(pitch, 0, 0);
+			CmdLookAngle(lookAngle);
+			Cursor.visible = false;
 		}
 	}
 }
