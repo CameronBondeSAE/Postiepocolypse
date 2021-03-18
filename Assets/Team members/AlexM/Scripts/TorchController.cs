@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
@@ -9,16 +10,33 @@ public class TorchController : NetworkBehaviour
     public Light flashlight;
 
 
-    public void ToggleLight()
+    public void Awake()
     {
-        if (isServer)
+        flashlight = GetComponent<Light>();
+    }
+
+    public void FlashLightInput(InputAction.CallbackContext obj)
+    {
+        //if (isLocalPlayer)
+        {
+            if (obj.performed)
+            {
+                ToggleLight();
+            }
+        }
+    }
+    void ToggleLight()
+    {
+       // if (isServer)
         {
             if (flashlight == null)
             {
                 Debug.Log("Please add the players light source to Cam_MouseLook");
                 return;
             }
-
+            
+            Debug.Log("Flashlight button pressed");
+            
             if (flashlight.enabled)
             {
                 flashlight.enabled = false;
@@ -26,17 +44,6 @@ public class TorchController : NetworkBehaviour
             else if (!flashlight.enabled)
             {
                 flashlight.enabled = true;
-            }
-        }
-    }
-
-    public void FlashLightInput(InputAction.CallbackContext obj)
-    {
-        if (isLocalPlayer)
-        {
-            if (obj.performed)
-            {
-                ToggleLight();
             }
         }
     }

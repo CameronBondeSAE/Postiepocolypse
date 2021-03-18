@@ -16,7 +16,8 @@ public class CamMouseLook : MonoBehaviour
 
 	[HideInInspector]
 	public float mouseX, mouseY;
-	
+
+	private Vector2 mouseDelta;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -31,7 +32,7 @@ public class CamMouseLook : MonoBehaviour
 	void OldMouseMovement()
 	{
 		//Using the new Input System..
-		var   mouseDelta = Mouse.current.delta.ReadValue();
+		mouseDelta = Mouse.current.delta.ReadValue();
 		float mouseXSpeed   = mouseDelta.x;
 		float mouseYSpeed   = mouseDelta.y;
 		//mouseX = Mathf.Clamp(mouseX, -3, 3);

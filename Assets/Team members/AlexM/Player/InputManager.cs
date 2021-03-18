@@ -11,6 +11,7 @@ namespace AlexM
 		private PlayerMovement _pMovement;
 		private CamMouseLook   _camScript;
 		private InteractRay _interactRay;
+		private TorchController _torchController;
 
 		[HideInInspector]
 		public Vector2 moveDirection;
@@ -20,6 +21,7 @@ namespace AlexM
 			_pMovement = GetComponent<PlayerMovement>();
 			_camScript = GetComponentInChildren<CamMouseLook>();
 			_interactRay = GetComponent<InteractRay>();
+			_torchController = _camScript.GetComponentInChildren<TorchController>();
 		}
 
 		private void ControlSetup()
@@ -30,8 +32,8 @@ namespace AlexM
 			_controls.Movement.Move.canceled        += _pMovement.MovementInput;
 			_controls.Movement.Jump.performed       += _pMovement.JumpInput;
 			_controls.Movement.Jump.canceled        += _pMovement.JumpInput;
-			// _controls.Movement.Flashlight.performed += _camScript.ToggleLight;
-			// _controls.Movement.Flashlight.canceled  += _camScript.ToggleLight;
+			_controls.Movement.Flashlight.performed += _torchController.FlashLightInput;
+			 _controls.Movement.Flashlight.canceled  += _torchController.FlashLightInput;
 			_controls.Movement.Sprint.performed     += _pMovement.Sprint;
 			_controls.Movement.Sprint.canceled      += _pMovement.Sprint;
 			_controls.Movement.Crouch.performed     += _pMovement.Crouch;
