@@ -6,12 +6,13 @@ using UnityEngine.InputSystem;
 
 public class CamMouseLook : MonoBehaviour
 {
+	public float mouseSensitivity = 1f;
 	public Light flashlight;
 
 	public Transform playerbody;
-
+	
 	//public float mouseSensitivity;
-	public float xRotation;
+	public float pitch;
 	public bool  cursorVisible;
 
 	[HideInInspector]
@@ -30,30 +31,29 @@ public class CamMouseLook : MonoBehaviour
 		Cursor.visible = false;
 	}
 
-	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		OldMouseMovement();
 	}
 	void OldMouseMovement()
 	{
 		//Using the new Input System..
-		var   mousePos = Mouse.current.delta.ReadValue();
-		float mouseX   = mousePos.x;
-		float mouseY   = mousePos.y;
-		mouseX = Mathf.Clamp(mouseX, -3, 3);
-		mouseY = Mathf.Clamp(mouseY, -1, 1);
+		var   mouseDelta = Mouse.current.delta.ReadValue();
+		float mouseXSpeed   = mouseDelta.x;
+		float mouseYSpeed   = mouseDelta.y;
+		//mouseX = Mathf.Clamp(mouseX, -3, 3);
+		//mouseY = Mathf.Clamp(mouseY, -1, 1);
 		
-		xRotation -= mouseY;
-		xRotation =  Mathf.Clamp(xRotation, -90f, 90f);
+		pitch -= mouseYSpeed;
+		pitch =  Mathf.Clamp(pitch, -90f, 90f);
 		//GameManagerDependance- Needs to be removed to be used universally
 		//if (!_gameManager.isPaused)
 		{
 			//Rotate the main body of the player on the horizontal axis
-			playerbody.Rotate(Vector3.up * mouseX);
+			playerbody.Rotate(Vector3.up * mouseXSpeed);
 			
 			//Head's up/down movement
-			transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+			transform.localRotation = Quaternion.Euler(pitch, 0, 0);
 
 			Cursor.visible = false;
 		}
