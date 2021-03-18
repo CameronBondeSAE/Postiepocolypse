@@ -29,7 +29,7 @@ namespace CameronBonde
 			FakeTarget[] fakeTargets = FindObjectsOfType<FakeTarget>();
 
 			// Pick a random target
-			FakeTarget fakeTarget = fakeTargets[Random.Range(0, fakeTargets.Length - 1)];
+			FakeTarget fakeTarget = fakeTargets[Random.Range(0, fakeTargets.Length)];
 
 			if (fakeTarget != null)
 			{
