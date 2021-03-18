@@ -26,7 +26,7 @@ namespace AlexM
 		public override void OnStartLocalPlayer()
 		{
 			base.OnStartLocalPlayer();
-			camera.enabled = isLocalPlayer;
+			//camera.enabled = isLocalPlayer;
 		}
 
 		void Start()
@@ -37,6 +37,8 @@ namespace AlexM
 
 		void FixedUpdate()
 		{
+			camera.enabled = isLocalPlayer;
+			
 			if (isLocalPlayer)
 			{
 				OldMouseMovement();
