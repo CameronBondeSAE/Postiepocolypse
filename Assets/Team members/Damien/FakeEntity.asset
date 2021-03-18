@@ -13,26 +13,36 @@ MonoBehaviour:
   m_Name: FakeEntity
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 37, y: 220}
+    position: {x: 241, y: 376}
     list:
     - id: 0
-      name: Near Target
+      name: Close to Target
     - id: 1
-      name: Has Target
+      name: Target Chosen
     - id: 2
       name: Target Disoriented
     - id: 3
-      name: Has Energy
+      name: Energy location found
+    - id: 4
+      name: Arrived at energy
+    - id: 5
+      name: Energy is full
+    - id: 6
+      name: Target in Range
+    - id: 7
+      name: Patrolling
   actions:
   - name: Pick Target
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 241, y: 217}
+    position: {x: 721, y: 576}
     pre:
     - id: 1
       value: 0
-    - id: 3
+    - id: 6
+      value: 1
+    - id: 5
       value: 1
     post:
     - id: 1
@@ -41,22 +51,22 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 447, y: 217}
+    position: {x: 921, y: 576}
     pre:
     - id: 1
       value: 1
-    - id: 3
+    - id: 6
       value: 1
     post:
     - id: 0
       value: 1
   - name: Find Energy
-    isDefault: 1
+    isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 38, y: 29}
+    position: {x: 721, y: 396}
     pre:
-    - id: 3
+    - id: 5
       value: 0
     post:
     - id: 3
@@ -65,30 +75,96 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 866, y: 216}
+    position: {x: 1321, y: 576}
     pre:
     - id: 0
+      value: 1
+    - id: 1
+      value: 1
+    - id: 6
       value: 1
     post:
     - id: 2
       value: 1
+  - name: Move to Energy
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 921, y: 396}
+    pre:
+    - id: 3
+      value: 1
+    post:
+    - id: 4
+      value: 1
+  - name: Collect Energy
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1321, y: 396}
+    pre:
+    - id: 4
+      value: 1
+    post:
+    - id: 5
+      value: 1
+  - name: Patrol
+    isDefault: 1
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 721, y: 196}
+    pre:
+    - id: 5
+      value: 1
+    - id: 6
+      value: 0
+    post:
+    - id: 7
+      value: 1
+  - name: Stop Patrolling
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1121, y: 196}
+    pre:
+    - id: 7
+      value: 1
+    post:
+    - id: 6
+      value: 1
   goals:
   - name: Disorient Target
     isDefault: 1
-    position: {x: 1065, y: 217}
+    position: {x: 1521, y: 576}
     conditions:
     - id: 2
       value: 1
   - name: Arrive at target
     isDefault: 0
-    position: {x: 653, y: 217}
+    position: {x: 1121, y: 576}
     conditions:
     - id: 0
       value: 1
-    - id: 3
+  - name: Arrive at Energy
+    isDefault: 0
+    position: {x: 1121, y: 396}
+    conditions:
+    - id: 4
+      value: 1
+  - name: Fill Energy
+    isDefault: 0
+    position: {x: 1521, y: 396}
+    conditions:
+    - id: 5
+      value: 1
+  - name: Patrol
+    isDefault: 0
+    position: {x: 921, y: 196}
+    conditions:
+    - id: 7
       value: 1
   worldStates:
-  - position: {x: 38, y: 415}
+  - position: {x: 219, y: 894}
     list:
     - id: 0
       value: 0
@@ -97,4 +173,12 @@ MonoBehaviour:
     - id: 2
       value: 0
     - id: 3
+      value: 0
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0
+    - id: 7
       value: 0
