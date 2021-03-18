@@ -9,9 +9,11 @@ namespace Luke
     {
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
+            Debug.Log("Collecting conditions");
+            
             aWorldState.BeginUpdate(aAgent.planner);
-            aWorldState.Set("At Position", false);
-            aWorldState.Set("Has target", aAgent.GetComponent<TestAIModel>().target != null);
+            aWorldState.Set("AtPosition", false);
+            aWorldState.Set("HasTarget", aAgent.GetComponent<TestAIModel>().target != null);
             aWorldState.EndUpdate();
         }
     }

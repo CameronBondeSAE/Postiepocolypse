@@ -62,6 +62,6 @@ MonoBehaviour:
   - position: {x: 308, y: 660}
     list:
     - id: 0
-      value: 1
+      value: 0
     - id: 1
       value: 0

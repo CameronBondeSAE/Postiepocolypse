@@ -9,7 +9,7 @@ namespace Luke
     public class TestMoveToPosState : AntAIState
     {
         public GameObject owner;
-        NavMeshAgent      navMeshAgent;
+        NavMeshAgent navMeshAgent;
 
         public override void Create(GameObject aGameObject)
         {
@@ -23,7 +23,7 @@ namespace Luke
         {
             base.Enter();
 
-            Debug.Log("ENTER MOVE STATE");
+            Debug.Log("In Move State");
 
             navMeshAgent.SetDestination(owner.GetComponent<TestAIModel>().target.transform.position);
         }
@@ -36,8 +36,9 @@ namespace Luke
             if (navMeshAgent.remainingDistance < 1f)
             {
                 owner.GetComponent<TestAIModel>().target = null;
-                Finish();
             }
+            
+            Finish();
         }
     }
 }

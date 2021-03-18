@@ -19,7 +19,7 @@ namespace Luke
         {
             base.Enter();
             
-            Debug.Log("Pick Target");
+            Debug.Log("Picking state");
 
             Target[] targets = FindObjectsOfType<Target>();
 
