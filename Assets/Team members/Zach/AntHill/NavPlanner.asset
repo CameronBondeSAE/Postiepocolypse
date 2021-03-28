@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NavPlanner
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 55, y: 66}
+    position: {x: 88, y: 75}
     list:
     - id: 0
       name: Has Target
