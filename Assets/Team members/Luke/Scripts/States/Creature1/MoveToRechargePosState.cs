@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Luke
 {
-    public class MoveToRechargePos : AntAIState
+    public class MoveToRechargePosState : AntAIState
     {
         
     }
