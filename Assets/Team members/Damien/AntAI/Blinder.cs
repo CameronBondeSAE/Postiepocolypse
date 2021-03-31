@@ -4,20 +4,17 @@ using Anthill.AI;
 using Damien;
 using UnityEngine;
 
-public class Blinder : MonoBehaviour
+namespace Damien
 {
-    public AntAIAgent AntAIAgent;
-
-    public PickTarget target;
-    // Start is called before the first frame update
-    void Start()
+    public class Blinder : MonoBehaviour
     {
-        AntAIAgent.SetGoal("Arrive at Target");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        public AntAIAgent antAIAgent;
+        public Target target;
+        
+        // Start is called before the first frame update
+        void Start()
+        {
+            antAIAgent.SetGoal("Arrive at target");
+        }
     }
 }

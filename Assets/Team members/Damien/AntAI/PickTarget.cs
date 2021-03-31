@@ -5,16 +5,16 @@ namespace Damien
 {
     public class PickTarget : AntAIState
     {
-        public GameObject entity;
+        public GameObject blinder;
 
         public override void Enter()
         {
             base.Enter();
 
-            FakeTarget[] fakeTargets = FindObjectsOfType<FakeTarget>();
-            FakeTarget fakeTarget = fakeTargets[Random.Range(0, fakeTargets.Length - 1)];
+            Target[] targets = FindObjectsOfType<Target>();
+            Target target = targets[Random.Range(0, targets.Length - 1)];
 
-            if (fakeTarget == null)
+            if (target == null)
             {
 
             }
