@@ -2101,6 +2101,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273991838}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!165 &1358366747 stripped
+AudioHighPassFilter:
+  m_CorrespondingSourceObject: {fileID: 1930951723861161663, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
+  m_PrefabInstance: {fileID: 962231593469029986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1394010302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,6 +2758,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1934062508810756093, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
+      propertyPath: laughing
+      value: 
+      objectReference: {fileID: 1358366747}
     - target: {fileID: 7058318617128531734, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_Name
       value: Blinder
@@ -2763,15 +2772,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7058318617128531946, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.33
+      value: 33.56
       objectReference: {fileID: 0}
     - target: {fileID: 7058318617128531946, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.95
+      value: 11.72
       objectReference: {fileID: 0}
     - target: {fileID: 7058318617128531946, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.37
+      value: -24.68
       objectReference: {fileID: 0}
     - target: {fileID: 7058318617128531946, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_LocalRotation.w

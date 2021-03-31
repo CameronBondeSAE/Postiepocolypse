@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BlinderSound : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public AudioHighPassFilter laughing;
+    
+    public 
     // Update is called once per frame
     void Update()
     {
-        
+        laughing.cutoffFrequency = Mathf.PerlinNoise(Time.time / 2f, 0) * 1000f + 5000;
     }
 }

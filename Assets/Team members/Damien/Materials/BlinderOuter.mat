@@ -23,6 +23,7 @@ Material:
   - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
+  - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -117,7 +118,7 @@ Material:
     m_Floats:
     - Vector1_D7A911C4: 1
     - _AORemapMax: 1
-    - _AORemapMin: 0
+    - _AORemapMin: 0.9450391
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
@@ -185,7 +186,7 @@ Material:
     - _MaterialID: 1
     - _Metallic: 1
     - _NormalMapSpace: 0
-    - _NormalScale: 0.4
+    - _NormalScale: 4.03
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -195,8 +196,8 @@ Material:
     - _RefractionModel: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 0.5
-    - _SmoothnessRemapMax: 1
-    - _SmoothnessRemapMin: 0.82450116
+    - _SmoothnessRemapMax: 0.7320661
+    - _SmoothnessRemapMin: 0.65274876
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 1
@@ -218,7 +219,7 @@ Material:
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
     - _TransmissionEnable: 1
-    - _TransparentBackfaceEnable: 1
+    - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
