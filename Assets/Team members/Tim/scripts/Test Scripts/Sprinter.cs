@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Anthill.AI;
 
 namespace TimPearson
 {
@@ -9,15 +10,20 @@ namespace TimPearson
 {
     public float Speed;
     private bool isBoosting = false;
-    
+    public Rigidbody rb;
     public float Boost;
-    [Range(0f,10f)]
-    public float energy;
+    
+    public Energy amount;
     public float decreaseSpeed;
+
+    public Target target;
+   public AntAIAgent antAIAgent;
     // Start is called before the first frame update
     void Start()
     {
-        
+        amount = GetComponent<Energy>();
+        rb = gameObject.GetComponent<Rigidbody>();
+        antAIAgent.SetGoal("At Position");
     }
 
     // Update is called once per frame
@@ -25,14 +31,15 @@ namespace TimPearson
     {
         Vector2 mi = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Speed = (mi.normalized * Boost).magnitude;
+        rb.AddRelativeForce(Speed,0,0);
 
-        if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && energy > 0)
+        if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && amount.Amount > 0)
         {
             
             isBoosting = true;
 
             // if needed avoid negative value
-            energy = Mathf.Max(0, energy);
+            amount.Amount = Mathf.Max(0, amount.Amount);
 
             // double the move distance
             Boost *= 10f;
@@ -46,12 +53,12 @@ namespace TimPearson
         if(isBoosting == true)
         {
             // Reduce energy by decreaseSpeed per second
-            energy -= decreaseSpeed * Time.deltaTime;
+            amount.Amount -= decreaseSpeed * Time.deltaTime;
         }
 
         if (isBoosting == false)
         {
-            energy += decreaseSpeed * Time.deltaTime;
+            amount.Amount += decreaseSpeed * Time.deltaTime;
         }
     }
    

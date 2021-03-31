@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: Sprinter
+  m_EditorClassIdentifier: 
+  conditions:
+    position: {x: 81, y: 83}
+    list:
+    - id: 0
+      name: Has Target
+    - id: 1
+      name: At Target
+  actions:
+  - name: Choose Random Target
+    isDefault: 0
+    state: {fileID: 3748094166389526379, guid: 7d32154e7d0f93d45971dcbe534c469c, type: 3}
+    cost: 1
+    position: {x: 422, y: 51}
+    pre:
+    - id: 0
+      value: 0
+    post:
+    - id: 0
+      value: 1
+  - name: Move to Target
+    isDefault: 0
+    state: {fileID: 2063101611716845348, guid: 5d5721cbd793bb6409f9eece654de437, type: 3}
+    cost: 1
+    position: {x: 683, y: 44}
+    pre:
+    - id: 0
+      value: 1
+    post:
+    - id: 1
+      value: 1
+  - name: Idle
+    isDefault: 1
+    state: {fileID: 7660674129930753216, guid: 260f821c93555c94bac133ac103472f2, type: 3}
+    cost: 0
+    position: {x: 921, y: 39}
+    pre: []
+    post: []
+  goals:
+  - name: At Position
+    isDefault: 1
+    position: {x: 29, y: 225}
+    conditions:
+    - id: 1
+      value: 1
+  worldStates:
+  - position: {x: 58, y: 397}
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
