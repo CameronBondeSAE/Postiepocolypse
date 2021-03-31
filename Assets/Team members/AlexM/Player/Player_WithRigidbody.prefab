@@ -251,6 +251,8 @@ GameObject:
   - component: {fileID: 6868612393043126525}
   - component: {fileID: 7281854152797712298}
   - component: {fileID: 1692211948241447940}
+  - component: {fileID: 8299417107634708922}
+  - component: {fileID: 4012591622684060849}
   m_Layer: 0
   m_Name: Player_WithRigidbody
   m_TagString: Untagged
@@ -440,6 +442,36 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &8299417107634708922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271187260368080590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa9c6b89cc10c244b8456d698dae7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  maxHealth: 100
+  currentHealth: 0
+  invincible: 0
+--- !u!114 &4012591622684060849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271187260368080590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468f955eae133164fafd23edbeca5183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amount: 100
+  Regen: 5
 --- !u!1 &6271187260610386039
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,12 +11,15 @@ namespace Niall
     {
         public int resources = 5;
         public GameObject resource;
+
+        public Transform[] resourceSpawnpoint;
         private float RanX;
         private float RanZ;
         private float spawnTime = 1;
         private float spawnDelay= 1;
-        public float minRange = -25;
-        public float maxRange = 25;
+        public float rangeRad = 25;
+
+        private bool spawning;
 
         public override void OnStartServer()
         {
@@ -36,21 +39,25 @@ namespace Niall
         {
             if (isServer)
             {
-                for (int i = 0; i < resources; i++)
+                while (spawning)
                 {
-                    RanX = Random.Range(minRange, maxRange);
-                    RanZ = Random.Range(minRange, maxRange);
-                    
-                   GameObject newGO = Instantiate(resource, transform.position + new Vector3(RanX, Random.Range(5,25), RanZ), Quaternion.identity);
-                   NetworkServer.Spawn(newGO);
-                   yield return new WaitForSeconds(0);
+                    for (int i = 0; i < resources; i++)
+                    {
+                        RanX = Random.Range(-rangeRad, rangeRad);
+                        RanZ = Random.Range(-rangeRad, rangeRad);
+
+                        GameObject newGO = Instantiate(resource, transform.position + new Vector3(RanX, 10, RanZ),
+                            Quaternion.identity);
+                        NetworkServer.Spawn(newGO);
+                        yield return new WaitForSeconds(0);
+                    }
                 }
             }
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireCube(transform.position, new Vector3(maxRange*2, 1, maxRange*2));
+            Gizmos.DrawWireCube(transform.position, new Vector3(rangeRad*2, 1, rangeRad*2));
         }
     }
 }
