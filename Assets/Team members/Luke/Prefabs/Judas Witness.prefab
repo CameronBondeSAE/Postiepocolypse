@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1230647831}
   - component: {fileID: 3647838643630263710}
   - component: {fileID: 485451840748974034}
-  - component: {fileID: 485451840748974035}
   - component: {fileID: 485451840748974041}
   m_Layer: 0
   m_Name: Judas Witness
@@ -144,23 +143,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fakeGotResource: 0
   fakePlayerIsNear: 1
-  fakeNeedRecharge: 1
+  fakeNeedRecharge: 0
   fakeFoundResource: 0
   fakeDeliveredResource: 0
---- !u!114 &485451840748974035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485451841668963778}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8952e802ab871d64881e935f83e0a499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 485451840748974041}
-  target: {fileID: 0}
+  fakeAtAttackRange: 0
+  fakeAtResourcePos: 0
+  fakeFoundRecharge: 0
+  fakeAtRechargePos: 0
 --- !u!195 &485451840748974041
 NavMeshAgent:
   m_ObjectHideFlags: 0
