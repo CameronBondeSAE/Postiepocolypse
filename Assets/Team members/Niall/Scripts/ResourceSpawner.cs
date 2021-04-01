@@ -72,19 +72,10 @@ namespace Niall
 
         private void OnDrawGizmos()
         {
-            for (int w = 0; w < resourceSpawnpoints.Length; w++)
+            foreach (var t in resourceSpawnpoints)
             {
-                if (spawnLocation > resourceSpawnpoints.Length)
-                 {
-                     break;
-                 }
-                 Gizmos.DrawWireSphere(resourceSpawnpoints[spawnLocation].transform.position, rangeRad);
-                 spawnLocation++;
-                 
+                Gizmos.DrawWireSphere(t.position, rangeRad);
             }
-               
-            
-            
         }
     }
 }
