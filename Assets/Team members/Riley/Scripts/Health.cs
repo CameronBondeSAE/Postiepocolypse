@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 //Namespace use cause why not keep it out of the way of other components
 namespace RileyMcGowan
 {
-    public class Health : MonoBehaviour
+    public class Health : NetworkBehaviour
     {
         [Tooltip("Starting Health between 1-100 is reasonable.")]
         public int startingHealth;
 
         [Tooltip("Expected to be the same as startingHealth on start. If no value set default 100.")]
         public int maxHealth;
-
+        [SyncVar]
         [Tooltip("This is current health, do not edit unless for testing.")]
         public int currentHealth;
         
-        [Tooltip("Toggle on to make object invinsible (not die).")]
+        [Tooltip("Toggle on to make object invincible (not die).")]
         public bool invincible;
         
         //Events for recognising
