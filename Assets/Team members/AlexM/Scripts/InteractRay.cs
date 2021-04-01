@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Tanks;
-using AlexM;
-using JonathonMiles;
+﻿using JonathonMiles;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,25 +28,44 @@ namespace AlexM
 			Debug.DrawRay(_camMouseLook.camera.transform.position, _camMouseLook.camera.transform.forward, Color.green);
 		}
 
-		public void SendRay(InputAction.CallbackContext obj)
+		public void Use(InputAction.CallbackContext obj)
 		{
 			if (obj.performed)
 			{
-				var t = _camMouseLook.camera.transform;
-				Ray = Physics.Raycast(t.position, t.forward, out hit );
-				Debug.Log(hit.transform.name);
-				hitObjEvent?.Invoke(hit.transform.gameObject);
+				ShootRay();
 
-				Debug.DrawLine(t.position, hit.point, Color.green, 3f);
-				
 				// TODO Cam hack
 				Interactable interactable = hit.transform.GetComponent<Interactable>();
 				if (interactable)
 				{
-					interactable.Interact();
+					interactable.Interact(gameObject);
 				}
 			}
 		}
-		
+
+		public void PickUp(InputAction.CallbackContext obj)
+		{
+			if (obj.performed)
+			{
+				ShootRay();
+
+				// TODO Cam hack
+				PickUpItem pickUpItem = hit.transform.GetComponent<PickUpItem>();
+				if (pickUpItem)
+				{
+					pickUpItem.PickUp(gameObject);
+					GetComponent<Inventory>().Add(pickUpItem.item);
+				}
+			}
+		}
+
+		void ShootRay()
+		{
+			Transform t = _camMouseLook.camera.transform;
+			Ray = Physics.Raycast(t.position, t.forward, out hit);
+			Debug.Log(hit.transform.name);
+			Debug.DrawLine(t.position, hit.point, Color.green, 3f);
+			hitObjEvent?.Invoke(hit.transform.gameObject);
+		}
 	}
 }

@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour, IPoolObject
 	}
 }
 
-public class CamsMonster : CharacterBase, IPoolObject
+public class CamsMonster : CreatureBase, IPoolObject
 {
 	public void Reset()
 	{

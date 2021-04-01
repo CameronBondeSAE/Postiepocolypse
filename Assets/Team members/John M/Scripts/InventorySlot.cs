@@ -42,7 +42,9 @@ namespace JonathonMiles
         {
             if (item != null)
             {
-                item.Use();
+				
+				// TODO check that 'root' will work with nested folders
+                item.Use(transform.root.gameObject);
             }
         }
 
