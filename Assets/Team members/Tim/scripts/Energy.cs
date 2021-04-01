@@ -9,8 +9,9 @@ public class Energy : MonoBehaviour
 {
     [Range(0f,100f)]
     public float Amount;
-    private bool isUsing = false;
+    private bool isUsing = true;
     public float Drain;
+    public float Regen;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class Energy : MonoBehaviour
 
         if (isUsing == false)
         {
-            //Amount += Drain * Time.deltaTime;
+            Amount += Regen * Time.deltaTime;
         }
     }
 }
