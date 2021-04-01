@@ -17,11 +17,15 @@ namespace ZachFrench
         
         public Vector3 civSpawn;
 
+        public Vector3 playerSpawn;
+
         public GameObject playerPrefab;
 
         public GameObject civilianPrefab;
 
         public int numberOfCivilian;
+
+        public int numberOfPlayers;
 
         public List<GameObject> civilians;
 
@@ -33,19 +37,23 @@ namespace ZachFrench
         {
             homeSpawn = new Vector3(0, 0, 0);
             numberOfCivilian = 4;
-            
+
             for (int i = 0; i < numberOfCivilian; i++)
             {
                 civSpawn = new Vector3(Random.Range(0,10), 0, Random.Range(0,10));
                 civilians.Add(Instantiate(civilianPrefab,civSpawn,new Quaternion(0,0,0,0)));
                 //civilians[i].GetComponent<Health>().deathEvent += RespawnAfterDeath;
             }
-
-            /*for (int i = 0; i < 3; i++)
+            
+            
+            //TODO Make the players and civilians spawn at desired location
+            for (int i = 0; i < numberOfPlayers; i++)
             {
-                players.Add(Instantiate(player,homeSpawn,new Quaternion(0,0,0,0)));
-                players[i].GetComponent<Health>().deathEvent += RespawnAfterDeath;
-            }*/
+                playerSpawn = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+                Instantiate(playerPrefab, playerSpawn , new Quaternion(0, 0, 0, 0));
+                players.Add(playerPrefab);
+            }
+            
             
             foreach (GameObject o in players)
             {

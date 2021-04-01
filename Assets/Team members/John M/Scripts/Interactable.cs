@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace JonathonMiles
 { 
-    public class Interactable : MonoBehaviour 
-    {
-        public virtual void Interact ()
-        {
-            //code can be overwritten here for each interactable item to have unique functions
-        }
+    public class Interactable : MonoBehaviour
+	{
+		public ItemBase item;
+		
+        public void Interact(GameObject owner)
+		{
+			item.Use(owner);
+		}
 	}
 }
