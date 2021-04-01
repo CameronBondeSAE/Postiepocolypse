@@ -51,17 +51,19 @@ namespace Niall
                         spawnLocation = 0;
                         for (int r = 0; r < resourceSpawnpoints.Length; r++)
                         {
-                            
-                            //  RanX = Random.Range(-rangeRad, rangeRad);
-                            //  RanZ = Random.Range(-rangeRad, rangeRad);
-                            GameObject newGO = Instantiate(resource, resourceSpawnpoints[spawnLocation].transform.position + Random.insideUnitSphere * rangeRad, Quaternion.identity);
-                            NetworkServer.Spawn(newGO);
-                            spawnLocation++;
-                           
-                            if (spawnLocation > resourceSpawnpoints.Length)
+                            if (resourceSpawnpoints[spawnLocation] != null)
                             {
-                                spawning = false;
-                                spawnLocation = 0;
+                                GameObject newGO = Instantiate(resource,
+                                    resourceSpawnpoints[spawnLocation].transform.position +
+                                    Random.insideUnitSphere * rangeRad, Quaternion.identity);
+                                NetworkServer.Spawn(newGO);
+                                spawnLocation++;
+
+                                if (spawnLocation > resourceSpawnpoints.Length)
+                                {
+                                    spawning = false;
+                                    spawnLocation = 0;
+                                }
                             }
                         }
                         yield return new WaitForSeconds(spawnRate);
@@ -72,10 +74,11 @@ namespace Niall
 
         private void OnDrawGizmos()
         {
-            foreach (var t in resourceSpawnpoints)
-            {
-                Gizmos.DrawWireSphere(t.position, rangeRad);
-            }
+            if (resourceSpawnpoints != null)
+                foreach (var t in resourceSpawnpoints)
+                {
+                    Gizmos.DrawWireSphere(t.position, rangeRad);
+                }
         }
     }
 }
