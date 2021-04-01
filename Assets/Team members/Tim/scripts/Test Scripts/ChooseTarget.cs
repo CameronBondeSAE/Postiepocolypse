@@ -24,7 +24,7 @@ namespace TimPearson
             Target target = targets[Random.Range(0, targets.Length)];
             if (target != null)
             {
-                parent.GetComponent<Sprinter>().target = target;
+                parent.GetComponent<SprinterAI>().target = target;
             }
 
             Finish();

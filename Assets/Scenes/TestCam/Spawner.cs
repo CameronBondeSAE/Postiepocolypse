@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
 	public float      range;
 	public float    offset = 1f;
 
+	
 	// Start is called before the first frame update
     void Start()
     {

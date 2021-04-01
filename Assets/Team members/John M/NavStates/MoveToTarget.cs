@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 
-public class MoveToTarget : AntAIState
+namespace JonathonMiles
 {
-    public override void Enter()
+    public class MoveToTarget : AntAIState
     {
-        base.Enter();
-        Debug.Log("Start Move State");
-    }
+        public override void Enter()
+        {
+            base.Enter();
+            Debug.Log("Start Move State");
+        }
+    } 
 }
+
+

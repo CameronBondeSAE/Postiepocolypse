@@ -8,7 +8,7 @@ namespace JonathonMiles
         public     Sprite    icon;
         public     int       amount;
         public     bool      isConsumable;
-        public     bool      isCoin;
+        
 
         public virtual void Use()
         {
