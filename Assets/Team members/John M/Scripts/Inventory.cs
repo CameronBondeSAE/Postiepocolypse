@@ -8,24 +8,15 @@ namespace JonathonMiles
     public class Inventory : MonoBehaviour
     {
 		public delegate void OnItemChanged();
-        public OnItemChanged onItemChangedCallback;
+        public event OnItemChanged onItemChangedCallback;
         
         public int inventorySpace = 20;
-        public int coinCount = 0;
-        public Text coinText;
         public List<ItemBase> items = new List<ItemBase>();
         
 
         public bool Add(ItemBase item)
         {
 
-            if (item.isCoin)
-            {
-                coinCount = coinCount + item.amount;
-                Debug.Log("You got a coin!");
-                coinText.text = ("x " + coinCount);
-                return true;
-            }
             if (items.Count >= inventorySpace)
             {
                 Debug.Log("Inventory Full!");

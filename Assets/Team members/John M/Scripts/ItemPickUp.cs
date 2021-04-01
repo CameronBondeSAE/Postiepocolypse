@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace  JonathonMiles
 {
-    public class ItemPickUp : Interactable
+    public class InteractItemPickUp : Interactable
     {
 		public ItemBase  item;
        

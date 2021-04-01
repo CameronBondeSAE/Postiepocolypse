@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 
-public class PickRandomTarget : AntAIState
+namespace JonathonMiles
 {
-    public override void Enter()
+    public class PickRandomTarget : AntAIState
     {
-        base.Enter();
-        Debug.Log("Pick Target State");
+        public override void Enter()
+        {
+            base.Enter();
+            Debug.Log("Pick Target State");
+        }
     }
 }
+
