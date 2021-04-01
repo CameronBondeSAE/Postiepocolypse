@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TimPearson;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,16 +11,14 @@ public class testcarscript : MonoBehaviour
     public float Speed;
     public float Turn;
     public Vector3 localVelocity;
-    private bool isBoosting = false;
-    
+    private Sprinter sprint;
     public float Boost;
-    [Range(0f,10f)]
-    public float energy;
-    public float decreaseSpeed;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        sprint = GetComponent<Sprinter>();
     }
 
     // Update is called once per frame
@@ -43,38 +42,47 @@ public class testcarscript : MonoBehaviour
         {
             rb.AddRelativeTorque(0,-Turn,0);
         }
-        
-        
-        
-        Vector2 mi = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Speed = (mi.normalized * Boost).magnitude;
-
-        if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && energy > 0)
+        if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && sprint.energy.Amount > 0)
         {
             
-            isBoosting = true;
-
-            // if needed avoid negative value
-            energy = Mathf.Max(0, energy);
-
-            // double the move distance
-            Boost *= 10f;
+            sprint.isBoosting = true;
         }
 
         if (InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasReleasedThisFrame)
         {
-            Boost = 10f;
-            isBoosting = false;
+            sprint.isBoosting = false;
         }
-        if(isBoosting == true)
-        {
-            // Reduce energy by decreaseSpeed per second
-            energy -= decreaseSpeed * Time.deltaTime;
-        }
-
-        if (isBoosting == false)
-        {
-            energy += decreaseSpeed * Time.deltaTime;
-        }
+        
+        
+        //  Vector2 mi = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        // Speed = (mi.normalized * Boost).magnitude;
+        //
+        // if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && energy > 0)
+        // {
+        //     
+        //     isBoosting = true;
+        //
+        //     // if needed avoid negative value
+        //     energy = Mathf.Max(0, energy);
+        //
+        //     // double the move distance
+        //     Boost *= 10f;
+        // }
+        //
+        // if (InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasReleasedThisFrame)
+        // {
+        //     Boost = 10f;
+        //     isBoosting = false;
+        // }
+        // if(isBoosting == true)
+        // {
+        //     // Reduce energy by decreaseSpeed per second
+        //     energy -= decreaseSpeed * Time.deltaTime;
+        // }
+        //
+        // if (isBoosting == false)
+        // {
+        //     energy += decreaseSpeed * Time.deltaTime;
+        // }
     }
 }

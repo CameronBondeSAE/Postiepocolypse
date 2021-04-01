@@ -10,7 +10,7 @@ public class Energy : MonoBehaviour
     [Range(0f,100f)]
     public float Amount;
     private bool isUsing = false;
-    public float Regen;
+    public float Drain;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +22,13 @@ public class Energy : MonoBehaviour
     {
         if(isUsing == true)
         {
-            // Reduce energy by decreaseSpeed per second
-            Amount -= Regen * Time.deltaTime;
+            // Reduce energy by the Drain value per second
+            Amount -= Drain * Time.deltaTime;
         }
 
         if (isUsing == false)
         {
-            Amount += Regen * Time.deltaTime;
+            //Amount += Drain * Time.deltaTime;
         }
     }
 }

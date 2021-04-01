@@ -22,7 +22,7 @@ namespace TimPearson
         {
             base.Enter();
             Debug.Log("Moving");
-            NavMeshAgent.SetDestination(parent.GetComponent<Sprinter>().target.transform.position);
+            NavMeshAgent.SetDestination(parent.GetComponent<SprinterAI>().target.transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -30,7 +30,7 @@ namespace TimPearson
             base.Execute(aDeltaTime, aTimeScale);
             if (NavMeshAgent.remainingDistance < 1f)
             {
-                parent.GetComponent<Sprinter>().target = null;
+                parent.GetComponent<SprinterAI>().target = null;
                 Finish();
             }
         }
