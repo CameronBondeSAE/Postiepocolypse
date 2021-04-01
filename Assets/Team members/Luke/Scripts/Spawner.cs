@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Luke
 {
@@ -10,7 +12,6 @@ namespace Luke
         public GameObject[] creaturePrefabs;
         public float      spawnRange;
         public float    ySpawnOffset = 1f;
-
         public void Start()
         {
             SpawnCreatures();

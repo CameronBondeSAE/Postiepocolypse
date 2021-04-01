@@ -11,14 +11,14 @@ public class testcarscript : MonoBehaviour
     public float Speed;
     public float Turn;
     public Vector3 localVelocity;
-    private Sprinter sprint;
+    private Sprint sprint;
     public float Boost;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        sprint = GetComponent<Sprinter>();
+        sprint = GetComponent<Sprint>();
     }
 
     // Update is called once per frame
@@ -44,7 +44,6 @@ public class testcarscript : MonoBehaviour
         }
         if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && sprint.energy.Amount > 0)
         {
-            
             sprint.isBoosting = true;
         }
 
@@ -52,37 +51,5 @@ public class testcarscript : MonoBehaviour
         {
             sprint.isBoosting = false;
         }
-        
-        
-        //  Vector2 mi = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        // Speed = (mi.normalized * Boost).magnitude;
-        //
-        // if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && energy > 0)
-        // {
-        //     
-        //     isBoosting = true;
-        //
-        //     // if needed avoid negative value
-        //     energy = Mathf.Max(0, energy);
-        //
-        //     // double the move distance
-        //     Boost *= 10f;
-        // }
-        //
-        // if (InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasReleasedThisFrame)
-        // {
-        //     Boost = 10f;
-        //     isBoosting = false;
-        // }
-        // if(isBoosting == true)
-        // {
-        //     // Reduce energy by decreaseSpeed per second
-        //     energy -= decreaseSpeed * Time.deltaTime;
-        // }
-        //
-        // if (isBoosting == false)
-        // {
-        //     energy += decreaseSpeed * Time.deltaTime;
-        // }
     }
 }

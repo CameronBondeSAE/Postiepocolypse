@@ -637,10 +637,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
+  isBoosting: 0
   rb: {fileID: 1965562892}
-  Boost: 1
+  Boost: 10
   energy: {fileID: 1965562899}
-  decreaseSpeed: 10
+  Drain: 10
 --- !u!114 &1965562899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,8 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468f955eae133164fafd23edbeca5183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Amount: 55
-  Drain: 10
+  Amount: 100
+  Drain: 0.5
+  Regen: 1
 --- !u!1001 &2808703371276474109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -709,6 +711,18 @@ PrefabInstance:
     - target: {fileID: 2808703371453850187, guid: 20393d743d4fbf84687779b8c4986504, type: 3}
       propertyPath: m_Name
       value: Sprinter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808703371730378012, guid: 20393d743d4fbf84687779b8c4986504, type: 3}
+      propertyPath: Drain
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808703371730378013, guid: 20393d743d4fbf84687779b8c4986504, type: 3}
+      propertyPath: Drain
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808703371730378013, guid: 20393d743d4fbf84687779b8c4986504, type: 3}
+      propertyPath: Regen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20393d743d4fbf84687779b8c4986504, type: 3}

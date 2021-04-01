@@ -19,17 +19,8 @@ namespace Luke
         {
             base.Enter();
             
-            // HACK
-            Target[] targets = FindObjectsOfType<Target>();
-        
-            // Pick a random target
-            Target targetPos = targets[Random.Range(0, targets.Length)];
-        
-            if (targetPos != null)
-            {
-                owner.GetComponent<JudasWitnessModel>().target = targetPos;
-            }
-        
+            Debug.Log("wander state");
+            
             Finish();
         }
     }

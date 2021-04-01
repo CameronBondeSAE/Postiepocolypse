@@ -8,15 +8,15 @@ namespace Luke
 {
     public class JudasWitnessSensor : MonoBehaviour, ISense
     {
-        public bool fakeGotResource = false;
-        public bool fakePlayerIsNear = false;
-        public bool fakeNeedRecharge = false;
-        public bool fakeFoundResource = false;
-        public bool fakeDeliveredResource = false;
-        public bool fakeAtAttackRange = false;
-        public bool fakeAtResourcePos = false;
-        public bool fakeFoundRecharge = false;
-        public bool fakeAtRechargePos = false;
+        public bool fakeGotResource;
+        public bool fakePlayerIsNear;
+        public bool fakeNeedRecharge;
+        public bool fakeFoundResource;
+        public bool fakeDeliveredResource ;
+        public bool fakeAtAttackRange;
+        public bool fakeAtResourcePos;
+        public bool fakeFoundRecharge;
+        public bool fakeAtRechargePos;
 
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
