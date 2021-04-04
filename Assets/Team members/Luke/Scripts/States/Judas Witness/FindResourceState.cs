@@ -23,14 +23,14 @@ namespace Luke
             Debug.Log("find resource state");
             
             // HACK
-            Target[] targets = FindObjectsOfType<Target>();
+            JudasTarget[] targets = FindObjectsOfType<JudasTarget>();
         
             // Pick a random target
-            Target targetPos = targets[Random.Range(0, targets.Length)];
+            JudasTarget judasTargetPos = targets[Random.Range(0, targets.Length)];
         
-            if (targetPos != null)
+            if (judasTargetPos != null)
             {
-                owner.GetComponent<JudasWitnessModel>().target = targetPos;
+                owner.GetComponent<JudasWitnessModel>().judasTarget = judasTargetPos;
             }
         
             Finish();

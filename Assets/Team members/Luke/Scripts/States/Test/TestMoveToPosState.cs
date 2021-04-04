@@ -25,7 +25,7 @@ namespace Luke
 
             Debug.Log("In Move State");
 
-            navMeshAgent.SetDestination(owner.GetComponent<TestAIModel>().target.transform.position);
+            navMeshAgent.SetDestination(owner.GetComponent<TestAIModel>().judasTarget.transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -35,7 +35,7 @@ namespace Luke
             // Have we got to the target?
             if (navMeshAgent.remainingDistance < 1f)
             {
-                owner.GetComponent<TestAIModel>().target = null;
+                owner.GetComponent<TestAIModel>().judasTarget = null;
             }
             
             Finish();

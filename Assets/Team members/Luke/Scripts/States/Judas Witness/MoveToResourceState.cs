@@ -25,7 +25,7 @@ namespace Luke
     
              Debug.Log("move to resource state");
     
-             navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().target.transform.position);
+             navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().judasTarget.transform.position);
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)

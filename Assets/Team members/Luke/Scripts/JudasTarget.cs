@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Luke
 {
-    public class Target : MonoBehaviour
+    public class JudasTarget : MonoBehaviour
     {
         
     }

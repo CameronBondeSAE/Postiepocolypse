@@ -21,13 +21,13 @@ namespace Luke
             
             Debug.Log("Picking state");
 
-            Target[] targets = FindObjectsOfType<Target>();
+            JudasTarget[] targets = FindObjectsOfType<JudasTarget>();
 
-            Target target = targets[Random.Range(0, targets.Length)];
+            JudasTarget judasTarget = targets[Random.Range(0, targets.Length)];
 
-            if (target != null)
+            if (judasTarget != null)
             {
-                owner.GetComponent<TestAIModel>().target = target;
+                owner.GetComponent<TestAIModel>().judasTarget = judasTarget;
             }
             
             Finish();

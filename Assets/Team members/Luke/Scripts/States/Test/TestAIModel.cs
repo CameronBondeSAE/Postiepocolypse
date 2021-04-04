@@ -9,7 +9,7 @@ namespace Luke
     {
 
         public AntAIAgent antAIAgent;
-        public Target target;
+        public JudasTarget judasTarget;
         
         // Start is called before the first frame update
         void Start()

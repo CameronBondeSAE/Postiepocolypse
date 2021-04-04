@@ -13,7 +13,7 @@ namespace Luke
             
             aWorldState.BeginUpdate(aAgent.planner);
             aWorldState.Set("AtPosition", false);
-            aWorldState.Set("HasTarget", aAgent.GetComponent<TestAIModel>().target != null);
+            aWorldState.Set("HasTarget", aAgent.GetComponent<TestAIModel>().judasTarget != null);
             aWorldState.EndUpdate();
         }
     }

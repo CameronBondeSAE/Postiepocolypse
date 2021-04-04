@@ -12,7 +12,7 @@ namespace Luke
     {
         [Header("Other considerations")]
         public AntAIAgent antAIAgent;
-        public Target target;
+        public JudasTarget judasTarget;
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
         public float timeGathering;
