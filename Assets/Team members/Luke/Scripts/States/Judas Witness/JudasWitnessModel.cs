@@ -10,16 +10,36 @@ namespace Luke
 
     public class JudasWitnessModel : MonoBehaviour
     {
+        [Header("Other considerations")]
         public AntAIAgent antAIAgent;
         public Target target;
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
+        public float timeGathering;
+        
+
+        [Header("Audio")]
         public float timeBetweenAudio;
         public float audioRepeatRate;
-
         public float maxWetMix;
         public float maxRate;
         public float maxDepth;
+
+        /// <summary>
+        /// state bools
+        /// </summary>
+        [Header("State checks")]
+        public bool gotResource;
+        public bool playerIsNear;
+        public bool needRecharge;
+        public bool foundResource;
+        public bool deliveredResource;
+        public bool atAttackRange;
+        public bool atResourcePos;
+        public bool foundRecharge;
+        public bool atRechargePos;
+        
+        
 
         void Start()
         {

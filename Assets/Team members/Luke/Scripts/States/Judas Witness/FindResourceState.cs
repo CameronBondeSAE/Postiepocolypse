@@ -12,10 +12,10 @@ namespace Luke
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
-
+        
             owner = aGameObject;
         }
-
+        
         public override void Enter()
         {
             base.Enter();
