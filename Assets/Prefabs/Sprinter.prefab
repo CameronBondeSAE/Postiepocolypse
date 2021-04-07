@@ -145,11 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bab9dc10836bb74686a67837462a1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  isBoosting: 0
   rb: {fileID: 2808703371730378015}
   Boost: 10
-  energy: {fileID: 0}
-  decreaseSpeed: 10
+  energy: {fileID: 2808703371730378013}
+  Drain: 0
 --- !u!114 &2808703371730378013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Amount: 100
+  Drain: 0
   Regen: 10
 --- !u!54 &2808703371730378015
 Rigidbody:
@@ -173,8 +174,8 @@ Rigidbody:
   m_GameObject: {fileID: 2808703371730378022}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 5
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -243,3 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   antAIAgent: {fileID: 2808703371730378009}
+  rb: {fileID: 2808703371730378015}
+  RaycastHitLayer:
+    serializedVersion: 2
+    m_Bits: 0
