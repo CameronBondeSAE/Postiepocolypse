@@ -77,8 +77,12 @@ namespace Niall
             if (resourceSpawnpoints != null)
                 foreach (var t in resourceSpawnpoints)
                 {
-                    Gizmos.DrawWireSphere(t.position, rangeRad);
+                    if (t != null)
+                    {
+                        Gizmos.DrawWireSphere(t.position, rangeRad);
+                    }
                 }
+                    
         }
     }
 }
