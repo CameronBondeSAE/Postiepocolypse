@@ -11,7 +11,7 @@ namespace JonathonMiles
     {
         public Node[,] grid; 
         public Vector3Int gridSize;
-        void Awake()
+        void Start()
         {
             grid = new Node[gridSize.x,gridSize.z];
         }
@@ -27,12 +27,10 @@ namespace JonathonMiles
                 for (int z = 0; z < gridSize.z; z++)
                 {
                     grid[x, z] = new Node();
-                    grid[x, z].gridPos = new Vector3Int(x,0,z);
-                    
-                    if (Physics.CheckBox(new Vector3(x , 0, z ),Vector3.one))
+                    grid[x, z].isBlocked = false;
+                    if (Physics.CheckBox(new Vector3(x , 0, z ),
+                        new Vector3(1,1,1)))
                     {
-                        //doing a physics check along the grid to see if something 
-                        //is in the way, checking for barriers along the path
                         grid[x, z].isBlocked = true;
                     }
                 }
