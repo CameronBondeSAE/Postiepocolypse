@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   antAIAgent: {fileID: 6410610709035693269}
-  target: {fileID: 0}
+  judasTarget: {fileID: 0}
   audioSource: {fileID: 3680741728346999298}
   chorusFilter: {fileID: 8261083863869696342}
   timeGathering: 5
