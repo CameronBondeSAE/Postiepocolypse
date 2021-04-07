@@ -7,13 +7,16 @@ public class AngleCalculator : MonoBehaviour
 {
     public GameObject target;
     public float angle;
+    public Vector3 targetDir;
+    public Rigidbody rb;
+    public float speed = 10;
         
     // Update is called once per frame
     void Update()
     {
-        Vector3 targetDir = target.transform.position - transform.position;
-        //angle = Vector3.Angle(target.transform.position, transform.forward);
-        angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+        targetDir = target.transform.position - transform.position;
+        angle = Vector3.Angle(targetDir, transform.forward);
+        rb.velocity = targetDir.normalized * speed;
     }
 
     private void OnDrawGizmos()
