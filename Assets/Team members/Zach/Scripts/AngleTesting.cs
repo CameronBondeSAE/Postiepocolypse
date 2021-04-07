@@ -24,7 +24,7 @@ namespace ZachFrench
         {
             TargetAngle = target.transform.position - transform.position;
             angle = Vector3.Angle(TargetAngle, transform.forward);
-
+            Debug.Log(angle);
             rb.velocity = TargetAngle.normalized * speed;
             
             
