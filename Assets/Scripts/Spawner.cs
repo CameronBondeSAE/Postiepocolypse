@@ -54,7 +54,7 @@ namespace Luke
 
                 //raycast hit spawn pos
                 RaycastHit hitInfo;
-                Physics.Raycast(new Ray(position, Vector3.down), out hitInfo, 200f);
+                Physics.Raycast(new Ray(position, Vector3.down), out hitInfo);
                 if (hitInfo.collider)
                 {
                     currentPrefab.transform.position = hitInfo.point + new Vector3(0,ySpawnGroundOffset, 0);
