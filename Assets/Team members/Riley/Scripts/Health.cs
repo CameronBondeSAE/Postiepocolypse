@@ -39,7 +39,8 @@ namespace RileyMcGowan
         public enum DamageType
         {
             Normal,
-            Poison
+            Poison,
+            Energy
         }
 
         void Update()
