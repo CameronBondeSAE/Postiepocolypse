@@ -240,8 +240,8 @@ MonoBehaviour:
   AudioSource: {fileID: 4854635941517208795}
   AudioChorusFilter: {fileID: 47435545733010404}
   AudioLowPassFilter: {fileID: 1626046351502291585}
-  maxTimeBetweenBaseSounds: 10
-  basePitch: 0.18
+  maxTimeBetweenBaseSounds: 15
+  basePitch: 0.12
 --- !u!1 &877434046122071125
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab5fd38fc5d6fad49957736998605252, type: 2}
+  - {fileID: 2100000, guid: 5118790a88bcaa6488cd99c76154e50a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
