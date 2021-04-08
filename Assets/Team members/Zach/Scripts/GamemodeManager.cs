@@ -35,7 +35,7 @@ namespace ZachFrench
             rm.numberOfPlayers = playerCount;
             //PortalSpawner is next 
             //Setting the amount of portals to spawn
-            portalSpawner.numberOfPrefabs = portalCount;
+            portalSpawner.setsOfPrefabs = portalCount;
             //Setting the spawn offset of spawners
             portalSpawner.spawnRange = portalOffset;
             //checking for bool, to make sure that we can spawn/start spawning the portals
