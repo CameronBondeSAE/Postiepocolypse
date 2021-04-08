@@ -14,11 +14,12 @@ namespace ZachFrench
         // Make sure that there are already the other managers in the scene as these only grab them and don't spawn them
         private RespawnManager rm;
         private ResourceSpawner rs;
-        private Luke.Spawner portalSpawner;
+        public Luke.Spawner portalSpawner;
         //These are just set values for testing and can be altered in code or in the scene 
         public int civilianCount = 5;
         public int playerCount = 2;
         public int portalCount = 3;
+        public float portalOffset = 20;
 
         // Start is called before the first frame update
         void Awake()
@@ -34,7 +35,11 @@ namespace ZachFrench
             rm.numberOfPlayers = playerCount;
             //hellspawner is next 
             portalSpawner.numberOfPrefabs = portalCount;
-            
+            portalSpawner.spawnRange = portalOffset;
+            if (portalSpawner.spawnOnStart == false)
+            {
+                portalSpawner.spawnOnStart = true;
+            }
         }
 
         // Update is called once per frame
