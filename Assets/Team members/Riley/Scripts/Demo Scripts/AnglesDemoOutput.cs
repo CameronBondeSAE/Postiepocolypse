@@ -21,11 +21,11 @@ public class AnglesDemoOutput : MonoBehaviour
         
         if (invertDirection != true)
         {
-            vectorToTarget = target.transform.position - transform.position;
+            vectorToTarget = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z) - transform.position;
         }
         else
         {
-            vectorToTarget = transform.position - target.transform.position;
+            vectorToTarget = transform.position - new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
         }
         
         if (vectorToTarget != null)
@@ -37,5 +37,24 @@ public class AnglesDemoOutput : MonoBehaviour
             signedToTarget = Vector3.SignedAngle(vectorToTarget, transform.forward, Vector3.up);
             //Debug.Log("The Signed vector is " + signedToTarget);
         }
+
+        float perlinNoise = Mathf.PerlinNoise(1, 0);
+        if (signedToTarget < 5 && perlinNoise > .5f)
+        {
+            if (signedToTarget > -5)
+            {
+                //Move
+            }
+        }
+        //else
+        //{
+            //if (signedToTarget > -5 && perlinNoise > -.5f)
+            //{
+            //    if (signedToTarget < 5)
+            //    {
+            //        //move
+            //    }
+            //}
+        //}
     }
 }
