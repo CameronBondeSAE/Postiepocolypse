@@ -23,7 +23,7 @@ namespace AJ
                     health -= healthLossRate;
                 }
                 
-                //not only is this to prevent the health falling below 0, once health hits 0, it stops counting down
+                //once it reaches 0, it stops counting
                 if (health <= 0)
                 {
                     health = 0;
