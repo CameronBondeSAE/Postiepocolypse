@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5775224301136106522}
   - component: {fileID: 211089926295112691}
   m_Layer: 0
-  m_Name: HellPortal
+  m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,10 +105,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de923142510d91445aa64c49ca3dd5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfCreatures: 0
-  creaturePrefabs: []
+  numberOfPrefabs: 2
+  prefabs:
+  - {fileID: 877434046122071125, guid: b0aeda5f661973e49b686c75cde6510a, type: 3}
+  - {fileID: 7154905640460653465, guid: df3d597915338994385d481615e03fc7, type: 3}
   spawnRange: 0
   ySpawnOffset: 1
+  spawnOnStart: 0
 --- !u!114 &211089926295112691
 MonoBehaviour:
   m_ObjectHideFlags: 0
