@@ -828,6 +828,10 @@ PrefabInstance:
       propertyPath: laughing
       value: 
       objectReference: {fileID: 347200307}
+    - target: {fileID: 2512420059901344553, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3956812273395593936, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: ignore.m_Bits
       value: 1847
@@ -854,6 +858,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6642301740245682791, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058318616107597941, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7058318617128531734, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
@@ -907,6 +915,14 @@ PrefabInstance:
     - target: {fileID: 7058318617128531947, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_Constraints
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058318617128531948, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058318617128531950, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7076765992571148482, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
       propertyPath: m_IsActive

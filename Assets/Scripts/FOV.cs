@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Tanks;
-using tripolygon.UModeler;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 
 namespace Damien
 {
     public class FOV : MonoBehaviour
     {
-        public GameObject owner;
         public LayerMask targets;
-        public LayerMask obstacle;
 
         public float viewRadius;
         [Range(0, 360)] public float viewAngle = 90;
