@@ -105,13 +105,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de923142510d91445aa64c49ca3dd5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPrefabs: 2
+  setsOfPrefabs: 2
   prefabs:
   - {fileID: 877434046122071125, guid: b0aeda5f661973e49b686c75cde6510a, type: 3}
   - {fileID: 7154905640460653465, guid: df3d597915338994385d481615e03fc7, type: 3}
-  spawnRange: 0
-  ySpawnOffset: 1
-  spawnOnStart: 0
+  - {fileID: 7058318617128531734, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
+  - {fileID: 4979934498223357703, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
+  spawnRange: 25
+  spawnOnStart: 1
+  randomSpawn: 0
+  ySpawnGroundOffset: 1
+  minDistanceBetweenSpawning: 0
 --- !u!114 &211089926295112691
 MonoBehaviour:
   m_ObjectHideFlags: 0
