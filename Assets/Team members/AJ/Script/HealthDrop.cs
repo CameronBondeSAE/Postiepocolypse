@@ -8,25 +8,19 @@ namespace AJ
 {
     public class HealthDrop : MonoBehaviour
     {
-        public float energy = 5f;
-        public float health = 20f;
+        public Energy Energy;
+        public Health Health;
         public float healthLossRate = 0.01f;
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             //if (Input.GetKey(KeyCode.A))
             {
                 //if energy is less than or = to 0, health takes damage corresponding to the healthLossRate's set stat
-                if (energy <= 0)
+                if (Energy.Amount <= 0)
                 {
-                    health -= healthLossRate;
-                }
-                
-                //once it reaches 0, it stops counting
-                if (health <= 0)
-                {
-                    health = 0;
+                    Health.DoDamage(healthLossRate, Health.DamageType.Energy); 
                 }
             }
         }

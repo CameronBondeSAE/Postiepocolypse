@@ -164,6 +164,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4046304397150965760, guid: 05d659792da865a468042985bff82d0f, type: 3}
+      propertyPath: m_Cookie
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4046304397150965761, guid: 05d659792da865a468042985bff82d0f, type: 3}
       propertyPath: sceneId
       value: 0

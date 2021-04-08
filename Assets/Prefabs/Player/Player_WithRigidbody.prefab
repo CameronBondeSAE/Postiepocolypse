@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 8299417107634708922}
   - component: {fileID: 4012591622684060849}
   - component: {fileID: 5555126118862272970}
+  - component: {fileID: 5719859735224713059}
   m_Layer: 0
   m_Name: Player_WithRigidbody
   m_TagString: Untagged
@@ -449,6 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa9c6b89cc10c244b8456d698dae7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   startingHealth: 100
   maxHealth: 100
   currentHealth: 0
@@ -467,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Amount: 100
   Drain: 0
+  Regen: 0
 --- !u!114 &5555126118862272970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +485,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySpace: 20
   items: []
+--- !u!114 &5719859735224713059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271187260368080590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c873623cdce9dd544a7830511ba3534c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  flashlight: {fileID: 6732787804643739882}
+  lightOn: 0
 --- !u!1 &6271187260610386039
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,3 +834,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   flashlight: {fileID: 6732787804643739882}
+  lightOn: 0
