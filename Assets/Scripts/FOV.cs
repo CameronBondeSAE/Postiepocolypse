@@ -12,45 +12,48 @@ namespace Damien
     public class FOV : MonoBehaviour
     {
         public GameObject owner;
-        public LayerMask target;
+        public LayerMask targets;
         public LayerMask obstacle;
 
         public float viewRadius;
-        [Range(0, 360)] public float viewAngle = 360;
-        
-        
+        [Range(0, 360)] public float viewAngle = 90;
 
-        public List<Transform> playerTargets = new List<Transform>();
+
+        public List<Collider> listOfTargets = new List<Collider>();
 
         private void Start()
         {
-            StartCoroutine("SeePlayers", 0.2f);
+            StartCoroutine("SeeThings", 0.2f);
         }
 
-        IEnumerator SeePlayers(float delay)
+        IEnumerator SeeThings(float delay)
         {
             while (true)
             {
                 yield return new WaitForSeconds(delay);
-                DetectPlayer();
-                
+                DetectThings();
             }
         }
 
-        void DetectPlayer()
+        void DetectThings()
         {
-            playerTargets.Clear();
-            Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, target);
+            listOfTargets.Clear();
+            Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targets);
             for (int i = 0; i < targetsInViewRadius.Length; i++)
             {
-                Transform target = targetsInViewRadius[i].transform;
-                Vector3 dirToTarget = (target.position - transform.position).normalized;
+                Collider target = targetsInViewRadius[i];
+                Vector3 dirToTarget = (target.transform.position - transform.position).normalized;
                 if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
                 {
-                    float distance = Vector3.Distance(transform.position, target.position);
-                    if (!Physics.Raycast(transform.position, dirToTarget, distance, obstacle))
+                    float distance = Vector3.Distance(transform.position, target.transform.position);
+
+                    RaycastHit hit;
+
+                    Physics.Raycast(transform.position, dirToTarget, out hit, distance);
+                    
+                    if(hit.collider == targetsInViewRadius[i])
                     {
-                        playerTargets.Add(target);
+                        listOfTargets.Add(target);
                     }
                 }
             }
@@ -62,6 +65,7 @@ namespace Damien
             {
                 angleInDegrees += transform.eulerAngles.y;
             }
+
             return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
         }
     }

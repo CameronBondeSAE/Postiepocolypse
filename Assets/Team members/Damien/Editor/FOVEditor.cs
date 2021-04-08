@@ -21,10 +21,10 @@ public class FOVEditor : Editor
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngleA * fov.viewRadius);
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngleB * fov.viewRadius);
 
-        foreach (Transform playerTarget in fov.playerTargets)
+        foreach (Collider playerTarget in fov.listOfTargets)
         {
             Handles.color = Color.red;
-            Handles.DrawLine(fov.transform.position, playerTarget.position);
+            Handles.DrawLine(fov.transform.position, playerTarget.transform.position);
         }
     }
 }
