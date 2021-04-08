@@ -24,7 +24,7 @@ public class PlayerHealthDemo : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    private void Damaged(RileyMcGowan.Health health, int damageDealt, Health.DamageType damageType)
+    private void Damaged(RileyMcGowan.Health health, float damageDealt, Health.DamageType damageType)
     {
         Debug.Log("I'VE BEEN HIT FOR " + damageDealt);
     }

@@ -10,20 +10,20 @@ namespace RileyMcGowan
     public class Health : NetworkBehaviour
     {
         [Tooltip("Starting Health between 1-100 is reasonable.")]
-        public int startingHealth;
+        public float startingHealth;
 
         [Tooltip("Expected to be the same as startingHealth on start. If no value set default 100.")]
-        public int maxHealth;
+        public float maxHealth;
         [SyncVar]
         [Tooltip("This is current health, do not edit unless for testing.")]
-        public int currentHealth;
+        public float currentHealth;
         
         [Tooltip("Toggle on to make object invincible (not die).")]
         public bool invincible;
         
         //Events for recognising
         public event Action<Health> deathEvent;
-        public event Action<Health, int, DamageType> damagedEvent;
+        public event Action<Health, float, DamageType> damagedEvent;
         public event Action<Health> healedEvent;
         
         
@@ -43,7 +43,7 @@ namespace RileyMcGowan
             Energy
         }
 
-        void Update()
+        void FixedUpdate()
         {
             //If we take damage that makes the objects health 0 then invoke death
             if (currentHealth <= 0 && invincible != true)
@@ -59,7 +59,7 @@ namespace RileyMcGowan
         
         /// DO DAMAGE AND HEALING ///
         //DoDamage function to record damage then apply it
-        public void DoDamage(int damageDealt, DamageType damageType)
+        public void DoDamage(float damageDealt, DamageType damageType)
         {
             if (invincible != true)
             {
@@ -68,7 +68,7 @@ namespace RileyMcGowan
             }
         }
         //DoHeal function to apply healing to the object until max
-        public void DoHeal(int healApply)
+        public void DoHeal(float healApply)
         {
             if (currentHealth + healApply <= maxHealth && invincible != true)
             {
@@ -86,11 +86,11 @@ namespace RileyMcGowan
         }
         
         //Simple add and remove max health
-        public void DecreaseMaxHealth(int removeHealthMax)
+        public void DecreaseMaxHealth(float removeHealthMax)
         {
             maxHealth -= removeHealthMax;
         }
-        public void IncreaseMaxHealth(int addHealthMax)
+        public void IncreaseMaxHealth(float addHealthMax)
         {
             maxHealth += addHealthMax;
         }
@@ -119,17 +119,17 @@ namespace RileyMcGowan
         }
 
         /// Modular functions to rip out if needed ///
-        public void DoPoison(int totalDamage, int damageIntervals, int damageDelay)
+        public void DoPoison(float totalDamage, float damageIntervals, float damageDelay)
         {
             StartCoroutine(PoisonedDOT(totalDamage, damageIntervals, damageDelay));
         }
 
-        IEnumerator PoisonedDOT(int damageToDeal, int damageIntervals, int intervalDelay)
+        IEnumerator PoisonedDOT(float damageToDeal, float damageIntervals, float intervalDelay)
         {
             //Split the damage to be delt across the intervals
-            int intervalDamage = damageToDeal / damageIntervals;
+            float intervalDamage = damageToDeal / damageIntervals;
             
-            for (int i = 0; i < damageIntervals; i++)
+            for (float i = 0; i < damageIntervals; i++)
             {
                 this.DoDamage(intervalDamage, DamageType.Poison);
                 yield return new WaitForSeconds(intervalDelay);
