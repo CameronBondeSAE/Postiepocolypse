@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using RileyMcGowan;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class HealthEditor : Editor
         }
         if (GUILayout.Button("Damage Object by 10"))
         {
-            (target as RileyMcGowan.Health)?.DoDamage(10);
+            (target as RileyMcGowan.Health)?.DoDamage(10, Health.DamageType.Normal);
         }
         if (GUILayout.Button("Heal Object by 10"))
         {

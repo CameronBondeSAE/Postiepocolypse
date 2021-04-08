@@ -13,7 +13,7 @@ public class MonsterTrigger : MonoBehaviour
         var health = other.GetComponent<RileyMcGowan.Health>();
         if (health != null)
         {
-            health.DoDamage(damageAmount);
+            health.DoDamage(damageAmount, Health.DamageType.Normal);
         }
     }
     private void OnTriggerExit(Collider other)

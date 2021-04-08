@@ -23,8 +23,10 @@ namespace RileyMcGowan
         
         //Events for recognising
         public event Action<Health> deathEvent;
-        public event Action<Health> damagedEvent;
+        public event Action<Health, int, DamageType> damagedEvent;
         public event Action<Health> healedEvent;
+        
+        
         void Start()
         {
             ResetStartingHealth();
@@ -33,6 +35,13 @@ namespace RileyMcGowan
                 maxHealth = 100;
             }
         }
+        
+        public enum DamageType
+        {
+            Normal,
+            Poison
+        }
+
         void Update()
         {
             //If we take damage that makes the objects health 0 then invoke death
@@ -49,12 +58,12 @@ namespace RileyMcGowan
         
         /// DO DAMAGE AND HEALING ///
         //DoDamage function to record damage then apply it
-        public void DoDamage(int damageDelt)
+        public void DoDamage(int damageDealt, DamageType damageType)
         {
             if (invincible != true)
             {
-                currentHealth -= damageDelt;
-                damagedEvent?.Invoke(this);
+                currentHealth -= damageDealt;
+                damagedEvent?.Invoke(this, damageDealt, damageType);
             }
         }
         //DoHeal function to apply healing to the object until max
@@ -106,6 +115,24 @@ namespace RileyMcGowan
         public void DestroyObject()
         {
             deathEvent?.Invoke(this);
+        }
+
+        /// Modular functions to rip out if needed ///
+        public void DoPoison(int totalDamage, int damageIntervals, int damageDelay)
+        {
+            StartCoroutine(PoisonedDOT(totalDamage, damageIntervals, damageDelay));
+        }
+
+        IEnumerator PoisonedDOT(int damageToDeal, int damageIntervals, int intervalDelay)
+        {
+            //Split the damage to be delt across the intervals
+            int intervalDamage = damageToDeal / damageIntervals;
+            
+            for (int i = 0; i < damageIntervals; i++)
+            {
+                this.DoDamage(intervalDamage, DamageType.Poison);
+                yield return new WaitForSeconds(intervalDelay);
+            }
         }
     }
 }

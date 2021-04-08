@@ -21,7 +21,7 @@ public class Damage : MonoBehaviour
           //this loop goes through all objects in the list and deals damage to them
           foreach (var x in inCollider)
           {
-               x.GetComponent<Health>().DoDamage(damageAmount);
+               x.GetComponent<Health>().DoDamage(damageAmount, Health.DamageType.Normal);
                     //Debug.Log("Damaging 10 Points to " + inCollider.Count + " items");
           }
      }
