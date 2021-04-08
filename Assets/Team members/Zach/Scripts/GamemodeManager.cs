@@ -33,9 +33,12 @@ namespace ZachFrench
             //first is the respawn manager 
             rm.numberOfCivilian = civilianCount;
             rm.numberOfPlayers = playerCount;
-            //hellspawner is next 
+            //PortalSpawner is next 
+            //Setting the amount of portals to spawn
             portalSpawner.numberOfPrefabs = portalCount;
+            //Setting the spawn offset of spawners
             portalSpawner.spawnRange = portalOffset;
+            //checking for bool, to make sure that we can spawn/start spawning the portals
             if (portalSpawner.spawnOnStart == false)
             {
                 portalSpawner.spawnOnStart = true;
