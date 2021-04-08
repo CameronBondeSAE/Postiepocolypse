@@ -1364,7 +1364,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1411,7 +1411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c89b1c66213a41468780e5d18da93ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laughing: {fileID: 2512420059901344553}
+  laughing: {fileID: 1930951723861161663}
 --- !u!1 &6642301740245682791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,7 +1610,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1647,11 +1647,8 @@ GameObject:
   - component: {fileID: 7058318617128531945}
   - component: {fileID: 7058318617128531944}
   - component: {fileID: 7058318617128531735}
-  - component: {fileID: 7058318617128531947}
-  - component: {fileID: 7058318617128531949}
-  - component: {fileID: 7058318617128531948}
-  - component: {fileID: 7058318617128531950}
   - component: {fileID: 3956812273395593936}
+  - component: {fileID: 6850868778339535585}
   m_Layer: 0
   m_Name: Blinder
   m_TagString: Untagged
@@ -1737,73 +1734,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7058318617128531947
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058318617128531734}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &7058318617128531949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058318617128531734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc0548a8365998240a8868affe0a4009, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  antAIAgent: {fileID: 7058318617128531950}
-  target: {fileID: 0}
---- !u!195 &7058318617128531948
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058318617128531734}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &7058318617128531950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058318617128531734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e724e36405834fa192b36cd6a4e6059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manualUpdate: 0
-  thinkInterval: 0.1
-  scenario: {fileID: 11400000, guid: d3f59d5e568ff6749bdb0c6b8c2dba0b, type: 2}
 --- !u!114 &3956812273395593936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1816,16 +1746,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9179d9dfc31e1d4ea49f8ed8d1649b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 7058318617128531734}
-  target:
+  targets:
     serializedVersion: 2
-    m_Bits: 256
-  obstacle:
-    serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
   viewRadius: 30
   viewAngle: 360
-  playerTargets: []
+  listOfTargets: []
+--- !u!114 &6850868778339535585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058318617128531734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a0d8d2cabb58347a03ed5e962d922f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: {x: 50, y: 1, z: 50}
+  timeScale: 0.075
 --- !u!1 &7076765992571148482
 GameObject:
   m_ObjectHideFlags: 0
