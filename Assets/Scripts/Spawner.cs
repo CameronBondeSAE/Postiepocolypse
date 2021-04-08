@@ -12,9 +12,13 @@ namespace Luke
         public GameObject[] prefabs;
         public float      spawnRange;
         public float    ySpawnOffset = 1f;
+        public bool spawnOnStart;
         public void Start()
         {
-            SpawnPrefabs();
+            if (spawnOnStart)
+            {
+                SpawnPrefabs();
+            }
         }
 
         //spawn with the amount numberOfPrefabs with a range of prefabs
