@@ -8,28 +8,29 @@ namespace Luke
 {
     public class Spawner : MonoBehaviour
     {
-        public int numberOfCreatures;
-        public GameObject[] creaturePrefabs;
+        public int numberOfPrefabs;
+        public GameObject[] prefabs;
         public float      spawnRange;
         public float    ySpawnOffset = 1f;
         public void Start()
         {
-            SpawnCreatures();
+            SpawnPrefabs();
         }
 
-        //spawn an numberOfCreatures on hell portal with a range of creatureTypes
-        public void SpawnCreatures()
+        //spawn with the amount numberOfPrefabs with a range of prefabs
+        public void SpawnPrefabs()
         {
             //position at each spawn point
-            for (int i = 0; i < numberOfCreatures; i++)
+            for (int i = 0; i < numberOfPrefabs; i++)
             {
+                //hard coded height for the raycast to the ground
                 Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), 100, Random.Range(-spawnRange, spawnRange));
                 
                 //run through randoms
-                int randomPrefab = Random.Range(0, creaturePrefabs.Length);
+                int randomPrefab = Random.Range(0, prefabs.Length);
 
                 //set current random on the loop
-                GameObject currentPrefab = Instantiate(creaturePrefabs[randomPrefab], position, Quaternion.identity);
+                GameObject currentPrefab = Instantiate(prefabs[randomPrefab], position, Quaternion.identity);
 
                 //raycast hit spawn pos
                 RaycastHit hitInfo;
@@ -38,6 +39,7 @@ namespace Luke
                 {
                     currentPrefab.transform.position = hitInfo.point + new Vector3(0,ySpawnOffset, 0);
                 }
+                //just in case the prefabs spawn in the ground
                 else
                 {
                     Destroy(currentPrefab);

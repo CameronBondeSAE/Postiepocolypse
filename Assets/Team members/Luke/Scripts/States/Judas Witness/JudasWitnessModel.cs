@@ -16,8 +16,7 @@ namespace Luke
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
         public float timeGathering;
-        private Vector3 targetDirection;
-        
+
 
         [Header("Audio")]
         public float timeBetweenAudio;
@@ -63,9 +62,12 @@ namespace Luke
 
         public void DirectionRaycast()
         {
-            targetDirection = judasTarget.transform.position - transform.position;
-            
             Debug.DrawLine(transform.position, judasTarget.transform.position, Color.green);
+        }
+
+        public void Patrol()
+        {
+            
         }
     }
 }
