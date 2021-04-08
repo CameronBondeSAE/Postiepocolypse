@@ -28,35 +28,35 @@ namespace ZachFrench
         public List<GameObject> civilians;
 
         public List<GameObject> players;
+
+        public PostieNetworkManager postieNetworkManager;
         
         
         // Civilian don't get created instead are still currently part of the list
         void Start()
         {
-            homeSpawn = new Vector3(0, 0, 0);
+            homeSpawn = transform.position;
             numberOfCivilian = 4;
+            postieNetworkManager = FindObjectOfType<PostieNetworkManager>();
+            postieNetworkManager.newPlayerEvent += PostieNetworkManagerOnNewPlayerEvent;
+            postieNetworkManager.playerDisconnectedEvent += PostieNetworkManagerOnPlayerDisconnectedEvent;
 
             for (int i = 0; i < numberOfCivilian; i++)
             {
-                civSpawn = new Vector3(Random.Range(0,10), 0, Random.Range(0,10));
+                civSpawn = new Vector3(homeSpawn.x + Random.Range(0,5),homeSpawn.y,homeSpawn.z + Random.Range(0,5));
                 civilians.Add(Instantiate(civilianPrefab,civSpawn,new Quaternion(0,0,0,0)));
                 //civilians[i].GetComponent<Health>().deathEvent += RespawnAfterDeath;
             }
-            
-            
-            //TODO Make the players and civilians spawn at desired location
-            /*for (int i = 0; i < numberOfPlayers; i++)
-            {
-                playerSpawn = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
-                Instantiate(playerPrefab, playerSpawn , new Quaternion(0, 0, 0, 0));
-                players.Add(playerPrefab);
-            }*/
-            
-            
-            foreach (GameObject o in players)
-            {
-                o.GetComponent<Health>().deathEvent += RespawnAfterDeath;
-            }
+        }
+
+        private void PostieNetworkManagerOnNewPlayerEvent(GameObject obj)
+        {
+            obj.GetComponent<Health>().deathEvent += RespawnAfterDeath;
+        }
+        
+        private void PostieNetworkManagerOnPlayerDisconnectedEvent(GameObject obj)
+        {
+            obj.GetComponent<Health>().deathEvent -= RespawnAfterDeath;
         }
 
         //Function/event that resets player position

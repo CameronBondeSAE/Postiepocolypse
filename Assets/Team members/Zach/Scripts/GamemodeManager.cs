@@ -19,7 +19,7 @@ namespace ZachFrench
         public int civilianCount = 5;
         public int playerCount = 2;
         public int portalCount = 3;
-        public float portalOffset = 20;
+        public float portalSpawnRange = 50;
 
         // Start is called before the first frame update
         void Awake()
@@ -37,7 +37,7 @@ namespace ZachFrench
             //Setting the amount of portals to spawn
             portalSpawner.setsOfPrefabs = portalCount;
             //Setting the spawn offset of spawners
-            portalSpawner.spawnRange = portalOffset;
+            portalSpawner.spawnRange = portalSpawnRange;
             //checking for bool, to make sure that we can spawn/start spawning the portals
             if (portalSpawner.spawnOnStart == false)
             {
