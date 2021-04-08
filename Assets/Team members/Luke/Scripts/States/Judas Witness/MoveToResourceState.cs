@@ -9,6 +9,7 @@ namespace Luke
     public class MoveToResourceState : AntAIState
     {
          public GameObject owner;
+         private Vector3 targetDirection;
          NavMeshAgent navMeshAgent;
          
          public override void Create(GameObject aGameObject)
@@ -26,12 +27,16 @@ namespace Luke
              Debug.Log("move to resource state");
     
              navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().judasTarget.transform.position);
+             
+             
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)
          {
              base.Execute(aDeltaTime, aTimeScale);
-    
+
+             owner.GetComponent<JudasWitnessModel>().DirectionRaycast();
+             
              // Have we got to the target?
              if (navMeshAgent.remainingDistance < 1f)
              {

@@ -42,7 +42,7 @@ namespace Luke
 
         public void Update()
         {
-            // creatures.AddRange();
+            creatures.AddRange(FindObjectsOfType<CreatureBase>());
             creatureAmountInScene = creatures.Count;
         }
     }

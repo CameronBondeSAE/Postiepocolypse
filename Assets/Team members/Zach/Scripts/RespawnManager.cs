@@ -19,8 +19,6 @@ namespace ZachFrench
 
         public Vector3 playerSpawn;
 
-        public GameObject playerPrefab;
-
         public GameObject civilianPrefab;
 
         public int numberOfCivilian;
@@ -47,12 +45,12 @@ namespace ZachFrench
             
             
             //TODO Make the players and civilians spawn at desired location
-            for (int i = 0; i < numberOfPlayers; i++)
+            /*for (int i = 0; i < numberOfPlayers; i++)
             {
                 playerSpawn = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
                 Instantiate(playerPrefab, playerSpawn , new Quaternion(0, 0, 0, 0));
                 players.Add(playerPrefab);
-            }
+            }*/
             
             
             foreach (GameObject o in players)

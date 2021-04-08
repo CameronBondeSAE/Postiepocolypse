@@ -16,7 +16,7 @@ namespace Luke
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
         public float timeGathering;
-        
+
 
         [Header("Audio")]
         public float timeBetweenAudio;
@@ -58,6 +58,16 @@ namespace Luke
             {
                 audioSource.Play();
             }
+        }
+
+        public void DirectionRaycast()
+        {
+            Debug.DrawLine(transform.position, judasTarget.transform.position, Color.green);
+        }
+
+        public void Patrol()
+        {
+            
         }
     }
 }

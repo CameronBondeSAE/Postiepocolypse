@@ -10,6 +10,7 @@ namespace Luke
     {
         public GameObject owner;
         public NavMeshAgent navMeshAgent;
+        private Vector3 targetDirection;
         
         public override void Create(GameObject aGameObject)
         {
@@ -30,6 +31,8 @@ namespace Luke
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
+            owner.GetComponent<JudasWitnessModel>().DirectionRaycast();
             
             // Have we got to the target?
             if (navMeshAgent.remainingDistance < 1f)

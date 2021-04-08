@@ -570,8 +570,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: resourcePrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: resourcePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8966067261719390043, guid: 705319ed2bf9f044ba1a81639315770a, type: 3}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: resourcePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8421045275480443797, guid: 254a0fd162453fe4583464c73ccfb084, type: 3}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoint.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: resourceSpawnpoints.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoint.Array.data[0]
@@ -597,6 +613,10 @@ PrefabInstance:
       propertyPath: resourceSpawnpoints.Array.data[2]
       value: 
       objectReference: {fileID: 871663872}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: resourceSpawnpoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 821153988559785861, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

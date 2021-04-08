@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NodeCanvas.Tasks.Actions;
+using RileyMcGowan;
 using UnityEngine;
 
 public class PlayerHealthDemo : MonoBehaviour
@@ -23,9 +24,9 @@ public class PlayerHealthDemo : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    private void Damaged(RileyMcGowan.Health health)
+    private void Damaged(RileyMcGowan.Health health, int damageDealt, Health.DamageType damageType)
     {
-        Debug.Log("I'VE BEEN HIT!");
+        Debug.Log("I'VE BEEN HIT FOR " + damageDealt);
     }
     private void Healed(RileyMcGowan.Health health)
     {
