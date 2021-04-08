@@ -10,10 +10,13 @@ namespace Luke
     {
         public int setsOfPrefabs;
         public GameObject[] prefabs;
-        public float      spawnRange;
-        public float    ySpawnGroundOffset = 1f;
+        public float spawnRange;
         public bool spawnOnStart;
         public bool randomSpawn;
+        
+        [Header("Raycast stuff")]
+        public float ySpawnGroundOffset = 1f;
+        public float minDistanceBetweenSpawning;
         public void Start()
         {
             if (spawnOnStart)
@@ -32,18 +35,18 @@ namespace Luke
             {
                 //hard coded height for the raycast to the ground
                 Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), 100, Random.Range(-spawnRange, spawnRange));
-                
-                //run through randoms
-                int randomPrefab = Random.Range(0, prefabs.Length);
 
-                //set current random on the loop
-                if(randomSpawn)
+                //loop through prefabs list
+                for (int j = 0; j < prefabs.Length; j++)
                 {
-                    currentPrefab = Instantiate(prefabs[randomPrefab], position, Quaternion.identity);
-                }
-                else
-                {
-                    for (int j = 0; j < prefabs.Length; j++)
+                    //set current random on the loop
+                    int randomPrefab = Random.Range(0, prefabs.Length);
+                    
+                    if (randomSpawn)
+                    {
+                        currentPrefab = Instantiate(prefabs[randomPrefab], position, Quaternion.identity);
+                    }
+                    else
                     {
                         currentPrefab = Instantiate(prefabs[j], position, Quaternion.identity);
                     }
