@@ -3,35 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using RileyMcGowan;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Damage : MonoBehaviour
 {
-     public SphereCollider sphere;
-     public float sphereRadius;
-
-     public List<GameObject> inCircle;
+     public int damageAmount;
+     [FormerlySerializedAs("inCircle")]
+     public List<GameObject> inCollider;
 
      private void Start()
      {
-          sphere = GetComponent<SphereCollider>();
-          sphere.radius = sphereRadius;
+          
      }
 
      private void FixedUpdate()
      {
-          foreach (var x in inCircle)
+          //this loop goes through all objects in the list and deals damage to them
+          foreach (var x in inCollider)
           {
-               x.GetComponent<Health>().DoDamage(1);
-                    Debug.Log("Damaging 10 Points to " + inCircle.Count + " items");
+               x.GetComponent<Health>().DoDamage(damageAmount);
+                    //Debug.Log("Damaging 10 Points to " + inCollider.Count + " items");
           }
      }
 
      private void OnTriggerEnter(Collider other)
      {
+          //when an object with health enters the collider it is added to the list
           if(other.transform.GetComponent<Health>() != null)
           {
-               Debug.Log("Health object found, adding to list");
-               inCircle.Add(other.gameObject);
+               inCollider.Add(other.gameObject);
+               //Debug.Log("Health object found, adding to list");
+          }
+     }
+
+     private void OnTriggerExit(Collider other)
+     {
+          //when an object that has health leaves the collider it is removed from the list 
+          if(other.transform.GetComponent<Health>() != null)
+          {
+               inCollider.Remove(other.gameObject);
+               //Debug.Log("Health object left the collider");
           }
      }
 }
