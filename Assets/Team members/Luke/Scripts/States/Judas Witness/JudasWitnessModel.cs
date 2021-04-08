@@ -16,6 +16,7 @@ namespace Luke
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
         public float timeGathering;
+        private Vector3 targetDirection;
         
 
         [Header("Audio")]
@@ -58,6 +59,13 @@ namespace Luke
             {
                 audioSource.Play();
             }
+        }
+
+        public void DirectionRaycast()
+        {
+            targetDirection = judasTarget.transform.position - transform.position;
+            
+            Debug.DrawLine(transform.position, judasTarget.transform.position, Color.green);
         }
     }
 }
