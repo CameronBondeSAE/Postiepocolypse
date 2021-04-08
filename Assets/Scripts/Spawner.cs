@@ -11,7 +11,7 @@ namespace Luke
         public int numberOfPrefabs;
         public GameObject[] prefabs;
         public float      spawnRange;
-        public float    ySpawnOffset = 1f;
+        public float    ySpawnGroundOffset = 1f;
         public bool spawnOnStart;
         public void Start()
         {
@@ -41,7 +41,7 @@ namespace Luke
                 Physics.Raycast(new Ray(position, Vector3.down), out hitInfo, 200f);
                 if (hitInfo.collider)
                 {
-                    currentPrefab.transform.position = hitInfo.point + new Vector3(0,ySpawnOffset, 0);
+                    currentPrefab.transform.position = hitInfo.point + new Vector3(0,ySpawnGroundOffset, 0);
                 }
                 //just in case the prefabs spawn in the ground
                 else
