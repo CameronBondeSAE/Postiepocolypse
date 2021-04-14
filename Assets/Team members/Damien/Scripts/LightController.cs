@@ -13,6 +13,7 @@ public class LightController : MonoBehaviour
 
     private void Start()
     {
+        flashOn = false;
     }
 
     private void Update()
@@ -20,7 +21,6 @@ public class LightController : MonoBehaviour
         if (flashOn)
         {
             light.intensity = 200000000f;
-            
         }
 
         else
@@ -29,15 +29,6 @@ public class LightController : MonoBehaviour
         }
         
         //if (Input.anyKey)
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                flashOn = true;
-                if (flashOn && Time.time - startTime > waitForSeconds)
-                {
-                    flashOn = false;
-                }
-            }
-        }
+        
     }
 }
