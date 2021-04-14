@@ -1618,7 +1618,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: df7d7dc24df86334db82099db98f63eb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1864,7 +1864,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 54e0e3a22309e11428339f5b67edc53b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1962,6 +1962,9 @@ GameObject:
   - component: {fileID: 7058318617128531735}
   - component: {fileID: 3956812273395593936}
   - component: {fileID: 6850868778339535585}
+  - component: {fileID: 215902256}
+  - component: {fileID: 215902257}
+  - component: {fileID: 215902258}
   m_Layer: 0
   m_Name: Blinder
   m_TagString: Untagged
@@ -2073,13 +2076,56 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7058318617128531734}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15a0d8d2cabb58347a03ed5e962d922f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scale: {x: 50, y: 0, z: 50}
   timeScale: 0.05
+--- !u!114 &215902256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058318617128531734}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e724e36405834fa192b36cd6a4e6059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manualUpdate: 0
+  thinkInterval: 0.1
+  scenario: {fileID: 11400000, guid: d3f59d5e568ff6749bdb0c6b8c2dba0b, type: 2}
+--- !u!114 &215902257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058318617128531734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc0548a8365998240a8868affe0a4009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  antAIAgent: {fileID: 215902256}
+  target: {fileID: 0}
+--- !u!114 &215902258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058318617128531734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e7358f952c78704d8e74f5eb6861980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light: {fileID: 6025210774468816826}
+  flashOn: 0
 --- !u!1 &7076765992571148482
 GameObject:
   m_ObjectHideFlags: 0
