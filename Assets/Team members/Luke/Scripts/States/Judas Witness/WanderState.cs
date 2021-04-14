@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Luke
 {
     public class WanderState : AntAIState
     {
         public GameObject owner;
+        public NavMeshAgent navMeshAgent;
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
+            navMeshAgent = owner.GetComponent<NavMeshAgent>();
         }
 
         public override void Enter()
@@ -20,6 +23,13 @@ namespace Luke
             base.Enter();
             
             Debug.Log("wander state");
+            
+            
+        }
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
             
             Finish();
         }

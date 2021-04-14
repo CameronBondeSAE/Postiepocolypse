@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Anthill.AI;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace Luke
@@ -12,10 +13,14 @@ namespace Luke
     {
         [Header("Other considerations")]
         public AntAIAgent antAIAgent;
+
+        public NavMeshAgent navMeshAgent;
         public JudasTarget judasTarget;
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
         public float timeGathering;
+        public float patrolSpeed;
+        private Vector3 waypoint;
 
 
         [Header("Audio")]
@@ -67,7 +72,7 @@ namespace Luke
 
         public void Patrol()
         {
-            
+            navMeshAgent.speed = patrolSpeed;
         }
     }
 }

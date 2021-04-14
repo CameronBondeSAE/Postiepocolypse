@@ -21,7 +21,7 @@ namespace Luke
             Debug.Log("find resource state");
 
             // HACK
-            var targets = FindObjectsOfType<JudasTarget>();
+            JudasTarget[] targets = FindObjectsOfType<JudasTarget>();
 
             // Pick a random target
             if (targets != null)
