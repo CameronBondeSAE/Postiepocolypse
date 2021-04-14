@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 4012591622684060849}
   - component: {fileID: 5555126118862272970}
   - component: {fileID: 5719859735224713059}
+  - component: {fileID: 2228857321506447193}
   m_Layer: 0
   m_Name: Player_WithRigidbody
   m_TagString: Untagged
@@ -296,7 +297,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6271187260368080590}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 50
   m_Drag: 1
   m_AngularDrag: 1.5
   m_UseGravity: 1
@@ -344,8 +345,9 @@ MonoBehaviour:
   _isSprinting: 0
   _groundAngle: 0
   _groundAngleOffset: 0
-  maxSpeed: 70
-  jumpForce: 70
+  maxSpeed: 6
+  sprintMultiplier: 1.5
+  jumpForce: 250
   _speed: 0
   groundAngle: 0
   groundAngleOffset: 0
@@ -453,7 +455,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   startingHealth: 100
-  maxHealth: 100
+  maxHealth: 250
   currentHealth: 0
   invincible: 0
 --- !u!114 &4012591622684060849
@@ -501,6 +503,20 @@ MonoBehaviour:
   syncInterval: 0.1
   flashlight: {fileID: 6732787804643739882}
   lightOn: 0
+--- !u!136 &2228857321506447193
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271187260368080590}
+  m_Material: {fileID: 13400000, guid: 2b44a5cf64d015643b0069a71faf751e, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6271187260610386039
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +528,6 @@ GameObject:
   - component: {fileID: 6271187260610386038}
   - component: {fileID: 6271187260610386043}
   - component: {fileID: 6271187260610386040}
-  - component: {fileID: 6271187260610386041}
   m_Layer: 0
   m_Name: VisualBody
   m_TagString: Untagged
@@ -561,7 +576,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 9107b4df6f0b8d44092ad6117a1db3d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -583,20 +598,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6271187260610386041
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6271187260610386039}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7271636079834535862
 GameObject:
   m_ObjectHideFlags: 0

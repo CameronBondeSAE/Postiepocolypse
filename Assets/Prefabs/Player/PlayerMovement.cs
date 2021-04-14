@@ -11,10 +11,10 @@ namespace AlexM
 	public class PlayerMovement : PlayerBase
 	{
 		public Inputs controls;
-		public float  maxSpeed  = 100f;
-		public float  jumpForce = 70f;
+		public float  maxSpeed         = 100f;
+		public float  sprintMultiplier = 1.5f;
 
-
+		public float jumpForce = 70f;
 
 
 		[SerializeField, Header("= Debug =")]
@@ -206,8 +206,7 @@ namespace AlexM
 		{
 			if (isLocalPlayer)
 			{
-				_movement = (_inputManager.moveDirection.y * _fwdDirection) +
-				            (_inputManager.moveDirection.x * _rightDirection);
+				_movement = (_inputManager.moveDirection.y * _fwdDirection) + (_inputManager.moveDirection.x * _rightDirection);
 				CmdMovementInput(_movement);
 			}
 		}
@@ -222,20 +221,18 @@ namespace AlexM
 		{
 			if (isLocalPlayer)
 			{
-				if (_isSprinting)
+				if (GetSpeed() < maxSpeed)
 				{
-					if (GetSpeed() < 25)
+					if (_isSprinting)
 					{
-						_rb.AddForce(_movement.normalized * ((maxSpeed * 2) * Time.fixedDeltaTime),
-							ForceMode.VelocityChange);
+						_rb.AddForce(_movement.normalized * ((maxSpeed * sprintMultiplier) * Time.fixedDeltaTime), ForceMode.VelocityChange);
 					}
-				}
-				else
-				{
-					if (GetSpeed() < 10)
+					else
 					{
-						_rb.AddForce(_movement.normalized * ((maxSpeed / 2) * Time.fixedDeltaTime),
-							ForceMode.VelocityChange);
+						// if (GetSpeed() < 10f)
+						// {
+						_rb.AddForce(_movement.normalized * (maxSpeed * Time.fixedDeltaTime), ForceMode.VelocityChange);
+						// }
 					}
 				}
 			}
@@ -250,16 +247,15 @@ namespace AlexM
 			GetGroundAngle();
 		}
 
-	#region Examples
+		#region Examples
 
 		/// <summary>
 		/// INPUT happens LOCALLY
 		/// >>sends COMMAND to SERVER
 		/// >>>SERVER RPC to all CLIENTS
 		/// </summary>
-
 		private bool examples;
 
-	#endregion
+		#endregion
 	}
 }
