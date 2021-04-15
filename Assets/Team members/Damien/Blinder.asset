@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blinder
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 55, y: 228}
+    position: {x: 31, y: 411}
     list:
     - id: 0
       name: Close to Target
@@ -36,7 +36,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 535, y: 428}
+    position: {x: 227, y: 411}
     pre:
     - id: 1
       value: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 735, y: 428}
+    position: {x: 427, y: 411}
     pre:
     - id: 1
       value: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 535, y: 248}
+    position: {x: 227, y: 231}
     pre:
     - id: 5
       value: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1135, y: 428}
+    position: {x: 827, y: 411}
     pre:
     - id: 0
       value: 1
@@ -90,7 +90,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 735, y: 248}
+    position: {x: 427, y: 231}
     pre:
     - id: 3
       value: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 1135, y: 248}
+    position: {x: 827, y: 231}
     pre:
     - id: 4
       value: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 0}
     cost: 0
-    position: {x: 535, y: 48}
+    position: {x: 227, y: 31}
     pre:
     - id: 5
       value: 1
@@ -125,7 +125,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 0}
     cost: 0
-    position: {x: 935, y: 48}
+    position: {x: 627, y: 31}
     pre:
     - id: 7
       value: 1
@@ -135,36 +135,36 @@ MonoBehaviour:
   goals:
   - name: Disorient Target
     isDefault: 1
-    position: {x: 1335, y: 428}
+    position: {x: 1027, y: 411}
     conditions:
     - id: 2
       value: 1
   - name: Arrive at target
     isDefault: 0
-    position: {x: 935, y: 428}
+    position: {x: 627, y: 411}
     conditions:
     - id: 0
       value: 1
   - name: Arrive at Energy
     isDefault: 0
-    position: {x: 935, y: 248}
+    position: {x: 627, y: 231}
     conditions:
     - id: 4
       value: 1
   - name: Fill Energy
     isDefault: 0
-    position: {x: 1335, y: 248}
+    position: {x: 1027, y: 231}
     conditions:
     - id: 5
       value: 1
   - name: Patrol
     isDefault: 0
-    position: {x: 735, y: 48}
+    position: {x: 427, y: 31}
     conditions:
     - id: 7
       value: 1
   worldStates:
-  - position: {x: 33, y: 746}
+  - position: {x: 228, y: 642}
     list:
     - id: 0
       value: 0

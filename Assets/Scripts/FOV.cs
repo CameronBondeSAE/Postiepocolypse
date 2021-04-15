@@ -9,8 +9,8 @@ namespace Damien
     {
         public LayerMask targets;
 
-        public float viewRadius;
-        [Range(0, 360)] public float viewAngle = 90;
+        public float viewRadius = 30f;
+        [Range(0, 360)] public float viewAngle = 90f;
 
 
         public List<Collider> listOfTargets = new List<Collider>();
