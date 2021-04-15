@@ -115,7 +115,10 @@ MonoBehaviour:
   spawnOnStart: 1
   randomSpawn: 0
   ySpawnGroundOffset: 1
-  minDistanceBetweenSpawning: 0
+  yAdjustablePosition: -50
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &211089926295112691
 MonoBehaviour:
   m_ObjectHideFlags: 0
