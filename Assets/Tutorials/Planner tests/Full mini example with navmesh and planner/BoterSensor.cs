@@ -12,7 +12,6 @@ namespace CameronBonde
 			Debug.Log("Collect conditions");
 		
 			aWorldState.BeginUpdate(aAgent.planner);
-			aWorldState.Set("Am I at the target position", false);
 			aWorldState.Set("Has target",                  aAgent.GetComponent<Boter_Model>().target != null);
 			aWorldState.EndUpdate();
 		}
