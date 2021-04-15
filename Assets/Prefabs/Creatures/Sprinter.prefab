@@ -146,10 +146,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoosting: 0
-  rb: {fileID: 2808703371730378015}
   Boost: 10
   energy: {fileID: 2808703371730378013}
-  Drain: 0
+  Drain: 0.5
 --- !u!114 &2808703371730378013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Amount: 100
-  Drain: 0
+  Drain: 0.5
   Regen: 10
 --- !u!54 &2808703371730378015
 Rigidbody:
