@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Luke
 {
-    public class Spawner : MonoBehaviour
+    public class Spawner : NetworkBehaviour
     {
         public int setsOfPrefabs;
         public GameObject[] prefabs;
         public float spawnRange;
         public bool spawnOnStart;
         public bool randomSpawn;
-        
         [Header("Spawn Ray-casting")]
         public float ySpawnGroundOffset = 1f;
         public float yAdjustablePosition;
         public LayerMask groundLayer;
         public float yGroundTestOffset = 5f;
-        public void Start()
+        public override void OnStartServer()
         {
+            base.OnStartServer();
             if (spawnOnStart)
             {
                 SpawnMultipleSets();
@@ -55,39 +56,49 @@ namespace Luke
         public GameObject SpawnSingle(GameObject prefab)
         {
             GameObject spawnedInstance;
-            //set current random on the loop
-            int randomPrefab = Random.Range(0, prefabs.Length);
-
-            //random position for spawn + an adjustable y position in case of very large prefabs
-            Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange),
-                transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
-            
-            if (randomSpawn)
+            if (isServer)
             {
-                spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
+                
+                //set current random on the loop
+                int randomPrefab = Random.Range(0, prefabs.Length);
+
+                //random position for spawn + an adjustable y position in case of very large prefabs
+                Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange),
+                    transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
+
+                if (randomSpawn)
+                {
+                    spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
+                    NetworkServer.Spawn(spawnedInstance);
+                }
+                else
+                {
+                    spawnedInstance = Instantiate(prefab, position, transform.rotation);
+                    NetworkServer.Spawn(spawnedInstance);
+                }
+
+                //raycast hit spawn pos
+                RaycastHit hitInfo;
+                Physics.Raycast(new Ray(position + new Vector3(0, yGroundTestOffset, 0),
+                    -transform.up), out hitInfo);
+                if (hitInfo.collider)
+                {
+                    spawnedInstance.transform.position = hitInfo.point + new Vector3(0, ySpawnGroundOffset, 0);
+                    Debug.Log(hitInfo.collider.gameObject.name);
+                }
+                //just in case the prefabs spawn in the ground
+                else
+                {
+                    Destroy(spawnedInstance);
+                    Debug.Log("Failed Spawn");
+                }
+                ///TODO: Keep on trying to find a surface instead of deleting
+                return spawnedInstance;
             }
             else
             {
-                spawnedInstance = Instantiate(prefab, position, transform.rotation);
+                return null;
             }
-
-            //raycast hit spawn pos
-            RaycastHit hitInfo;
-            Physics.Raycast(new Ray(position + new Vector3(0,yGroundTestOffset,0),
-                -transform.up), out hitInfo);
-            if (hitInfo.collider)
-            {
-                spawnedInstance.transform.position = hitInfo.point + new Vector3(0, ySpawnGroundOffset, 0);
-                Debug.Log(hitInfo.collider.gameObject.name);
-            }
-            //just in case the prefabs spawn in the ground
-            else
-            {
-                Destroy(spawnedInstance);
-                Debug.Log("Failed Spawn");
-            }
-            ///TODO: Keep on trying to find a surface instead of destroying (while loop?)
-            return spawnedInstance;
         }
     }
 }

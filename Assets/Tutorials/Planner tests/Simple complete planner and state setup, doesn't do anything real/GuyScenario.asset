@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GuyScenario
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 17, y: 73}
+    position: {x: 22, y: 45}
     list:
     - id: 0
       name: HasAmmo
@@ -26,7 +26,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 946235353482840474, guid: 6e9e85382cc65974d81783739c8f2d38, type: 3}
     cost: 0
-    position: {x: 542, y: 113}
+    position: {x: 547, y: 85}
     pre:
     - id: 0
       value: 1
@@ -39,7 +39,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 8409735986646044100, guid: c94a5c33b5d05b24490d693938388268, type: 3}
     cost: 0
-    position: {x: 756, y: 114}
+    position: {x: 761, y: 86}
     pre:
     - id: 0
       value: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 3454710352095945603, guid: ac8024657355dd140bcad78ddb6d7e1a, type: 3}
     cost: 0
-    position: {x: 326, y: 113}
+    position: {x: 331, y: 85}
     pre:
     - id: 2
       value: 0
@@ -61,18 +61,25 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 2361161832381532264, guid: 71ddd4468effd984ba94f3993b2c027c, type: 3}
     cost: 0
-    position: {x: 751, y: 336}
+    position: {x: 756, y: 308}
+    pre: []
+    post: []
+  - name: NewThing
+    isDefault: 0
+    state: {fileID: 7092896659260911183, guid: f6ea4748755c2464bbf5afaf2e8205f1, type: 3}
+    cost: 0
+    position: {x: 449, y: 312}
     pre: []
     post: []
   goals:
   - name: Kill player
     isDefault: 1
-    position: {x: 16, y: 342}
+    position: {x: 21, y: 314}
     conditions:
     - id: 1
       value: 1
   worldStates:
-  - position: {x: 16, y: 462}
+  - position: {x: 21, y: 434}
     list:
     - id: 0
       value: 0
