@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections;
+using Tanks;
 using TPUModelerEditor;
 
 [CustomEditor(typeof(FOV))]
@@ -21,7 +22,7 @@ public class FOVEditor : Editor
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngleA * fov.viewRadius);
         Handles.DrawLine(fov.transform.position, fov.transform.position + viewAngleB * fov.viewRadius);
 
-        foreach (Collider playerTarget in fov.listOfTargets)
+        foreach (GameObject playerTarget in fov.listOfTargets)
         {
             Handles.color = Color.red;
             Handles.DrawLine(fov.transform.position, playerTarget.transform.position);
