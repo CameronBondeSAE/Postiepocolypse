@@ -1,23 +1,30 @@
-﻿using Anthill.AI;
+﻿using System.Runtime.CompilerServices;
+using Anthill.AI;
+using NodeCanvas.Tasks.Actions;
 using UnityEngine;
 
 namespace Damien
 {
     public class PickTarget : AntAIState
     {
-        public GameObject blinder;
+        public GameObject owner;
 
+        public override void Create(GameObject aGameObject)
+        {
+            base.Create(aGameObject);
+
+            owner = aGameObject;
+        }
+        
         public override void Enter()
         {
             base.Enter();
-
-            Target[] targets = FindObjectsOfType<Target>();
-            Target target = targets[Random.Range(0, targets.Length - 1)];
-
-            if (target == null)
-            {
-
-            }
+            Debug.Log("Pick Target");
+            
+            
+            
+            //Send the target to the parent
+          //  owner.GetComponent<Blinder>().target =;
 
             Finish();
         }

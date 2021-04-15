@@ -1618,7 +1618,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: df7d7dc24df86334db82099db98f63eb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1629,7 +1629,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 40
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1832,7 +1832,7 @@ GameObject:
   - component: {fileID: 7058318616107597940}
   - component: {fileID: 7058318616107597941}
   m_Layer: 0
-  m_Name: LowHum
+  m_Name: Flies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1862,9 +1862,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 54e0e3a22309e11428339f5b67edc53b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1c787f295a941f14abc2563fd03e993d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1875,7 +1875,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 40
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1965,6 +1965,7 @@ GameObject:
   - component: {fileID: 215902256}
   - component: {fileID: 215902257}
   - component: {fileID: 215902258}
+  - component: {fileID: 215902250}
   m_Layer: 0
   m_Name: Blinder
   m_TagString: Untagged
@@ -2090,7 +2091,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7058318617128531734}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e724e36405834fa192b36cd6a4e6059, type: 3}
   m_Name: 
@@ -2127,6 +2128,18 @@ MonoBehaviour:
   light: {fileID: 6025210774468816826}
   blindPlayer: 0
   flashOn: 0
+--- !u!114 &215902250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058318617128531734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1ca5783a3abb24c98e249ac9ffb016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7076765992571148482
 GameObject:
   m_ObjectHideFlags: 0

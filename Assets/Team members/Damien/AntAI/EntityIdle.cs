@@ -7,5 +7,6 @@ namespace Damien
 {
     public class EntityIdle : AntAIState
     {
+        
     }
 }
