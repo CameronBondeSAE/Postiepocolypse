@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using RileyMcGowan;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,7 +11,7 @@ namespace ZachFrench
 {
 
 
-    public class RespawnManager : MonoBehaviour
+    public class RespawnManager : NetworkBehaviour
     {
 
         public Vector3 homeSpawn;
@@ -35,8 +36,14 @@ namespace ZachFrench
         
         
         // Civilian don't get created instead are still currently part of the list
-        void Start()
+        public override void OnStartServer()
         {
+            base.OnStartServer();
+
+            if (!isServer)
+            {
+                return;
+            }
             homeSpawn = transform.position;
             postieNetworkManager.newPlayerEvent += PostieNetworkManagerOnNewPlayerEvent;
             postieNetworkManager.playerDisconnectedEvent += PostieNetworkManagerOnPlayerDisconnectedEvent;
