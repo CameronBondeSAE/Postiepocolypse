@@ -20,7 +20,12 @@ namespace Luke
         public AudioChorusFilter chorusFilter;
         public float timeGathering;
         public float patrolSpeed;
-        private Vector3 waypoint;
+        
+        [Header("Patrol variables")]
+        public Vector3 scale = Vector3.one;
+        
+        [HideInInspector]
+        public Vector3 startPos;
 
 
         [Header("Audio")]
@@ -50,8 +55,11 @@ namespace Luke
         {
             Debug.Log("Before states");
             
+            startPos = transform.position;
+            
             InvokeRepeating("BasicNoises",timeBetweenAudio,audioRepeatRate);
         }
+        
 
         public void BasicNoises()
         {
@@ -73,6 +81,12 @@ namespace Luke
         public void Patrol()
         {
             navMeshAgent.speed = patrolSpeed;
+            
+            float x = Mathf.PerlinNoise(Time.time, startPos.x) * scale.x;
+            float y = Mathf.PerlinNoise(Time.time, startPos.y) * scale.y;
+            float z = Mathf.PerlinNoise(Time.time, startPos.z) * scale.z;
+            
+            transform.position = startPos + new Vector3(x, y, z);
         }
     }
 }

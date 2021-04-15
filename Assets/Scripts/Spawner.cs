@@ -86,7 +86,7 @@ namespace Luke
                 Destroy(spawnedInstance);
                 Debug.Log("Failed Spawn");
             }
-            ///TODO: Keep on trying to find a surface instead of deleting
+            ///TODO: Keep on trying to find a surface instead of destroying (while loop?)
             return spawnedInstance;
         }
     }
