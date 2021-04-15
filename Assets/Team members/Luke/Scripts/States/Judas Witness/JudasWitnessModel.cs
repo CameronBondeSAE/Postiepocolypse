@@ -56,7 +56,7 @@ namespace Luke
             Debug.Log("Before states");
             
             startPos = transform.position;
-            
+
             InvokeRepeating("BasicNoises",timeBetweenAudio,audioRepeatRate);
         }
         

@@ -6,12 +6,14 @@ namespace Luke
     public class FindResourceState : AntAIState
     {
         public GameObject owner;
+        public JudasTarget judasTargetPos;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
+            judasTargetPos = GetComponent<JudasTarget>();
         }
 
         public override void Enter()
@@ -26,8 +28,16 @@ namespace Luke
             // Pick a random target
             if (targets != null)
             {
-                var judasTargetPos = targets[Random.Range(0, targets.Length)];
-                owner.GetComponent<JudasWitnessModel>().judasTarget = judasTargetPos;
+                if (judasTargetPos == null)
+                {
+                    return;
+                }
+                else
+                {
+                    judasTargetPos = targets[Random.Range(0, targets.Length)];
+
+                    owner.GetComponent<JudasWitnessModel>().judasTarget = judasTargetPos;
+                }
             }
 
             Finish();
