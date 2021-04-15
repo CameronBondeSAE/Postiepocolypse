@@ -19,8 +19,9 @@ namespace Luke
         public float yAdjustablePosition;
         public LayerMask groundLayer;
         public float yGroundTestOffset = 5f;
-        public void Start()
+        public override void OnStartServer()
         {
+            base.OnStartServer();
             if (spawnOnStart)
             {
                 SpawnMultipleSets();
@@ -68,14 +69,12 @@ namespace Luke
                 if (randomSpawn)
                 {
                     spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
-                    GameObject newGO = Instantiate(prefabs[randomPrefab], position, Quaternion.identity);
-                    NetworkServer.Spawn(newGO);
+                    NetworkServer.Spawn(spawnedInstance);
                 }
                 else
                 {
                     spawnedInstance = Instantiate(prefab, position, transform.rotation);
-                    GameObject newGO = Instantiate(prefab, position, Quaternion.identity);
-                    NetworkServer.Spawn(newGO);
+                    NetworkServer.Spawn(spawnedInstance);
                 }
 
                 //raycast hit spawn pos

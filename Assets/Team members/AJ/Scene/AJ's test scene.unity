@@ -155,9 +155,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  setsOfPrefabs: 1
+  setsOfPrefabs: 2
   prefabs:
-  - {fileID: 5412636322028122213, guid: 2b64a713dbd76954db51f78721f45ffb, type: 3}
+  - {fileID: 8373218265869093888, guid: 12a190d26c80d6b4894a268de9e84876, type: 3}
   spawnRange: 0
   spawnOnStart: 1
   randomSpawn: 0
@@ -206,12 +206,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5583273272166823888, guid: a38311411e9eab14a8d0cb561f095153, type: 3}
       propertyPath: spawnPrefabs.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5583273272166823888, guid: a38311411e9eab14a8d0cb561f095153, type: 3}
       propertyPath: spawnPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 5412636322028122213, guid: 2b64a713dbd76954db51f78721f45ffb, type: 3}
+      objectReference: {fileID: 8373218265869093888, guid: 12a190d26c80d6b4894a268de9e84876, type: 3}
+    - target: {fileID: 5583273272166823888, guid: a38311411e9eab14a8d0cb561f095153, type: 3}
+      propertyPath: spawnPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8373218265869093888, guid: 12a190d26c80d6b4894a268de9e84876, type: 3}
+    - target: {fileID: 5583273272166823888, guid: a38311411e9eab14a8d0cb561f095153, type: 3}
+      propertyPath: spawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8373218265869093888, guid: 12a190d26c80d6b4894a268de9e84876, type: 3}
+    - target: {fileID: 5583273272166823888, guid: a38311411e9eab14a8d0cb561f095153, type: 3}
+      propertyPath: spawnPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 8373218265869093888, guid: 12a190d26c80d6b4894a268de9e84876, type: 3}
     - target: {fileID: 5583273272166823891, guid: a38311411e9eab14a8d0cb561f095153, type: 3}
       propertyPath: m_Name
       value: Network manager
