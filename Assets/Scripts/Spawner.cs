@@ -14,7 +14,7 @@ namespace Luke
         public bool spawnOnStart;
         public bool randomSpawn;
         
-        [Header("Ray-casting")]
+        [Header("Spawn Ray-casting")]
         public float ySpawnGroundOffset = 1f;
         public float yAdjustablePosition;
         public void Start()
@@ -25,6 +25,9 @@ namespace Luke
             }
         }
 
+        /// <summary>
+        /// TODO: Need to figure out how to have the spawn ignore everything except the ground and also the option to part the spawns further away.
+        /// </summary>
         //spawn with the amount numberOfPrefabs with a range of different types of prefabs
         public void SpawnSetPrefabs()
         {
@@ -35,7 +38,7 @@ namespace Luke
             {
                 //hard coded height for the raycast to the ground
                 Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange),
-                    yAdjustablePosition + transform.position.y, Random.Range(-spawnRange, spawnRange));
+                    transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
 
                 currentPrefab = SpawnPrefab(currentPrefab, position);
             }
@@ -64,7 +67,7 @@ namespace Luke
 
             //raycast hit spawn pos
             RaycastHit hitInfo;
-            Physics.Raycast(new Ray(position, Vector3.down), out hitInfo);
+            Physics.Raycast(new Ray(position, -transform.up), out hitInfo);
             if (hitInfo.collider)
             {
                 currentPrefab.transform.position = hitInfo.point + new Vector3(0, ySpawnGroundOffset, 0);
@@ -73,6 +76,7 @@ namespace Luke
             else
             {
                 Destroy(currentPrefab);
+                Debug.Log("Failed Spawn");
             }
 
             return currentPrefab;
