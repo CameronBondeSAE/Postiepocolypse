@@ -188,29 +188,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3270292016320185728, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
-      propertyPath: civSpawn
-      value: 
-      objectReference: {fileID: 1577826189}
-    - target: {fileID: 3270292016320185728, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
-      propertyPath: players.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270292016320185728, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
       propertyPath: postieNetworkManager
       value: 
       objectReference: {fileID: 798427398}
-    - target: {fileID: 3270292016320185728, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
-      propertyPath: players.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270292016320185728, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
-      propertyPath: players.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270292016320185729, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 3270292016320185729, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
       propertyPath: m_Name
       value: RespawnManager
@@ -930,30 +910,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
---- !u!1 &1577826188 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3270292016320185729, guid: 056dcd9f8e445f440ada4addccefb82d, type: 3}
-  m_PrefabInstance: {fileID: 529436226}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1577826189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577826188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de923142510d91445aa64c49ca3dd5f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  setsOfPrefabs: 0
-  prefabs: []
-  spawnRange: 0
-  spawnOnStart: 0
-  randomSpawn: 0
-  ySpawnGroundOffset: 1
-  yAdjustablePosition: 0
 --- !u!1001 &3003114599433103519
 PrefabInstance:
   m_ObjectHideFlags: 0
