@@ -13,6 +13,8 @@ public class Monster_Sensor : MonoBehaviour, ISense
         aWorldState.BeginUpdate(aAgent.planner);
         //Set our current location to not there
         aWorldState.Set("Am I here", false);
+        //Set our safe state to false for worldstate reasons
+        aWorldState.Set("Am I safe", false);
         //Check if we have a target andd if not false it
         aWorldState.Set("Target Picked", aAgent.GetComponent<Monster_Main>().currentTarget != null);
         //End our meddling

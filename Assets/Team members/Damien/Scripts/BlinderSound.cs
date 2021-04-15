@@ -10,6 +10,6 @@ public class BlinderSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        laughing.cutoffFrequency = Mathf.PerlinNoise(Time.time / 2f, 0) * 1000f + 5000;
+        laughing.cutoffFrequency = Mathf.PerlinNoise(Time.time / 2f, 0) * 3000f + 5000;
     }
 }

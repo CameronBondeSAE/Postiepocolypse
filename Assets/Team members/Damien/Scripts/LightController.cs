@@ -17,10 +17,9 @@ public class LightController : MonoBehaviour
         flashOn = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (blindPlayer)
-        {
+       
             if (flashOn)
             {
                 light.intensity = 200000000f;
@@ -30,13 +29,8 @@ public class LightController : MonoBehaviour
             if (!flashOn)
             {
                 light.intensity = 0.2f;
-                flashOn = true;
             }
-        }
-        else
-        {
-            light.intensity = 0.2f;
-        }
+        
         
         
     }

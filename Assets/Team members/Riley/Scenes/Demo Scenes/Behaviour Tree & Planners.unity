@@ -123,6 +123,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 85ce0929bd122554cbede93f9d62d286, type: 2}
+--- !u!1 &64113413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64113414}
+  - component: {fileID: 64113415}
+  m_Layer: 0
+  m_Name: ChildRaycast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64113414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64113413}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1428325367}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &64113415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64113413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc566b044cb4d549af2d6f833211ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToPlatformInfo: 0
+  RaycastHitLayer:
+    serializedVersion: 2
+    m_Bits: 2064
 --- !u!1 &206860215
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +350,7 @@ GameObject:
   - component: {fileID: 343795468}
   - component: {fileID: 343795467}
   - component: {fileID: 343795466}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1813,6 +1860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2046058432}
   move: 1
+  floatingHeight: 15
 --- !u!65 &1283497095
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2023,6 +2071,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1428325367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2158803128251731822, guid: 75eea2cc4e135c44692b3233dac638db, type: 3}
+  m_PrefabInstance: {fileID: 2158803128110052330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1480025998
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,6 +3243,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 2046058432}
+    - target: {fileID: 2158803128251731861, guid: 75eea2cc4e135c44692b3233dac638db, type: 3}
+      propertyPath: childRaycast
+      value: 
+      objectReference: {fileID: 64113413}
+    - target: {fileID: 2158803128251731861, guid: 75eea2cc4e135c44692b3233dac638db, type: 3}
+      propertyPath: floatingHeight
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75eea2cc4e135c44692b3233dac638db, type: 3}
 --- !u!1001 &2652843482594934899

@@ -5,11 +5,10 @@ using UnityEngine;
 
 namespace ZachFrench
 {
-
-
-
+    
     public class MovingTowardsPlayer : AntAIState
     {
+        
         // Start is called before the first frame update
         void Start()
         {
