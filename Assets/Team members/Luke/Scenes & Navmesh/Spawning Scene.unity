@@ -184,6 +184,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1248257494764712657, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
+      propertyPath: sceneId
+      value: 1985300170
+      objectReference: {fileID: 0}
     - target: {fileID: 688555602209672504, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
       propertyPath: spawnRange
       value: 10
@@ -360,6 +364,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1248257494764712657, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
+      propertyPath: sceneId
+      value: 2074137237
+      objectReference: {fileID: 0}
     - target: {fileID: 688555602209672504, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
       propertyPath: spawnRange
       value: 20
@@ -370,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 688555602209672504, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
       propertyPath: setsOfPrefabs
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 688555602209672504, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
       propertyPath: groundLayer.m_Bits
@@ -955,6 +963,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1248257494764712657, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
+      propertyPath: sceneId
+      value: 4116889781
+      objectReference: {fileID: 0}
     - target: {fileID: 688555602209672504, guid: b94c15157010ea945b7d8c0d57e11100, type: 3}
       propertyPath: spawnRange
       value: 50
