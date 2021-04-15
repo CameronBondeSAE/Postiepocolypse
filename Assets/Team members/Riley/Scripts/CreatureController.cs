@@ -8,6 +8,8 @@ public class CreatureController : MonoBehaviour
 {
     public GameObject target;
     public bool move;
+    public float floatingHeight;
+    private RaycastHandler childRaycastHandler;
     private bool invertDirection;
     private float directionToTarget;
     private Vector3 vectorToTarget;
@@ -24,10 +26,28 @@ public class CreatureController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         childHaveDamaged = GetComponentInChildren<CreatureDamage>();
+        if (GetComponentInChildren<RaycastHandler>() != null)
+        {
+            childRaycastHandler = GetComponentInChildren<RaycastHandler>();
+        }
     }
 
     void FixedUpdate()
     {
+        if (childRaycastHandler.distanceToPlatformInfo > floatingHeight && childRaycastHandler != null)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z);
+        }
+        else
+        {
+            if (childRaycastHandler.distanceToPlatformInfo != floatingHeight && childRaycastHandler != null)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
+            }
+        }
+
+
+
         perlinNoise = Mathf.PerlinNoise(Random.Range(1,10), Random.Range(1,10));
         invertDirection = childHaveDamaged.haveDamaged;
         if (invertDirection != true && rotateSpeed != 1)
