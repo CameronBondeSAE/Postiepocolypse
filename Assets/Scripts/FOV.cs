@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tanks;
 using UnityEngine;
 
 
@@ -13,7 +14,7 @@ namespace Damien
         [Range(0, 360)] public float viewAngle = 90f;
 
 
-        public List<Collider> listOfTargets = new List<Collider>();
+        public List<GameObject> listOfTargets = new List<GameObject>();
 
         private void Start()
         {
@@ -47,7 +48,7 @@ namespace Damien
                     
                     if(hit.collider == targetsInViewRadius[i])
                     {
-                        listOfTargets.Add(target);
+                        listOfTargets.Add(target.gameObject);
                     }
                 }
             }
