@@ -12,8 +12,8 @@ namespace ZachFrench
     public class GamemodeManager : MonoBehaviour
     {
         // Make sure that there are already the other managers in the scene as these only grab them and don't spawn them
-        private RespawnManager rm;
-        private ResourceSpawner rs;
+        private RespawnManager respawnManager;
+        private ResourceSpawner resourceSpawner;
         public Luke.Spawner portalSpawner;
         //These are just set values for testing and can be altered in code or in the scene 
         public int civilianCount = 5;
@@ -25,13 +25,13 @@ namespace ZachFrench
         void Awake()
         {
             //Finds the other managers 
-            rm = FindObjectOfType<RespawnManager>();
-            rs = FindObjectOfType<ResourceSpawner>();
+            respawnManager = FindObjectOfType<RespawnManager>();
+            resourceSpawner = FindObjectOfType<ResourceSpawner>();
 
             //this sets the values within the managers to the values located in the Gamemode Manager
             //first is the respawn manager 
-            rm.numberOfCivilian = civilianCount;
-            rm.numberOfPlayers = playerCount;
+            respawnManager.numberOfCivilian = civilianCount;
+            respawnManager.numberOfPlayers = playerCount;
             //PortalSpawner is next 
             //Setting the amount of portals to spawn
             portalSpawner.setsOfPrefabs = portalCount;
