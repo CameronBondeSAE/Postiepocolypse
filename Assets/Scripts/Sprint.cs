@@ -4,11 +4,12 @@ namespace TimPearson
 {
     /// <summary>
     ///     Needs to have the Energy Script to function.
+    ///     Also needs to have a rigidbody component
     /// </summary>
     public class Sprint : MonoBehaviour
     {
         public bool isBoosting;
-        public Rigidbody rb;
+        private Rigidbody rb;
         public float Boost;
         public Energy energy;
         public float Drain;

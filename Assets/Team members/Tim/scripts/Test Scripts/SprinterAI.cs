@@ -5,7 +5,7 @@ namespace TimPearson
 {
     public class SprinterAI : MonoBehaviour
     {
-        public Target target;
+        public WaterTarget target;
         public AntAIAgent antAIAgent;
         public Rigidbody rb;
         public LayerMask RaycastHitLayer;

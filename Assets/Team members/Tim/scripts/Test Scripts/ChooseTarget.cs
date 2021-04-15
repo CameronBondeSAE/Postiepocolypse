@@ -8,7 +8,7 @@ namespace TimPearson
     public class ChooseTarget : AntAIState
     {
         private GameObject parent;
-        public Target[] targets;
+        public WaterTarget[] targets;
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -20,8 +20,8 @@ namespace TimPearson
             base.Enter();
             Debug.Log("Finding Target");
             //bodgejob array probs should do a manager
-            targets = FindObjectsOfType<Target>();
-            Target target = targets[Random.Range(0, targets.Length)];
+            targets = FindObjectsOfType<WaterTarget>();
+            WaterTarget target = targets[Random.Range(0, targets.Length)];
             if (target != null)
             {
                 parent.GetComponent<SprinterAI>().target = target;

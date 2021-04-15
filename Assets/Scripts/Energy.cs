@@ -7,7 +7,6 @@ namespace TimPearson
     
 public class Energy : MonoBehaviour
 {
-    [Range(0f,100f)]
     public float Amount;
     private bool isUsing = true;
     public float Drain;
