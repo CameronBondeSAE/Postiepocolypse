@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Damien
 {
-    public class BlindTarget : AntAIState
+    public class PickEnergy : AntAIState
     {
         // Start is called before the first frame update
         void Start()

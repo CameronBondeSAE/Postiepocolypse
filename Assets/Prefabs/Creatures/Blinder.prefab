@@ -2125,6 +2125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light: {fileID: 6025210774468816826}
+  blindPlayer: 0
   flashOn: 0
 --- !u!1 &7076765992571148482
 GameObject:
