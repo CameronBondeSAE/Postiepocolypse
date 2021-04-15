@@ -44,11 +44,8 @@ namespace ZachFrench
             portalSpawner.setsOfPrefabs = portalCount;
             //Setting the spawn offset of spawners
             portalSpawner.spawnRange = portalSpawnRange;
-            //checking for bool, to make sure that we can spawn/start spawning the portals
-            if (portalSpawner.spawnOnStart == false)
-            {
-                portalSpawner.spawnOnStart = true;
-            }
+            //Using new Spawner code 
+            portalSpawner.SpawnMultipleSets();
         }
     }
 }
