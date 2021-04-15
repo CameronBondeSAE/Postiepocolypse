@@ -8,7 +8,6 @@ using UnityEngine.Serialization;
 public class Damage : MonoBehaviour
 {
      public int damageAmount;
-     [FormerlySerializedAs("inCircle")]
      public List<GameObject> inCollider;
 
      private void Start()
