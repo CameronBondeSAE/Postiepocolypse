@@ -43,7 +43,7 @@ namespace ZachFrench
 
             for (int i = 0; i < numberOfCivilian; i++)
             {
-                civilians.Add(civSpawn.SpawnPrefab(civilianPrefab, transform.position));
+                civilians.Add(civSpawn.SpawnSingle(civilianPrefab));
             }
         }
 
