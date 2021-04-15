@@ -26,10 +26,10 @@ namespace CameronBonde
 
 
 			// HACK
-			FakeTarget[] fakeTargets = FindObjectsOfType<FakeTarget>();
+			WaterTarget[] fakeTargets = FindObjectsOfType<WaterTarget>();
 
 			// Pick a random target
-			FakeTarget fakeTarget = fakeTargets[Random.Range(0, fakeTargets.Length)];
+			WaterTarget fakeTarget = fakeTargets[Random.Range(0, fakeTargets.Length)];
 
 			if (fakeTarget != null)
 			{

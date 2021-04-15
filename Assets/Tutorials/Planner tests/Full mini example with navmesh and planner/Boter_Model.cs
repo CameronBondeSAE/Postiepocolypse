@@ -10,11 +10,12 @@ namespace CameronBonde
 	{
 		public AntAIAgent antAIAgent;
 
-		public FakeTarget target;
+		public WaterTarget target;
 	
 		// Start is called before the first frame update
 		void Start()
 		{
+			// You can set a lot of the Planner in code as well as the graphical editor
 			antAIAgent.SetGoal("Arrive at target");
 		
 			// antAIAgent.worldState.BeginUpdate(antAIAgent.planner);

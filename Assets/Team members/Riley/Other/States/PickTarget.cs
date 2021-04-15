@@ -21,10 +21,10 @@ namespace RileyMcGowan
             base.Enter();
             Debug.Log("Pick Target");
             //Store all possible targets
-            FakeTarget[] targetArray = FindObjectsOfType<FakeTarget>();
+            WaterTarget[] targetArray = FindObjectsOfType<WaterTarget>();
             
             //Set the target
-            FakeTarget currentTarget = targetArray[Random.Range(0, targetArray.Length)];
+			WaterTarget currentTarget = targetArray[Random.Range(0, targetArray.Length)];
             
             //Send the target to the parent
             owner.GetComponent<Monster_Main>().currentTarget = currentTarget;

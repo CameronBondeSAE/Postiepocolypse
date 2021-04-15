@@ -10,7 +10,7 @@ namespace RileyMcGowan
     public class Monster_Main : MonoBehaviour
     {
         private AntAIAgent antAIAgent;
-        public FakeTarget currentTarget;
+        public WaterTarget currentTarget;
         public float safeDistance = 1f;
         private float directionToTarget;
         private Vector3 vectorToTarget;
