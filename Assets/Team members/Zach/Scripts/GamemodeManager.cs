@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using AJ;
+using Mirror;
 using Niall;
 using UnityEngine;
 using ZachFrench;
@@ -9,7 +10,7 @@ namespace ZachFrench
 {
 
 
-    public class GamemodeManager : MonoBehaviour
+    public class GamemodeManager : NetworkBehaviour
     {
         // Make sure that there are already the other managers in the scene as these only grab them and don't spawn them
         private RespawnManager respawnManager;
@@ -22,8 +23,14 @@ namespace ZachFrench
         public float portalSpawnRange = 50;
 
         // Start is called before the first frame update
-        void Awake()
+        public override void OnStartServer()
         {
+            base.OnStartServer();
+
+            if (!isServer)
+            {
+                return;
+            }
             //Finds the other managers 
             respawnManager = FindObjectOfType<RespawnManager>();
             resourceSpawner = FindObjectOfType<ResourceSpawner>();
@@ -42,12 +49,6 @@ namespace ZachFrench
             {
                 portalSpawner.spawnOnStart = true;
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }
