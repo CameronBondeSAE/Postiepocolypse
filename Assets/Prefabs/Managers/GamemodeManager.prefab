@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8badf2e1e53bf47857b1a894c45052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalSpawner: {fileID: 0}
+  portalSpawner: {fileID: 938057395}
   civilianCount: 5
   playerCount: 2
   portalCount: 3
-  portalOffset: 20
+  portalSpawnRange: 50
 --- !u!114 &938057395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,9 +61,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de923142510d91445aa64c49ca3dd5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPrefabs: 3
+  syncMode: 0
+  syncInterval: 0.1
+  setsOfPrefabs: 0
   prefabs:
   - {fileID: 211089926295112692, guid: 9efe3638f4df0814f9646abbf78c9f5a, type: 3}
-  spawnRange: 5
-  ySpawnGroundOffset: 1
+  spawnRange: 50
   spawnOnStart: 0
+  randomSpawn: 0
+  ySpawnGroundOffset: 1
+  yAdjustablePosition: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  yGroundTestOffset: 5

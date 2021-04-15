@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3270292016320185731}
   - component: {fileID: 3270292016320185728}
+  - component: {fileID: 1577826189}
   m_Layer: 0
   m_Name: RespawnManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -44,11 +45,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   homeSpawn: {x: 0, y: 0, z: 0}
-  civSpawn: {x: 0, y: 0, z: 0}
   playerSpawn: {x: 0, y: 0, z: 0}
-  playerPrefab: {fileID: 4937713751050895461, guid: 35f478af4476a1d44a040c4b6ee9b6eb, type: 3}
   civilianPrefab: {fileID: 5300904820060497483, guid: 5f225be61f23361489c7676488472793, type: 3}
   numberOfCivilian: 0
   numberOfPlayers: 0
   civilians: []
   players: []
+  postieNetworkManager: {fileID: 0}
+  civSpawn: {fileID: 1577826189}
+--- !u!114 &1577826189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270292016320185729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de923142510d91445aa64c49ca3dd5f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  setsOfPrefabs: 0
+  prefabs: []
+  spawnRange: 0
+  spawnOnStart: 0
+  randomSpawn: 0
+  ySpawnGroundOffset: 1
+  yAdjustablePosition: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  yGroundTestOffset: 5
