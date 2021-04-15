@@ -15,13 +15,13 @@ namespace ZachFrench
 
         public Vector3 homeSpawn;
         
-        public Vector3 civSpawn;
+        //public Vector3 civSpawn;
 
         public Vector3 playerSpawn;
 
         public GameObject civilianPrefab;
 
-        public int numberOfCivilian;
+        public int numberOfCivilian = 4;
 
         public int numberOfPlayers;
 
@@ -30,22 +30,20 @@ namespace ZachFrench
         public List<GameObject> players;
 
         public PostieNetworkManager postieNetworkManager;
+
+        public Luke.Spawner civSpawn;
         
         
         // Civilian don't get created instead are still currently part of the list
         void Start()
         {
             homeSpawn = transform.position;
-            numberOfCivilian = 4;
-            postieNetworkManager = FindObjectOfType<PostieNetworkManager>();
             postieNetworkManager.newPlayerEvent += PostieNetworkManagerOnNewPlayerEvent;
             postieNetworkManager.playerDisconnectedEvent += PostieNetworkManagerOnPlayerDisconnectedEvent;
 
             for (int i = 0; i < numberOfCivilian; i++)
             {
-                civSpawn = new Vector3(homeSpawn.x + Random.Range(0,5),homeSpawn.y,homeSpawn.z + Random.Range(0,5));
-                civilians.Add(Instantiate(civilianPrefab,civSpawn,new Quaternion(0,0,0,0)));
-                //civilians[i].GetComponent<Health>().deathEvent += RespawnAfterDeath;
+                civilians.Add(civSpawn.SpawnPrefab(civilianPrefab, transform.position));
             }
         }
 

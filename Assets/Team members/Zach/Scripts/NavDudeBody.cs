@@ -7,7 +7,6 @@ using UnityEngine;
 namespace ZachFrench
 {
 
-
     public class NavDudeBody : MonoBehaviour
     {
         public Target target;

@@ -31,7 +31,7 @@ namespace ZachFrench
             //signed angle uses the distance from target and the forward of the object to calculate the angle 
             angle = Vector3.SignedAngle(targetAngle, forward, Vector3.up);
             Debug.Log(angle);
-            rb.rotation = new Quaternion(0, angle, 0, 0);
+            //rb.rotation = new Quaternion(0, angle, 0, 0);
             rb.AddRelativeForce(targetAngle.normalized * speed);
 
             Debug.DrawLine(transform.position, target.transform.position);

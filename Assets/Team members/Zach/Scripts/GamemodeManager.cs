@@ -27,8 +27,7 @@ namespace ZachFrench
             //Finds the other managers 
             rm = FindObjectOfType<RespawnManager>();
             rs = FindObjectOfType<ResourceSpawner>();
-            portalSpawner = FindObjectOfType<Luke.Spawner>();
-          
+
             //this sets the values within the managers to the values located in the Gamemode Manager
             //first is the respawn manager 
             rm.numberOfCivilian = civilianCount;
