@@ -1,6 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Anthill.AI;
-using NodeCanvas.Tasks.Actions;
 using UnityEngine;
 
 namespace Damien
@@ -8,6 +8,8 @@ namespace Damien
     public class PickTarget : AntAIState
     {
         public GameObject owner;
+
+        private List<GameObject>[] targets;
 
         public override void Create(GameObject aGameObject)
         {
@@ -18,12 +20,13 @@ namespace Damien
         
         public override void Enter()
         {
+            
             base.Enter();
             Debug.Log("Pick Target");
-            
-            
-            
-            //Send the target to the parent
+           //TODO:FINISH THIS
+           //owner.GetComponent<FOV>().listOfTargets
+
+                //Send the target to the parent
           //  owner.GetComponent<Blinder>().target =;
 
             Finish();

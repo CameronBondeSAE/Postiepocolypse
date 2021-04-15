@@ -1,9 +1,6 @@
 ﻿using Damien;
 using UnityEditor;
 using UnityEngine;
-using System.Collections;
-using Tanks;
-using TPUModelerEditor;
 
 [CustomEditor(typeof(FOV))]
 public class FOVEditor : Editor
