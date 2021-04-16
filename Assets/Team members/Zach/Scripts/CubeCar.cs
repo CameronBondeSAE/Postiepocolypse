@@ -32,7 +32,7 @@ namespace Zach
         void Update()
         {
           Wheels();
-          SpringForce();
+          //SpringForce();
         }
 
 
@@ -69,7 +69,7 @@ namespace Zach
             }
         }
 
-        void SpringForce()
+        /*void SpringForce()
         {
             //Raycast for the height of car/spring 
             Origin = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -90,6 +90,6 @@ namespace Zach
 
             Rigidbody.AddRelativeForce(0,maxForce - hitinfo.distance,0);
 
-        }
+        }*/
     }
 }
