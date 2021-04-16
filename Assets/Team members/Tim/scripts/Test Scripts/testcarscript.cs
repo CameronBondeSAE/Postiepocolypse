@@ -42,7 +42,7 @@ public class testcarscript : MonoBehaviour
         {
             rb.AddRelativeTorque(0,-Turn,0);
         }
-        if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && sprint.energy.Amount > 0)
+        if(InputSystem.GetDevice<Keyboard>().rightCtrlKey.wasPressedThisFrame && sprint.energy.CurrentAmount > 0)
         {
             sprint.isBoosting = true;
         }

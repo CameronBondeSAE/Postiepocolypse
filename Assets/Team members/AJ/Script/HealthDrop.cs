@@ -18,7 +18,7 @@ namespace AJ
             //if (Input.GetKey(KeyCode.A))
             {
                 //if energy is less than or = to 0, health takes damage corresponding to the healthLossRate's set stat
-                if (Energy.Amount <= 0)
+                if (Energy.CurrentAmount <= 0)
                 {
                     Health.DoDamage(healthLossRate, Health.DamageType.Energy); 
                 }

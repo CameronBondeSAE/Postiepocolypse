@@ -28,7 +28,7 @@ namespace TimPearson
             if (isBoosting)
             {
                 // Reduce energy by the Drain amount per second
-                energy.Amount -= Drain * Time.deltaTime;
+                energy.CurrentAmount -= Drain * Time.deltaTime;
 
                 // double the move distance
                 Boost = 50f;

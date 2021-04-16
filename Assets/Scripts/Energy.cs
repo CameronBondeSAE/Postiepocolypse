@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ namespace TimPearson
     
 public class Energy : MonoBehaviour
 {
-    public float Amount;
-    private bool isUsing = true;
+    public float MinAmount = 0f;
+    public float CurrentAmount;
+    public float MaxAmount = 20f;
+    //public bool isUsing = false;
     public float Drain;
     public float Regen;
     // Start is called before the first frame update
@@ -20,16 +23,27 @@ public class Energy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isUsing == true)
+        //if(isUsing == true)
+        if(CurrentAmount >= MinAmount)
         {
+            CurrentAmount -= Drain * Time.deltaTime;
             // Reduce energy by the Drain value per second
-            Amount -= Drain * Time.deltaTime;
+            if (CurrentAmount == MinAmount -1)
+            {
+                CurrentAmount = 0f;
+            }
+            
         }
-
-        if (isUsing == false)
+        if (CurrentAmount <= MaxAmount)
         {
-            Amount += Regen * Time.deltaTime;
+            CurrentAmount += Regen * Time.deltaTime;
+            if (CurrentAmount == MaxAmount + 1)
+            {
+                CurrentAmount = 20f;
+            }
+            
         }
     }
 }
 }
+
