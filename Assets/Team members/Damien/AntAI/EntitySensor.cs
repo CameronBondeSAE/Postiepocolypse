@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Anthill.AI;
+﻿using Anthill.AI;
 using UnityEngine;
 
 namespace Damien
 {
     public class EntitySensor : MonoBehaviour, ISense
     {
+        public GameObject owner;
+
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
             aWorldState.BeginUpdate(aAgent.planner);
