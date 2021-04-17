@@ -7,7 +7,7 @@ namespace Damien
     {
         public GameObject owner;
         public AntAIAgent antAIAgent;
-        public Target target;
+        public GameObject target;
         
         // Start is called before the first frame update
         void Start()
