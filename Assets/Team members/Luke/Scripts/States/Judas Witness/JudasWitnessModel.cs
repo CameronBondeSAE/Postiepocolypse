@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 namespace Luke
 {
 
-    public class JudasWitnessModel : MonoBehaviour
+    public class JudasWitnessModel : CreatureBase
     {
         [Header("Other considerations")]
         public AntAIAgent antAIAgent;

@@ -9,15 +9,16 @@ namespace Luke
 {
     public class Spawner : NetworkBehaviour
     {
+        [Tooltip("Multiple amounts of each prefab in the list")]
         public int setsOfPrefabs;
         public GameObject[] prefabs;
         public float spawnRange;
         public bool spawnOnStart;
+        [Tooltip("Randomly chooses prefabs within the prefabs list")]
         public bool randomSpawn;
         [Header("Spawn Ray-casting")]
         public float ySpawnGroundOffset = 1f;
         public float yAdjustablePosition;
-        public LayerMask groundLayer;
         public float yGroundTestOffset = 5f;
         public override void OnStartServer()
         {
@@ -55,27 +56,15 @@ namespace Luke
         /// </summary>
         public GameObject SpawnSingle(GameObject prefab)
         {
-            GameObject spawnedInstance;
+            GameObject spawnedInstance = null;
             if (isServer)
             {
-                
                 //set current random on the loop
                 int randomPrefab = Random.Range(0, prefabs.Length);
 
                 //random position for spawn + an adjustable y position in case of very large prefabs
                 Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange),
                     transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
-
-                if (randomSpawn)
-                {
-                    spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
-                    NetworkServer.Spawn(spawnedInstance);
-                }
-                else
-                {
-                    spawnedInstance = Instantiate(prefab, position, transform.rotation);
-                    NetworkServer.Spawn(spawnedInstance);
-                }
 
                 //raycast hit spawn pos
                 RaycastHit hitInfo;
@@ -89,9 +78,21 @@ namespace Luke
                 //just in case the prefabs spawn in the ground
                 else
                 {
-                    Destroy(spawnedInstance);
+                    Destroy(spawnedInstance);   
                     Debug.Log("Failed Spawn");
                 }
+                
+                if (randomSpawn)
+                {
+                    spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
+                    NetworkServer.Spawn(spawnedInstance);
+                }
+                else
+                {
+                    spawnedInstance = Instantiate(prefab, position, transform.rotation);
+                    NetworkServer.Spawn(spawnedInstance);
+                }
+
                 ///TODO: Keep on trying to find a surface instead of deleting
                 return spawnedInstance;
             }

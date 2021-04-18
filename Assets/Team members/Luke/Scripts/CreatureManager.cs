@@ -16,34 +16,35 @@ namespace Luke
         {
             get
             {
-                GameObject go = new GameObject("Creature Manager");
-                instance = go.AddComponent<CreatureManager>();
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("Creature Manager");
+                    instance = go.AddComponent<CreatureManager>();
+                    return instance;
+                }
+
                 return instance;
             }
         }
         
         void Awake()
         {
-            //checking to see if there is a manager already there
-            if (instance == null && instance != this)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
             instance = this;
-            //won't delete, continue to next scene
-            DontDestroyOnLoad(this.gameObject);
         }
 
         public void Start()
         {
-            throw new NotImplementedException();
+            creatures.AddRange(FindObjectsOfType<CreatureBase>());
         }
 
         public void Update()
         {
-            creatures.AddRange(FindObjectsOfType<CreatureBase>());
             creatureAmountInScene = creatures.Count;
+
+            foreach (CreatureBase creature in creatures)
+            {
+                creature.transform.SetParent(this.transform);
+            }
         }
     }
 }

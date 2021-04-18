@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using JonathonMiles;
 using UnityEngine;
 
 namespace Luke
 {
-    public class MotionSensor : MonoBehaviour
+    public class MotionSensor : ItemBase
     {
         public float pingDuration;
         public float pingWaitTime;
