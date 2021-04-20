@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: NavManScenario
+  m_EditorClassIdentifier: 
+  conditions:
+    position: {x: 1473, y: 1186}
+    list:
+    - id: 0
+      name: See MidPoint
+    - id: 1
+      name: At Midpoint
+    - id: 2
+      name: See Goal
+    - id: 3
+      name: At Goal
+  actions:
+  - name: Move To Mid
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 1892, y: 922}
+    pre:
+    - id: 0
+      value: 1
+    - id: 1
+      value: 0
+    post:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 1
+  - name: Select Mid
+    isDefault: 0
+    state: {fileID: 5328860923978580379, guid: 93985f3a676f03c49b04c1412b9faac5, type: 3}
+    cost: 0
+    position: {x: 1683, y: 1160}
+    pre:
+    - id: 0
+      value: 0
+    post:
+    - id: 0
+      value: 1
+  - name: See Goal
+    isDefault: 0
+    state: {fileID: 5328860923978580379, guid: 93985f3a676f03c49b04c1412b9faac5, type: 3}
+    cost: 0
+    position: {x: 2092, y: 1164}
+    pre:
+    - id: 1
+      value: 1
+    - id: 2
+      value: 0
+    post:
+    - id: 2
+      value: 1
+  - name: At Goal
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 2305, y: 1185}
+    pre:
+    - id: 2
+      value: 1
+    - id: 3
+      value: 0
+    post:
+    - id: 3
+      value: 1
+  goals:
+  - name: Arrived at Target
+    isDefault: 1
+    position: {x: 1871, y: 1565}
+    conditions:
+    - id: 3
+      value: 1
+  - name: Find A Target
+    isDefault: 0
+    position: {x: 2101, y: 1570}
+    conditions:
+    - id: 0
+      value: 1
+  worldStates:
+  - position: {x: 1492, y: 1420}
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
+    - id: 2
+      value: 0
+    - id: 3
+      value: 0

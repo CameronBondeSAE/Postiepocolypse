@@ -35,5 +35,10 @@ namespace JonathonMiles
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
         }
+
+        public void Drop(ItemBase item)
+        {
+            
+        }
     }
 }
