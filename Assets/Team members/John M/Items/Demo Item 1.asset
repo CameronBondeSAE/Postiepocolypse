@@ -16,4 +16,4 @@ MonoBehaviour:
   icon: {fileID: 7954328192878167021, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
   amount: 1
   isConsumable: 1
-  isCoin: 0
+  prefab: {fileID: 779218646461303581, guid: e7fe20057b90114459d5b27639f282ec, type: 3}
