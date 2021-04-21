@@ -32,13 +32,9 @@ namespace Luke
             instance = this;
         }
 
-        public void Start()
-        {
-            creatures.AddRange(FindObjectsOfType<CreatureBase>());
-        }
-
         public void Update()
         {
+            creatures.AddRange(FindObjectsOfType<CreatureBase>());
             creatureAmountInScene = creatures.Count;
 
             foreach (CreatureBase creature in creatures)
