@@ -66,6 +66,20 @@ namespace Luke
                 Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange),
                     transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
 
+                
+                if (randomSpawn)
+                {
+                    spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
+                    NetworkServer.Spawn(spawnedInstance);
+                }
+                else
+                {
+                    spawnedInstance = Instantiate(prefab, position, transform.rotation);
+                    NetworkServer.Spawn(spawnedInstance);
+                }
+
+
+                
                 //raycast hit spawn pos
                 RaycastHit hitInfo;
                 Physics.Raycast(new Ray(position + new Vector3(0, yGroundTestOffset, 0),
@@ -82,17 +96,6 @@ namespace Luke
                     Debug.Log("Failed Spawn");
                 }
                 
-                if (randomSpawn)
-                {
-                    spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
-                    NetworkServer.Spawn(spawnedInstance);
-                }
-                else
-                {
-                    spawnedInstance = Instantiate(prefab, position, transform.rotation);
-                    NetworkServer.Spawn(spawnedInstance);
-                }
-
                 ///TODO: Keep on trying to find a surface instead of deleting
                 return spawnedInstance;
             }
