@@ -10,7 +10,7 @@ namespace Luke
     public class Spawner : NetworkBehaviour
     {
         [Tooltip("Multiple amounts of each prefab in the list")]
-        public int setsOfPrefabs;
+        public int setsOfPrefabs = 1;
         public GameObject[] prefabs;
         public float spawnRange;
         public bool spawnOnStart;
