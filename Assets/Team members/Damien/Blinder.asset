@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Blinder
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 175, y: 266}
+    position: {x: 70, y: 328}
     list:
     - id: 0
       name: Close to Target
     - id: 1
       name: Target Chosen
     - id: 2
-      name: Target Disoriented
+      name: Target Blinded
     - id: 3
       name: Energy location found
     - id: 4
@@ -28,7 +28,7 @@ MonoBehaviour:
     - id: 5
       name: Energy is full
     - id: 6
-      name: Target in Range
+      name: Target in View Range
     - id: 7
       name: Patrolling
   actions:
@@ -36,7 +36,7 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 4793493128706573800, guid: 08ff0d4a407e96443a19fc9000b9588b, type: 3}
     cost: 0
-    position: {x: 371, y: 266}
+    position: {x: 266, y: 328}
     pre:
     - id: 1
       value: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 741396489344472497, guid: 9a8109483e914294cad22b01e2596cf5, type: 3}
     cost: 0
-    position: {x: 571, y: 266}
+    position: {x: 466, y: 328}
     pre:
     - id: 1
       value: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 184449912305600510, guid: 06ed5c4960bee7a4898cbabb918284af, type: 3}
     cost: 0
-    position: {x: 371, y: 86}
+    position: {x: 266, y: 148}
     pre:
     - id: 5
       value: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5830141339148926194, guid: c63cdf0c1ede6aa4181a10cfe8aabf5f, type: 3}
     cost: 0
-    position: {x: 971, y: 266}
+    position: {x: 866, y: 328}
     pre:
     - id: 0
       value: 1
@@ -90,7 +90,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 741396489344472497, guid: 9a8109483e914294cad22b01e2596cf5, type: 3}
     cost: 0
-    position: {x: 571, y: 86}
+    position: {x: 466, y: 148}
     pre:
     - id: 3
       value: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 3459357550999035444, guid: d7fe7ee1360baad4e83da43cc1071245, type: 3}
     cost: 0
-    position: {x: 971, y: 86}
+    position: {x: 866, y: 148}
     pre:
     - id: 4
       value: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 6687878144443710320, guid: d7b402394bc7eb34c8e31993d811f429, type: 3}
     cost: 0
-    position: {x: 371, y: -114}
+    position: {x: 266, y: -52}
     pre:
     - id: 5
       value: 1
@@ -124,30 +124,30 @@ MonoBehaviour:
   goals:
   - name: Disorient Target
     isDefault: 1
-    position: {x: 1171, y: 266}
+    position: {x: 1066, y: 328}
     conditions:
     - id: 2
       value: 1
   - name: Arrive at target
     isDefault: 0
-    position: {x: 771, y: 266}
+    position: {x: 666, y: 328}
     conditions:
     - id: 0
       value: 1
   - name: Arrive at Energy
     isDefault: 0
-    position: {x: 771, y: 86}
+    position: {x: 666, y: 148}
     conditions:
     - id: 4
       value: 1
   - name: Fill Energy
     isDefault: 0
-    position: {x: 1171, y: 86}
+    position: {x: 1066, y: 148}
     conditions:
     - id: 5
       value: 1
   worldStates:
-  - position: {x: 372, y: 497}
+  - position: {x: 264, y: 556}
     list:
     - id: 0
       value: 0

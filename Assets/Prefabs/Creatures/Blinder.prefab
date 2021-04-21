@@ -1968,6 +1968,7 @@ GameObject:
   - component: {fileID: 215902250}
   - component: {fileID: 5190809701841526850}
   - component: {fileID: 3464585275034954302}
+  - component: {fileID: 791187359}
   m_Layer: 0
   m_Name: Blinder
   m_TagString: Untagged
@@ -2068,7 +2069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   viewRadius: 30
   viewAngle: 360
   listOfTargets: []
@@ -2180,6 +2181,28 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!195 &791187359
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058318617128531734}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7076765992571148482
 GameObject:
   m_ObjectHideFlags: 0
