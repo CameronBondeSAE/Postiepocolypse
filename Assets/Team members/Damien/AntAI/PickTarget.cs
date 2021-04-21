@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Anthill.AI;
+﻿using Anthill.AI;
 using UnityEngine;
 
 namespace Damien
@@ -11,7 +9,6 @@ namespace Damien
 
         public FOV fieldOfView;
 
-        public List<GameObject> potentialTargets = new List<GameObject>();
 
         public override void Create(GameObject aGameObject)
         {
@@ -24,17 +21,12 @@ namespace Damien
         {
             base.Enter();
             Debug.Log("Pick Target");
-            if (potentialTargets != null)
+
+
+            //Sends the target to the parent if the FOV has targets to send
+            if (fieldOfView.listOfTargets.Count > 0)
             {
-                foreach (GameObject target in fieldOfView.listOfTargets)
-                {
-                    potentialTargets.Add(target.gameObject);
-                }
-
-
-                //Sends the target to the parent
-
-                owner.GetComponentInParent<Blinder>().target = potentialTargets[0];
+                owner.GetComponentInParent<Blinder>().target = fieldOfView.listOfTargets[0];
             }
 
             Finish();

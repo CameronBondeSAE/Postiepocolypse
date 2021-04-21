@@ -2113,6 +2113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0548a8365998240a8868affe0a4009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   antAIAgent: {fileID: 215902256}
   target: {fileID: 0}
 --- !u!114 &215902258
@@ -2142,6 +2143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1ca5783a3abb24c98e249ac9ffb016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 7058318617128531734}
 --- !u!1 &7076765992571148482
 GameObject:
   m_ObjectHideFlags: 0
