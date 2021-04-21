@@ -27,7 +27,7 @@ public class Reflect : MonoBehaviour
             if (hitInfo.collider != null)
             {
                 reflect = Vector3.Reflect(ray.direction, hitInfo.normal);
-                Debug.DrawLine(ray.origin, hitInfo.point, Color.white);
+                Debug.DrawLine(ray.origin, hitInfo.point, Color.green);
             }
 
             initialPos = hitInfo.point;
