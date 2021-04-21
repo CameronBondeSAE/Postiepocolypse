@@ -13,8 +13,8 @@ namespace Damien
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
-
             owner = aGameObject;
+            fieldOfView = owner.GetComponentInParent<FOV>();
         }
 
         public override void Enter()
@@ -28,6 +28,10 @@ namespace Damien
             {
                 owner.GetComponentInParent<Blinder>().target = fieldOfView.listOfTargets[0];
             }
+            
+            Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
+
+            
 
             Finish();
         }
