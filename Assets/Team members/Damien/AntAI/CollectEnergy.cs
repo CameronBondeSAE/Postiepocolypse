@@ -7,16 +7,23 @@ namespace MyNamespace
     {
         public GameObject owner;
 
-        // Start is called before the first frame update
-        void Start()
+        public override void Create(GameObject aGameObject)
         {
-
+            base.Create(aGameObject);
+            owner = aGameObject;
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void Enter()
         {
+            base.Enter();
+            
+          
+            
 
+
+           
+            
+            Finish();
         }
     }
 }
