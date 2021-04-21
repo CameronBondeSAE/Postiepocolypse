@@ -456,13 +456,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 829081828}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1024834847 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 821153988559785861, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
-  m_PrefabInstance: {fileID: 8376678940831152414}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1408518772
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +486,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 829081828}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1194094499792315073
 PrefabInstance:
@@ -570,6 +565,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: resources
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: spawnRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourcePrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -587,12 +590,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoints.Array.size
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoint.Array.data[0]
       value: 
-      objectReference: {fileID: 1024834847}
+      objectReference: {fileID: 0}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoint.Array.data[1]
       value: 
@@ -604,11 +607,11 @@ PrefabInstance:
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1024834847}
+      objectReference: {fileID: 1408518773}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1408518773}
+      objectReference: {fileID: 871663872}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoints.Array.data[2]
       value: 
