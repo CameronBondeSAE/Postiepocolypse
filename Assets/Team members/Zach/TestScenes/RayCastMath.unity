@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8a1547bd5b54e428f2a21c5916af86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflections: 5
+  reflections: 100
 --- !u!136 &2133475810
 CapsuleCollider:
   m_ObjectHideFlags: 0
