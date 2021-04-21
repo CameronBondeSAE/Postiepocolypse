@@ -13,11 +13,15 @@ namespace Niall
         private GameObject resource;
         public GameObject[] resourcePrefabs;
 
-        [Header("Amount of Resources Spawned per wave.")]
+        [Header("Amount of Resources Spawned per Wave.")]
         public int resources = 5;
-
+        
+        [Header("Amount of Waves/Times to Spawn Resources")]
+        public int waves = 1;
+        
         [Header("Time between spawn waves (Seconds)")]
         public int spawnRate;
+        
 
         [Space] public Transform[] resourceSpawnpoints;
 
@@ -44,25 +48,29 @@ namespace Niall
         {
             if (isServer && spawning)
             {
-                for (int i = 0; i < resources; i++)
+                for (int w = 0; w < waves; w++)
                 {
-                    spawnLocation = 0;
-                    for (int r = 0; r < resourceSpawnpoints.Length; r++)
+                    for (int i = 0; i < resources; i++)
                     {
-                        if (resourceSpawnpoints[spawnLocation] != null)
+                        spawnLocation = 0;
+                        for (int r = 0; r < resourceSpawnpoints.Length; r++)
                         {
-                            resource = resourcePrefabs[Random.Range(0, resourcePrefabs.Length)];
-                            GameObject newGO = Instantiate(resource,
-                                resourceSpawnpoints[spawnLocation].transform.position +
-                                Random.insideUnitSphere * rangeRad, Quaternion.identity);
-                            NetworkServer.Spawn(newGO);
-                            spawnLocation++;
-
-                            if (spawnLocation > resourceSpawnpoints.Length)
+                            if (resourceSpawnpoints[spawnLocation] != null)
                             {
-                                spawning = false;
-                                spawnLocation = 0;
+                                resource = resourcePrefabs[Random.Range(0, resourcePrefabs.Length)];
+                                GameObject newGO = Instantiate(resource,
+                                    resourceSpawnpoints[spawnLocation].transform.position +
+                                    Random.insideUnitSphere * rangeRad, Quaternion.identity);
+                                NetworkServer.Spawn(newGO);
+                                
+
+                                if (spawnLocation > resourceSpawnpoints.Length)
+                                {
+                                    spawning = false;
+                                    spawnLocation = 0;
+                                }
                             }
+                            spawnLocation++;
                         }
                     }
 
