@@ -12,37 +12,74 @@ public class Energy : MonoBehaviour
     public float CurrentAmount;
     public float MaxAmount = 20f;
     //public bool isUsing = false;
-    public float Drain;
-    public float Regen;
+    public float Drain = 2f;
+    public float MoveDrainScale;
+    public float StandingDrain = 1f;
+    public float Regen = 0f;
+    private Vector3 currentPos;
+    private Vector3 lastPos;
+
+    private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentPos = transform.position;
+        lastPos = currentPos;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        else
+        {
+            if (GetComponentInParent<Rigidbody>() != null)
+            {
+                rb = GetComponentInParent<Rigidbody>();
+            }
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        
+        
+        currentPos = transform.position;
+
+        float speed = (lastPos - currentPos).magnitude;
+        
+        if (currentPos != lastPos)
+        {
+            Drain = speed * MoveDrainScale;
+            Regen = 0f;
+        }
+        else
+        {
+            Drain = StandingDrain;
+            //Regen = Drain *2;
+        }
         //if(isUsing == true)
         if(CurrentAmount >= MinAmount)
         {
             CurrentAmount -= Drain * Time.deltaTime;
             // Reduce energy by the Drain value per second
-            if (CurrentAmount == MinAmount -1)
+            if (CurrentAmount < MinAmount)
             {
-                CurrentAmount = 0f;
+                CurrentAmount = MinAmount;
+                Regen = Drain *2;
             }
             
         }
         if (CurrentAmount <= MaxAmount)
         {
             CurrentAmount += Regen * Time.deltaTime;
-            if (CurrentAmount == MaxAmount + 1)
+            if (CurrentAmount > MaxAmount)
             {
-                CurrentAmount = 20f;
+                CurrentAmount = MaxAmount;
+                Regen = 0f;
             }
             
         }
+        lastPos = currentPos;
     }
 }
 }

@@ -35,7 +35,7 @@ namespace JonathonMiles
 
         public void OnRemoveButton ()
         {
-            inventory.Remove(item);
+            inventory.Drop(item);
         }
 
         public void UseItem ()

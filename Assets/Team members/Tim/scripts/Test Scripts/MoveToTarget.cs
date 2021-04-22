@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
+using ZachFrench;
 
 namespace TimPearson
 {
@@ -10,6 +11,7 @@ namespace TimPearson
     {
         public GameObject parent;
         private NavMeshAgent NavMeshAgent;
+        public PatrolManager targets;
 
         public override void Create(GameObject aGameObject)
         {
@@ -22,7 +24,7 @@ namespace TimPearson
         {
             base.Enter();
             Debug.Log("Moving");
-            NavMeshAgent.SetDestination(parent.GetComponent<SprinterAI>().target.transform.position);
+            NavMeshAgent.SetDestination(parent.GetComponent<SprinterAI>().currentTarget.transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -30,7 +32,7 @@ namespace TimPearson
             base.Execute(aDeltaTime, aTimeScale);
             if (NavMeshAgent.remainingDistance < 1f)
             {
-                parent.GetComponent<SprinterAI>().target = null;
+                parent.GetComponent<SprinterAI>().currentTarget = null;
                 Finish();
             }
         }

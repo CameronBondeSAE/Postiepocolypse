@@ -24,10 +24,10 @@ namespace JonathonMiles
 			}
         }
 	
-        void FixedUpdate ()
+        void Update ()
         {
             //toggle the UI to be visible to the player
-            if (InputSystem.GetDevice<Keyboard>().iKey.isPressed)
+            if (InputSystem.GetDevice<Keyboard>().iKey.wasPressedThisFrame)
             {
                 inventoryUI.SetActive(!inventoryUI.activeSelf);
             }

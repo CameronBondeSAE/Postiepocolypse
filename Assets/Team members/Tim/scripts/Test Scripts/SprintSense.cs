@@ -10,7 +10,7 @@ namespace TimPearson
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
             aWorldState.BeginUpdate(aAgent.planner);
-            aWorldState.Set("Has Target", aAgent.GetComponent<SprinterAI>().target != null);
+            aWorldState.Set("Has Target", aAgent.GetComponent<SprinterAI>().currentTarget != null);
             aWorldState.Set("At Target", false);
             aWorldState.EndUpdate();
         }

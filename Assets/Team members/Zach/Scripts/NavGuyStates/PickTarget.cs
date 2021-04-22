@@ -8,11 +8,14 @@ namespace ZachFrench
     public class PickTarget : AntAIState
     {
         private GameObject parent;
-        public Target[] targets;
+        public PatrolManager patrolManager;
+        public List<PatrolPoint> targets;
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
             parent = aGameObject;
+            //I know we don't like using findObjectOfType however it works when there is only one for now
+            patrolManager = FindObjectOfType<PatrolManager>();
         }
 
         public override void Enter()
@@ -20,12 +23,14 @@ namespace ZachFrench
             base.Enter();
             
             Debug.Log("Looking For Target");
+            //setting the target list to the patrol manager's list of paths 
 
-            //Hack
-            //Uses an array instead of the a manager to get the to planner work
-            targets = FindObjectsOfType<Target>();
+            if (patrolManager != null)
+            {
+                targets = patrolManager.paths;
+            }
 
-            Target target = targets[Random.Range(0, targets.Length)];
+            PatrolPoint target = targets[Random.Range(0, targets.Count - 1)];
 
             if (target != null)
             {

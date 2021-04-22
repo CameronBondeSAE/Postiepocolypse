@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
+using ZachFrench;
 
 namespace TimPearson
 {
     public class ChooseTarget : AntAIState
     {
         private GameObject parent;
-        public WaterTarget[] targets;
+        private PatrolManager patrolManager;
+        public List<PatrolPoint> targetList;
+        //public PatrolPoint currentTarget;
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -19,12 +22,11 @@ namespace TimPearson
         {
             base.Enter();
             Debug.Log("Finding Target");
-            //bodgejob array probs should do a manager
-            targets = FindObjectsOfType<WaterTarget>();
-            WaterTarget target = targets[Random.Range(0, targets.Length)];
-            if (target != null)
+            patrolManager = FindObjectOfType<PatrolManager>();
+            targetList = patrolManager.paths;
+            if (targetList != null)
             {
-                parent.GetComponent<SprinterAI>().target = target;
+                parent.GetComponent<SprinterAI>().currentTarget = targetList[Random.Range(0,targetList.Count)];
             }
 
             Finish();

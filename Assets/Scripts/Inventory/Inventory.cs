@@ -2,6 +2,7 @@
 using Mirror.Examples.Chat;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace JonathonMiles
 {
@@ -14,10 +15,30 @@ namespace JonathonMiles
 
         public int inventorySpace = 20;
         public List<ItemBase> items = new List<ItemBase>();
-        public GameObject player;
+        public GameObject handPos;
 
+        private void Update()
+        {
+            if (InputSystem.GetDevice<Keyboard>().vKey.wasPressedThisFrame)
+            {
+                if (items.Count == 0)
+                {
+                    Debug.Log("Nothing in Inventory");
+                    return;
+                }           
 
-        public bool Add(ItemBase item)
+                Drop(items[0]);
+            }
+
+            if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
+            {
+                Use(items[0]);
+            }
+
+           
+        }
+
+         public bool Add(ItemBase item)
         {
 
             if (items.Count >= inventorySpace)
@@ -32,13 +53,23 @@ namespace JonathonMiles
             return true;
         }
 
-        public void Remove(ItemBase item)
+        public void Drop(ItemBase item)
         {
-            items.Remove(item);
+           // items.Remove(item);
+            items.RemoveAt(0);
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
             
-            
+            //update transform position to hand position once complete
+            Instantiate(item.prefab,handPos.transform.position, Quaternion.identity);
+            Rigidbody rb = item.prefab.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.up;
+        }
+        
+        void Use(ItemBase item)
+        {
+            item.Use(this.gameObject);
+            items.RemoveAt(0);
         }
     }
 }

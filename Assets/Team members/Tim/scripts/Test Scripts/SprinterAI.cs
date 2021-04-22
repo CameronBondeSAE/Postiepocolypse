@@ -1,15 +1,17 @@
 ﻿using Anthill.AI;
 using UnityEngine;
+using ZachFrench;
 
 namespace TimPearson
 {
     public class SprinterAI : MonoBehaviour
     {
-        public WaterTarget target;
+        public PatrolManager target;
         public AntAIAgent antAIAgent;
         public Rigidbody rb;
         public LayerMask RaycastHitLayer;
         private Sprint sprint;
+        public PatrolPoint currentTarget;
 
         // Start is called before the first frame update
         private void Start()
@@ -32,7 +34,7 @@ namespace TimPearson
                 }
                 else
                 {
-                    Debug.DrawLine(transform.position, target.transform.position);
+                    Debug.DrawLine(transform.position, currentTarget.transform.position);
                     sprint.isBoosting = false;
                 }
             }
