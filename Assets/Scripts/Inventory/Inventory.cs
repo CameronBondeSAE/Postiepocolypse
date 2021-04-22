@@ -21,8 +21,13 @@ namespace JonathonMiles
         {
             if (InputSystem.GetDevice<Keyboard>().vKey.wasPressedThisFrame)
             {
-                
-                Remove(items[0]);
+                if (items.Count == 0)
+                {
+                    Debug.Log("Nothing in Inventory");
+                    return;
+                }           
+
+            Remove(items[0]);
             }
         }
 
