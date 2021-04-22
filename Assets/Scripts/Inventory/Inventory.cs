@@ -14,7 +14,7 @@ namespace JonathonMiles
 
         public int inventorySpace = 20;
         public List<ItemBase> items = new List<ItemBase>();
-        public GameObject player;
+        public Transform handPos;
 
 
         public bool Add(ItemBase item)
@@ -35,10 +35,12 @@ namespace JonathonMiles
         public void Remove(ItemBase item)
         {
             items.Remove(item);
+            //items.RemoveAt(0);
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
             
-            
+            //update transform position to hand position once complete
+            Instantiate(item.prefab,handPos);
         }
     }
 }
