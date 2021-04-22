@@ -1,11 +1,12 @@
 ﻿using Anthill.AI;
 using UnityEngine;
+using ZachFrench;
 
 namespace TimPearson
 {
     public class SprinterAI : MonoBehaviour
     {
-        public WaterTarget target;
+        public PatrolManager target;
         public AntAIAgent antAIAgent;
         public Rigidbody rb;
         public LayerMask RaycastHitLayer;
@@ -32,7 +33,7 @@ namespace TimPearson
                 }
                 else
                 {
-                    Debug.DrawLine(transform.position, target.transform.position);
+                    Debug.DrawLine(transform.position, FindObjectOfType<ChooseTarget>().currentTarget.transform.position);
                     sprint.isBoosting = false;
                 }
             }

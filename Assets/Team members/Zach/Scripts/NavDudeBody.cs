@@ -9,7 +9,7 @@ namespace ZachFrench
 
     public class NavDudeBody : MonoBehaviour
     {
-        public Target target;
+        public PatrolPoint target;
 
         public AntAIAgent antAIAgent;
 
