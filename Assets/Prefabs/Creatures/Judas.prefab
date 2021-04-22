@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2164576276896990144}
   - component: {fileID: 3680741728346999298}
   - component: {fileID: 8261083863869696342}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 7240398346134527958}
   - component: {fileID: 1636507480890146595}
   - component: {fileID: 2450397370497296085}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Lukes VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 6794730730155927835}
   - component: {fileID: 6805969491227737825}
   - component: {fileID: -5937119535910051994}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Judas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

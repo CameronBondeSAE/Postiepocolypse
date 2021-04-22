@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 47435545733010404}
   - component: {fileID: 1626046351502291585}
   - component: {fileID: 5581457164020607276}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 877434046122071126}
   - component: {fileID: 8338246296931870246}
   - component: {fileID: -1154987474014648797}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Omni
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -324,6 +324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a0d8d2cabb58347a03ed5e962d922f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   scale: {x: 20, y: 3, z: 20}
   timeScale: 0.1
 --- !u!114 &8338246296931870246
@@ -372,7 +374,7 @@ GameObject:
   - component: {fileID: 6928108469721273793}
   - component: {fileID: 7033088548054015692}
   - component: {fileID: 5252887870330316783}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +422,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5118790a88bcaa6488cd99c76154e50a, type: 2}
+  - {fileID: 2100000, guid: ab5fd38fc5d6fad49957736998605252, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -466,7 +468,7 @@ GameObject:
   - component: {fileID: 2968716280837673442}
   - component: {fileID: 5362152326815220095}
   - component: {fileID: 2426017435998541655}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +672,7 @@ GameObject:
   - component: {fileID: 9219288441951815496}
   - component: {fileID: 6757980014541545799}
   - component: {fileID: 6997107906693279421}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Visual Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

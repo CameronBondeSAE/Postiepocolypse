@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMarker: {fileID: 9084442935422052300, guid: dd165d8916dd67d429d41af1d72b0c9f, type: 3}
   enemyMarker: {fileID: 7034074015497551509, guid: be14e8ccd536e54478f594d25a70c067, type: 3}
+  itemMarker: {fileID: 9084442935422052300, guid: c5876438ce5c568479d08a2ed562ed84, type: 3}
   radarSpeed: 0.8
 --- !u!1001 &4836390160524199721
 PrefabInstance:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8418516715477619573}
   - component: {fileID: 287004606628336677}
   - component: {fileID: 1899876374879829946}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4108175504934120795}
   - component: {fileID: -2547478179074440259}
   - component: {fileID: -8511900995793618822}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Surus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
