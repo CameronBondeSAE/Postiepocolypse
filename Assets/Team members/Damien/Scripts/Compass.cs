@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Compass : MonoBehaviour
+namespace Damien
 {
-    // Start is called before the first frame update
-    public GameObject compassNeedle;
-
-    // Update is called once per frame
-    void Update()
+    public class Compass : MonoBehaviour
     {
-        compassNeedle.transform.rotation = Quaternion.Euler(0, 0, 0);
+        public GameObject compassNeedle;
+
+        void Update()
+        {
+            compassNeedle.transform.rotation = Quaternion.Euler(transform.rotation.x, -transform.rotation.y, transform.rotation.z);
+        }
     }
 }
