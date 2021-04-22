@@ -32,7 +32,7 @@ namespace TimPearson
             base.Execute(aDeltaTime, aTimeScale);
             if (NavMeshAgent.remainingDistance < 1f)
             {
-                parent.GetComponent<SprinterAI>().target = null;
+                parent.GetComponent<SprinterAI>().currentTarget = null;
                 Finish();
             }
         }
