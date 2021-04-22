@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 478110}
   - component: {fileID: 20545436}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_Boat_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 3390472}
   - component: {fileID: 2310144}
   - component: {fileID: 6526986}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Boat_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 465904}
   - component: {fileID: 3380308}
   - component: {fileID: 2353594}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Boat_A_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 3351626}
   - component: {fileID: 2376696}
   - component: {fileID: 6586176}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Boat_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

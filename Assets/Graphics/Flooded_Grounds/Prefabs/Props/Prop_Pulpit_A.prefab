@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 464912}
   - component: {fileID: 20579144}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_Pulpit_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 3314274}
   - component: {fileID: 2396590}
   - component: {fileID: 6573684}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Pulpit_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3346806}
   - component: {fileID: 2367802}
   - component: {fileID: 6519386}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Pulpit_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

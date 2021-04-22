@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3399812}
   - component: {fileID: 2345684}
   - component: {fileID: 6548236}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Clock_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481948}
   - component: {fileID: 20565268}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_Clock_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3383020}
   - component: {fileID: 2380546}
   - component: {fileID: 6557654}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Clock_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3317332}
   - component: {fileID: 2349940}
   - component: {fileID: 6571192}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Vase_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 458986}
   - component: {fileID: 20536116}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_Vase_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3361950}
   - component: {fileID: 2344926}
   - component: {fileID: 6510564}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Vase_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

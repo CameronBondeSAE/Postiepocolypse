@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3352258}
   - component: {fileID: 2318122}
   - component: {fileID: 6526028}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_ParkBench_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3348780}
   - component: {fileID: 2341038}
   - component: {fileID: 6526088}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_ParkBench_A_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 3329606}
   - component: {fileID: 2347452}
   - component: {fileID: 6528718}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_ParkBench_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413904}
   - component: {fileID: 20503288}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_ParkBench_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}

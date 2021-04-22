@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3358170}
   - component: {fileID: 2372240}
   - component: {fileID: 6500412}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Lamp_C_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 438830}
   - component: {fileID: 20576438}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_Lamp_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3301010}
   - component: {fileID: 2385596}
   - component: {fileID: 6543232}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Lamp_C_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

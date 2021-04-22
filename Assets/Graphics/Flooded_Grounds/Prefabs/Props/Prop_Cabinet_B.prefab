@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3388182}
   - component: {fileID: 2345406}
   - component: {fileID: 6584366}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Cabinet_B_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3391466}
   - component: {fileID: 2344978}
   - component: {fileID: 6511708}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Cabinet_B_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 408488}
   - component: {fileID: 20548814}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_Cabinet_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3336706}
   - component: {fileID: 2318018}
   - component: {fileID: 6567756}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_ChurchBench_A_DM_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3360190}
   - component: {fileID: 2317246}
   - component: {fileID: 6549844}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_ChurchBench_A_DM_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 485384}
   - component: {fileID: 20529292}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_ChurchBench_A_DM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ Transform:
   m_GameObject: {fileID: 199228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 650.0514, y: 17.499998, z: 487.57693}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children:
   - {fileID: 400168}
   - {fileID: 432142}

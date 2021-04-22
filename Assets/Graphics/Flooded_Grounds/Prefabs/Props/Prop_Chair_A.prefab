@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 406252}
   - component: {fileID: 20503330}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prop_Chair_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 3363470}
   - component: {fileID: 2382726}
   - component: {fileID: 6505384}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Chair_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3378898}
   - component: {fileID: 2355576}
   - component: {fileID: 6571980}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: lo_Prop_Chair_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

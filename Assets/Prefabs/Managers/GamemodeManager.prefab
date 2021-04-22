@@ -51,7 +51,7 @@ MonoBehaviour:
   civilianCount: 5
   playerCount: 2
   portalCount: 3
-  portalSpawnRange: 250
+  portalSpawnRange: 100
 --- !u!114 &938057395
 MonoBehaviour:
   m_ObjectHideFlags: 0
