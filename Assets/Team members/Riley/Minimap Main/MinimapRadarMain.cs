@@ -71,8 +71,8 @@ namespace RileyMcGowan
         }
         private void SpawnMarkerItem(GameObject itemTransform)
         {
-            Vector3 enemyPos = new Vector3(itemTransform.transform.position.x, 80, itemTransform.transform.position.z);
-            instantiate = Instantiate<GameObject>(enemyMarker, enemyPos, transform.rotation);
+            Vector3 itemPos = new Vector3(itemTransform.transform.position.x, 80, itemTransform.transform.position.z);
+            instantiate = Instantiate<GameObject>(itemMarker, itemPos, transform.rotation);
             instantiate.transform.parent = itemTransform.transform;
             instantiate.GetComponent<MarkerHandler>().timeToLive = timeToLive;
         }
