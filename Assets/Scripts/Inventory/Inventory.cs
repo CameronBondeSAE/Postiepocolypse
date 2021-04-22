@@ -2,6 +2,7 @@
 using Mirror.Examples.Chat;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace JonathonMiles
 {
@@ -16,8 +17,16 @@ namespace JonathonMiles
         public List<ItemBase> items = new List<ItemBase>();
         public Transform handPos;
 
+        private void Update()
+        {
+            if (InputSystem.GetDevice<Keyboard>().vKey.wasPressedThisFrame)
+            {
+                
+                Remove(items[0]);
+            }
+        }
 
-        public bool Add(ItemBase item)
+         public bool Add(ItemBase item)
         {
 
             if (items.Count >= inventorySpace)
@@ -35,7 +44,7 @@ namespace JonathonMiles
         public void Remove(ItemBase item)
         {
             items.Remove(item);
-            //items.RemoveAt(0);
+            items.RemoveAt(0);
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
             
