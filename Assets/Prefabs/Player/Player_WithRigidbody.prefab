@@ -494,7 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySpace: 20
   items: []
-  handPos: {fileID: 0}
+  handPos: {fileID: 7524519435191800825}
 --- !u!114 &5719859735224713059
 MonoBehaviour:
   m_ObjectHideFlags: 0
