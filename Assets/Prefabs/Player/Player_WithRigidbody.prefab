@@ -280,6 +280,7 @@ Transform:
   - {fileID: 6271187260610386038}
   - {fileID: 6271187259283767327}
   - {fileID: 7432703755333875212}
+  - {fileID: 4459827645430392477}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -472,7 +473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468f955eae133164fafd23edbeca5183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Amount: 100
+  MinAmount: 0
+  CurrentAmount: 0
+  MaxAmount: 20
   Drain: 0
   Regen: 0
 --- !u!114 &5555126118862272970
@@ -489,6 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySpace: 20
   items: []
+  player: {fileID: 0}
 --- !u!114 &5719859735224713059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +854,36 @@ MonoBehaviour:
   syncInterval: 0.1
   flashlight: {fileID: 6732787804643739882}
   lightOn: 0
+--- !u!1 &7524519435191800825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4459827645430392477}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4459827645430392477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524519435191800825}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.34, y: 0, z: 0.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6271187260368080563}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8783297146665763042
 PrefabInstance:
   m_ObjectHideFlags: 0
