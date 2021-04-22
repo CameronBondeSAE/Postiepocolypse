@@ -27,8 +27,15 @@ namespace JonathonMiles
                     return;
                 }           
 
-            Remove(items[0]);
+                Drop(items[0]);
             }
+
+            if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
+            {
+                Use(items[0]);
+            }
+
+           
         }
 
          public bool Add(ItemBase item)
@@ -46,7 +53,7 @@ namespace JonathonMiles
             return true;
         }
 
-        public void Remove(ItemBase item)
+        public void Drop(ItemBase item)
         {
            // items.Remove(item);
             items.RemoveAt(0);
@@ -55,6 +62,14 @@ namespace JonathonMiles
             
             //update transform position to hand position once complete
             Instantiate(item.prefab,handPos.transform.position, Quaternion.identity);
+            Rigidbody rb = item.prefab.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.up;
+        }
+        
+        void Use(ItemBase item)
+        {
+            item.Use(this.gameObject);
+            items.RemoveAt(0);
         }
     }
 }
