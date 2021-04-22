@@ -47,11 +47,8 @@ namespace EditedDamien
                     RaycastHit hit;
                     //checks if there is anything blocking the line of sight to the target
                     Physics.Raycast(transform.position, dirToTarget, out hit, distance);
-                    if (hit.collider == targetsInViewRadius[i])
-                    {
-                        //adds the target to the list of valid Targets
-                        listOfTargets.Add(target.gameObject);
-                    }
+                    
+                    listOfTargets.Add(target.gameObject);
                 }
             }
         }
