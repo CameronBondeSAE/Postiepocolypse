@@ -9,8 +9,9 @@ namespace TimPearson
     public class ChooseTarget : AntAIState
     {
         private GameObject parent;
-        private PatrolManager targets;
-        public PatrolPoint currentTarget;
+        private PatrolManager patrolManager;
+        public List<PatrolPoint> targetList;
+        //public PatrolPoint currentTarget;
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -21,11 +22,11 @@ namespace TimPearson
         {
             base.Enter();
             Debug.Log("Finding Target");
-            targets = FindObjectOfType<PatrolManager>();
-            currentTarget = targets.paths[Random.Range(0, targets.paths.Count)];
-            if (currentTarget != null)
+            patrolManager = FindObjectOfType<PatrolManager>();
+            targetList = patrolManager.paths;
+            if (targetList != null)
             {
-                parent.GetComponent<SprinterAI>().target = targets;
+                parent.GetComponent<SprinterAI>().currentTarget = targetList[Random.Range(0,targetList.Count)];
             }
 
             Finish();

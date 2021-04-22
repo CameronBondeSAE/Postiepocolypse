@@ -57,7 +57,7 @@ MonoBehaviour:
     - id: 1
       value: 1
   worldStates:
-  - position: {x: 44, y: 394}
+  - position: {x: 44, y: 393}
     list:
     - id: 0
       value: 0
