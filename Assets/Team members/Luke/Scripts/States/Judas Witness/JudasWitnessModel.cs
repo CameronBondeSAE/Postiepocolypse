@@ -25,7 +25,7 @@ namespace Luke
         public float maxRate;
         public float maxDepth;
 
-        private void Start()
+        public void Start()
         {
             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
             antAIAgent.worldState.Set("gotResource", false);
@@ -38,6 +38,7 @@ namespace Luke
             antAIAgent.worldState.Set("foundRecharge", false);
             antAIAgent.worldState.Set("atRechargePos", false);
             antAIAgent.worldState.EndUpdate();
+
             
             patrolManager = FindObjectOfType<PatrolManager>();
             navMeshAgent = FindObjectOfType<NavMeshAgent>();
@@ -65,6 +66,10 @@ namespace Luke
 
         public void Wander()
         {
+            if (patrolManager == null)
+            {
+                patrolManager = FindObjectOfType<PatrolManager>();
+            }
             if (patrolManager.pathsWithIndoors != null)
             {
                 navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);

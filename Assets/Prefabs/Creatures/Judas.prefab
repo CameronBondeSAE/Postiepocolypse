@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   antAIAgent: {fileID: 6410610709035693269}
-  navMeshAgent: {fileID: 0}
+  navMeshAgent: {fileID: 6794730730155927835}
   audioSource: {fileID: 3680741728346999298}
   chorusFilter: {fileID: 8261083863869696342}
   timeGathering: 5
