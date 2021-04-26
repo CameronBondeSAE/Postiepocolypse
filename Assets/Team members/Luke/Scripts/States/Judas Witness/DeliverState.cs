@@ -25,7 +25,7 @@ namespace Luke
             base.Enter();
             Debug.Log("Delivering");
             
-            navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().judasTarget.transform.position);
+            //navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().judasTarget.transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)

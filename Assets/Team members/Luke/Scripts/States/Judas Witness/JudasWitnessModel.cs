@@ -1,72 +1,57 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using Anthill.AI;
+using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
+using ZachFrench;
 
 namespace Luke
 {
-
     public class JudasWitnessModel : CreatureBase
     {
-        [Header("Other considerations")]
+        [Header("Other considerations")] 
         public AntAIAgent antAIAgent;
-
         public NavMeshAgent navMeshAgent;
-        public JudasTarget judasTarget;
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
         public float timeGathering;
-        public float patrolSpeed;
-        
-        [Header("Patrol variables")]
-        public Vector3 scale = Vector3.one;
-        
-        [HideInInspector]
-        public Vector3 startPos;
 
+        [Header("Patrol variables")] 
+        public PatrolManager patrolManager;
 
-        [Header("Audio")]
+        [Header("Audio")] 
         public float timeBetweenAudio;
         public float audioRepeatRate;
         public float maxWetMix;
         public float maxRate;
         public float maxDepth;
 
-        /// <summary>
-        /// state bools
-        /// </summary>
-        [Header("State checks")]
-        public bool gotResource;
-        public bool playerIsNear;
-        public bool needRecharge;
-        public bool foundResource;
-        public bool deliveredResource;
-        public bool atAttackRange;
-        public bool atResourcePos;
-        public bool foundRecharge;
-        public bool atRechargePos;
-        
-        
-
-        void Start()
+        private void Start()
         {
-            Debug.Log("Before states");
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("gotResource", false);
+            antAIAgent.worldState.Set("playerFound", false);
+            antAIAgent.worldState.Set("needRecharge", false);
+            antAIAgent.worldState.Set("foundResource", false);
+            antAIAgent.worldState.Set("deliveredResource", false);
+            antAIAgent.worldState.Set("atAttackRange", false);
+            antAIAgent.worldState.Set("atResourceRange", false);
+            antAIAgent.worldState.Set("foundRecharge", false);
+            antAIAgent.worldState.Set("atRechargePos", false);
+            antAIAgent.worldState.EndUpdate();
             
-            startPos = transform.position;
+            patrolManager = FindObjectOfType<PatrolManager>();
+            navMeshAgent = FindObjectOfType<NavMeshAgent>();
 
-            InvokeRepeating("BasicNoises",timeBetweenAudio,audioRepeatRate);
+            InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
         }
-        
+
 
         public void BasicNoises()
         {
-            chorusFilter.wetMix1 = Mathf.PerlinNoise(Time.time/ maxWetMix, 0);
+            chorusFilter.wetMix1 = Mathf.PerlinNoise(Time.time / maxWetMix, 0);
             chorusFilter.rate = Mathf.PerlinNoise(Time.time / maxRate, 0);
             chorusFilter.depth = Mathf.PerlinNoise(Time.time / maxDepth, 0);
-            
+
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
@@ -75,18 +60,15 @@ namespace Luke
 
         public void DirectionRaycast()
         {
-            Debug.DrawLine(transform.position, judasTarget.transform.position, Color.green);
+            Debug.DrawRay(transform.position, transform.forward, Color.magenta);
         }
 
-        public void Patrol()
+        public void Wander()
         {
-            navMeshAgent.speed = patrolSpeed;
-            
-            float x = Mathf.PerlinNoise(Time.time, startPos.x) * scale.x;
-            float y = Mathf.PerlinNoise(Time.time, startPos.y) * scale.y;
-            float z = Mathf.PerlinNoise(Time.time, startPos.z) * scale.z;
-            
-            transform.position = startPos + new Vector3(x, y, z);
+            if (patrolManager.pathsWithIndoors != null)
+            {
+                navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
+            }
         }
     }
 }

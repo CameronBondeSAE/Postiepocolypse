@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Luke
 {
     /// <summary>
-    /// raycast sphere? find player script
+    /// change colour to orange
     /// </summary>
     public class PlayerFoundState : AntAIState
     {

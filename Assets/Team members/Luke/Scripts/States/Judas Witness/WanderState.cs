@@ -4,22 +4,22 @@ using Anthill.AI;
 using Damien;
 using UnityEngine;
 using UnityEngine.AI;
+using ZachFrench;
 
 namespace Luke
 {
     public class WanderState : AntAIState
     {
         public GameObject owner;
-        public NavMeshAgent navMeshAgent;
         public JudasWitnessModel judasWitnessModel;
-        
+        public NavMeshAgent navMeshAgent;
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
-            navMeshAgent = owner.GetComponent<NavMeshAgent>();
-            
+            judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
         }
 
         public override void Enter()
@@ -33,9 +33,14 @@ namespace Luke
         {
             base.Execute(aDeltaTime, aTimeScale);
             
-            judasWitnessModel.Patrol();
+            judasWitnessModel.Wander();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
             
-            Finish();
+            Debug.Log("Exit Wander State");
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Luke
     {
         public GameObject owner;
         public NavMeshAgent navMeshAgent;
-        
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -24,18 +24,18 @@ namespace Luke
             base.Enter();
             Debug.Log("Gather state");
             
-            StartCoroutine(GatheringResources());
-            
-            // HACK
-            JudasTarget[] targets = FindObjectsOfType<JudasTarget>();
-        
-            // Pick a random target
-            JudasTarget judasTargetPos = targets[Random.Range(0, targets.Length)];
-        
-            if (judasTargetPos != null)
-            {
-                owner.GetComponent<JudasWitnessModel>().judasTarget = judasTargetPos;
-            }
+            // StartCoroutine(GatheringResources());
+            //
+            // // HACK
+            // JudasTarget[] targets = FindObjectsOfType<JudasTarget>();
+            //
+            // // Pick a random target
+            // JudasTarget judasTargetPos = targets[Random.Range(0, targets.Length)];
+            //
+            // if (judasTargetPos != null)
+            // {
+            //     //owner.GetComponent<JudasWitnessModel>().judasTarget = judasTargetPos;
+            // }
         }
         
         public IEnumerator GatheringResources()
