@@ -25,7 +25,7 @@ namespace RileyMcGowan
         void Update()
         {
             transform.Rotate(0,radarSpeed,0);
-            if (minimapFOV.listOfTargets.Count >= 1)
+            if (minimapFOV.listOfTargets.Count > 0)
             {
                 foreach (GameObject targetInFOV in minimapFOV.listOfTargets)
                 {
@@ -43,7 +43,7 @@ namespace RileyMcGowan
                             SpawnMarkerMonster(targetInFOV);
                         }
                     }
-                    if (targetInFOV.layer == 15) //Check layer enemy
+                    if (targetInFOV.layer == 15) //Check layer item
                     {
                         if (targetInFOV.GetComponentInChildren<MarkerHandler>() == null)
                         {

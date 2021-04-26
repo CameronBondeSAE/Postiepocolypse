@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
     serializedVersion: 2
-    m_Bits: 16640
+    m_Bits: 49408
   viewRadius: 550
   viewAngle: 13
   listOfTargets: []
