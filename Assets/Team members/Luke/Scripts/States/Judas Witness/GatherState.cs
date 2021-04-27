@@ -24,24 +24,20 @@ namespace Luke
             base.Enter();
             Debug.Log("Gather state");
             
-            // StartCoroutine(GatheringResources());
-            //
-            // // HACK
-            // JudasTarget[] targets = FindObjectsOfType<JudasTarget>();
-            //
-            // // Pick a random target
-            // JudasTarget judasTargetPos = targets[Random.Range(0, targets.Length)];
-            //
-            // if (judasTargetPos != null)
-            // {
-            //     //owner.GetComponent<JudasWitnessModel>().judasTarget = judasTargetPos;
-            // }
+            StartCoroutine(GatheringResources());
         }
         
         public IEnumerator GatheringResources()
         {
             Debug.Log("Gathering Gathering");
             yield return new WaitForSeconds(owner.GetComponent<JudasWitnessModel>().timeGathering);
+            
+            //setting the world condition
+            AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("gotResource", true);
+            antAIAgent.worldState.EndUpdate();
+            
             Finish();
         }
     }

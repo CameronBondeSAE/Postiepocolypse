@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Anthill.AI;
+﻿using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +15,7 @@ namespace Luke
             base.Create(aGameObject);
 
             owner = aGameObject;
+            waterTarget = FindObjectsOfType<WaterTarget>();
         }
 
         public override void Enter()
@@ -23,20 +23,23 @@ namespace Luke
             base.Enter();
 
             Debug.Log("Find resource state");
-            waterTarget = FindObjectsOfType<WaterTarget>();
-            
-            //setting the world condition
-            AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            antAIAgent.worldState.Set("foundResource", waterTarget != null);
-            antAIAgent.worldState.EndUpdate();
+
+            if (waterTarget != null)
+            {
+                //setting the world condition
+                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("foundResource", waterTarget != null);
+                antAIAgent.worldState.EndUpdate();
+                Debug.Log("Found resource");
+            }
         }
 
         public override void Exit()
         {
             base.Exit();
             Debug.Log("Exit find resource state");
-            
+
             Finish();
         }
     }

@@ -34,7 +34,7 @@ namespace Luke
             antAIAgent.worldState.Set("foundResource", false);
             antAIAgent.worldState.Set("deliveredResource", false);
             antAIAgent.worldState.Set("atAttackRange", false);
-            antAIAgent.worldState.Set("atResourceRange", false);
+            antAIAgent.worldState.Set("atResourcePos", false);
             antAIAgent.worldState.Set("foundRecharge", false);
             antAIAgent.worldState.Set("atRechargePos", false);
             antAIAgent.worldState.EndUpdate();

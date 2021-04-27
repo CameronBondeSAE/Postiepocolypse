@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlexM;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,7 +26,7 @@ namespace Luke
             base.Enter();
             Debug.Log("Delivering");
             
-            //navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().judasTarget.transform.position);
+            navMeshAgent.SetDestination(FindObjectOfType<HellPortal>().transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -37,6 +38,12 @@ namespace Luke
             // Have we got to the target?
             if (navMeshAgent.remainingDistance < 1f)
             {
+                //setting the world condition
+                            AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                            antAIAgent.worldState.Set("deliveredResource", true);
+                            antAIAgent.worldState.EndUpdate();
+                
                 Finish();
             }
         }

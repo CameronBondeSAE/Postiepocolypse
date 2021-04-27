@@ -20,6 +20,7 @@ namespace Luke
     
              owner = aGameObject;
              navMeshAgent = owner.GetComponent<NavMeshAgent>();
+             findResourceState = owner.GetComponentInChildren<FindResourceState>();
          }
          
          public override void Enter()
@@ -28,26 +29,32 @@ namespace Luke
     
              Debug.Log("Move to resource state");
 
-             targetWater = findResourceState.waterTarget[Random.Range(0,findResourceState.waterTarget.Length)];
-
-             //setting the world condition
-             AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-             antAIAgent.worldState.Set("gotResource", navMeshAgent.remainingDistance < remainingDistance);
-             antAIAgent.worldState.EndUpdate();
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             if (findResourceState != null)
+             if (targetWater != null)
              {
-                 navMeshAgent.SetDestination(targetWater.transform.position);
+                 navMeshAgent.SetDestination(findResourceState.waterTarget[Random.Range(0,findResourceState.waterTarget.Length)].transform.position);
              }
-             
+
              if (navMeshAgent.remainingDistance < remainingDistance)
              {
+                 //setting the world condition
+                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                 antAIAgent.worldState.Set("atResourcePos", navMeshAgent.remainingDistance < remainingDistance);
+                 antAIAgent.worldState.EndUpdate();
+             
+                 Debug.Log("At resource position");
+                 Finish();
+             }
+             
+             else if (targetWater == null)
+             {
+                 Debug.Log("waterTarget Null");
                  Finish();
              }
          }
