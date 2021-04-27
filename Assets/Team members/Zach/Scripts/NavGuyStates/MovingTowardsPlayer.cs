@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace ZachFrench
 {
     
     public class MovingTowardsPlayer : AntAIState
     {
-        
-        // Start is called before the first frame update
-        void Start()
+        private GameObject parent;
+        public NavMeshAgent NavMeshAgent;
+        public override void Create(GameObject aGameObject)
         {
-
+            base.Create(aGameObject);
+            parent = aGameObject;
+            NavMeshAgent = parent.GetComponent<NavMeshAgent>();
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void Enter()
         {
-
+            base.Enter();
+            NavMeshAgent.SetDestination(parent.GetComponent<NavDudeBody>().playerTarget.position);
         }
     }
 }
