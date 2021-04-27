@@ -1060,13 +1060,9 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1121335458
       objectReference: {fileID: 0}
-    - target: {fileID: 4979934498223357702, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
-      propertyPath: manualUpdate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4979934498223357702, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
-      propertyPath: thinkInterval
-      value: 1
+    - target: {fileID: 4651490969434858021, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
+      propertyPath: m_AssetId
+      value: 5b536c5d9a67a8b49ab9de14c7df93e5
       objectReference: {fileID: 0}
     - target: {fileID: 4979934498223357703, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
       propertyPath: m_Name
@@ -1115,18 +1111,6 @@ PrefabInstance:
     - target: {fileID: 4979934498223357708, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4979934498223357711, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 6271187260368080590, guid: 17a9d4a3d42c62746ac18cc3322a8043, type: 3}
-    - target: {fileID: 4979934498223357711, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
-      propertyPath: playerCollider
-      value: 
-      objectReference: {fileID: 6271187260368080590, guid: 17a9d4a3d42c62746ac18cc3322a8043, type: 3}
-    - target: {fileID: 4979934498223357711, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
