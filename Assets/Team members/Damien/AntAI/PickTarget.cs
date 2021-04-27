@@ -16,27 +16,26 @@ namespace Damien
         {
             base.Create(aGameObject);
             owner = aGameObject;
-            fieldOfView = owner.GetComponent<FOV>();
+            fieldOfView = owner.GetComponentInParent<FOV>();
         }
 
         public override void Enter()
         {
             base.Enter();
             //Debug.Log("Pick Target");
-            owner.GetComponent<FOV>().targets = LayerMask.GetMask("Player");
-            owner.GetComponent<FOV>().viewRadius = targetViewRadius;
+            owner.GetComponentInParent<FOV>().targets = LayerMask.GetMask("Player");
+            owner.GetComponentInParent<FOV>().viewRadius = targetViewRadius;
 
 
             //Sends the target to the parent if the FOV has targets to send
             if (fieldOfView.listOfTargets.Count > 0)
             {
-                owner.GetComponent<Blinder>().target = fieldOfView.listOfTargets[0];
+                owner.GetComponentInParent<Blinder>().target = fieldOfView.listOfTargets[0];
             }
-            
-           // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
 
-            
-            
+            // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
+
+
             Finish();
         }
     }

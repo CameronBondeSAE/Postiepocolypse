@@ -8,9 +8,8 @@ namespace Damien
         public GameObject owner;
 
         public FOV fieldOfView;
-        
-        public float energyViewRadius = 80f;
 
+        public float energyViewRadius = 80f;
 
 
         public override void Create(GameObject aGameObject)
@@ -33,10 +32,9 @@ namespace Damien
             {
                 owner.GetComponent<Blinder>().target = fieldOfView.listOfTargets[0];
             }
-            
+
             // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
 
-            
 
             Finish();
         }

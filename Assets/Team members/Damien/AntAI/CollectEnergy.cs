@@ -1,7 +1,7 @@
 ﻿using Anthill.AI;
 using UnityEngine;
 
-namespace MyNamespace
+namespace Damien
 {
     public class CollectEnergy : AntAIState
     {
@@ -16,12 +16,6 @@ namespace MyNamespace
         public override void Enter()
         {
             base.Enter();
-            
-          
-            
-
-
-           
             
             Finish();
         }
