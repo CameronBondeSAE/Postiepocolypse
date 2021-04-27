@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NavPlanner
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 19, y: 31}
+    position: {x: 21, y: 31}
     list:
     - id: 0
       name: Has Target Patrol
@@ -27,10 +27,12 @@ MonoBehaviour:
   - name: Pick Random Target
     isDefault: 1
     state: {fileID: 1717104106964401100, guid: 4c933270b17341b4cb51d7c7b88e9bac, type: 3}
-    cost: 0
-    position: {x: 300, y: 36}
+    cost: 2
+    position: {x: 302, y: 36}
     pre:
     - id: 0
+      value: 0
+    - id: 2
       value: 0
     post:
     - id: 0
@@ -40,11 +42,13 @@ MonoBehaviour:
   - name: Moving Target
     isDefault: 0
     state: {fileID: 6138840715368551018, guid: 87e2600531e93614f9c45bca7721559a, type: 3}
-    cost: 0
-    position: {x: 499, y: 35}
+    cost: 2
+    position: {x: 501, y: 35}
     pre:
     - id: 0
       value: 1
+    - id: 2
+      value: 0
     post:
     - id: 0
       value: 0
@@ -54,34 +58,30 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 2790763053214894716, guid: ae2aaad62e359f142a04f22619c6c819, type: 3}
     cost: 0
-    position: {x: 608, y: 257}
+    position: {x: 764, y: 52}
     pre:
     - id: 2
       value: 1
     post:
     - id: 3
       value: 1
+    - id: 2
+      value: 0
   goals:
-  - name: Is at Position
-    isDefault: 0
-    position: {x: 16, y: 369}
+  - name: Patrol
+    isDefault: 1
+    position: {x: 17, y: 369}
     conditions:
     - id: 1
       value: 1
-  - name: At Player
-    isDefault: 1
-    position: {x: 216, y: 367}
-    conditions:
-    - id: 3
-      value: 1
   worldStates:
-  - position: {x: 15, y: 476}
+  - position: {x: 17, y: 476}
     list:
     - id: 0
       value: 0
     - id: 1
       value: 0
     - id: 2
-      value: 0
+      value: 1
     - id: 3
       value: 0
