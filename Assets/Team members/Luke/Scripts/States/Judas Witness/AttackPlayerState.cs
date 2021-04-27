@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Anthill.AI;
+using Damien;
 
 namespace Luke
 {
@@ -10,6 +11,6 @@ namespace Luke
     /// </summary>
     public class AttackPlayerState : AntAIState
     {
-        
+        public FOV fov;
     }
 }

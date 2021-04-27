@@ -335,8 +335,9 @@ MonoBehaviour:
   navMeshAgent: {fileID: 6794730730155927835}
   audioSource: {fileID: 3680741728346999298}
   chorusFilter: {fileID: 8261083863869696342}
-  timeGathering: 5
+  timeGathering: 10
   patrolManager: {fileID: 0}
+  patrolSpeed: 5
   timeBetweenAudio: 20
   audioRepeatRate: 1
   maxWetMix: 1.35

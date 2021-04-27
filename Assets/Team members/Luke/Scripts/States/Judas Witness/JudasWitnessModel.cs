@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,6 +18,7 @@ namespace Luke
 
         [Header("Patrol variables")] 
         public PatrolManager patrolManager;
+        public float patrolSpeed;
 
         [Header("Audio")] 
         public float timeBetweenAudio;
@@ -72,6 +74,7 @@ namespace Luke
             }
             if (patrolManager.pathsWithIndoors != null)
             {
+                navMeshAgent.speed = patrolSpeed;
                 navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
             }
         }
