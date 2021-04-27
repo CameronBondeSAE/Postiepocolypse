@@ -21,7 +21,16 @@ namespace ZachFrench
         public override void Enter()
         {
             base.Enter();
-            NavMeshAgent.SetDestination(parent.GetComponent<NavDudeBody>().playerTarget.position);
+            NavMeshAgent.SetDestination(parent.GetComponent<UnitSense>().playerTarget.position);
+        }
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+            if (NavMeshAgent.remainingDistance < 1f)
+            {
+                Finish();
+            }
         }
     }
 }
