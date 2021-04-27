@@ -22,32 +22,12 @@ public class NavMain : MonoBehaviour
 
     void Start()
     {
-        _antAIAgent.SetGoal("Arrived at Target");
+        _antAIAgent.SetGoal("Deposit Item");
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (currentTarget != null)
-        {
-            if (invertDirection != true)
-            {
-                vectorToTarget = currentTarget.transform.position - transform.position;
-            }
-            else
-            {
-                vectorToTarget = transform.position - currentTarget.transform.position;
-            }
-                
-            if (vectorToTarget != null)
-            {
-                vectorNormalised = vectorToTarget.normalized;
-                Debug.Log("The vectorToTarget is " + vectorToTarget);
-                directionToTarget = Vector3.Angle(vectorToTarget, transform.forward);
-                Debug.Log("The directionToTarget is " + directionToTarget);
-                signedToTarget = Vector3.SignedAngle(vectorToTarget, transform.forward, Vector3.up);
-                Debug.Log("The Signed vector is " + signedToTarget);
-            }
-        }
+      
     }
 }
