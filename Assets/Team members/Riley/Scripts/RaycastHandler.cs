@@ -10,11 +10,11 @@ public class RaycastHandler : MonoBehaviour
     public LayerMask RaycastHitLayer;
     private int maxRayDistance = 500;
     private float yellowRayLine;
-    private CreatureController parentController;
+    private CreatureMain parentController;
 
     private void Start()
     {
-        parentController = GetComponentInParent<CreatureController>();
+        parentController = GetComponentInParent<CreatureMain>();
     }
 
     void Update()
