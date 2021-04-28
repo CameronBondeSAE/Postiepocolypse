@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 6794730730155927835}
   - component: {fileID: 6805969491227737825}
   - component: {fileID: -5937119535910051994}
+  - component: {fileID: 7020842292826884857}
+  - component: {fileID: 775556024857065438}
   m_Layer: 14
   m_Name: Judas
   m_TagString: Untagged
@@ -338,6 +340,7 @@ MonoBehaviour:
   timeGathering: 10
   patrolManager: {fileID: 0}
   patrolSpeed: 5
+  spawnPos: {x: 0, y: 0, z: 0}
   timeBetweenAudio: 20
   audioRepeatRate: 1
   maxWetMix: 1.35
@@ -412,3 +415,40 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &7020842292826884857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794730728925289216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9179d9dfc31e1d4ea49f8ed8d1649b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+    serializedVersion: 2
+    m_Bits: 0
+  viewRadius: 30
+  viewAngle: 90
+  listOfTargets: []
+--- !u!114 &775556024857065438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794730728925289216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468f955eae133164fafd23edbeca5183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinAmount: 0
+  CurrentAmount: 0
+  MaxAmount: 20
+  Drain: 2
+  MoveDrainScale: 0
+  StandingDrain: 1
+  Regen: 0

@@ -26,7 +26,8 @@ namespace TimPearson
         {
             base.Enter();
             Debug.Log("Low Energy");
-            NavMeshAgent.SetDestination(transform.position);
+            //NavMeshAgent.SetDestination(transform.position);
+            NavMeshAgent.isStopped = true;
             //parent.transform.position = parent.transform.position;
         }
 
