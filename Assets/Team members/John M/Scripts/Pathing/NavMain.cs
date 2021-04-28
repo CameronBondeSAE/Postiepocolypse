@@ -7,13 +7,8 @@ using UnityEngine;
 public class NavMain : MonoBehaviour
 {
     private AntAIAgent _antAIAgent;
-    public WaterTarget currentTarget;
-    public float safeDistance = 1f;
-    private float directionToTarget;
-    private Vector3 vectorToTarget;
-    public bool invertDirection;
-    private Vector3 vectorNormalised;
-    private float signedToTarget;
+    public PatrolPoint currentTarget;
+    
 
     private void Awake()
     {
