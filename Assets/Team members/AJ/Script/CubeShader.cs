@@ -17,13 +17,6 @@ namespace AJ
             {
                 renderer.material.SetTexture("_Texture2D", tex);
             }
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }

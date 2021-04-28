@@ -7,17 +7,6 @@ namespace AJ
 {
     public class TestShader : NetworkBehaviour
     {
-        //private Renderer renderer;
-        //public Gradient gradient;
-        //[SerializeField] private Material material;
-        //Color lerpedColor = Color.white;
-
-        /// <summary>
-        ///
-        /// </summary>
-        ///
-        
-        
         public float FadeDuration = 1f;
         public Color Color1;
         public Color Color2;
@@ -28,13 +17,6 @@ namespace AJ
         private float lastColorChangeTime;
 
         private Material material;
-
-        /// <summary>
-        ///
-        /// </summary>
-
-
-        // Start is called before the first frame update
         
         void Start()
         {
@@ -66,14 +48,6 @@ namespace AJ
                     startColor = endColor;
                     endColor = temp;
                 }
-
-                /*if (Input.GetButtonDown("Fire1"))
-                {
-                    material.SetColor("_Color",lerpedColor = Color.Lerp(Color.white, Color.green, Mathf.PingPong(Time.time, 1)));
-                    
-                }*/
-                //renderer.material.SetColor("_Colour", Color.yellow);
-                //gradient.Evaluate(0f);
             }
         }
         

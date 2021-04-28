@@ -11,11 +11,7 @@ namespace AJ
         public int amount;
         public TextMeshProUGUI amountUI;
         public int food;
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+       
 
         // Update is called once per frame
         void Update()

@@ -10,18 +10,14 @@ namespace AJ
     {
 
         public Light _light;
-
         public float MinTime;
-
         public float MaxTime;
-
         public float Timer;
         // Start is called before the first frame update
         void Start()
         {
             Timer = Random.Range(MinTime, MaxTime);
         }
-
         // Update is called once per frame
         void Update()
         {
@@ -35,19 +31,16 @@ namespace AJ
                 CmdFirstCommand();
             }
         }
-
         [Command(ignoreAuthority = true)]
         void CmdFirstCommand()
         {
             Debug.Log("Client command sent!");
         }
-
         [ClientRpc]
         void RpcSetLight(bool lightEnabled)
         {
             _light.enabled = lightEnabled;
         }
-
         void FlickerLight()
         {
             if (isServer)
@@ -56,7 +49,6 @@ namespace AJ
                 {
                     Timer -= Time.deltaTime;
                 }
-
                 if (Timer <= 0)
                 {
                     _light.enabled = !_light.enabled; 
