@@ -27,10 +27,20 @@ public class Threading : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if (InputSystem.GetDevice<Keyboard>().spaceKey.isPressed)
+        if (InputSystem.GetDevice<Keyboard>().spaceKey.wasPressedThisFrame)
         {
-            Thread thread = new Thread(NormalThreads);
-            thread.Start();
+            Debug.Log("Total = " + total);
+
+            total = 0;
+
+            for (int i = 0; i < 100; i++)
+            {
+                Thread thread = new Thread(NormalThreads);
+                thread.Start();
+            }
+
+            // We can wait for all 100 threads to finish here
+            // Debug.Log("Total = " + total);
         }
 
         JobHandle jobHandle;
@@ -41,16 +51,26 @@ public class Threading : MonoBehaviour
         }
     }
 
+    // Shared memory with ALL threads. Be careful of race conditions! Use LOCKING
+    public float total = 0;
+    public object lockKey = new object();
+
     // This is running in a thread
     private void NormalThreads()
     {
-        float answer = 0;
+        // float answer = 0;
 
-        for (int i = 0; i < 10000000; i++)
+
+        lock (lockKey)
         {
-            answer+=Mathf.Sqrt(i)+Mathf.PerlinNoise(i*1.24f,0);
+            for (int i = 0; i < 1000; i++)
+            {
+                total += Mathf.Sqrt(i) + Mathf.PerlinNoise(i * 1.24f, 0);
+            }
         }
-    
-        Debug.Log("I did something! : "+answer);
+
+        // total = total + answer;
+
+        // Debug.Log("I did something! : "+answer);
     }
 }
