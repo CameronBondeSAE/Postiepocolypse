@@ -36,6 +36,7 @@ namespace TimPearson
             base.Execute(aDeltaTime, aTimeScale);
             if (energy.CurrentAmount > 10f)
             {
+                NavMeshAgent.isStopped = false;
                 AntAIAgent antAIAgent = parent.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("Low Energy", false);
