@@ -28,6 +28,7 @@ namespace Damien
             if (_navMeshAgent.remainingDistance < 1f)
             {
                 owner.GetComponent<Blinder>().target = null;
+                
                 Finish();
             }
         }

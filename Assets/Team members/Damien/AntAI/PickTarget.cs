@@ -31,6 +31,11 @@ namespace Damien
             if (fieldOfView.listOfTargets.Count > 0)
             {
                 owner.GetComponentInParent<Blinder>().target = fieldOfView.listOfTargets[0];
+                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+               // antAIAgent.worldState.Set("Target Chosen", antAIAgent.GetComponent<Blinder>().target != null);
+                antAIAgent.worldState.Set("Target Chosen", true);
+                antAIAgent.worldState.EndUpdate();
             }
 
             // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);

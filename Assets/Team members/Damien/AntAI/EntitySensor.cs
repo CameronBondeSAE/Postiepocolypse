@@ -10,13 +10,13 @@ namespace Damien
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
             aWorldState.BeginUpdate(aAgent.planner);
-            aWorldState.Set("Close to Target", false);
+            aWorldState.Set("Arrived at Target", false);
             aWorldState.Set("Target Chosen", false);
             aWorldState.Set("Target Blinded", false);
-            aWorldState.Set("Energy Location Found", false);
+            aWorldState.Set("Energy Picked", false);
             aWorldState.Set("Arrived at Energy", false);
-            aWorldState.Set("Energy is full", false);
-            aWorldState.Set("Target is in view range", false);
+            aWorldState.Set("Light Energy is Full", false);
+            aWorldState.Set("Target in View Range", false);
             aWorldState.Set("Patrolling", false);
             aWorldState.EndUpdate();
         }
