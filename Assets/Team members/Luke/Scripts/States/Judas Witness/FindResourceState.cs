@@ -16,6 +16,7 @@ namespace Luke
             base.Create(aGameObject);
 
             owner = aGameObject;
+            navMeshAgent = owner.GetComponent<NavMeshAgent>();
             waterTarget = FindObjectsOfType<WaterTarget>();
         }
 
@@ -33,6 +34,11 @@ namespace Luke
                 antAIAgent.worldState.Set("foundResource", waterTarget != null);
                 antAIAgent.worldState.EndUpdate();
                 Debug.Log("Found resource");
+            }
+
+            else
+            {
+                Finish();
             }
         }
 

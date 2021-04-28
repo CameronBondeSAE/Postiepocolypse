@@ -45,7 +45,7 @@ namespace Luke
         public override void Exit()
         {
             base.Exit();
-
+            
             Debug.Log("Exit Wander State");
         }
     }

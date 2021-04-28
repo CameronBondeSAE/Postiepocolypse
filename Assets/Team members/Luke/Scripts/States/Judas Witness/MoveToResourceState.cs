@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
+using ZachFrench;
 
 namespace Luke
 {
@@ -10,7 +11,9 @@ namespace Luke
     {
          public GameObject owner;
          public NavMeshAgent navMeshAgent;
-         public WaterTarget[] waterTarget;
+         public List<PatrolPoint> waterTargets;
+         public PatrolManager patrolManager;
+         public PatrolPoint currentWaterTarget;
          public float remainingDistance = .5f;
          
          public override void Create(GameObject aGameObject)
@@ -19,18 +22,22 @@ namespace Luke
     
              owner = aGameObject;
              navMeshAgent = owner.GetComponent<NavMeshAgent>();
-             waterTarget = FindObjectsOfType<WaterTarget>();
+             patrolManager = FindObjectOfType<PatrolManager>();
+             
+             
+             waterTargets = patrolManager.waterTargets;
          }
          
          public override void Enter()
          {
              base.Enter();
-    
-             Debug.Log("Move to resource state");
              
-             if (waterTarget != null)
+             Debug.Log("Move to resource state");
+             currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
+             
+             if (waterTargets != null)
              {
-                 navMeshAgent.SetDestination(waterTarget[Random.Range(0, waterTarget.Length)].transform.position);
+                 navMeshAgent.SetDestination(currentWaterTarget.transform.position);
              }
          }
          
@@ -38,23 +45,31 @@ namespace Luke
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             if (navMeshAgent.remainingDistance < remainingDistance)
-             {
-                 //setting the world condition
-                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                 antAIAgent.worldState.Set("atResourcePos", true);
-                 antAIAgent.worldState.EndUpdate();
-             
-                 Debug.Log("At resource position");
-                 Finish();
-             }
-             
-             else if (waterTarget == null)
+             if (waterTargets == null)
              {
                  Debug.Log("waterTarget Null");
                  Finish();
              }
+             
+             if (navMeshAgent.remainingDistance < remainingDistance)
+             {
+                 Finish();
+             }
+         }
+
+         public override void Exit()
+         {
+             base.Exit();
+
+             waterTargets.Remove(currentWaterTarget);
+             
+             //setting the world condition
+             AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+             antAIAgent.worldState.Set("atResourcePos", false);
+             antAIAgent.worldState.EndUpdate();
+             
+             Debug.Log("At resource position");
          }
     }
 }

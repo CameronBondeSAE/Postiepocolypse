@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 using ZachFrench;
+using Random = UnityEngine.Random;
 
 namespace Luke
 {
@@ -19,6 +21,8 @@ namespace Luke
         [Header("Patrol variables")] 
         public PatrolManager patrolManager;
         public float patrolSpeed;
+
+        public Vector3 spawnPos;
 
         [Header("Audio")] 
         public float timeBetweenAudio;
@@ -46,6 +50,11 @@ namespace Luke
             navMeshAgent = FindObjectOfType<NavMeshAgent>();
 
             InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
+        }
+
+        public void Awake()
+        {
+            spawnPos = transform.position;
         }
 
 
