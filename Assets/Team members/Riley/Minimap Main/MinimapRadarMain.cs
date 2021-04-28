@@ -8,14 +8,17 @@ namespace RileyMcGowan
 {
     public class MinimapRadarMain : MonoBehaviour
     {
-        public GameObject playerMarker;
-        public GameObject enemyMarker;
-        public GameObject itemMarker;
+        //Main Vars
         private MinimapFOV minimapFOV;
         private int timeToLive = 5;
         private GameObject instantiate;
         private GameObject tempRef;
         public float radarSpeed;
+        //Changeable Vars (Add a new for each type of marker)
+        public GameObject playerMarker;
+        public GameObject enemyMarker;
+        public GameObject itemMarker;
+        
         
         void Start()
         {
@@ -29,51 +32,30 @@ namespace RileyMcGowan
             {
                 foreach (GameObject targetInFOV in minimapFOV.listOfTargets)
                 {
-                    if (targetInFOV.layer == 8) //Check layer player
+                    if (targetInFOV.GetComponentInChildren<MarkerHandler>() == null)
                     {
-                        if (targetInFOV.GetComponentInChildren<MarkerHandler>() == null)
+                        if (targetInFOV.layer == 8)
                         {
-                            SpawnMarkerPlayer(targetInFOV);
+                            SpawnMarker(targetInFOV, playerMarker);
                         }
-                    }
-                    if (targetInFOV.layer == 14) //Check layer enemy
-                    {
-                        if (targetInFOV.GetComponentInChildren<MarkerHandler>() == null)
+                        if (targetInFOV.layer == 14)
                         {
-                            SpawnMarkerMonster(targetInFOV);
+                            SpawnMarker(targetInFOV, enemyMarker);
                         }
-                    }
-                    if (targetInFOV.layer == 15) //Check layer item
-                    {
-                        if (targetInFOV.GetComponentInChildren<MarkerHandler>() == null)
+                        if (targetInFOV.layer == 15)
                         {
-                            SpawnMarkerItem(targetInFOV);
+                            SpawnMarker(targetInFOV, itemMarker);
                         }
                     }
                 }
             }
         }
 
-        private void SpawnMarkerPlayer(GameObject playerTransform)
+        private void SpawnMarker(GameObject currentTransform, GameObject markerToSpawn)
         {
-            Vector3 playerPos = new Vector3(playerTransform.transform.position.x, 80, playerTransform.transform.position.z);
-            instantiate = Instantiate<GameObject>(playerMarker, playerPos, transform.rotation);
-            instantiate.transform.parent = playerTransform.transform;
-            instantiate.GetComponent<MarkerHandler>().timeToLive = timeToLive;
-        }
-
-        private void SpawnMarkerMonster(GameObject enemyTransform)
-        {
-            Vector3 enemyPos = new Vector3(enemyTransform.transform.position.x, 80, enemyTransform.transform.position.z);
-            instantiate = Instantiate<GameObject>(enemyMarker, enemyPos, transform.rotation);
-            instantiate.transform.parent = enemyTransform.transform;
-            instantiate.GetComponent<MarkerHandler>().timeToLive = timeToLive;
-        }
-        private void SpawnMarkerItem(GameObject itemTransform)
-        {
-            Vector3 itemPos = new Vector3(itemTransform.transform.position.x, 80, itemTransform.transform.position.z);
-            instantiate = Instantiate<GameObject>(itemMarker, itemPos, transform.rotation);
-            instantiate.transform.parent = itemTransform.transform;
+            Vector3 currentPos = new Vector3(currentTransform.transform.position.x, 80, currentTransform.transform.position.z);
+            instantiate = Instantiate<GameObject>(markerToSpawn, currentPos, transform.rotation);
+            instantiate.transform.parent = currentTransform.transform;
             instantiate.GetComponent<MarkerHandler>().timeToLive = timeToLive;
         }
     }
