@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570a3fd6508643040b5fb7425064dee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energy: {fileID: 7408941740104443705}
 --- !u!114 &5296256202243030052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +222,7 @@ MonoBehaviour:
   rb: {fileID: 7408941740104443707}
   RaycastHitLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   currentTarget: {fileID: 0}
 --- !u!114 &1287278178981910291
 MonoBehaviour:
