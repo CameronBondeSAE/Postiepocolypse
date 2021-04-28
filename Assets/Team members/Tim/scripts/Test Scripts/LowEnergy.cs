@@ -35,6 +35,10 @@ namespace TimPearson
             base.Execute(aDeltaTime, aTimeScale);
             if (energy.CurrentAmount > 10f)
             {
+                AntAIAgent antAIAgent = parent.GetComponent<AntAIAgent>();
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("Low Energy", false);
+                antAIAgent.worldState.EndUpdate();
                 Finish();
             }
         }

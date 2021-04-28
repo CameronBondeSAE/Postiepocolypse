@@ -47,7 +47,7 @@ public class Energy : MonoBehaviour
 
         float speed = (lastPos - currentPos).magnitude;
         
-        if (currentPos != lastPos)
+        if (Vector3.Distance(currentPos, lastPos) < 0.1f)
         {
             Drain = speed * MoveDrainScale;
             Regen = 0f;
