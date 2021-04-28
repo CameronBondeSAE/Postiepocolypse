@@ -23,7 +23,7 @@ namespace RileyMcGowan
         private float speed;
         private float rotateSpeed;
         private float perlinNoise;
-        public PatrolPoint currentPatrolPoint;
+        public ZachFrench.Target currentPatrolPoint;
         public WaterTarget currentWaterTarget;
 
         private void Start()

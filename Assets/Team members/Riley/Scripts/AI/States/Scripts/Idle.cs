@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RileyMcGowan
 {
-    public class Idle : AntAIState
+    public class Idle : AntAIPlannerState
     {
         public override void Enter()
         {
