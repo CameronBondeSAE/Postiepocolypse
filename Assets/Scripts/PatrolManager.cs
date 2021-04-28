@@ -11,5 +11,6 @@ namespace ZachFrench
         public List<PatrolPoint> pathsWithIndoors;
         public List<PatrolPoint> indoors;
         public List<PatrolPoint> sneaky;
+        public List<PatrolPoint> waterTargets;
     }
 }
