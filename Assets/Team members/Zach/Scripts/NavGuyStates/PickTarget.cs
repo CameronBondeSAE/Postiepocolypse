@@ -30,7 +30,7 @@ namespace ZachFrench
                 targets = patrolManager.paths;
             }
 
-            PatrolPoint target = targets[Random.Range(0, targets.Count - 1)];
+            PatrolPoint target = targets[Random.Range(0, targets.Count)];
 
             if (target != null)
             {
