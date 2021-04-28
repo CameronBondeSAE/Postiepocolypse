@@ -21,7 +21,10 @@ namespace Luke
         [Header("Patrol variables")] 
         public PatrolManager patrolManager;
         public float patrolSpeed;
-
+        
+        [Header("Resource state variables")]
+        public List<PatrolPoint> waterTargets;
+        public PatrolPoint currentWaterTarget;
         public Vector3 spawnPos;
 
         [Header("Audio")] 
@@ -50,14 +53,12 @@ namespace Luke
             navMeshAgent = FindObjectOfType<NavMeshAgent>();
 
             InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
-        }
-
-        public void Awake()
-        {
+            
             spawnPos = transform.position;
+            
+            waterTargets = patrolManager.waterTargets;
         }
-
-
+        
         public void BasicNoises()
         {
             chorusFilter.wetMix1 = Mathf.PerlinNoise(Time.time / maxWetMix, 0);
@@ -70,11 +71,6 @@ namespace Luke
             }
         }
 
-        public void DirectionRaycast()
-        {
-            Debug.DrawRay(transform.position, transform.forward, Color.magenta);
-        }
-
         public void Wander()
         {
             if (patrolManager == null)
@@ -85,6 +81,16 @@ namespace Luke
             {
                 navMeshAgent.speed = patrolSpeed;
                 navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
+            }
+        }
+
+        public void SetWaterTarget()
+        {
+            currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
+             
+            if (waterTargets != null)
+            {
+                navMeshAgent.SetDestination(currentWaterTarget.transform.position);
             }
         }
     }

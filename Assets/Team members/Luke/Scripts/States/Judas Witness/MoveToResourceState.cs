@@ -11,9 +11,8 @@ namespace Luke
     {
          public GameObject owner;
          public NavMeshAgent navMeshAgent;
-         public List<PatrolPoint> waterTargets;
-         public PatrolManager patrolManager;
-         public PatrolPoint currentWaterTarget;
+         public JudasWitnessModel judasWitnessModel;
+         public AntAIAgent antAIAgent;
          public float remainingDistance = .5f;
          
          public override void Create(GameObject aGameObject)
@@ -21,11 +20,9 @@ namespace Luke
              base.Create(aGameObject);
     
              owner = aGameObject;
+             antAIAgent = owner.GetComponent<AntAIAgent>();
              navMeshAgent = owner.GetComponent<NavMeshAgent>();
-             patrolManager = FindObjectOfType<PatrolManager>();
-             
-             
-             waterTargets = patrolManager.waterTargets;
+             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
          }
          
          public override void Enter()
@@ -33,19 +30,20 @@ namespace Luke
              base.Enter();
              
              Debug.Log("Move to resource state");
-             currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
              
-             if (waterTargets != null)
-             {
-                 navMeshAgent.SetDestination(currentWaterTarget.transform.position);
-             }
+             //need this here so the wait time for gathering is realised
+             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+             antAIAgent.worldState.Set("foundResource", false);
+             antAIAgent.worldState.EndUpdate();
+             
+             judasWitnessModel.SetWaterTarget();
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             if (waterTargets == null)
+             if (judasWitnessModel.waterTargets == null)
              {
                  Debug.Log("waterTarget Null");
                  Finish();
@@ -60,13 +58,9 @@ namespace Luke
          public override void Exit()
          {
              base.Exit();
-
-             waterTargets.Remove(currentWaterTarget);
              
-             //setting the world condition
-             AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
              antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-             antAIAgent.worldState.Set("atResourcePos", false);
+             antAIAgent.worldState.Set("atResourcePos", true);
              antAIAgent.worldState.EndUpdate();
              
              Debug.Log("At resource position");
