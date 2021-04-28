@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1423523618212336981}
   - component: {fileID: 2123074019}
   - component: {fileID: 5457194389746452590}
+  - component: {fileID: -6021764109565790340}
   m_Layer: 0
   m_Name: Civilian
   m_TagString: Untagged
@@ -132,3 +133,22 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &-6021764109565790340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300904820060497483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468f955eae133164fafd23edbeca5183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinAmount: 0
+  CurrentAmount: 0
+  MaxAmount: 20
+  Drain: 2
+  MoveDrainScale: 0
+  StandingDrain: 1
+  Regen: 0
