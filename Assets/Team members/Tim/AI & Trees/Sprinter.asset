@@ -13,20 +13,24 @@ MonoBehaviour:
   m_Name: Sprinter
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 66, y: 80}
+    position: {x: 170, y: 150}
     list:
     - id: 0
       name: Has Target
     - id: 1
       name: At Target
+    - id: 2
+      name: Low Energy
   actions:
   - name: Choose Random Target
     isDefault: 0
     state: {fileID: 3748094166389526379, guid: 7d32154e7d0f93d45971dcbe534c469c, type: 3}
     cost: 1
-    position: {x: 407, y: 48}
+    position: {x: 511, y: 118}
     pre:
     - id: 0
+      value: 0
+    - id: 2
       value: 0
     post:
     - id: 0
@@ -35,10 +39,12 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 2063101611716845348, guid: 5d5721cbd793bb6409f9eece654de437, type: 3}
     cost: 1
-    position: {x: 668, y: 41}
+    position: {x: 772, y: 111}
     pre:
     - id: 0
       value: 1
+    - id: 2
+      value: 0
     post:
     - id: 1
       value: 1
@@ -46,20 +52,33 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 7660674129930753216, guid: 260f821c93555c94bac133ac103472f2, type: 3}
     cost: 0
-    position: {x: 906, y: 36}
+    position: {x: 1010, y: 106}
     pre: []
     post: []
+  - name: Low Energy
+    isDefault: 0
+    state: {fileID: 6643909040311805548, guid: 4916da555d3cdcb4c94085a9b3172d6d, type: 3}
+    cost: 0
+    position: {x: 506, y: 322}
+    pre:
+    - id: 2
+      value: 1
+    post:
+    - id: 2
+      value: 0
   goals:
   - name: At Position
     isDefault: 1
-    position: {x: 14, y: 222}
+    position: {x: 118, y: 292}
     conditions:
     - id: 1
       value: 1
   worldStates:
-  - position: {x: 44, y: 393}
+  - position: {x: 148, y: 463}
     list:
     - id: 0
       value: 0
     - id: 1
       value: 0
+    - id: 2
+      value: 1
