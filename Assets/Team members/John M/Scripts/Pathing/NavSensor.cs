@@ -13,6 +13,8 @@ public class NavSensor : MonoBehaviour, ISense
         aWorldState.Set("Retreat", false);
         aWorldState.Set("Deposit Item", false);
         aWorldState.Set("Move To Deposit", false);
+        aWorldState.Set("Has Target", aAgent.GetComponent<NavMain>().currentTarget != null);
+        aWorldState.Set("Arrived At Target", false);
         aWorldState.EndUpdate();
     }
     
