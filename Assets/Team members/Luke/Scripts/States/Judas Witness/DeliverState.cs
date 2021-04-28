@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlexM;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,7 +11,7 @@ namespace Luke
     {
         public GameObject owner;
         public NavMeshAgent navMeshAgent;
-        private Vector3 targetDirection;
+        public Vector3 returnResourcePos;
         
         public override void Create(GameObject aGameObject)
         {
@@ -18,6 +19,7 @@ namespace Luke
 
             owner = aGameObject;
             navMeshAgent = owner.GetComponent<NavMeshAgent>();
+            returnResourcePos = transform.position;
         }
 
         public override void Enter()
@@ -25,7 +27,7 @@ namespace Luke
             base.Enter();
             Debug.Log("Delivering");
             
-            navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().judasTarget.transform.position);
+            navMeshAgent.SetDestination(returnResourcePos);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -37,7 +39,17 @@ namespace Luke
             // Have we got to the target?
             if (navMeshAgent.remainingDistance < 1f)
             {
+                //setting the world condition
+                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("deliveredResource", true);
+                antAIAgent.worldState.EndUpdate();
+                            
+                Debug.Log("Delivered resource");
+                
                 Finish();
+                
+                // Here I need to find if there is any other water sources and if not wander
             }
         }
     }

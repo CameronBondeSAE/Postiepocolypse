@@ -1,44 +1,45 @@
 ﻿using Anthill.AI;
+using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Luke
 {
     public class FindResourceState : AntAIState
     {
         public GameObject owner;
-        public JudasTarget judasTargetPos;
+        public WaterTarget[] waterTarget;
+        public NavMeshAgent navMeshAgent;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
-            judasTargetPos = GetComponent<JudasTarget>();
+            waterTarget = FindObjectsOfType<WaterTarget>();
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            Debug.Log("find resource state");
+            Debug.Log("Find resource state");
 
-            // HACK
-            JudasTarget[] targets = FindObjectsOfType<JudasTarget>();
-
-            // Pick a random target
-            if (targets != null)
+            if (waterTarget != null)
             {
-                if (judasTargetPos == null)
-                {
-                    return;
-                }
-                else
-                {
-                    judasTargetPos = targets[Random.Range(0, targets.Length)];
-
-                    owner.GetComponent<JudasWitnessModel>().judasTarget = judasTargetPos;
-                }
+                //setting the world condition
+                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("foundResource", waterTarget != null);
+                antAIAgent.worldState.EndUpdate();
+                Debug.Log("Found resource");
             }
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            Debug.Log("Exit find resource state");
 
             Finish();
         }

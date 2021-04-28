@@ -54,7 +54,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -332,28 +332,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   antAIAgent: {fileID: 6410610709035693269}
-  navMeshAgent: {fileID: 0}
-  judasTarget: {fileID: 0}
+  navMeshAgent: {fileID: 6794730730155927835}
   audioSource: {fileID: 3680741728346999298}
   chorusFilter: {fileID: 8261083863869696342}
-  timeGathering: 5
-  patrolSpeed: 0
-  scale: {x: 1, y: 1, z: 1}
-  startPos: {x: 0, y: 0, z: 0}
+  timeGathering: 10
+  patrolManager: {fileID: 0}
+  patrolSpeed: 5
   timeBetweenAudio: 20
   audioRepeatRate: 1
   maxWetMix: 1.35
   maxRate: 2
   maxDepth: 2.5
-  gotResource: 0
-  playerIsNear: 0
-  needRecharge: 0
-  foundResource: 0
-  deliveredResource: 0
-  atAttackRange: 0
-  atResourcePos: 0
-  foundRecharge: 0
-  atRechargePos: 0
 --- !u!114 &6794730730155927824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3779311a5695f584994b3d26584feb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  judasWitnessModel: {fileID: 0}
+  judasWitnessModel: {fileID: 7667564812406049628}
 --- !u!195 &6794730730155927835
 NavMeshAgent:
   m_ObjectHideFlags: 0

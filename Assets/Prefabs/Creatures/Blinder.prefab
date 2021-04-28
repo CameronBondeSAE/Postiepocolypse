@@ -2069,7 +2069,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   viewRadius: 30
   viewAngle: 360
   listOfTargets: []
@@ -2088,7 +2088,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   scale: {x: 50, y: 0, z: 50}
-  timeScale: 0.05
+  timeScale: 1
 --- !u!114 &215902256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2116,7 +2116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0548a8365998240a8868affe0a4009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
+  owner: {fileID: 7058318617128531734}
   antAIAgent: {fileID: 215902256}
   target: {fileID: 0}
 --- !u!114 &215902258

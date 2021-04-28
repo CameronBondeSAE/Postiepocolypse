@@ -9,8 +9,9 @@ namespace Luke
     public class MoveToResourceState : AntAIState
     {
          public GameObject owner;
-         private Vector3 targetDirection;
-         NavMeshAgent navMeshAgent;
+         public NavMeshAgent navMeshAgent;
+         public WaterTarget[] waterTarget;
+         public float remainingDistance = .5f;
          
          public override void Create(GameObject aGameObject)
          {
@@ -18,28 +19,40 @@ namespace Luke
     
              owner = aGameObject;
              navMeshAgent = owner.GetComponent<NavMeshAgent>();
+             waterTarget = FindObjectsOfType<WaterTarget>();
          }
          
          public override void Enter()
          {
              base.Enter();
     
-             Debug.Log("move to resource state");
-    
-             navMeshAgent.SetDestination(owner.GetComponent<JudasWitnessModel>().judasTarget.transform.position);
+             Debug.Log("Move to resource state");
              
-             
+             if (waterTarget != null)
+             {
+                 navMeshAgent.SetDestination(waterTarget[Random.Range(0, waterTarget.Length)].transform.position);
+             }
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             owner.GetComponent<JudasWitnessModel>().DirectionRaycast();
-             
-             // Have we got to the target?
-             if (navMeshAgent.remainingDistance < 1f)
+             if (navMeshAgent.remainingDistance < remainingDistance)
              {
+                 //setting the world condition
+                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                 antAIAgent.worldState.Set("atResourcePos", true);
+                 antAIAgent.worldState.EndUpdate();
+             
+                 Debug.Log("At resource position");
+                 Finish();
+             }
+             
+             else if (waterTarget == null)
+             {
+                 Debug.Log("waterTarget Null");
                  Finish();
              }
          }

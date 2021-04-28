@@ -2,32 +2,33 @@
 using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
-using UnityEngine.AI;
 
-namespace ZachFrench
+namespace RileyMcGowan
 {
-    
-    public class MovingTowardsPlayer : AntAIState
+    public class ReturnToPortal : AntAIState
     {
-        private GameObject parent;
-        public NavMeshAgent NavMeshAgent;
+        //Public Vars
+        
+        //Private Vars
+        private GameObject owner;
+        private bool isFinished;
+        
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
-            parent = aGameObject;
-            NavMeshAgent = parent.GetComponent<NavMeshAgent>();
+            isFinished = false;
+            owner = aGameObject;
         }
 
         public override void Enter()
         {
             base.Enter();
-            NavMeshAgent.SetDestination(parent.GetComponent<UnitSense>().playerTarget.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            if (NavMeshAgent.remainingDistance < 1f)
+            if (isFinished == true)
             {
                 Finish();
             }
