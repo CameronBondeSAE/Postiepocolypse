@@ -19,6 +19,7 @@ namespace TimPearson
         {
             if (!(antAIAgent is null)) antAIAgent.SetGoal("At Position");
             sprint = GetComponent<Sprint>();
+            target = FindObjectOfType<PatrolManager>();
         }
 
         // Update is called once per frame

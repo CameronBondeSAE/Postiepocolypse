@@ -34,7 +34,7 @@ namespace TimPearson
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            if (energy.CurrentAmount > 10f)
+            if (energy.CurrentAmount > energy.MaxAmount-1f)
             {
                 NavMeshAgent.isStopped = false;
                 AntAIAgent antAIAgent = parent.GetComponent<AntAIAgent>();

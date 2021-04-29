@@ -18,6 +18,8 @@ public class Energy : MonoBehaviour
     public float Regen = 0f;
     private Vector3 currentPos;
     private Vector3 lastPos;
+    public float distance;
+    public float speed;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -44,11 +46,11 @@ public class Energy : MonoBehaviour
         
         
         currentPos = transform.position;
-
-        float speed = (lastPos - currentPos).magnitude;
-
-        float distance = Vector3.Distance(currentPos, lastPos);
-        if (distance > 0.2f)
+        
+        distance = Vector3.Distance(currentPos, lastPos);
+        
+        speed = (lastPos - currentPos).magnitude;
+        if (distance > 0.15f)
         {
             Drain = speed * MoveDrainScale;
             Regen = 0f;
