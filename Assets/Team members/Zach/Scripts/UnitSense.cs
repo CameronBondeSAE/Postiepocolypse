@@ -5,6 +5,7 @@ using Anthill.AI;
 using Damien;
 using TimPearson;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 
@@ -20,6 +21,7 @@ namespace ZachFrench
 
         public Transform playerTarget;
         //public List<GameObject> Players;
+        public NavMeshAgent NavMeshAgent;
         
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
@@ -62,9 +64,10 @@ namespace ZachFrench
             {
                 lowEnergy = true;
             }
-            else if (Energy.CurrentAmount > 15f)
+            else if (Energy.CurrentAmount > Energy.MaxAmount - 1f)
             {
                 lowEnergy = false;
+                NavMeshAgent.isStopped = false;
             }
         }
         
