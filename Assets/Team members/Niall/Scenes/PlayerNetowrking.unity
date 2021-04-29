@@ -566,15 +566,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resources
-      value: 2
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: spawnRate
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourcePrefabs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourcePrefabs.Array.data[0]
@@ -584,6 +584,10 @@ PrefabInstance:
       propertyPath: resourcePrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 8421045275480443797, guid: 254a0fd162453fe4583464c73ccfb084, type: 3}
+    - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
+      propertyPath: resourcePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8344312059397507535, guid: 61b6e62deebda8c45a5e5e12eea645c3, type: 3}
     - target: {fileID: 1688161171, guid: 9d8658f6e531a5e43965d5d49b009d62, type: 3}
       propertyPath: resourceSpawnpoint.Array.size
       value: 3

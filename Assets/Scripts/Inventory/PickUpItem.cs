@@ -8,17 +8,22 @@ namespace JonathonMiles
 	public class PickUpItem : NetworkBehaviour
 	{
 		public ItemBase item;
+		private Inventory inv;
 
 		// Pick up the item
 		public void PickUp(GameObject owner)
 		{
-			Debug.Log("Picking up " + item.name);
-			item.Pickup(owner);
 			
-			CmdPickUp();
+			//if (inv.items.Count < inv.inventorySpace)
+		//	{
+				Debug.Log("Picking up " + item.name);
+				item.Pickup(owner);
+
+				CmdPickUp();
+		//	}
 		}
 		[Command(ignoreAuthority = true)]
-		public void CmdPickUp()
+		private void CmdPickUp()
 		{
 			Destroy(gameObject);
 		}
