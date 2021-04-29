@@ -17,7 +17,7 @@ public class NavMain : MonoBehaviour
 
     void Start()
     {
-        _antAIAgent.SetGoal("Deposit Item");
+        _antAIAgent.SetGoal("Arrived at Target");
     }
 
     // Update is called once per frame

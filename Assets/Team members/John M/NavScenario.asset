@@ -126,7 +126,7 @@ MonoBehaviour:
     post: []
   - name: Pick A Target
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 5328860923978580379, guid: 93985f3a676f03c49b04c1412b9faac5, type: 3}
     cost: 0
     position: {x: 239, y: 714}
     pre:
@@ -139,14 +139,12 @@ MonoBehaviour:
       value: 1
   - name: Move To Target
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 5581026121193848253, guid: 2c3b00a6a8757224eb2fa386870a4ae1, type: 3}
     cost: 0
-    position: {x: 438, y: 699}
+    position: {x: 463, y: 722}
     pre:
     - id: 8
       value: 1
-    - id: 9
-      value: 0
     post:
     - id: 9
       value: 1
@@ -170,6 +168,12 @@ MonoBehaviour:
     position: {x: 649, y: 507}
     conditions:
     - id: 7
+      value: 1
+  - name: Arrived at Target
+    isDefault: 0
+    position: {x: 688, y: 717}
+    conditions:
+    - id: 9
       value: 1
   worldStates:
   - position: {x: 8, y: 669}
