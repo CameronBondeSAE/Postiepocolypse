@@ -33,7 +33,7 @@ MonoBehaviour:
       name: Patrolling
   actions:
   - name: Pick Target
-    isDefault: 0
+    isDefault: 1
     state: {fileID: 4793493128706573800, guid: 08ff0d4a407e96443a19fc9000b9588b, type: 3}
     cost: 0
     position: {x: 459, y: 253}
@@ -111,7 +111,7 @@ MonoBehaviour:
     - id: 5
       value: 1
   - name: Patrol Idle
-    isDefault: 1
+    isDefault: 0
     state: {fileID: 6687878144443710320, guid: d7b402394bc7eb34c8e31993d811f429, type: 3}
     cost: 0
     position: {x: 259, y: 33}
