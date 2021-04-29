@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Luke
 {
-    public class MotionSensor : ItemBase
+    public class MotionSensor : MonoBehaviour
     {
         public float pingDuration;
         public float pingWaitTime;

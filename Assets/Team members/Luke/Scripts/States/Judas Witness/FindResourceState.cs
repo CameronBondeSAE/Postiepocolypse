@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Anthill.AI;
-using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +23,12 @@ namespace Luke
             base.Enter();
 
             Debug.Log("Find resource state");
+        }
 
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+            
             if (judasWitnessModel.waterTargets != null)
             {
                 //setting the world condition
@@ -33,6 +37,8 @@ namespace Luke
                 antAIAgent.worldState.Set("foundResource", judasWitnessModel.waterTargets != null);
                 antAIAgent.worldState.EndUpdate();
                 Debug.Log("Found resource");
+                
+                Finish();
             }
 
             else
