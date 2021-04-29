@@ -61,7 +61,8 @@ namespace JonathonMiles
             items.RemoveAt(0);
         }
 
-        [Command(ignoreAuthority = true)]
+        // [Command(ignoreAuthority = true)]
+		[Command]
         void CmdDrop(ItemBase item)
         {
             items.RemoveAt(0);
