@@ -11,16 +11,12 @@ namespace RileyMcGowan
         //Public Vars
         
         //Private Vars
-        private bool isFinished;
         private float safeDistance;
 
         public override void Enter()
         {
             base.Enter();
-            isFinished = false;
-            navMeshRef = creatureMainRef.navMeshRef;
-            WaterTarget currentTarget = creatureMainRef.currentWaterTarget;
-            navMeshRef.SetDestination(currentTarget.transform.position);
+            navMeshRef.SetDestination(creatureMainRef.currentWaterTarget.transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -32,8 +28,11 @@ namespace RileyMcGowan
             //Check the distance the creature has until it's finished
             if (navMeshRef.remainingDistance < safeDistance)
             {
-                //Stop navigation and finish
+                antAIRef.worldState.BeginUpdate(antAIRef.planner);
+                antAIRef.worldState.Set("EnergyCollected", true);
+                antAIRef.worldState.EndUpdate();
                 creatureMainRef.currentWaterTarget = null;
+                //Stop navigation and finish
                 Finish();
             }
         }

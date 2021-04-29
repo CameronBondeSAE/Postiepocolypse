@@ -31,10 +31,10 @@ namespace ZachFrench
         public override void Exit()
         {
             base.Exit();
-            AntAIAgent antAIAgent = parent.GetComponent<AntAIAgent>();
+            /*AntAIAgent antAIAgent = parent.GetComponent<AntAIAgent>();
             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
             antAIAgent.worldState.Set("Low Energy", parent.GetComponent<UnitSense>().lowEnergy = false);
-            antAIAgent.worldState.EndUpdate();
+            antAIAgent.worldState.EndUpdate();*/
         }
     }
 }

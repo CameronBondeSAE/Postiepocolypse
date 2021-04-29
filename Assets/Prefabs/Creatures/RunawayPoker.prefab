@@ -13,9 +13,13 @@ GameObject:
   - component: {fileID: 2552460577428112420}
   - component: {fileID: 2552460577428112423}
   - component: {fileID: 2552460577428112422}
-  - component: {fileID: 2552460577428112601}
   - component: {fileID: -9132475553261869846}
   - component: {fileID: -7767447981005496856}
+  - component: {fileID: 1881397175}
+  - component: {fileID: 1881397176}
+  - component: {fileID: 1881397177}
+  - component: {fileID: 1881397178}
+  - component: {fileID: 1881397179}
   m_Layer: 14
   m_Name: RunawayPoker
   m_TagString: Untagged
@@ -116,21 +120,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &2552460577428112601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2552460577428112600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b7c16ff1c3af1c419f112f20a35731e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  move: 1
-  floatingHeight: 11
 --- !u!114 &-9132475553261869846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +154,92 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!195 &1881397175
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552460577428112600}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1881397176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552460577428112600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e724e36405834fa192b36cd6a4e6059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manualUpdate: 0
+  thinkInterval: 0.1
+  scenario: {fileID: 11400000, guid: 4a2ec549a2f42ee4a90e6ffb497d4bc7, type: 2}
+--- !u!114 &1881397177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552460577428112600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d0c80146d0b9e41a07bc1063634501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1881397178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552460577428112600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99840fbc31dcdd24ea05067339c4b0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portalTarget: {fileID: 0}
+  playerTarget: {fileID: 0}
+  currentPatrolPoint: {fileID: 0}
+  currentWaterTarget: {fileID: 0}
+  floatingHeight: 11
+  navMeshRef: {fileID: 0}
+  safeDistance: 1
+--- !u!114 &1881397179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552460577428112600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9179d9dfc31e1d4ea49f8ed8d1649b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets:
+    serializedVersion: 2
+    m_Bits: 256
+  viewRadius: 50
+  viewAngle: 20
+  listOfTargets: []
 --- !u!1 &2552460577630369638
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +252,7 @@ GameObject:
   - component: {fileID: 2552460577630369635}
   - component: {fileID: 2552460577630369634}
   - component: {fileID: 2552460577630369637}
-  - component: {fileID: 2552460577630369636}
+  - component: {fileID: 1059806178}
   m_Layer: 14
   m_Name: ColliderTrigger
   m_TagString: Untagged
@@ -261,7 +336,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2552460577630369636
+--- !u!114 &1059806178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,10 +345,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2552460577630369638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267b3e034a8b4854b8f4e155d27ee606, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bbd3071f9e87f04a8d96a9eb26115ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveDamaged: 0
+  damageAmount: 10
+  inCollider: []
 --- !u!1 &2786266547875069626
 GameObject:
   m_ObjectHideFlags: 0

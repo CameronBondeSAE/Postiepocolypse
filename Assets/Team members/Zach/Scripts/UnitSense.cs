@@ -62,7 +62,7 @@ namespace ZachFrench
             {
                 lowEnergy = true;
             }
-            else if (Energy.CurrentAmount > 5f)
+            else if (Energy.CurrentAmount > 15f)
             {
                 lowEnergy = false;
             }

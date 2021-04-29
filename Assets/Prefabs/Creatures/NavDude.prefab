@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 4651490969434858021}
   - component: {fileID: 1095733464824670759}
   - component: {fileID: 1959558857}
+  - component: {fileID: 5288077799947234339}
+  - component: {fileID: 99469371506948746}
   m_Layer: 14
   m_Name: NavDude
   m_TagString: Untagged
@@ -170,7 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  playerTarget: {fileID: 0}
   antAIAgent: {fileID: 4979934498223357702}
   playerLayer:
     serializedVersion: 2
@@ -188,6 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fov: {fileID: 1959558857}
+  Energy: {fileID: 0}
+  lowEnergy: 0
   playerTarget: {fileID: 0}
 --- !u!114 &4651490969434858021
 MonoBehaviour:
@@ -241,3 +244,30 @@ MonoBehaviour:
   viewRadius: 30
   viewAngle: 90
   listOfTargets: []
+--- !u!135 &5288077799947234339
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979934498223357703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &99469371506948746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979934498223357703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbd3071f9e87f04a8d96a9eb26115ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 15
+  inCollider: []

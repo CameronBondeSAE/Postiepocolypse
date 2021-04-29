@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlexM;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,17 +12,17 @@ namespace RileyMcGowan
         //Public Vars
         
         //Private Vars
-        private bool isFinished;
         private float safeDistance;
 
         public override void Enter()
         {
             base.Enter();
-            isFinished = false;
             navMeshRef = creatureMainRef.navMeshRef;
-            //GameObject currentTarget = portal object ref?
-            //owner.GetComponent<CreatureMain>().portalTarget = currentTarget;
-            //navMeshRef.SetDestination(currentTarget.transform.position);
+            //Store all possible targets of type Targer in targetArray
+            GameObject currentTarget = FindObjectOfType<HellPortal>().gameObject; //HACK CHANGE LATER FOR MAIN PORTALS
+            //Tell the parent what the target is
+            creatureMainRef.portalTarget = currentTarget;
+            navMeshRef.SetDestination(currentTarget.transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -32,8 +33,13 @@ namespace RileyMcGowan
             //Check the distance the creature has until it's finished
             if (navMeshRef.remainingDistance < safeDistance)
             {
+                antAIRef.worldState.BeginUpdate(antAIRef.planner);
+                antAIRef.worldState.Set("EnergyDeposited", true);
+                antAIRef.worldState.EndUpdate();
                 //Stop navigation and finish
                 creatureMainRef.portalTarget = null;
+                creatureMainRef.ResetPlanner();
+                creatureMainRef.playerTarget = null;
                 Finish();
             }
         }

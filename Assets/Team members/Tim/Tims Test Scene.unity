@@ -766,6 +766,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d68f364b4721aa419aa4c62e28aebcd, type: 3}
+--- !u!114 &1665416482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
+  m_PrefabInstance: {fileID: 1799837953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad974e166cd11747ba427269df88e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1694655929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1039,8 @@ MonoBehaviour:
   MoveDrainScale: 0
   StandingDrain: 1
   Regen: 1
+  distance: 0
+  speed: 0
 --- !u!1001 &2071928623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1172,6 +1185,10 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5296256202243030052, guid: 20393d743d4fbf84687779b8c4986504, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1665416482}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20393d743d4fbf84687779b8c4986504, type: 3}
 --- !u!1001 &6094274127497257771
