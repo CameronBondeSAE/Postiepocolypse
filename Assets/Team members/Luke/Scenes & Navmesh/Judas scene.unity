@@ -968,11 +968,11 @@ PrefabInstance:
     - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
       propertyPath: waterTargets.Array.data[0]
       value: 
-      objectReference: {fileID: 881758085}
+      objectReference: {fileID: 1876740232}
     - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
       propertyPath: waterTargets.Array.data[1]
       value: 
-      objectReference: {fileID: 1876740232}
+      objectReference: {fileID: 881758085}
     - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
       propertyPath: pathsWithIndoors.Array.size
       value: 4
