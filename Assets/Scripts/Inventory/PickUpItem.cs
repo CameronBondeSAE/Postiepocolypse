@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 namespace JonathonMiles
 {
-	public class PickUpItem : MonoBehaviour
+	public class PickUpItem : NetworkBehaviour
 	{
 		public ItemBase item;
 
@@ -13,9 +14,14 @@ namespace JonathonMiles
 		{
 			Debug.Log("Picking up " + item.name);
 			item.Pickup(owner);
-
-			// TODO check networking
-			Destroy(gameObject); // Destroy item from scene
+			
+			CmdPickUp();
+		}
+		[Command]
+		public void CmdPickUp()
+		{
+			Destroy(gameObject);
 		}
 	}
+	
 }

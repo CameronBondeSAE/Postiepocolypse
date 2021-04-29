@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using Mirror.Examples.Chat;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace JonathonMiles
 {
 
-    public class Inventory : MonoBehaviour
+    public class Inventory : NetworkBehaviour
     {
         public delegate void OnItemChanged();
 
@@ -61,7 +62,8 @@ namespace JonathonMiles
                 onItemChangedCallback.Invoke();
             
             //update transform position to hand position once complete
-            Instantiate(item.prefab,handPos.transform.position, Quaternion.identity);
+           GameObject droppedItem = Instantiate(item.prefab,handPos.transform.position, Quaternion.identity);
+           NetworkServer.Spawn(droppedItem);
             Rigidbody rb = item.prefab.GetComponent<Rigidbody>();
             rb.velocity = Vector3.up;
         }
