@@ -30,13 +30,15 @@ namespace ZachFrench
                 targets = patrolManager.paths;
             }
 
-            PatrolPoint target = targets[Random.Range(0, targets.Count)];
-
-            if (target != null)
+            if (targets.Count > 0)
             {
-                parent.GetComponent<NavDudeBody>().target = target;
+                PatrolPoint target = targets[Random.Range(0, targets.Count)];
+                if (target != null)
+                {
+                    parent.GetComponent<NavDudeBody>().target = target;
+                }
             }
-            
+
             Finish();
         }
     }
