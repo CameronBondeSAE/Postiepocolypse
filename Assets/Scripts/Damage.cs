@@ -16,11 +16,12 @@ public class Damage : MonoBehaviour
      /// </summary>
      
      public int damageAmount;
-
-     public SphereCollider sphereCollider;
-     public List<GameObject> inCollider;
      public Health.DamageType damageType;
      public bool damageOverDistance;
+     public SphereCollider sphereCollider;
+     public List<GameObject> inCollider;
+     
+     
      
 
      private void Start()
