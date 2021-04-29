@@ -19,10 +19,18 @@ namespace RileyMcGowan
             base.Enter();
             navMeshRef = creatureMainRef.navMeshRef;
             //Store all possible targets of type Targer in targetArray
-            GameObject currentTarget = FindObjectOfType<HellPortal>().gameObject; //HACK CHANGE LATER FOR MAIN PORTALS
+            GameObject currentTarget = FindObjectOfType<HellPortal>().gameObject;
             //Tell the parent what the target is
-            creatureMainRef.portalTarget = currentTarget;
-            navMeshRef.SetDestination(currentTarget.transform.position);
+            if (currentTarget != null)
+            {
+                creatureMainRef.portalTarget = currentTarget;
+                navMeshRef.SetDestination(currentTarget.transform.position);
+            }
+            else
+            {
+                Debug.Log("No Portals are Available " + owner);
+                Finish();
+            }
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
