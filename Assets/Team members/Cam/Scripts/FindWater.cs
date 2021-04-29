@@ -2,17 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using System.Linq;
 using UnityEngine;
 using ZachFrench;
 using Random = UnityEngine.Random;
 
 public class FindWater : MonoBehaviour
 {
-    public LayerMask layerMask;
-    public int numberOfTargets;
+    public  LayerMask     layerMask;
+    public  int           numberOfTargets;
     private PatrolManager patrolManager;
-    public PatrolPoint prefab;
-    public int size = 20;
+    public  PatrolPoint   prefab;
+    public  int           size = 20;
+	public  float         minDepth = 1f;
 
     public RaycastHit[] raycastHits;
 
@@ -69,10 +71,16 @@ public class FindWater : MonoBehaviour
                 else
                 {
                     // Didn't hit either
-                    return;
+                    continue;
                 }
 
-
+				float  waterTargetDepth = raycastHits[waterIndex].point.y - raycastHits[groundIndex].point.y;
+				if (waterTargetDepth <= minDepth)
+				{
+					// Terrain is ABOVE water so bail
+					continue;
+				}
+				
                 Debug.DrawLine(ray.origin, raycastHits[waterIndex].point, Color.green, 10f);
 
                 PatrolPoint patrolPoint = Instantiate(prefab, raycastHits[waterIndex].point, Quaternion.identity);
@@ -89,8 +97,10 @@ public class FindWater : MonoBehaviour
                 // Check as the PatrolPoint might not SPECIFICALLY be a WaterTarget inheritor
                 WaterTarget waterTarget = (patrolPoint as WaterTarget);
                 if (!(waterTarget is null))
-                    waterTarget.depth = raycastHits[waterIndex].point.y - raycastHits[groundIndex].point.y;
-            }
+				{
+					waterTarget.depth = waterTargetDepth;
+				}
+			}
             else
             {
                 Debug.DrawLine(ray.origin, raycastHits[groundIndex].point, Color.red, 10f);
