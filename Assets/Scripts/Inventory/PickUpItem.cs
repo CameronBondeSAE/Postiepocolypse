@@ -15,17 +15,16 @@ namespace JonathonMiles
 		{
 			// figure out way to reference the inventory :) - Niall
 			//if (inv.items.Count < inv.inventorySpace)
-		//	{
-				Debug.Log("Picking up " + item.name);
-				item.Pickup(owner);
-
-				CmdPickUp();
+		//	{	
+			CmdPickUp(owner);
 		//	}
 		}
 		[Command(ignoreAuthority = true)]
-		private void CmdPickUp()
-		{
-			Destroy(gameObject);
+		private void CmdPickUp(GameObject owner)
+		{	
+			Debug.Log("Picking up " + item.name);
+         				item.Pickup(owner);
+						Destroy(gameObject);
 		}
 	}
 	
