@@ -23,8 +23,8 @@ namespace Luke
         public float patrolSpeed;
         
         [Header("Resource state variables")]
-        public List<PatrolPoint> waterTargets;
-        public PatrolPoint currentWaterTarget;
+        public List<WaterTarget> waterTargets;
+        public WaterTarget currentWaterTarget;
         public Vector3 spawnPos;
 
         [Header("Audio")] 
@@ -47,16 +47,19 @@ namespace Luke
             antAIAgent.worldState.Set("foundRecharge", false);
             antAIAgent.worldState.Set("atRechargePos", false);
             antAIAgent.worldState.EndUpdate();
-
             
             patrolManager = FindObjectOfType<PatrolManager>();
+            if (patrolManager == null)
+            {
+                return;
+            }
             navMeshAgent = FindObjectOfType<NavMeshAgent>();
 
             InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
             
             spawnPos = transform.position;
             
-            waterTargets = patrolManager.waterTargets;
+            waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
         }
         
         public void BasicNoises()
@@ -76,6 +79,10 @@ namespace Luke
             if (patrolManager == null)
             {
                 patrolManager = FindObjectOfType<PatrolManager>();
+                if (patrolManager == null)
+                {
+                    return;
+                }
             }
             if (patrolManager.pathsWithIndoors != null)
             {
