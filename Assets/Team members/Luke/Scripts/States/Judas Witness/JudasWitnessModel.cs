@@ -23,8 +23,8 @@ namespace Luke
         public float patrolSpeed;
         
         [Header("Resource state variables")]
-        public List<PatrolPoint> waterTargets;
-        public PatrolPoint currentWaterTarget;
+        public List<WaterTarget> waterTargets;
+        public WaterTarget currentWaterTarget;
         public Vector3 spawnPos;
 
         [Header("Audio")] 
