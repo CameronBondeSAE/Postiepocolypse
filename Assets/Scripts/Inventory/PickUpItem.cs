@@ -13,7 +13,7 @@ namespace JonathonMiles
 		// Pick up the item
 		public void PickUp(GameObject owner)
 		{
-			
+			// figure out way to reference the inventory :) - Niall
 			//if (inv.items.Count < inv.inventorySpace)
 		//	{
 				Debug.Log("Picking up " + item.name);

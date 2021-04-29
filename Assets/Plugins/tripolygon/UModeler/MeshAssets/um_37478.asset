@@ -6,7 +6,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: um_44498
+  m_Name: um_37478
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -151,8 +151,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 10873.989, y: 9.809521, z: -8.084103}
-    m_Extent: {x: 10874.415, y: 9.81052, z: 7.9986386}
+    m_Center: {x: -0.25558636, y: 0.019409567, z: -0.22518994}
+    m_Extent: {x: 0.17012213, y: 0.020409565, z: 0.13972573}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
