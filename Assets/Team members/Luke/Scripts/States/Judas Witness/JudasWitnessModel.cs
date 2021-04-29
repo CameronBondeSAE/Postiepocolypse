@@ -86,10 +86,9 @@ namespace Luke
 
         public void SetWaterTarget()
         {
-            currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
-             
             if (waterTargets != null)
             {
+                currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
                 navMeshAgent.SetDestination(currentWaterTarget.transform.position);
             }
         }

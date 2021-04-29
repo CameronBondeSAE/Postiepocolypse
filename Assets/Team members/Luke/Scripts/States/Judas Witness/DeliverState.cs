@@ -13,7 +13,7 @@ namespace Luke
         public NavMeshAgent navMeshAgent;
         public AntAIAgent antAIAgent;
         public JudasWitnessModel judasWitnessModel;
-        
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -65,18 +65,11 @@ namespace Luke
         public override void Exit()
         {
             base.Exit();
-            
+
             //setting the world condition
             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
             antAIAgent.worldState.Set("gotResource", false);
-            antAIAgent.worldState.Set("playerFound", false);
-            antAIAgent.worldState.Set("needRecharge", false);
-            antAIAgent.worldState.Set("foundResource", false);
             antAIAgent.worldState.Set("deliveredResource", false);
-            antAIAgent.worldState.Set("atAttackRange", false);
-            antAIAgent.worldState.Set("atResourcePos", false);
-            antAIAgent.worldState.Set("foundRecharge", false);
-            antAIAgent.worldState.Set("atRechargePos", false);
             antAIAgent.worldState.EndUpdate();
         }
     }

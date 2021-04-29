@@ -11,6 +11,7 @@ namespace Luke
     {
         public GameObject owner;
         public JudasWitnessModel judasWitnessModel;
+        public NavMeshAgent navMeshAgent;
 
         public override void Create(GameObject aGameObject)
         {
@@ -18,6 +19,7 @@ namespace Luke
         
             owner = aGameObject;
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
+            navMeshAgent = owner.GetComponent<NavMeshAgent>();
         }
 
         public override void Enter()
@@ -31,8 +33,11 @@ namespace Luke
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
-            StartCoroutine(GatheringResources());
+
+            if (navMeshAgent.remainingDistance < .5f)
+            {
+                StartCoroutine(GatheringResources());
+            }
         }
 
         public IEnumerator GatheringResources()
