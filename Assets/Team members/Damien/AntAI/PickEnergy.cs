@@ -30,11 +30,12 @@ namespace Damien
             //Sends the target to the parent if the FOV has targets to send
             if (fieldOfView.listOfTargets.Count > 0)
             {
-                owner.GetComponentInParent<Blinder>().target = fieldOfView.listOfTargets[0];
+                owner.GetComponent<Blinder>().target = fieldOfView.listOfTargets[0];
                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("Energy Picked", antAIAgent.GetComponent<Blinder>().target != null);
                 antAIAgent.worldState.EndUpdate();
+                
             }
 
             // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
