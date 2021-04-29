@@ -19,7 +19,7 @@ namespace RileyMcGowan
             base.Enter();
             isFinished = false;
             navMeshRef = creatureMainRef.navMeshRef;
-            PatrolPoint currentTarget = creatureMainRef.currentPatrolPoint;
+            GameObject currentTarget = creatureMainRef.currentPatrolPoint;
             navMeshRef.SetDestination(currentTarget.transform.position);
         }
 

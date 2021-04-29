@@ -19,8 +19,8 @@ namespace RileyMcGowan
         //Public Vars
         public GameObject portalTarget;
         public GameObject playerTarget;
-        public PatrolPoint currentPatrolPoint;
-        public WaterTarget currentWaterTarget;
+        public GameObject currentPatrolPoint;
+        public GameObject currentWaterTarget;
         public float floatingHeight;
         public NavMeshAgent navMeshRef;
         public float safeDistance = 1f;
@@ -72,7 +72,7 @@ namespace RileyMcGowan
             //Check the FOV for a player target
             if (currentFOV.listOfTargets.Count > 0)
             {
-                playerTarget = currentFOV.listOfTargets[1];
+                playerTarget = currentFOV.listOfTargets[0];
             }
             
             //Check if the object should be moving
@@ -88,16 +88,10 @@ namespace RileyMcGowan
             //Planner do we have a player target
             if (playerTarget != null && antAIRef != null)
             {
-                antAIRef.worldState.BeginUpdate(antAIRef.planner);
-                antAIRef.worldState.Set("PlayerFound", true);
-                antAIRef.worldState.EndUpdate();
                 antAIRef.SetGoal("ReturnToPortal");
             }
             else
             {
-                antAIRef.worldState.BeginUpdate(antAIRef.planner);
-                antAIRef.worldState.Set("PlayerFound", false);
-                antAIRef.worldState.EndUpdate();
                 antAIRef.SetGoal("PatrolLoop");
             }
         }
