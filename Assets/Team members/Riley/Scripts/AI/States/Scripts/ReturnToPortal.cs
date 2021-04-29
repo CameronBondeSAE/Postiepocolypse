@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AlexM;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,10 +17,9 @@ namespace RileyMcGowan
         public override void Enter()
         {
             base.Enter();
-            creatureMainRef.currentWaterTarget = null;
             navMeshRef = creatureMainRef.navMeshRef;
             //Store all possible targets of type Targer in targetArray
-            GameObject currentTarget = FindObjectOfType<DummyPortal>().gameObject; //HACK CHANGE LATER FOR MAIN PORTALS
+            GameObject currentTarget = FindObjectOfType<HellPortal>().gameObject; //HACK CHANGE LATER FOR MAIN PORTALS
             //Tell the parent what the target is
             creatureMainRef.portalTarget = currentTarget;
             navMeshRef.SetDestination(currentTarget.transform.position);
@@ -38,6 +38,8 @@ namespace RileyMcGowan
                 antAIRef.worldState.EndUpdate();
                 //Stop navigation and finish
                 creatureMainRef.portalTarget = null;
+                creatureMainRef.ResetPlanner();
+                creatureMainRef.playerTarget = null;
                 Finish();
             }
         }

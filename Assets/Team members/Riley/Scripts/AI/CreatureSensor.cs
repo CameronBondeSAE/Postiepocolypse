@@ -16,10 +16,6 @@ namespace RileyMcGowan
             aWorldState.Set("TargetFound", cr.currentPatrolPoint != null);
             aWorldState.Set("EnergyFound", cr.currentWaterTarget != null);
             aWorldState.Set("PlayerFound", cr.playerTarget != null);
-            aWorldState.Set("PlayerReached", false);
-            aWorldState.Set("EnergyCollected", false);
-            aWorldState.Set("EnergyDeposited", false);
-            aWorldState.Set("PatrolCompleted", false);
             //End the World State Definition
             aWorldState.EndUpdate();
         }

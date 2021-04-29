@@ -32,10 +32,7 @@ namespace RileyMcGowan
                 antAIRef.worldState.BeginUpdate(antAIRef.planner);
                 antAIRef.worldState.Set("PlayerReached", true);
                 antAIRef.worldState.EndUpdate();
-                
-                //creatureMainRef.currentPatrolPoint = null;
-                //creatureMainRef.playerTarget = null;
-                
+                creatureMainRef.currentPatrolPoint = null;
                 //Stop navigation and finish
                 Finish();
             }

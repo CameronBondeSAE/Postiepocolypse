@@ -61,7 +61,7 @@ MonoBehaviour:
     post:
     - id: 6
       value: 1
-  - name: MoveToPlayer
+  - name: StalkToPlayer
     isDefault: 0
     state: {fileID: 4222742263494085023, guid: 3f4298c619afcec449e10b6e19d5604d, type: 3}
     cost: 0
