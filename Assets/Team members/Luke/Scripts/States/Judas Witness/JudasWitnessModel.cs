@@ -14,8 +14,6 @@ namespace Luke
         [Header("Other considerations")] 
         public AntAIAgent antAIAgent;
         public NavMeshAgent navMeshAgent;
-        public AudioSource audioSource;
-        public AudioChorusFilter chorusFilter;
         public float timeGathering;
 
         [Header("Patrol variables")] 
@@ -28,6 +26,8 @@ namespace Luke
         public Vector3 spawnPos;
 
         [Header("Audio")] 
+        public AudioSource audioSource;
+        public AudioChorusFilter chorusFilter;
         public float timeBetweenAudio;
         public float audioRepeatRate;
         public float maxWetMix;
