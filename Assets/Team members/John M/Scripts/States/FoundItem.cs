@@ -20,11 +20,14 @@ namespace JonathonMiles
         public override void Enter()
         {
             base.Enter();
+            Debug.Log("Moving towards item");
+            
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            Finish();
         }
     } 
 }

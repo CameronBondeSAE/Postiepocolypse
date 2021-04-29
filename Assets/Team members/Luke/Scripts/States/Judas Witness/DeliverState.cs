@@ -51,13 +51,13 @@ namespace Luke
                             
                 Debug.Log("Delivered resource");
 
-                DeliveredWiatTime();
+                DeliveredWaitTime();
                 
                 Finish();
             }
         }
 
-        public IEnumerator DeliveredWiatTime()
+        public IEnumerator DeliveredWaitTime()
         {
             yield return new WaitForSeconds(4f);
         }

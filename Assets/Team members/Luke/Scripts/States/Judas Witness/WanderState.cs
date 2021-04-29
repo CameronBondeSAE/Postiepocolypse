@@ -32,16 +32,6 @@ namespace Luke
             judasWitnessModel.Wander();
         }
 
-        public override void Execute(float aDeltaTime, float aTimeScale)
-        {
-            base.Execute(aDeltaTime, aTimeScale);
-
-            if (navMeshAgent.remainingDistance < .5f)
-            {
-                navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
-            }
-        }
-
         public override void Exit()
         {
             base.Exit();
