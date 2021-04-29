@@ -17,7 +17,7 @@ namespace JonathonMiles
 			
 			CmdPickUp();
 		}
-		[Command]
+		[Command(ignoreAuthority = true)]
 		public void CmdPickUp()
 		{
 			Destroy(gameObject);

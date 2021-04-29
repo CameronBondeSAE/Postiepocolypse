@@ -54,6 +54,7 @@ namespace JonathonMiles
             return true;
         }
 
+         private GameObject droppedItem;
         public void Drop(ItemBase item)
         {
            // items.Remove(item);
@@ -62,16 +63,23 @@ namespace JonathonMiles
                 onItemChangedCallback.Invoke();
             
             //update transform position to hand position once complete
-           GameObject droppedItem = Instantiate(item.prefab,handPos.transform.position, Quaternion.identity);
-           NetworkServer.Spawn(droppedItem);
-            Rigidbody rb = item.prefab.GetComponent<Rigidbody>();
+           droppedItem = Instantiate(item.prefab,handPos.transform.position, Quaternion.identity);
+           Rigidbody rb = item.prefab.GetComponent<Rigidbody>();
             rb.velocity = Vector3.up;
+            
+            CmdDrop();
         }
         
         void Use(ItemBase item)
         {
             item.Use(this.gameObject);
             items.RemoveAt(0);
+        }
+        [Command(ignoreAuthority = true)]
+        void CmdDrop()
+        {
+            NetworkServer.Spawn(droppedItem);
+
         }
     }
 }
