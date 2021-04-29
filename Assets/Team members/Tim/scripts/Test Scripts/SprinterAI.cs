@@ -14,6 +14,7 @@ namespace TimPearson
         public PatrolPoint currentTarget;
         public bool rayOn = true;
         public Damage damage;
+        public float knockbackMultiplier;
        
 
         // Start is called before the first frame update
@@ -61,7 +62,7 @@ namespace TimPearson
             {
                 foreach (GameObject obj in damage.inCollider)
                 {
-                    obj.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(50,0,100));
+                    obj.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(50,0,100)*knockbackMultiplier);
                 }
             }
         }
