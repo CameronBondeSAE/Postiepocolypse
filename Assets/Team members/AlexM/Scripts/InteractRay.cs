@@ -54,7 +54,9 @@ namespace AlexM
 				if (pickUpItem)
 				{
 					pickUpItem.PickUp(gameObject);
-					GetComponent<Inventory>().Add(pickUpItem.item);
+					
+					
+					GetComponent<Inventory>().CmdAdd(pickUpItem.item);
 				}
 			}
 		}

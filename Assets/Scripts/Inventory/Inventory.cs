@@ -36,6 +36,13 @@ namespace JonathonMiles
             }
         }
 
+        [Command]
+        public void CmdAdd(ItemBase i)
+        {
+            Add(i);
+        }
+
+
         public bool Add(ItemBase item)
         {
             if (items.Count >= inventorySpace)
@@ -49,8 +56,8 @@ namespace JonathonMiles
                 onItemChangedCallback.Invoke();
             return true;
         }
-        
-            public void Drop(ItemBase item)
+
+        public void Drop(ItemBase item)
         {
             CmdDrop(item);
         }
@@ -62,13 +69,13 @@ namespace JonathonMiles
         }
 
         // [Command(ignoreAuthority = true)]
-		[Command]
+        [Command]
         void CmdDrop(ItemBase item)
         {
             items.RemoveAt(0);
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
-            
+
             //update transform position to hand position once complete
             GameObject droppedItem = Instantiate(item.prefab, handPos.transform.position, Quaternion.identity);
             Rigidbody rb = item.prefab.GetComponent<Rigidbody>();
