@@ -12,6 +12,7 @@ namespace TimPearson
         public LayerMask RaycastHitLayer;
         private Sprint sprint;
         public PatrolPoint currentTarget;
+        public bool rayOn = true;
        
 
         // Start is called before the first frame update
@@ -20,28 +21,36 @@ namespace TimPearson
             if (!(antAIAgent is null)) antAIAgent.SetGoal("At Position");
             sprint = GetComponent<Sprint>();
             target = FindObjectOfType<PatrolManager>();
+            rayOn = true;
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (target != null)
+            sprintRay();
+        }
+        public void sprintRay()
+        {
+            if (rayOn == true)
             {
-                var ray = new Ray(transform.position, transform.forward);
-                RaycastHit raycastBoost;
-                if (Physics.Raycast(ray, out raycastBoost, 500, RaycastHitLayer))
+                if (target != null)
                 {
-                    Debug.DrawLine(ray.origin, raycastBoost.point, Color.green);
-                    sprint.isBoosting = true;
-                }
-                else
-                {
-                    Debug.DrawLine(transform.position, currentTarget.transform.position);
-                    sprint.isBoosting = false;
+                    var ray = new Ray(transform.position, transform.forward);
+                    RaycastHit raycastBoost;
+                    if (Physics.Raycast(ray, out raycastBoost, 500, RaycastHitLayer))
+                    {
+                        Debug.DrawLine(ray.origin, raycastBoost.point, Color.green);
+                        sprint.isBoosting = true;
+                    }
+                    else
+                    {
+                        Debug.DrawLine(transform.position, currentTarget.transform.position);
+                        sprint.isBoosting = false;
+                    }
                 }
             }
+            
         }
-
         
     }
 }
