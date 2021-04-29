@@ -52,6 +52,7 @@ namespace RileyMcGowan
             {
                 currentFOV = GetComponent<Damien.FOV>();
             }
+            ResetPlanner();
         }
         
         private void FixedUpdate()
@@ -95,5 +96,17 @@ namespace RileyMcGowan
                 antAIRef.SetGoal("PatrolLoop");
             }
         }
+
+        public void ResetPlanner()
+        {
+            antAIRef.worldState.BeginUpdate(antAIRef.planner);
+            antAIRef.worldState.Set("PlayerReached", false);
+            antAIRef.worldState.Set("EnergyCollected", false);
+            antAIRef.worldState.Set("EnergyDeposited", false);
+            antAIRef.worldState.Set("PatrolCompleted", false);
+            antAIRef.worldState.EndUpdate();
+        }
+        
+        
     }
 }

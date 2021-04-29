@@ -31,6 +31,7 @@ namespace RileyMcGowan
                 antAIRef.worldState.BeginUpdate(antAIRef.planner);
                 antAIRef.worldState.Set("EnergyCollected", true);
                 antAIRef.worldState.EndUpdate();
+                creatureMainRef.currentWaterTarget = null;
                 //Stop navigation and finish
                 Finish();
             }
