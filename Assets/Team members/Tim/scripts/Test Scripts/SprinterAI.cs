@@ -13,6 +13,8 @@ namespace TimPearson
         private Sprint sprint;
         public PatrolPoint currentTarget;
         public bool rayOn = true;
+        public Damage damage;
+        public float knockbackMultiplier;
        
 
         // Start is called before the first frame update
@@ -22,12 +24,14 @@ namespace TimPearson
             sprint = GetComponent<Sprint>();
             target = FindObjectOfType<PatrolManager>();
             rayOn = true;
+            
         }
 
         // Update is called once per frame
         private void Update()
         {
             sprintRay();
+            KnockBack();
         }
         public void sprintRay()
         {
@@ -51,6 +55,16 @@ namespace TimPearson
             }
             
         }
-        
+
+        public void KnockBack()
+        {
+            if (damage.inCollider !=null)
+            {
+                foreach (GameObject obj in damage.inCollider)
+                {
+                    obj.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(50,0,100)*knockbackMultiplier);
+                }
+            }
+        }
     }
 }

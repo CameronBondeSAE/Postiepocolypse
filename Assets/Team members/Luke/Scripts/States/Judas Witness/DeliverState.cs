@@ -21,7 +21,6 @@ namespace Luke
             owner = aGameObject;
             navMeshAgent = owner.GetComponent<NavMeshAgent>();
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
-            antAIAgent = owner.GetComponent<AntAIAgent>();
         }
 
         public override void Enter()
@@ -30,13 +29,17 @@ namespace Luke
             Debug.Log("Delivering");
 
             navMeshAgent.SetDestination(judasWitnessModel.spawnPos);
+            
+            //setting the world condition
+            antAIAgent = owner.GetComponent<AntAIAgent>();
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("atResourcePos", false);
+            antAIAgent.worldState.EndUpdate();
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
-            antAIAgent.worldState.Set("atResourcePos", false);
 
             // Have we got to the target position?
             if (navMeshAgent.remainingDistance < .5f)
@@ -47,9 +50,16 @@ namespace Luke
                 antAIAgent.worldState.EndUpdate();
                             
                 Debug.Log("Delivered resource");
+
+                DeliveredWiatTime();
                 
                 Finish();
             }
+        }
+
+        public IEnumerator DeliveredWiatTime()
+        {
+            yield return new WaitForSeconds(4f);
         }
 
         public override void Exit()
@@ -58,9 +68,15 @@ namespace Luke
             
             //setting the world condition
             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            antAIAgent.worldState.Set("foundResource", false);
             antAIAgent.worldState.Set("gotResource", false);
+            antAIAgent.worldState.Set("playerFound", false);
+            antAIAgent.worldState.Set("needRecharge", false);
+            antAIAgent.worldState.Set("foundResource", false);
             antAIAgent.worldState.Set("deliveredResource", false);
+            antAIAgent.worldState.Set("atAttackRange", false);
+            antAIAgent.worldState.Set("atResourcePos", false);
+            antAIAgent.worldState.Set("foundRecharge", false);
+            antAIAgent.worldState.Set("atRechargePos", false);
             antAIAgent.worldState.EndUpdate();
         }
     }
