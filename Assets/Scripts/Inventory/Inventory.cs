@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mirror;
 using Mirror.Examples.Chat;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace JonathonMiles
 {
-
-    public class Inventory : MonoBehaviour
+    public class Inventory : NetworkBehaviour
     {
         public delegate void OnItemChanged();
 
@@ -25,22 +25,26 @@ namespace JonathonMiles
                 {
                     Debug.Log("Nothing in Inventory");
                     return;
-                }           
+                }
 
-                Drop(items[0]);
+                Drop();
             }
 
             if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
             {
                 Use(items[0]);
             }
-
-           
         }
 
-         public bool Add(ItemBase item)
+        [Command]
+        public void CmdAdd(ItemBase i)
         {
+            Add(i);
+        }
 
+
+        public bool Add(ItemBase item)
+        {
             if (items.Count >= inventorySpace)
             {
                 Debug.Log("Inventory Full!");
@@ -53,23 +57,34 @@ namespace JonathonMiles
             return true;
         }
 
-        public void Drop(ItemBase item)
-        {
-           // items.Remove(item);
-            items.RemoveAt(0);
-            if (onItemChangedCallback != null)
-                onItemChangedCallback.Invoke();
-            
-            //update transform position to hand position once complete
-            Instantiate(item.prefab,handPos.transform.position, Quaternion.identity);
-            Rigidbody rb = item.prefab.GetComponent<Rigidbody>();
-            rb.velocity = Vector3.up;
-        }
-        
         void Use(ItemBase item)
         {
             item.Use(this.gameObject);
             items.RemoveAt(0);
+        }
+
+        public void Drop()
+        {
+            CmdDrop();
+        }
+
+
+        //  [Command(ignoreAuthority = true)]
+        [Command]
+       public void CmdDrop()
+        {
+            if (items.Count <= 0)
+            {
+                return;
+            }
+            //update transform position to hand position once complete
+            GameObject droppedItem = Instantiate(items[0].prefab, handPos.transform.position, Quaternion.identity);
+            Rigidbody rb = items[0].prefab.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.up;
+            NetworkServer.Spawn(droppedItem);
+            items.RemoveAt(0);
+            
+            onItemChangedCallback?.Invoke();
         }
     }
 }

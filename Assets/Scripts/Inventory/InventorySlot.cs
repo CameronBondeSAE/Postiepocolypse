@@ -18,7 +18,7 @@ namespace JonathonMiles
         {
             item = newItem;
 
-            icon.sprite = item.icon;
+            // icon.sprite = item.icon;
             icon.enabled = true;
             removeButton.interactable = true;
         }
@@ -35,7 +35,7 @@ namespace JonathonMiles
 
         public void OnRemoveButton ()
         {
-            inventory.Drop(item);
+            inventory.Drop();
         }
 
         public void UseItem ()

@@ -1,5 +1,5 @@
-﻿using Anthill.AI;
-using Sirenix.Utilities;
+﻿using System.Collections.Generic;
+using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,15 +8,14 @@ namespace Luke
     public class FindResourceState : AntAIState
     {
         public GameObject owner;
-        public WaterTarget[] waterTarget;
-        public NavMeshAgent navMeshAgent;
+        public JudasWitnessModel judasWitnessModel;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
-            waterTarget = FindObjectsOfType<WaterTarget>();
+            judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
         }
 
         public override void Enter()
@@ -24,15 +23,28 @@ namespace Luke
             base.Enter();
 
             Debug.Log("Find resource state");
+        }
 
-            if (waterTarget != null)
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+            
+            if (judasWitnessModel.waterTargets != null)
             {
                 //setting the world condition
                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("foundResource", waterTarget != null);
+                antAIAgent.worldState.Set("foundResource", judasWitnessModel.waterTargets != null);
                 antAIAgent.worldState.EndUpdate();
                 Debug.Log("Found resource");
+                
+                Finish();
+            }
+
+            else
+            {
+                Debug.Log("No more waterTargets");
+                Finish();
             }
         }
 

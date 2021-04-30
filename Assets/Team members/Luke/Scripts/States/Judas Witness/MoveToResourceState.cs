@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
+using ZachFrench;
 
 namespace Luke
 {
@@ -10,7 +11,8 @@ namespace Luke
     {
          public GameObject owner;
          public NavMeshAgent navMeshAgent;
-         public WaterTarget[] waterTarget;
+         public JudasWitnessModel judasWitnessModel;
+         public AntAIAgent antAIAgent;
          public float remainingDistance = .5f;
          
          public override void Create(GameObject aGameObject)
@@ -18,43 +20,50 @@ namespace Luke
              base.Create(aGameObject);
     
              owner = aGameObject;
+             antAIAgent = owner.GetComponent<AntAIAgent>();
              navMeshAgent = owner.GetComponent<NavMeshAgent>();
-             waterTarget = FindObjectsOfType<WaterTarget>();
+             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
          }
          
          public override void Enter()
          {
              base.Enter();
-    
+             
              Debug.Log("Move to resource state");
              
-             if (waterTarget != null)
-             {
-                 navMeshAgent.SetDestination(waterTarget[Random.Range(0, waterTarget.Length)].transform.position);
-             }
+             //need this here so the wait time for gathering is realised
+             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+             antAIAgent.worldState.Set("foundResource", false);
+             antAIAgent.worldState.EndUpdate();
+             
+             judasWitnessModel.SetWaterTarget();
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             if (navMeshAgent.remainingDistance < remainingDistance)
-             {
-                 //setting the world condition
-                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                 antAIAgent.worldState.Set("atResourcePos", true);
-                 antAIAgent.worldState.EndUpdate();
-             
-                 Debug.Log("At resource position");
-                 Finish();
-             }
-             
-             else if (waterTarget == null)
+             if (judasWitnessModel.waterTargets == null)
              {
                  Debug.Log("waterTarget Null");
                  Finish();
              }
+             
+             if (navMeshAgent.remainingDistance < remainingDistance)
+             {
+                 Finish();
+             }
+         }
+
+         public override void Exit()
+         {
+             base.Exit();
+             
+             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+             antAIAgent.worldState.Set("atResourcePos", true);
+             antAIAgent.worldState.EndUpdate();
+             
+             Debug.Log("At resource position");
          }
     }
 }

@@ -11,46 +11,66 @@ namespace Luke
     {
         public GameObject owner;
         public NavMeshAgent navMeshAgent;
-        public Vector3 returnResourcePos;
-        
+        public AntAIAgent antAIAgent;
+        public JudasWitnessModel judasWitnessModel;
+
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
             navMeshAgent = owner.GetComponent<NavMeshAgent>();
-            returnResourcePos = transform.position;
+            judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
         }
 
         public override void Enter()
         {
             base.Enter();
             Debug.Log("Delivering");
+
+            navMeshAgent.SetDestination(judasWitnessModel.spawnPos);
             
-            navMeshAgent.SetDestination(returnResourcePos);
+            //setting the world condition
+            antAIAgent = owner.GetComponent<AntAIAgent>();
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("atResourcePos", false);
+            antAIAgent.worldState.EndUpdate();
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
-            owner.GetComponent<JudasWitnessModel>().DirectionRaycast();
-            
-            // Have we got to the target?
-            if (navMeshAgent.remainingDistance < 1f)
+
+            // Have we got to the target position?
+            if (navMeshAgent.remainingDistance < .5f)
             {
                 //setting the world condition
-                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("deliveredResource", true);
                 antAIAgent.worldState.EndUpdate();
                             
                 Debug.Log("Delivered resource");
+
+                DeliveredWaitTime();
                 
                 Finish();
-                
-                // Here I need to find if there is any other water sources and if not wander
             }
+        }
+
+        public IEnumerator DeliveredWaitTime()
+        {
+            yield return new WaitForSeconds(4f);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            //setting the world condition
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("gotResource", false);
+            antAIAgent.worldState.Set("deliveredResource", false);
+            antAIAgent.worldState.EndUpdate();
         }
     }
 }

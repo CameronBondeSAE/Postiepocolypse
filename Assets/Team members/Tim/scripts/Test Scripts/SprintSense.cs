@@ -24,7 +24,7 @@ namespace TimPearson
             {
                 lowEnergy = true;
             }
-            else if (energy.CurrentAmount>1f)
+            else if (energy.CurrentAmount>energy.MaxAmount-1f)
             {
                 lowEnergy = false;
             }

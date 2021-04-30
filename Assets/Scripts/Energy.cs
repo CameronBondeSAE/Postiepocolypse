@@ -18,6 +18,9 @@ public class Energy : MonoBehaviour
     public float Regen = 0f;
     private Vector3 currentPos;
     private Vector3 lastPos;
+    public float distance;
+    public float speed;
+    public event Action<Energy> lowEnergy;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -25,6 +28,7 @@ public class Energy : MonoBehaviour
     {
         currentPos = transform.position;
         lastPos = currentPos;
+        ResetStartingEnergy();
         if (GetComponent<Rigidbody>() != null)
         {
             rb = GetComponent<Rigidbody>();
@@ -36,18 +40,18 @@ public class Energy : MonoBehaviour
                 rb = GetComponentInParent<Rigidbody>();
             }
         }
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        
         currentPos = transform.position;
-
-        float speed = (lastPos - currentPos).magnitude;
         
-        if (currentPos != lastPos)
+        distance = Vector3.Distance(currentPos, lastPos);
+        
+        speed = (lastPos - currentPos).magnitude;
+        if (distance > 0.15f)
         {
             Drain = speed * MoveDrainScale;
             Regen = 0f;
@@ -66,6 +70,7 @@ public class Energy : MonoBehaviour
             {
                 CurrentAmount = MinAmount;
                 Regen = Drain *2;
+                lowEnergy?.Invoke(this);
             }
             
         }
@@ -80,6 +85,14 @@ public class Energy : MonoBehaviour
             
         }
         lastPos = currentPos;
+    }
+
+    public void ResetStartingEnergy()
+    {
+        if (CurrentAmount ==0f)
+        {
+            CurrentAmount = MaxAmount;
+        }
     }
 }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NavScenario
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 38, y: 77}
+    position: {x: -8, y: 206}
     list:
     - id: 0
       name: Found Item
@@ -30,26 +30,17 @@ MonoBehaviour:
     - id: 6
       name: Move To Deposit
     - id: 7
-      name: 
+      name: Hidden From Player
+    - id: 8
+      name: Has Target
+    - id: 9
+      name: Arrived At Target
   actions:
-  - name: Seek Item
-    isDefault: 0
-    state: {fileID: 0}
-    cost: 0
-    position: {x: 298, y: 77}
-    pre:
-    - id: 0
-      value: 0
-    - id: 3
-      value: 0
-    post:
-    - id: 0
-      value: 1
   - name: Found Item
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 5623208080860181825, guid: fd355983336667e488174572cd89c1c6, type: 3}
     cost: 0
-    position: {x: 518, y: 77}
+    position: {x: 1708, y: 101}
     pre:
     - id: 0
       value: 1
@@ -58,20 +49,22 @@ MonoBehaviour:
       value: 1
   - name: Move To Item
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 4610834287423321265, guid: cb0299538182d40468358cfca0202c57, type: 3}
     cost: 0
-    position: {x: 718, y: 77}
+    position: {x: 612, y: 201}
     pre:
     - id: 1
       value: 1
     post:
     - id: 2
       value: 1
+    - id: 1
+      value: 0
   - name: Move To Deposit
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 416806764062995789, guid: 132c5f951a1def54387bf35613a34c9a, type: 3}
     cost: 0
-    position: {x: 300, y: 293}
+    position: {x: 202, y: 434}
     pre:
     - id: 2
       value: 1
@@ -80,9 +73,9 @@ MonoBehaviour:
       value: 1
   - name: See Player
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 258945532927391298, guid: c592cc1f400d03c449ea91b361a5477b, type: 3}
     cost: 0
-    position: {x: 300, y: 493}
+    position: {x: 200, y: 621}
     pre:
     - id: 3
       value: 1
@@ -91,9 +84,9 @@ MonoBehaviour:
       value: 1
   - name: Deposit Item
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 5541841800217564314, guid: f6c8620e3906ec14fa7868781b255339, type: 3}
     cost: 0
-    position: {x: 500, y: 293}
+    position: {x: 405, y: 437}
     pre:
     - id: 6
       value: 1
@@ -102,45 +95,94 @@ MonoBehaviour:
       value: 1
   - name: Retreat
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 807449006840413732, guid: ca78d41981895cf4fab67be16417b221, type: 3}
     cost: 0
-    position: {x: 500, y: 493}
+    position: {x: 408, y: 624}
     pre:
     - id: 4
       value: 1
     post:
+    - id: 7
+      value: 1
+  - name: Seek Item
+    isDefault: 0
+    state: {fileID: 3864041967078596820, guid: 7656f6d20231bb048b0304ecd560e932, type: 3}
+    cost: 0
+    position: {x: 1515, y: 104}
+    pre:
+    - id: 0
+      value: 0
     - id: 3
       value: 0
-  - name: Patrol For Item
+    - id: 7
+      value: 1
+    post:
+    - id: 0
+      value: 1
+  - name: Patrol
     isDefault: 1
-    state: {fileID: 0}
+    state: {fileID: 5207508835890789557, guid: 278b8c0aa6d341e418c244172cab5edc, type: 3}
     cost: 0
-    position: {x: 38, y: 354}
+    position: {x: -21, y: 467}
     pre: []
     post: []
+  - name: Pick A Target
+    isDefault: 0
+    state: {fileID: 5328860923978580379, guid: 93985f3a676f03c49b04c1412b9faac5, type: 3}
+    cost: 2
+    position: {x: 209, y: 833}
+    pre:
+    - id: 8
+      value: 0
+    - id: 9
+      value: 0
+    - id: 1
+      value: 0
+    post:
+    - id: 8
+      value: 1
+  - name: Move To Target
+    isDefault: 0
+    state: {fileID: 5581026121193848253, guid: 2c3b00a6a8757224eb2fa386870a4ae1, type: 3}
+    cost: 2
+    position: {x: 433, y: 841}
+    pre:
+    - id: 8
+      value: 1
+    - id: 1
+      value: 0
+    post:
+    - id: 9
+      value: 1
+    - id: 8
+      value: 0
   goals:
   - name: Collect Item
     isDefault: 0
-    position: {x: 920, y: 73}
+    position: {x: 815, y: 202}
     conditions:
     - id: 2
       value: 1
   - name: Deposit Item
     isDefault: 1
-    position: {x: 700, y: 293}
+    position: {x: 609, y: 441}
     conditions:
     - id: 5
       value: 1
   - name: Hidden From Player
     isDefault: 0
-    position: {x: 700, y: 493}
+    position: {x: 619, y: 626}
     conditions:
-    - id: 3
-      value: 0
-    - id: 0
-      value: 0
+    - id: 7
+      value: 1
+  - name: Arrived at Target
+    isDefault: 0
+    position: {x: 658, y: 836}
+    conditions:
+    - id: 9
+      value: 1
   worldStates:
-  - position: {x: 20, y: 693}
+  - position: {x: -22, y: 788}
     list:
     - id: 0
       value: 0
@@ -155,4 +197,10 @@ MonoBehaviour:
     - id: 5
       value: 0
     - id: 6
+      value: 0
+    - id: 7
+      value: 0
+    - id: 8
+      value: 0
+    - id: 9
       value: 0

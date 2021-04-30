@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Anthill.AI;
+using ZachFrench;
 
 namespace Luke
 {
     public class GatherState : AntAIState
     {
         public GameObject owner;
+        public JudasWitnessModel judasWitnessModel;
         public NavMeshAgent navMeshAgent;
 
         public override void Create(GameObject aGameObject)
@@ -16,6 +18,7 @@ namespace Luke
             base.Create(aGameObject);
         
             owner = aGameObject;
+            judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
             navMeshAgent = owner.GetComponent<NavMeshAgent>();
         }
 
@@ -24,21 +27,40 @@ namespace Luke
             base.Enter();
             Debug.Log("Gather state");
             
-            StartCoroutine(GatheringResources());
+            judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
         }
-        
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+
+            if (navMeshAgent.remainingDistance < .5f)
+            {
+                StartCoroutine(GatheringResources());
+            }
+        }
+
         public IEnumerator GatheringResources()
         {
-            Debug.Log("Gathering Gathering");
-            yield return new WaitForSeconds(owner.GetComponent<JudasWitnessModel>().timeGathering);
+            Debug.Log("Gathering wait time");
+            yield return new WaitForSeconds(judasWitnessModel.timeGathering);
+
+            Finish();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            judasWitnessModel.currentWaterTarget = null;
             
             //setting the world condition
             AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("atResourcePos", false);
+            antAIAgent.worldState.Set("foundResource", false);
             antAIAgent.worldState.Set("gotResource", true);
             antAIAgent.worldState.EndUpdate();
-            
-            Finish();
         }
     }
 }

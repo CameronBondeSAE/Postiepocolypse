@@ -9,14 +9,14 @@ namespace Damien
 
         public FOV fieldOfView;
 
-        public float targetViewRadius = 30f;
+        public int targetViewRadius = 30;
 
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
             owner = aGameObject;
-            fieldOfView = owner.GetComponentInParent<FOV>();
+            fieldOfView = owner.GetComponent<FOV>();
         }
 
         public override void Enter()
@@ -31,10 +31,14 @@ namespace Damien
             if (fieldOfView.listOfTargets.Count > 0)
             {
                 owner.GetComponentInParent<Blinder>().target = fieldOfView.listOfTargets[0];
+                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                // antAIAgent.worldState.Set("Target Chosen", antAIAgent.GetComponent<Blinder>().target != null);
+                antAIAgent.worldState.Set("Target Chosen", true);
+                antAIAgent.worldState.EndUpdate();
             }
 
             // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
-
 
             Finish();
         }

@@ -4,11 +4,25 @@ using System.Collections.Generic;
 using RileyMcGowan;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+[RequireComponent(typeof(SphereCollider))]
 public class Damage : MonoBehaviour
 {
+     /// <summary>
+     /// Script is used to apply damage to any objects that enter the sphere collider. Any object that will deal damage is required to have a sphere collider on it.
+     /// You need to select a damage type within the inspector and set a damage amount.
+     /// Damage will constantly be applied while objects are within the sphere.
+     /// Once an object leaves the sphere they will no longer have damage applied.
+     /// If you want to allow for greater damage at the centre of the sphere, enable Damage Over Distance.
+     /// </summary>
+     
      public int damageAmount;
+     public Health.DamageType damageType;
+     public bool damageOverDistance;
+     public SphereCollider sphereCollider;
      public List<GameObject> inCollider;
+     
+     
+     
 
      private void Start()
      {
@@ -20,8 +34,16 @@ public class Damage : MonoBehaviour
           //this loop goes through all objects in the list and deals damage to them
           foreach (var x in inCollider)
           {
-               x.GetComponent<Health>().DoDamage(damageAmount, Health.DamageType.Normal);
+               if (damageOverDistance)
+               {
+                    x.GetComponent<Health>().DoDamage((sphereCollider.radius - damageAmount), damageType);
+               }
+               else
+               {
+                    x.GetComponent<Health>().DoDamage(damageAmount, damageType);
                     //Debug.Log("Damaging 10 Points to " + inCollider.Count + " items");
+               }
+              
           }
      }
 
@@ -44,4 +66,5 @@ public class Damage : MonoBehaviour
                //Debug.Log("Health object left the collider");
           }
      }
+     
 }

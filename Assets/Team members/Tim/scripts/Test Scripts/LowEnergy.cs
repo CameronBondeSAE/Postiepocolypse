@@ -13,6 +13,7 @@ namespace TimPearson
         public SprintSense sprintSense;
         private NavMeshAgent NavMeshAgent;
         private Energy energy;
+        private SprinterAI sprinterai;
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
@@ -26,15 +27,24 @@ namespace TimPearson
         {
             base.Enter();
             Debug.Log("Low Energy");
-            NavMeshAgent.SetDestination(transform.position);
+            //NavMeshAgent.SetDestination(transform.position);
+            NavMeshAgent.isStopped = true;
             //parent.transform.position = parent.transform.position;
+            sprinterai = parent.GetComponent<SprinterAI>();
+            sprinterai.rayOn = false;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            if (energy.CurrentAmount > 10f)
+            if (energy.CurrentAmount > energy.MaxAmount-1f)
             {
+                NavMeshAgent.isStopped = false;
+                sprinterai.rayOn = true;
+                AntAIAgent antAIAgent = parent.GetComponent<AntAIAgent>();
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("Low Energy", false);
+                antAIAgent.worldState.EndUpdate();
                 Finish();
             }
         }

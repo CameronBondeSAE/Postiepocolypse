@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 using ZachFrench;
+using Random = UnityEngine.Random;
 
 namespace Luke
 {
@@ -12,15 +14,20 @@ namespace Luke
         [Header("Other considerations")] 
         public AntAIAgent antAIAgent;
         public NavMeshAgent navMeshAgent;
-        public AudioSource audioSource;
-        public AudioChorusFilter chorusFilter;
         public float timeGathering;
 
         [Header("Patrol variables")] 
         public PatrolManager patrolManager;
         public float patrolSpeed;
+        
+        [Header("Resource state variables")]
+        public List<WaterTarget> waterTargets;
+        public WaterTarget currentWaterTarget;
+        public Vector3 spawnPos;
 
         [Header("Audio")] 
+        public AudioSource audioSource;
+        public AudioChorusFilter chorusFilter;
         public float timeBetweenAudio;
         public float audioRepeatRate;
         public float maxWetMix;
@@ -40,15 +47,21 @@ namespace Luke
             antAIAgent.worldState.Set("foundRecharge", false);
             antAIAgent.worldState.Set("atRechargePos", false);
             antAIAgent.worldState.EndUpdate();
-
             
             patrolManager = FindObjectOfType<PatrolManager>();
+            if (patrolManager == null)
+            {
+                return;
+            }
             navMeshAgent = FindObjectOfType<NavMeshAgent>();
 
             InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
+            
+            spawnPos = transform.position;
+            
+            waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
         }
-
-
+        
         public void BasicNoises()
         {
             chorusFilter.wetMix1 = Mathf.PerlinNoise(Time.time / maxWetMix, 0);
@@ -61,21 +74,29 @@ namespace Luke
             }
         }
 
-        public void DirectionRaycast()
-        {
-            Debug.DrawRay(transform.position, transform.forward, Color.magenta);
-        }
-
         public void Wander()
         {
             if (patrolManager == null)
             {
                 patrolManager = FindObjectOfType<PatrolManager>();
+                if (patrolManager == null)
+                {
+                    return;
+                }
             }
             if (patrolManager.pathsWithIndoors != null)
             {
                 navMeshAgent.speed = patrolSpeed;
                 navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
+            }
+        }
+
+        public void SetWaterTarget()
+        {
+            if (waterTargets != null)
+            {
+                currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
+                navMeshAgent.SetDestination(currentWaterTarget.transform.position);
             }
         }
     }
