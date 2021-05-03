@@ -197,7 +197,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -608,10 +608,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
-  sphereCollider: {fileID: 0}
-  inCollider: []
   damageType: 0
   damageOverDistance: 0
+  sphereCollider: {fileID: 0}
+  inCollider: []
 --- !u!1 &2786266547875069626
 GameObject:
   m_ObjectHideFlags: 0
