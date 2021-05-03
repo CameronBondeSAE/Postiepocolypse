@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 namespace RileyMcGowan
 {
@@ -15,7 +16,8 @@ namespace RileyMcGowan
         private CreatureDamage childHaveDamaged;
         private AntAIAgent antAIRef;
         private Damien.FOV currentFOV;
-        
+        private VisualEffect vfxComp;
+
         //Public Vars
         public GameObject portalTarget;
         public GameObject playerTarget;
@@ -25,9 +27,15 @@ namespace RileyMcGowan
         public NavMeshAgent navMeshRef;
         public float safeDistance = 1f;
         
+        
         void Start()
         {
             //Grab all the components needed for reference
+            if (GetComponentInChildren<VisualEffect>() != null)
+            {
+                vfxComp = GetComponentInChildren<VisualEffect>();
+                vfxComp.SetFloat("ParticleSpawnRate", 0.5f); //vfx.setfloat("Name", number);
+            }
             if (GetComponentInChildren<CreatureDamage>() != null)
             {
                 childHaveDamaged = GetComponentInChildren<CreatureDamage>();
