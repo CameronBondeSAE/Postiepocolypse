@@ -9,12 +9,14 @@ namespace Luke
     {
         public GameObject owner;
         public JudasWitnessModel judasWitnessModel;
+        public AntAIAgent antAIAgent;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
+            antAIAgent = owner.GetComponent<AntAIAgent>();
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
         }
 
@@ -23,19 +25,14 @@ namespace Luke
             base.Enter();
 
             Debug.Log("Find resource state");
-        }
 
-        public override void Execute(float aDeltaTime, float aTimeScale)
-        {
-            base.Execute(aDeltaTime, aTimeScale);
-            
-            if (judasWitnessModel.waterTargets != null)
+            if (judasWitnessModel.waterTargets.Count >= 1)
             {
                 //setting the world condition
-                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("foundResource", judasWitnessModel.waterTargets != null);
+                antAIAgent.worldState.Set("foundResource", true);
                 antAIAgent.worldState.EndUpdate();
+                
                 Debug.Log("Found resource");
                 
                 Finish();
@@ -44,6 +41,9 @@ namespace Luke
             else
             {
                 Debug.Log("No more waterTargets");
+                
+                antAIAgent.SetDefaultState();
+                
                 Finish();
             }
         }
@@ -51,9 +51,8 @@ namespace Luke
         public override void Exit()
         {
             base.Exit();
+            
             Debug.Log("Exit find resource state");
-
-            Finish();
         }
     }
 }

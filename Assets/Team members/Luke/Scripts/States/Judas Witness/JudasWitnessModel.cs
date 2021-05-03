@@ -46,6 +46,7 @@ namespace Luke
             antAIAgent.worldState.Set("atResourcePos", false);
             antAIAgent.worldState.Set("foundRecharge", false);
             antAIAgent.worldState.Set("atRechargePos", false);
+            antAIAgent.worldState.Set("wander", false);
             antAIAgent.worldState.EndUpdate();
             
             patrolManager = FindObjectOfType<PatrolManager>();

@@ -29,12 +29,22 @@ namespace Luke
 
             Debug.Log("wander state");
 
+            AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("wander", true);
+            antAIAgent.worldState.EndUpdate();
+
             judasWitnessModel.Wander();
         }
 
         public override void Exit()
         {
             base.Exit();
+            
+            AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("wander", false);
+            antAIAgent.worldState.EndUpdate();
             
             Debug.Log("Exit Wander State");
         }
