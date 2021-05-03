@@ -1413,7 +1413,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.81761, b: 0.81761, a: 1}
-  m_Intensity: 0.039788734
+  m_Intensity: 0.015915494
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 0.5
+  m_Intensity: 0.2
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -1970,7 +1970,6 @@ GameObject:
   - component: {fileID: 7058318617128531944}
   - component: {fileID: 7058318617128531735}
   - component: {fileID: 3956812273395593936}
-  - component: {fileID: 6850868778339535585}
   - component: {fileID: 215902256}
   - component: {fileID: 215902257}
   - component: {fileID: 215902258}
@@ -1983,7 +1982,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7058318617128531946
 Transform:
@@ -2082,22 +2081,6 @@ MonoBehaviour:
   viewRadius: 30
   viewAngle: 360
   listOfTargets: []
---- !u!114 &6850868778339535585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058318617128531734}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15a0d8d2cabb58347a03ed5e962d922f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  scale: {x: 50, y: 0, z: 50}
-  timeScale: 1
 --- !u!114 &215902256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2128,6 +2111,7 @@ MonoBehaviour:
   owner: {fileID: 7058318617128531734}
   antAIAgent: {fileID: 215902256}
   target: {fileID: 0}
+  energyTarget: {fileID: 0}
 --- !u!114 &215902258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2141,7 +2125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light: {fileID: 6025210774468816826}
-  blindPlayer: 0
   flashOn: 0
 --- !u!114 &215902250
 MonoBehaviour:
@@ -2209,7 +2192,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 4
+  m_BaseOffset: 6
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &7076765992571148482

@@ -22,23 +22,17 @@ namespace Damien
         public override void Enter()
         {
             base.Enter();
-            //Debug.Log("Pick Energy");
-            owner.GetComponentInParent<FOV>().targets = LayerMask.GetMask("Energy");
-            owner.GetComponentInParent<FOV>().viewRadius = energyViewRadius;
+            Debug.Log("Pick Energy");
+            fieldOfView.targets = LayerMask.GetMask("Energy");
+            fieldOfView.viewRadius = energyViewRadius;
 
 
             //Sends the target to the parent if the FOV has targets to send
             if (fieldOfView.listOfTargets.Count > 0)
             {
-                owner.GetComponent<Blinder>().target = fieldOfView.listOfTargets[0];
+                owner.GetComponent<Blinder>().energyTarget = fieldOfView.listOfTargets[0];
                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("Energy Picked", antAIAgent.GetComponent<Blinder>().target != null);
-                antAIAgent.worldState.EndUpdate();
-                
             }
-
-            // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
 
 
             Finish();
