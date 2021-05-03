@@ -337,14 +337,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   antAIAgent: {fileID: 6410610709035693269}
   navMeshAgent: {fileID: 6794730730155927835}
-  audioSource: {fileID: 3680741728346999298}
-  chorusFilter: {fileID: 8261083863869696342}
   timeGathering: 10
   patrolManager: {fileID: 0}
   patrolSpeed: 5
+  maxPatrolWaitTime: 0
   waterTargets: []
   currentWaterTarget: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
+  audioSource: {fileID: 3680741728346999298}
+  chorusFilter: {fileID: 8261083863869696342}
   timeBetweenAudio: 20
   audioRepeatRate: 1
   maxWetMix: 1.35
@@ -471,6 +472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
+  damageType: 0
+  damageOverDistance: 0
+  sphereCollider: {fileID: 0}
   inCollider: []
 --- !u!135 &3367743676390579978
 SphereCollider:
@@ -480,7 +484,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6794730728925289216}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 7.5
