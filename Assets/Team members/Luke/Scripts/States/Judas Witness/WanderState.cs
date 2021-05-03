@@ -43,6 +43,8 @@ namespace Luke
 
             if (navMeshAgent.remainingDistance < .5f)
             {
+                judasWitnessModel.WanderWaitTime();
+                //I think I have to put this inside the wanderWaitTime but change when the bug of default state and other states are fixed
                 navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
             }
         }

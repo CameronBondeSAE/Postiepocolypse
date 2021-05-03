@@ -89,10 +89,6 @@ namespace Luke
             if (patrolManager.pathsWithIndoors != null)
             {
                 navMeshAgent.speed = patrolSpeed;
-                if (navMeshAgent.remainingDistance < .5f)
-                {
-                    WanderWaitTime();
-                }
             }
         }
 
