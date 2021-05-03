@@ -19,6 +19,7 @@ namespace Luke
         [Header("Patrol variables")] 
         public PatrolManager patrolManager;
         public float patrolSpeed;
+        public float maxPatrolWaitTime;
         
         [Header("Resource state variables")]
         public List<WaterTarget> waterTargets;
@@ -88,13 +89,21 @@ namespace Luke
             if (patrolManager.pathsWithIndoors != null)
             {
                 navMeshAgent.speed = patrolSpeed;
-                navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
+                if (navMeshAgent.remainingDistance < .5f)
+                {
+                    WanderWaitTime();
+                }
             }
+        }
+
+        public IEnumerator WanderWaitTime()
+        {
+            yield return new WaitForSeconds(Random.Range(0, maxPatrolWaitTime));
         }
 
         public void SetWaterTarget()
         {
-            if (waterTargets != null)
+            if (waterTargets.Count != 0)
             {
                 currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
                 navMeshAgent.SetDestination(currentWaterTarget.transform.position);

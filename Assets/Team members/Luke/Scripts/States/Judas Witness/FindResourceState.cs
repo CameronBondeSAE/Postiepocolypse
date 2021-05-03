@@ -52,6 +52,12 @@ namespace Luke
         {
             base.Exit();
             
+            if (judasWitnessModel.waterTargets != null)
+            {
+                judasWitnessModel.SetWaterTarget();
+                judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
+            }
+
             Debug.Log("Exit find resource state");
         }
     }

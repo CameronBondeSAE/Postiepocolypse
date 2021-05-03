@@ -31,23 +31,22 @@ namespace Luke
              
              Debug.Log("Move to resource state");
 
-             judasWitnessModel.SetWaterTarget();
+             if (judasWitnessModel.waterTargets.Count < 1)
+             {
+                 Debug.Log("waterTarget Null");
+                 Finish();
+             }
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             if (judasWitnessModel.waterTargets.Count < 1)
+             if (navMeshAgent.remainingDistance < remainingDistance)
              {
-                 Debug.Log("waterTarget Null");
                  Finish();
              }
              
-             if (navMeshAgent.remainingDistance < remainingDistance && judasWitnessModel.waterTargets.Count >= 1)
-             {
-                 Finish();
-             }
          }
 
          public override void Exit()

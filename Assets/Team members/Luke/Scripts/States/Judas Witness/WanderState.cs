@@ -33,8 +33,18 @@ namespace Luke
             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
             antAIAgent.worldState.Set("wander", true);
             antAIAgent.worldState.EndUpdate();
+        }
 
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+            
             judasWitnessModel.Wander();
+
+            if (navMeshAgent.remainingDistance < .5f)
+            {
+                navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
+            }
         }
 
         public override void Exit()
