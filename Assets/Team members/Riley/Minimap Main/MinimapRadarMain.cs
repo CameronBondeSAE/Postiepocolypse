@@ -11,7 +11,7 @@ namespace RileyMcGowan
     {
         //Main Vars
         private MinimapFOV minimapFOV;
-        private int timeToLive = 5;
+        private int timeToLive = 10;
         private GameObject instantiate;
         private GameObject tempRef;
         public float radarSpeed;
