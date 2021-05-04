@@ -25,7 +25,10 @@ namespace ZachFrench
         {
             base.Enter();
             Debug.Log("I have low energy");
-            vfx.stateSwitch = VFXTesting.GradientSwitch.LowEnergy;
+            if (vfx != null)
+            {
+                vfx.stateSwitch = VFXTesting.GradientSwitch.LowEnergy;
+            }
             navMeshAgent.isStopped = true;
         }
 

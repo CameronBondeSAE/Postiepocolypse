@@ -64,7 +64,10 @@ namespace ZachFrench
             else
             {
                 playerTarget = null;
-                vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
+                if (vfx != null)
+                {
+                    vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
+                }
             }
         }
 
@@ -78,7 +81,10 @@ namespace ZachFrench
             {
                 lowEnergy = false;
                 NavMeshAgent.isStopped = false;
-                vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
+                if (vfx != null)
+                {
+                    vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
+                }
             }
         }
         

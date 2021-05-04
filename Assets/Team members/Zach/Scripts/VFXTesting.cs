@@ -3,29 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class VFXTesting : MonoBehaviour
+namespace ZachFrench
 {
-    public VisualEffect visualEffect;
-    public GradientSwitch stateSwitch;
-    public enum GradientSwitch
+
+
+    public class VFXTesting : MonoBehaviour
     {
-        Calm,
-        Angry,
-        LowEnergy
+        public VisualEffect visualEffect;
+        public GradientSwitch stateSwitch;
+
+        public enum GradientSwitch
+        {
+            Calm,
+            Angry,
+            LowEnergy
+        }
+
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            visualEffect.SetInt("SwitchGradient", (int) stateSwitch);
+        }
+
+
     }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        visualEffect.SetInt("SwitchGradient",(int)stateSwitch);
-    }
-
-    
 }
