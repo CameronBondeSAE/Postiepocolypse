@@ -23,6 +23,7 @@ namespace Luke
             aWorldState.BeginUpdate(aAgent.planner);
             {
                 aWorldState.Set("playerFound", judasWitnessModel.currentPlayerTarget != null);
+                aWorldState.Set("foundResource", judasWitnessModel.waterTargets.Count >= 1);
             }
             aWorldState.EndUpdate();
         }

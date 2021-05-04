@@ -43,6 +43,8 @@ namespace Luke
 
             if (judasWitnessModel.currentPlayerTarget != null && navMeshAgent.remainingDistance < .5f)
             {
+                //set vfx colour to red
+                
                 //setting the world condition
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("atAttackRange", true);

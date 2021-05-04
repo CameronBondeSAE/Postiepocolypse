@@ -24,9 +24,6 @@ namespace Luke
             owner = aGameObject;
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
             vfx = owner.GetComponentInChildren<VisualEffect>();
-            
-            vfx.SetInt("attackIntensity", judasWitnessModel.attackIntensity);
-            vfx.SetFloat("gradientTime", judasWitnessModel.gradientTime);
         }
 
         public override void Enter()
@@ -36,8 +33,8 @@ namespace Luke
             if (judasWitnessModel.currentPlayerTarget != null)
             {
                 Debug.Log("Player found");
+
                 judasWitnessModel.ResetPlanner();
-                
                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("playerFound", true);
@@ -57,9 +54,14 @@ namespace Luke
 
             if (judasWitnessModel.currentPlayerTarget != null)
             {
-                judasWitnessModel.gradientTime = .5f * aDeltaTime;
-                judasWitnessModel.attackIntensity *= 2;
+                vfx.SetInt("attackIntensity", judasWitnessModel.playerFoundIntensity);
+                vfx.SetFloat("gradientTime", judasWitnessModel.playerFoundGradient);
+                
+                Finish();
+            }
 
+            else
+            {
                 Finish();
             }
         }

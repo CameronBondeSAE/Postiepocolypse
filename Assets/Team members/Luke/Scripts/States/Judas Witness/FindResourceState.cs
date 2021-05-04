@@ -29,8 +29,6 @@ namespace Luke
 
             Debug.Log("Find resource state");
             
-            judasWitnessModel.waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
-
             if (judasWitnessModel.waterTargets.Count >= 1)
             {
                 //setting the world condition
@@ -54,14 +52,9 @@ namespace Luke
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
-            foreach (WaterTarget player in judasWitnessModel.waterTargets)
-            {
-                if (player.GetComponent<PlayerMovement>())
-                {
-                    judasWitnessModel.waterTargets.Remove(player);
-                }
-            }
+
+            //remove the players from this list
+            judasWitnessModel.SetWaterTarget();
             
             Finish();
         }

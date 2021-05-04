@@ -1,39 +1,38 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AlexM;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 using ZachFrench;
-using Random = UnityEngine.Random;
 
 namespace Luke
 {
     public class JudasWitnessModel : CreatureBase
     {
-        [Header("Other considerations")] 
-        public AntAIAgent antAIAgent;
+        [Header("Other considerations")] public AntAIAgent antAIAgent;
+
         public NavMeshAgent navMeshAgent;
         public float timeGathering;
 
-        [Header("Patrol variables")] 
-        public PatrolManager patrolManager;
+        [Header("Patrol variables")] public PatrolManager patrolManager;
+
         public float patrolSpeed;
         public float maxPatrolWaitTime;
-        
-        [Header("Resource state variables")]
-        public List<WaterTarget> waterTargets;
+
+        [Header("Resource state variables")] public List<WaterTarget> waterTargets;
+
         public WaterTarget currentWaterTarget;
         public Vector3 spawnPos;
 
-        [Header("Attacking state variables")]
-        public GameObject currentPlayerTarget;
-        public int attackIntensity;
-        public float gradientTime;
+        [Header("Attacking state variables")] public GameObject currentPlayerTarget;
 
-        [Header("Audio")] 
-        public AudioSource audioSource;
+        public int playerFoundIntensity;
+        public float playerFoundGradient;
+
+        [Header("Audio")] public AudioSource audioSource;
+
         public AudioChorusFilter chorusFilter;
         public float timeBetweenAudio;
         public float audioRepeatRate;
@@ -44,16 +43,17 @@ namespace Luke
         public void Start()
         {
             ResetPlanner();
-            
+
             patrolManager = FindObjectOfType<PatrolManager>();
             if (patrolManager == null)
             {
                 return;
             }
+
             navMeshAgent = FindObjectOfType<NavMeshAgent>();
 
             InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
-            
+
             spawnPos = transform.position;
         }
 
@@ -79,6 +79,7 @@ namespace Luke
                     return;
                 }
             }
+
             if (patrolManager.pathsWithIndoors != null)
             {
                 navMeshAgent.speed = patrolSpeed;
@@ -93,6 +94,20 @@ namespace Luke
 
         public void SetWaterTarget()
         {
+            if (waterTargets != null)
+            {
+                waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
+                
+                foreach (WaterTarget player in waterTargets.ToList())
+                {
+                    if (player.GetComponentInParent<PlayerMovement>())
+                    {
+                        waterTargets.Remove(player);
+                    }
+                }
+            }
+
+
             if (waterTargets.Count != 0)
             {
                 currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
@@ -114,7 +129,6 @@ namespace Luke
             antAIAgent.worldState.Set("atRechargePos", false);
             antAIAgent.worldState.Set("wander", false);
             antAIAgent.worldState.EndUpdate();
-            
         }
     }
 }

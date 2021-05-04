@@ -31,5 +31,15 @@ namespace Luke
         {
             base.Enter();
         }
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+            
+            if (judasWitnessModel.currentPlayerTarget == null)
+            {
+                Finish();
+            }
+        }
     }
 }
