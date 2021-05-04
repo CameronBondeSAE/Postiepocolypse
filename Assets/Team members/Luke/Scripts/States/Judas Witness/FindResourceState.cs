@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using AlexM;
 using Anthill.AI;
+using ParadoxNotion;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,6 +28,8 @@ namespace Luke
             base.Enter();
 
             Debug.Log("Find resource state");
+            
+            judasWitnessModel.waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
 
             if (judasWitnessModel.waterTargets.Count >= 1)
             {
@@ -34,8 +39,6 @@ namespace Luke
                 antAIAgent.worldState.EndUpdate();
                 
                 Debug.Log("Found resource");
-                
-                Finish();
             }
 
             else
@@ -46,6 +49,21 @@ namespace Luke
                 
                 Finish();
             }
+        }
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+            
+            foreach (WaterTarget player in judasWitnessModel.waterTargets)
+            {
+                if (player.GetComponent<PlayerMovement>())
+                {
+                    judasWitnessModel.waterTargets.Remove(player);
+                }
+            }
+            
+            Finish();
         }
 
         public override void Exit()
