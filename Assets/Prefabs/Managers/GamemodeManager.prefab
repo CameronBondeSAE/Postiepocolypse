@@ -66,7 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  setsOfPrefabs: 0
+  setsOfPrefabs: 1
   prefabs:
   - {fileID: 211089926295112692, guid: 9efe3638f4df0814f9646abbf78c9f5a, type: 3}
   spawnRange: 50
@@ -75,6 +75,8 @@ MonoBehaviour:
   ySpawnGroundOffset: 1
   yAdjustablePosition: 0
   yGroundTestOffset: 50
+  spawnOnPatrolPoints: 0
+  patrolManager: {fileID: 0}
 --- !u!114 &5059710653524475950
 MonoBehaviour:
   m_ObjectHideFlags: 0

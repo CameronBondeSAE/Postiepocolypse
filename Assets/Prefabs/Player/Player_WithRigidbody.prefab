@@ -283,7 +283,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6271187260368080563}
-  - component: {fileID: 4144068074024969157}
   - component: {fileID: 6271187260368080560}
   - component: {fileID: 580642317967517823}
   - component: {fileID: 4344033232605556001}
@@ -326,14 +325,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &4144068074024969157
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6271187260368080590}
-  m_Enabled: 1
 --- !u!54 &6271187260368080560
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -390,9 +381,9 @@ MonoBehaviour:
   _isSprinting: 0
   _groundAngle: 0
   _groundAngleOffset: 0
-  maxSpeed: 20
+  maxSpeed: 25
   sprintMultiplier: 2
-  jumpForce: 500
+  jumpForce: 300
   onGroundDrag: 5
   inAirDrag: 0
   _speed: 0
@@ -856,7 +847,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7271636079834535862}
   m_LocalRotation: {x: -0, y: -0.03787253, z: -0, w: 0.9992826}
-  m_LocalPosition: {x: 0.475, y: -0.716, z: 0.295}
+  m_LocalPosition: {x: -0.503, y: -0.48, z: 0.068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6271187259181377449}
@@ -874,8 +865,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.39788735
-  m_Range: 15.9
+  m_Intensity: 2.4931622
+  m_Range: 35.9
   m_SpotAngle: 63.68
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -943,10 +934,10 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 5
+  m_Intensity: 31.33
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
-  m_InnerSpotPercent: 0
+  m_InnerSpotPercent: 11.2
   m_LightDimmer: 1
   m_VolumetricDimmer: 0.92
   m_LightUnit: 0
@@ -957,7 +948,7 @@ MonoBehaviour:
   m_ShapeWidth: 0.5
   m_ShapeHeight: 0.5
   m_AspectRatio: 1
-  m_ShapeRadius: 0.025
+  m_ShapeRadius: 0
   m_SoftnessScale: 1
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 30

@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211089926295112692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5389, y: 1.424, z: -1.3035015}
+  m_LocalPosition: {x: 565.43286, y: 35.021564, z: 547.4452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8063455971631865326}
@@ -110,7 +110,6 @@ MonoBehaviour:
   syncInterval: 0.1
   setsOfPrefabs: 1
   prefabs:
-  - {fileID: 211089926295112692}
   - {fileID: 7058318617128531734, guid: 1df4a2b1b8e0485459ac6833fd67cd94, type: 3}
   - {fileID: 6794730728925289216, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
   - {fileID: 4979934498223357703, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
@@ -125,6 +124,8 @@ MonoBehaviour:
   ySpawnGroundOffset: 1
   yAdjustablePosition: -50
   yGroundTestOffset: 5
+  spawnOnPatrolPoints: 0
+  patrolManager: {fileID: 0}
 --- !u!114 &211089926295112691
 MonoBehaviour:
   m_ObjectHideFlags: 0
