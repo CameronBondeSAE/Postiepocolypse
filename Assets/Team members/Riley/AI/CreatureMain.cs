@@ -5,6 +5,7 @@ using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 
 namespace RileyMcGowan
 {
@@ -65,6 +66,7 @@ namespace RileyMcGowan
         
         private void FixedUpdate()
         {
+            vfxComp.SetFloat("ParticleSpawnRate", Random.Range(0.0f, 0.5f));
             //Raycast leveling
             if (childRaycastHandler.distanceToPlatformInfo > floatingHeight && childRaycastHandler != null)
             {

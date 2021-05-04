@@ -13,14 +13,17 @@ namespace RileyMcGowan
         //Private Vars
         private bool isFinished;
         private float safeDistance;
+        private GameObject currentTarget;
+        private Vector3 targetLocation;
 
         public override void Enter()
         {
             base.Enter();
             isFinished = false;
             navMeshRef = creatureMainRef.navMeshRef;
-            GameObject currentTarget = creatureMainRef.currentPatrolPoint;
-            navMeshRef.SetDestination(currentTarget.transform.position);
+            currentTarget = creatureMainRef.currentPatrolPoint;
+            targetLocation = currentTarget.transform.position;
+            navMeshRef.SetDestination(targetLocation);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
