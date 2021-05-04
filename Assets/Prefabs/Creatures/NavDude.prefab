@@ -364,10 +364,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 15
-  sphereCollider: {fileID: 5288077799947234339}
-  inCollider: []
   damageType: 0
   damageOverDistance: 0
+  sphereCollider: {fileID: 5288077799947234339}
+  inCollider: []
 --- !u!135 &3792472634777002654
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4979934498223357703}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2b44a5cf64d015643b0069a71faf751e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

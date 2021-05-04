@@ -11,18 +11,21 @@ namespace ZachFrench
     {
         public GameObject parent;
         private NavMeshAgent navMeshAgent;
+        public VFXTesting vfx;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
             parent = aGameObject;
             navMeshAgent = parent.GetComponent<NavMeshAgent>();
+            vfx = parent.GetComponentInChildren<VFXTesting>();
         }
 
         public override void Enter()
         {
             base.Enter();
             Debug.Log("I have low energy");
+            vfx.stateSwitch = VFXTesting.GradientSwitch.LowEnergy;
             navMeshAgent.isStopped = true;
         }
 

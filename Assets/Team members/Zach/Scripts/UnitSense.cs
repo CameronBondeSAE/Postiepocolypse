@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using AlexM;
 using Anthill.AI;
@@ -22,7 +23,14 @@ namespace ZachFrench
         public Transform playerTarget;
         //public List<GameObject> Players;
         public NavMeshAgent NavMeshAgent;
-        
+
+        public VFXTesting vfx;
+
+        private void Start()
+        {
+            vfx = this.gameObject.GetComponentInChildren<VFXTesting>();
+        }
+
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
             LookingForPlayers();
@@ -49,12 +57,14 @@ namespace ZachFrench
                     else
                     {
                         playerTarget = null;
+                        vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
                     }
                 }
             }
             else
             {
                 playerTarget = null;
+                vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
             }
         }
 
@@ -68,6 +78,7 @@ namespace ZachFrench
             {
                 lowEnergy = false;
                 NavMeshAgent.isStopped = false;
+                vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
             }
         }
         

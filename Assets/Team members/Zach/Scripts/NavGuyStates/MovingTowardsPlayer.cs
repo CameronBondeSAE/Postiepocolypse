@@ -11,16 +11,19 @@ namespace ZachFrench
     {
         private GameObject parent;
         public NavMeshAgent NavMeshAgent;
+        public VFXTesting vfx;
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
             parent = aGameObject;
             NavMeshAgent = parent.GetComponent<NavMeshAgent>();
+            vfx = parent.GetComponentInChildren<VFXTesting>();
         }
 
         public override void Enter()
         {
             base.Enter();
+            vfx.stateSwitch = VFXTesting.GradientSwitch.Angry;
             NavMeshAgent.SetDestination(parent.GetComponent<UnitSense>().playerTarget.position);
         }
 
@@ -29,6 +32,7 @@ namespace ZachFrench
             base.Execute(aDeltaTime, aTimeScale);
             if (NavMeshAgent.remainingDistance < 1f)
             {
+                vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
                 Finish();
             }
         }
