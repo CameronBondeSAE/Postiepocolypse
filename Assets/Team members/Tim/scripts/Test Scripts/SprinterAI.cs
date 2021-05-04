@@ -51,9 +51,13 @@ namespace TimPearson
                     }
                     else
                     {
-                        Debug.DrawLine(transform.position, currentTarget.transform.position);
-                        sprint.isBoosting = false;
-                        visualEffect.SetVector4("Color",new Vector4(15,250,0,1));
+                        if (currentTarget != null)
+                        {
+                            Debug.DrawLine(transform.position, currentTarget.transform.position);
+                            sprint.isBoosting = false;
+                            visualEffect.SetVector4("Color",new Vector4(15,250,0,1));
+                        }
+                        
                     }
                 }
             }
