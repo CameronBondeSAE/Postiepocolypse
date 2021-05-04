@@ -64,7 +64,7 @@ namespace RileyMcGowan
 
         public void FireFlare()
         {
-            if (InputSystem.GetDevice<Keyboard>().fKey.isPressed && currentFlares > 0 && flareAvailable == true)
+            if (InputSystem.GetDevice<Keyboard>().digit2Key.isPressed && currentFlares > 0 && flareAvailable == true)
             {
                 if (placeToSpawn != null)
                 {
