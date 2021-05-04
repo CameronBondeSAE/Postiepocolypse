@@ -11,12 +11,18 @@ namespace ZachFrench
     {
         public VisualEffect visualEffect;
         public GradientSwitch stateSwitch;
+        public ParticleCapacity particleSwitch;
 
         public enum GradientSwitch
         {
             Calm,
             Angry,
             LowEnergy
+        }
+        public enum ParticleCapacity
+        {
+            Normal,
+            Angry
         }
 
 
@@ -32,6 +38,10 @@ namespace ZachFrench
             visualEffect.SetInt("SwitchGradient", (int) stateSwitch);
         }
 
+        void AngerParticle()
+        {
+            visualEffect.SetInt("Capacity Switch", (int) particleSwitch);
+        }
 
     }
 }
