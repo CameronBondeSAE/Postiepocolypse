@@ -2112,6 +2112,10 @@ MonoBehaviour:
   antAIAgent: {fileID: 215902256}
   target: {fileID: 0}
   energyTarget: {fileID: 0}
+  flash: {fileID: 6025210774468816826}
+  flashBrightness: 200000000
+  flashOffBrightness: 0.5
+  targetsInView: 0
 --- !u!114 &215902258
 MonoBehaviour:
   m_ObjectHideFlags: 0
