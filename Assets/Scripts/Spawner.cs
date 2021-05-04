@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Sirenix.Utilities;
 using UnityEngine;
+using ZachFrench;
 using Random = UnityEngine.Random;
 
 namespace Luke
@@ -20,9 +22,17 @@ namespace Luke
         public float ySpawnGroundOffset = 1f;
         public float yAdjustablePosition;
         public float yGroundTestOffset = 5f;
+        public bool spawnOnPatrolPoints;
+        public PatrolManager patrolManager;
         public override void OnStartServer()
         {
             base.OnStartServer();
+            
+            if (patrolManager == null)
+            {
+                patrolManager = FindObjectOfType<PatrolManager>();
+            }
+            
             if (spawnOnStart)
             {
                 SpawnMultipleSets();
@@ -57,51 +67,75 @@ namespace Luke
         public GameObject SpawnSingle(GameObject prefab)
         {
             GameObject spawnedInstance = null;
+            
             if (isServer)
             {
-                //set current random on the loop
-                int randomPrefab = Random.Range(0, prefabs.Length);
-
                 //random position for spawn + an adjustable y position in case of very large prefabs
-                Vector3 position = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange),
+                Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange),
                     transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
 
-                
-                if (randomSpawn)
+                List<PatrolPoint> spawnPatrolPositions = patrolManager.paths;
+                PatrolPoint patrolPosition = spawnPatrolPositions[Random.Range(0, patrolManager.paths.Count)];
+
+                if (spawnOnPatrolPoints && patrolManager != null)
                 {
-                    spawnedInstance = Instantiate(prefabs[randomPrefab], position, transform.rotation);
-                    NetworkServer.Spawn(spawnedInstance);
-                }
-                else
-                {
-                    spawnedInstance = Instantiate(prefab, position, transform.rotation);
-                    NetworkServer.Spawn(spawnedInstance);
+                    foreach (PatrolPoint patrolPoint in spawnPatrolPositions)
+                    {
+                        while (patrolPosition != patrolPoint)    
+                        {
+                            SpawnPosition(patrolPosition.transform.position, prefab);
+                            spawnPatrolPositions.Remove(patrolPoint);
+                            break;
+                        }
+                    }
                 }
 
-
-                
-                //raycast hit spawn pos
-                RaycastHit hitInfo;
-                Physics.Raycast(new Ray(position + new Vector3(0, yGroundTestOffset, 0),
-                    -transform.up), out hitInfo);
-                if (hitInfo.collider)
-                {
-                    spawnedInstance.transform.position = hitInfo.point + new Vector3(0, ySpawnGroundOffset, 0);
-                    Debug.Log(hitInfo.collider.gameObject.name);
-                }
-                //just in case the prefabs spawn in the ground
                 else
                 {
-                    Destroy(spawnedInstance);   
-                    Debug.Log("Failed Spawn");
+                    SpawnPosition(randomPosition, prefab);
                 }
-                
                 ///TODO: Keep on trying to find a surface instead of deleting
+                spawnedInstance = prefab;
                 return spawnedInstance;
             }
             else
             {
                 return null;
+            }
+        }
+
+        public void SpawnPosition(Vector3 position, GameObject prefab)
+        {
+            //set current random on the loop
+            int randomPrefab = Random.Range(0, prefabs.Length);
+
+            prefab = prefabs[randomPrefab];
+
+            if (randomSpawn)
+            { 
+                Instantiate(prefab, position, transform.rotation);
+                NetworkServer.Spawn(prefab);
+            }
+            else
+            {
+                Instantiate(prefab, position, transform.rotation);
+                NetworkServer.Spawn(prefab);
+            }
+            
+            //raycast hit spawn pos
+            RaycastHit hitInfo;
+            Physics.Raycast(new Ray(position + new Vector3(0, yGroundTestOffset, 0),
+                -transform.up), out hitInfo);
+            if (hitInfo.collider)
+            {
+                prefab.transform.position = hitInfo.point + new Vector3(0, ySpawnGroundOffset, 0);
+                Debug.Log(hitInfo.collider.gameObject.name);
+            }
+            //just in case the prefabs spawn in the ground
+            else
+            {
+                Destroy(prefab);   
+                Debug.Log("Failed Spawn");
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Anthill.AI;
 using Damien;
+using UnityEngine.AI;
 
 namespace Luke
 {
@@ -11,6 +12,24 @@ namespace Luke
     /// </summary>
     public class AttackPlayerState : AntAIState
     {
-        public FOV fov;
+        public GameObject owner;
+        public NavMeshAgent navMeshAgent;
+        public JudasWitnessModel judasWitnessModel;
+        public AntAIAgent antAIAgent;
+        
+        public override void Create(GameObject aGameObject)
+        {
+            base.Create(aGameObject);
+            
+            owner = aGameObject;
+            navMeshAgent = owner.GetComponent<NavMeshAgent>();
+            judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
+            antAIAgent = owner.GetComponent<AntAIAgent>();
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+        }
     }
 }

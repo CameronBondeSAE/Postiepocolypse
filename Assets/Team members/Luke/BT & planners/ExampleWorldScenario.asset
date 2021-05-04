@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExampleWorldScenario
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 44, y: 41}
+    position: {x: 45, y: 41}
     list:
     - id: 0
       name: gotResource
@@ -40,7 +40,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 6911060642076552306, guid: 6a3e6f29c8d11f747ac28d2ba3a27523, type: 3}
     cost: 3
-    position: {x: 314, y: 514}
+    position: {x: 315, y: 514}
     pre:
     - id: 5
       value: 1
@@ -53,7 +53,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 1225086207060466103, guid: 24ddd92000120ed41b6ebe53b3caebbf, type: 3}
     cost: 4
-    position: {x: 636, y: 484}
+    position: {x: 637, y: 484}
     pre:
     - id: 2
       value: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 3739488329902857689, guid: 3e7499a545db9c44ba0b8a377e983f29, type: 3}
     cost: 3
-    position: {x: 1175, y: 480}
+    position: {x: 1176, y: 480}
     pre:
     - id: 2
       value: 1
@@ -85,16 +85,18 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 445444917551864119, guid: 8f1296043b658db438b4d888637eeaa0, type: 3}
     cost: 0
-    position: {x: 35, y: 306}
+    position: {x: 36, y: 306}
     pre:
     - id: 9
       value: 0
-    post: []
+    post:
+    - id: 9
+      value: 0
   - name: Deliver
     isDefault: 0
     state: {fileID: 915626821525863779, guid: 2e5eed031f13c854b915bb68f58b3e3e, type: 3}
     cost: 5
-    position: {x: 831, y: 522}
+    position: {x: 832, y: 522}
     pre:
     - id: 0
       value: 1
@@ -107,7 +109,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 8191465399672988679, guid: 6fa50c8f26d06c549a617366189e1008, type: 3}
     cost: 3
-    position: {x: 736, y: 264}
+    position: {x: 737, y: 264}
     pre:
     - id: 6
       value: 0
@@ -126,7 +128,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 4989078220545727644, guid: ec0597ae9f0cdbb45b294abd8029af94, type: 3}
     cost: 2
-    position: {x: 736, y: 28}
+    position: {x: 737, y: 28}
     pre:
     - id: 3
       value: 0
@@ -143,7 +145,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 644825408655154044, guid: 07712307c7e53fd41b5a29d55e368407, type: 3}
     cost: 1
-    position: {x: 1168, y: 30}
+    position: {x: 1169, y: 30}
     pre:
     - id: 2
       value: 1
@@ -156,7 +158,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 4309787799354415424, guid: f27503ebff3c6ff4388654bbb882a938, type: 3}
     cost: 1
-    position: {x: 314, y: 74}
+    position: {x: 315, y: 74}
     pre:
     - id: 1
       value: 0
@@ -169,7 +171,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 924223750451694883, guid: f17e77130de78a44aa99b4b1d40836c4, type: 3}
     cost: 2
-    position: {x: 1169, y: 247}
+    position: {x: 1170, y: 247}
     pre:
     - id: 2
       value: 1
@@ -182,7 +184,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 1740180386266013857, guid: db871798dbee8604c8e9a8b654d5e385, type: 3}
     cost: 2
-    position: {x: 315, y: 274}
+    position: {x: 316, y: 274}
     pre:
     - id: 5
       value: 0
@@ -194,12 +196,12 @@ MonoBehaviour:
   goals:
   - name: ResourceDelivered
     isDefault: 1
-    position: {x: 29, y: 558}
+    position: {x: 30, y: 558}
     conditions:
     - id: 4
       value: 1
   worldStates:
-  - position: {x: 26, y: 731}
+  - position: {x: 27, y: 731}
     list:
     - id: 0
       value: 0
@@ -218,4 +220,6 @@ MonoBehaviour:
     - id: 7
       value: 0
     - id: 8
+      value: 0
+    - id: 9
       value: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,6 +27,11 @@ namespace Luke
         public WaterTarget currentWaterTarget;
         public Vector3 spawnPos;
 
+        [Header("Attacking state variables")]
+        public GameObject currentPlayerTarget;
+        public int attackIntensity;
+        public float gradientTime;
+
         [Header("Audio")] 
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
@@ -37,18 +43,7 @@ namespace Luke
 
         public void Start()
         {
-            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            antAIAgent.worldState.Set("gotResource", false);
-            antAIAgent.worldState.Set("playerFound", false);
-            antAIAgent.worldState.Set("needRecharge", false);
-            antAIAgent.worldState.Set("foundResource", false);
-            antAIAgent.worldState.Set("deliveredResource", false);
-            antAIAgent.worldState.Set("atAttackRange", false);
-            antAIAgent.worldState.Set("atResourcePos", false);
-            antAIAgent.worldState.Set("foundRecharge", false);
-            antAIAgent.worldState.Set("atRechargePos", false);
-            antAIAgent.worldState.Set("wander", false);
-            antAIAgent.worldState.EndUpdate();
+            ResetPlanner();
             
             patrolManager = FindObjectOfType<PatrolManager>();
             if (patrolManager == null)
@@ -60,10 +55,8 @@ namespace Luke
             InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
             
             spawnPos = transform.position;
-            
-            waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
         }
-        
+
         public void BasicNoises()
         {
             chorusFilter.wetMix1 = Mathf.PerlinNoise(Time.time / maxWetMix, 0);
@@ -92,6 +85,7 @@ namespace Luke
             }
         }
 
+        //TODO not working yet because stuck between default and other states
         public IEnumerator WanderWaitTime()
         {
             yield return new WaitForSeconds(Random.Range(0, maxPatrolWaitTime));
@@ -104,6 +98,23 @@ namespace Luke
                 currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
                 navMeshAgent.SetDestination(currentWaterTarget.transform.position);
             }
+        }
+
+        public void ResetPlanner()
+        {
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("gotResource", false);
+            antAIAgent.worldState.Set("playerFound", false);
+            antAIAgent.worldState.Set("needRecharge", false);
+            antAIAgent.worldState.Set("foundResource", false);
+            antAIAgent.worldState.Set("deliveredResource", false);
+            antAIAgent.worldState.Set("atAttackRange", false);
+            antAIAgent.worldState.Set("atResourcePos", false);
+            antAIAgent.worldState.Set("foundRecharge", false);
+            antAIAgent.worldState.Set("atRechargePos", false);
+            antAIAgent.worldState.Set("wander", false);
+            antAIAgent.worldState.EndUpdate();
+            
         }
     }
 }
