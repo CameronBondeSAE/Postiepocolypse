@@ -8,12 +8,18 @@ namespace Damien
         public GameObject owner;
 
         //Reset states function call
-        
+        public override void Create(GameObject aGameObject)
+        {
+            base.Create(aGameObject);
+            owner = aGameObject;
+            
+        }
         public override void Enter()
         {
             base.Enter();
             owner.GetComponent<Blinder>().StartCoroutine("FlashPlayer");
             //owner.GetComponent<Blinder>().ResetStates();
+            Finish();
 
 
         }

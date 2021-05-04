@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blinder
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 287, y: 280}
+    position: {x: 46, y: 286}
     list:
     - id: 0
       name: Close to Target
@@ -34,7 +34,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 4793493128706573800, guid: 08ff0d4a407e96443a19fc9000b9588b, type: 3}
     cost: 0
-    position: {x: 487, y: 278}
+    position: {x: 246, y: 284}
     pre:
     - id: 1
       value: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 741396489344472497, guid: 9a8109483e914294cad22b01e2596cf5, type: 3}
     cost: 0
-    position: {x: 687, y: 278}
+    position: {x: 446, y: 284}
     pre:
     - id: 1
       value: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 184449912305600510, guid: 06ed5c4960bee7a4898cbabb918284af, type: 3}
     cost: 0
-    position: {x: 487, y: 58}
+    position: {x: 246, y: 64}
     pre:
     - id: 5
       value: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5830141339148926194, guid: c63cdf0c1ede6aa4181a10cfe8aabf5f, type: 3}
     cost: 0
-    position: {x: 887, y: 258}
+    position: {x: 646, y: 264}
     pre:
     - id: 0
       value: 1
@@ -90,7 +90,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 1644787127606055907, guid: 40514f8156fe1cc459ba8c89be35341c, type: 3}
     cost: 0
-    position: {x: 684, y: 61}
+    position: {x: 443, y: 67}
     pre:
     - id: 3
       value: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 3459357550999035444, guid: d7fe7ee1360baad4e83da43cc1071245, type: 3}
     cost: 0
-    position: {x: 883, y: 62}
+    position: {x: 642, y: 68}
     pre:
     - id: 4
       value: 1
@@ -112,24 +112,24 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 6687878144443710320, guid: d7b402394bc7eb34c8e31993d811f429, type: 3}
     cost: 0
-    position: {x: 284, y: 62}
+    position: {x: 43, y: 68}
     pre: []
     post: []
   goals:
   - name: Disorient Target
     isDefault: 1
-    position: {x: 1087, y: 278}
+    position: {x: 846, y: 284}
     conditions:
     - id: 2
       value: 1
   - name: Fill Energy
     isDefault: 0
-    position: {x: 1088, y: 72}
+    position: {x: 847, y: 78}
     conditions:
     - id: 5
       value: 1
   worldStates:
-  - position: {x: 287, y: 507}
+  - position: {x: 46, y: 513}
     list:
     - id: 0
       value: 0
@@ -144,4 +144,4 @@ MonoBehaviour:
     - id: 5
       value: 0
     - id: 6
-      value: 0
+      value: 1

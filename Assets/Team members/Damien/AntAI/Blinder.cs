@@ -82,6 +82,7 @@ namespace Damien
             flash.intensity = flashOffBrightness;
             
             ResetStates();
+            
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Damien
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("Arrived at Energy", true);
                 antAIAgent.worldState.EndUpdate();
-                blinder.energyTarget = null;
+                //blinder.energyTarget = null;
                 Finish();
             }
         }
