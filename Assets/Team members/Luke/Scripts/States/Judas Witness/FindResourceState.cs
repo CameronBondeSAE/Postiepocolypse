@@ -30,7 +30,11 @@ namespace Luke
             Debug.Log("Find resource state");
             //remove the players from this list
             judasWitnessModel.SetWaterTarget();
-            judasWitnessModel.currentWaterTarget = judasWitnessModel.waterTargets[Random.Range(0, judasWitnessModel.waterTargets.Count)];
+
+            if (judasWitnessModel.waterTargets.Count >= 1)
+            {
+                judasWitnessModel.currentWaterTarget = judasWitnessModel.waterTargets[Random.Range(0, judasWitnessModel.waterTargets.Count)];
+            }
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)

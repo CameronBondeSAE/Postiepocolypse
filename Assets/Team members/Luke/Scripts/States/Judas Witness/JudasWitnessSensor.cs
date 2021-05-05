@@ -26,7 +26,6 @@ namespace Luke
             aWorldState.BeginUpdate(aAgent.planner);
             {
                 lookForPlayers();
-
                 aWorldState.Set("playerFound", judasWitnessModel.currentPlayerTarget != null);
             }
             aWorldState.EndUpdate();

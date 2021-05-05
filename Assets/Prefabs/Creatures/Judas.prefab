@@ -394,7 +394,7 @@ MonoBehaviour:
   currentPlayerTarget: {fileID: 0}
   normalIntensity: 2
   normalGradient: 0
-  playerFoundIntensity: 4
+  playerFoundIntensity: 5
   playerFoundGradient: 0.5
   attackingIntensity: 10
   attackingGradient: 1
