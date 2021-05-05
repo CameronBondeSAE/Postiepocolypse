@@ -17,7 +17,8 @@ namespace RileyMcGowan
         private CreatureDamage childHaveDamaged;
         private AntAIAgent antAIRef;
         private Damien.FOV currentFOV;
-        private VisualEffect vfxComp;
+        private bool colourHasSwapped;
+        
 
         //Public Vars
         public GameObject portalTarget;
@@ -27,15 +28,20 @@ namespace RileyMcGowan
         public float floatingHeight;
         public NavMeshAgent navMeshRef;
         public float safeDistance = 1f;
+        public VisualEffect vfxComp;
+        public bool swapColour;
         
         
         void Start()
         {
+            swapColour = false;
             //Grab all the components needed for reference
             if (GetComponentInChildren<VisualEffect>() != null)
             {
                 vfxComp = GetComponentInChildren<VisualEffect>();
                 vfxComp.SetFloat("ParticleSpawnRate", 0.5f); //vfx.setfloat("Name", number);
+                vfxComp.SetFloat("Radius", 1f);
+                vfxComp.SetInt("MaxParticles", 2000);
             }
             if (GetComponentInChildren<CreatureDamage>() != null)
             {
@@ -68,6 +74,19 @@ namespace RileyMcGowan
         {
             vfxComp.SetFloat("ParticleSpawnRate", Random.Range(0.0f, 0.5f));
             //Raycast leveling
+            if (swapColour != true && colourHasSwapped != true)
+            {
+                colourHasSwapped = true;
+                Gradient defaultColour = vfxComp.GetGradient("DefaultColour");
+                vfxComp.SetGradient("ActiveColour", defaultColour);
+            }
+            else if (swapColour != false && colourHasSwapped != false)
+            {
+                colourHasSwapped = false;
+                Gradient angryColour = vfxComp.GetGradient("EnemySpottedColour");
+                vfxComp.SetGradient("ActiveColour", angryColour);
+            }
+
             if (childRaycastHandler.distanceToPlatformInfo > floatingHeight && childRaycastHandler != null)
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z);

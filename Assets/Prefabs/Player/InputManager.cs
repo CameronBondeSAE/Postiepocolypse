@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using AlexM;
+using JonathonMiles;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,11 +17,13 @@ namespace AlexM
 		private CamMouseLook    _camScript;
 		private InteractRay     _interactRay;
 		private TorchController _torchController;
+		private Inventory _inventory;
+
 
 		[HideInInspector]
 		public Vector2 moveDirection;
 
-	#endregion
+		#endregion
 
 		private void GetReferences()
 		{
@@ -28,6 +31,7 @@ namespace AlexM
 			_camScript = GetComponentInChildren<CamMouseLook>();
 			_interactRay = GetComponent<InteractRay>();
 			_torchController = _camScript.GetComponentInChildren<TorchController>();
+			_inventory = GetComponent<Inventory>();
 		}
 
 		private void ControlSetup()
@@ -48,6 +52,7 @@ namespace AlexM
 			_controls.Movement.Use.canceled         += _interactRay.Use;
 			_controls.Movement.Pickup.performed     += _interactRay.PickUp;
 			_controls.Movement.Pickup.canceled      += _interactRay.PickUp;
+			_controls.Movement.Drop.performed		+= _inventory.DropAction;
 
 			// if (_gameManager)
 			// {

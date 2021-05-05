@@ -15,6 +15,7 @@ namespace RileyMcGowan
         public override void Enter()
         {
             base.Enter();
+            creatureMainRef.swapColour = false;
             //Store all possible targets of type WaterTarger in targetArray
             WaterTarget[] targetArray = FindObjectsOfType<WaterTarget>();
             //Set the target using a random target from the array and make it currentTarget

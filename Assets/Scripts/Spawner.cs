@@ -80,7 +80,7 @@ namespace Luke
 			{
 				GameObject spawnedInstance = null;
 				//random position for spawn + an adjustable y position in case of very large prefabs
-				Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
+				Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
 
 				if (spawnOnPatrolPoints && patrolManager != null)
 				{
@@ -90,18 +90,17 @@ namespace Luke
 					// TODO: Don't spawn on a used point
 					// while (patrolPosition != patrolPoint)
 					// {
-						SpawnPosition(patrolPosition.transform.position, prefab);
+						spawnedInstance = SpawnPosition(patrolPosition.transform.position, prefab);
 						// spawnPatrolPositions.Remove(patrolPoint);
 						// break;
 					// }
 				}
 				else
 				{
-					SpawnPosition(randomPosition, prefab);
+					spawnedInstance = SpawnPosition(randomPosition, prefab);
 				}
 
 				///TODO: Keep on trying to find a surface instead of deleting
-				spawnedInstance = prefab;
 				return spawnedInstance;
 			}
 			else
@@ -110,14 +109,14 @@ namespace Luke
 			}
 		}
 
-		public void SpawnPosition(Vector3 position, GameObject prefab)
+		public GameObject SpawnPosition(Vector3 position, GameObject prefab)
 		{
 			//raycast hit spawn pos
 			RaycastHit hitInfo;
 			Physics.Raycast(new Ray(position + new Vector3(0, yGroundTestOffset, 0), -transform.up), out hitInfo);
 			if (hitInfo.collider)
 			{
-				prefab.transform.position = hitInfo.point + new Vector3(0, ySpawnGroundOffset, 0);
+				position = hitInfo.point + new Vector3(0, ySpawnGroundOffset, 0);
 				Debug.Log(hitInfo.collider.gameObject.name);
 			}
 			//just in case the prefabs spawn in the ground
@@ -125,8 +124,10 @@ namespace Luke
 			{
 				// Destroy(prefab);
 				Debug.Log("Failed Spawn");
-				return;
+				return null;
 			}
+
+			GameObject instantiate = null;
 			
 			if (randomSpawn)
 			{
@@ -134,16 +135,16 @@ namespace Luke
 				int randomPrefab = Random.Range(0, prefabs.Length);
 				prefab = prefabs[randomPrefab];
 
-				GameObject instantiate = Instantiate(prefab, position, transform.rotation);
+				instantiate = Instantiate(prefab, position, transform.rotation);
 				NetworkServer.Spawn(instantiate);
 			}
 			else
 			{
-				GameObject instantiate = Instantiate(prefab, position, transform.rotation);
+				instantiate = Instantiate(prefab, position, transform.rotation);
 				NetworkServer.Spawn(instantiate);
 			}
 
-			
+			return instantiate;
 		}
 	}
 }

@@ -81,6 +81,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""b82b30f3-d224-4742-acf1-2a64eebae668"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -197,7 +205,18 @@ public class @Inputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c515249d-f2d6-4707-9fc9-76f15da047dc"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41f69c82-7979-4192-a2bd-990f8c1c847e"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -208,11 +227,44 @@ public class @Inputs : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""83405e54-b9be-443c-993c-306a93fe42ac"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pick up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a82ff763-62cc-4a8e-af49-115614ca21ab"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pick up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f42ca147-5c97-49ae-be4c-fef192a8c739"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""018832cf-2aab-4ac3-91b3-6e45395447ff"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -231,6 +283,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         m_Movement_Flashlight = m_Movement.FindAction("Flashlight", throwIfNotFound: true);
         m_Movement_Use = m_Movement.FindAction("Use", throwIfNotFound: true);
         m_Movement_Pickup = m_Movement.FindAction("Pick up", throwIfNotFound: true);
+        m_Movement_Drop = m_Movement.FindAction("Drop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,6 +341,7 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Movement_Flashlight;
     private readonly InputAction m_Movement_Use;
     private readonly InputAction m_Movement_Pickup;
+    private readonly InputAction m_Movement_Drop;
     public struct MovementActions
     {
         private @Inputs m_Wrapper;
@@ -300,6 +354,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         public InputAction @Flashlight => m_Wrapper.m_Movement_Flashlight;
         public InputAction @Use => m_Wrapper.m_Movement_Use;
         public InputAction @Pickup => m_Wrapper.m_Movement_Pickup;
+        public InputAction @Drop => m_Wrapper.m_Movement_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -333,6 +388,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Pickup.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnPickup;
                 @Pickup.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnPickup;
                 @Pickup.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnPickup;
+                @Drop.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnDrop;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -361,6 +419,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Pickup.started += instance.OnPickup;
                 @Pickup.performed += instance.OnPickup;
                 @Pickup.canceled += instance.OnPickup;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
             }
         }
     }
@@ -375,5 +436,6 @@ public class @Inputs : IInputActionCollection, IDisposable
         void OnFlashlight(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
 }
