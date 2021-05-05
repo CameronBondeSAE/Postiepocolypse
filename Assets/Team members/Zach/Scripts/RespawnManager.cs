@@ -72,7 +72,7 @@ namespace ZachFrench
             if (civilians.Count > 0)
             {
                 GameObject civilianToDelete = civilians[Random.Range(0,civilians.Count)];
-                Destroy(civilianToDelete);
+                DestroyImmediate(civilianToDelete,true);
                 civilians.Remove(civilianToDelete);
                 obj.transform.position = civilianToDelete.transform.position;
                 //civilians[numberOfCivilian].GetComponent<Health>().deathEvent -= RespawnAfterDeath;
