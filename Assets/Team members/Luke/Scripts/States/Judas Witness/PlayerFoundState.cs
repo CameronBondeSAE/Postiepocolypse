@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
+using Damien;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
@@ -11,7 +12,7 @@ namespace Luke
     {
         public GameObject owner;
         public JudasWitnessModel judasWitnessModel;
-        public JudasWitnessSensor judasWitnessSensor;
+        public FOV fov;
         public VisualEffect vfx;
 
         public override void Create(GameObject aGameObject)
@@ -21,6 +22,7 @@ namespace Luke
             owner = aGameObject;
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
             vfx = owner.GetComponentInChildren<VisualEffect>();
+            fov = owner.GetComponent<FOV>();
         }
 
         public override void Enter()
@@ -54,6 +56,11 @@ namespace Luke
                 vfx.SetFloat("gradientTime", judasWitnessModel.playerFoundGradient);
                 
                 Finish();
+            }
+
+            if (fov.listOfTargets.Count <= 0)
+            {
+                judasWitnessModel.currentPlayerTarget = null;
             }
 
             else

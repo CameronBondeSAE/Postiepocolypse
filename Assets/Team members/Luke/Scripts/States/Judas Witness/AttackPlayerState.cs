@@ -13,6 +13,7 @@ namespace Luke
         public NavMeshAgent navMeshAgent;
         public JudasWitnessModel judasWitnessModel;
         public AntAIAgent antAIAgent;
+        public FOV fov;
         
         public override void Create(GameObject aGameObject)
         {
@@ -22,6 +23,7 @@ namespace Luke
             navMeshAgent = owner.GetComponent<NavMeshAgent>();
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
             antAIAgent = owner.GetComponent<AntAIAgent>();
+            fov = owner.GetComponent<FOV>();
         }
 
         public override void Enter()
@@ -34,6 +36,15 @@ namespace Luke
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
+            if (fov.listOfTargets.Count <= 0)
+            {
+                judasWitnessModel.currentPlayerTarget = null;
+                //setting the world condition
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("atAttackRange", false);
+                antAIAgent.worldState.EndUpdate();
+            }
             
             if (judasWitnessModel.currentPlayerTarget == null)
             {

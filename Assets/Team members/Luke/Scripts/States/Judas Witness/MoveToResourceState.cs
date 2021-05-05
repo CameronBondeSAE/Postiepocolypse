@@ -1,76 +1,75 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Anthill.AI;
+﻿using Anthill.AI;
 using UnityEngine;
-using UnityEngine.AI;
-using ZachFrench;
 
 namespace Luke
 {
     public class MoveToResourceState : AntAIState
     {
-         public GameObject owner;
-         public JudasWitnessModel judasWitnessModel;
-         public AntAIAgent antAIAgent;
-         public float minDistance = 3f;
-         
-         public override void Create(GameObject aGameObject)
-         {
-             base.Create(aGameObject);
-    
-             owner = aGameObject;
-             antAIAgent = owner.GetComponent<AntAIAgent>();
-             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
-             minDistance = 3f;
-         }
-         
-         public override void Enter()
-         {
-             base.Enter();
-             
-             Debug.Log("Move to resource state");
+        public GameObject owner;
+        public JudasWitnessModel judasWitnessModel;
+        public AntAIAgent antAIAgent;
+        public float minDistance = 3f;
 
-             if (judasWitnessModel.waterTargets.Count <= 0)
-             {
-                 Debug.Log("waterTarget Null");
-                 Finish();
-             }
-         }
-         
-         public override void Execute(float aDeltaTime, float aTimeScale)
-         {
-             base.Execute(aDeltaTime, aTimeScale);
+        public override void Create(GameObject aGameObject)
+        {
+            base.Create(aGameObject);
 
-             if (judasWitnessModel.waterTargets.Count > 0)
-             {
-                 if (judasWitnessModel.currentWaterTarget != null)
-                 {
-                     float betweenPosAndResource = 
-                         Vector3.Distance(judasWitnessModel.transform.position, judasWitnessModel.currentWaterTarget.transform.position);
-                     Debug.DrawLine( judasWitnessModel.transform.position, 
-                         judasWitnessModel.currentWaterTarget.transform.position,Color.blue);
-                 
-                     if (betweenPosAndResource < minDistance)
-                     {
-                         Debug.Log("At resource position");
-                                  
-                         judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
+            owner = aGameObject;
+            antAIAgent = owner.GetComponent<AntAIAgent>();
+            judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
+            minDistance = 3f;
+        }
 
-                         antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                         antAIAgent.worldState.Set("atResourcePos", true);
-                         antAIAgent.worldState.EndUpdate();
-                         
-                         Finish();
-                         
-                     }
-                 }
-             }
+        public override void Enter()
+        {
+            base.Enter();
 
-             if (judasWitnessModel.currentWaterTarget == null)
-             {
-                 Finish();
-             }
-             
-         }
+            Debug.Log("Move to resource state");
+
+            if (judasWitnessModel.waterTargets.Count <= 0)
+            {
+                Debug.Log("waterTarget Null");
+                Finish();
+            }
+        }
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+
+            if (judasWitnessModel.waterTargets.Count > 0)
+            {
+                if (judasWitnessModel.currentWaterTarget != null)
+                {
+                    Vector3 position = judasWitnessModel.currentWaterTarget.transform.position;
+                    
+                    float betweenPosAndResource =
+                        Vector3.Distance(judasWitnessModel.transform.position, position);
+                    
+                    Debug.DrawLine(judasWitnessModel.transform.position, position, Color.blue);
+                    
+                    judasWitnessModel.navMeshAgent.SetDestination(position);
+                    
+                    if (betweenPosAndResource < minDistance)
+                    {
+                        Debug.Log("At resource position");
+
+                        //added here as well to check for player interrupting
+                        judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
+
+                        antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                        antAIAgent.worldState.Set("atResourcePos", true);
+                        antAIAgent.worldState.EndUpdate();
+
+                        Finish();
+                    }
+                }
+            }
+
+            if (judasWitnessModel.currentWaterTarget == null)
+            {
+                Finish();
+            }
+        }
     }
 }

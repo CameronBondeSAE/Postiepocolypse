@@ -28,7 +28,6 @@ namespace Luke
                 lookForPlayers();
 
                 aWorldState.Set("playerFound", judasWitnessModel.currentPlayerTarget != null);
-                // aWorldState.Set("foundResource", judasWitnessModel.waterTargets.Count >= 1);
             }
             aWorldState.EndUpdate();
         }
