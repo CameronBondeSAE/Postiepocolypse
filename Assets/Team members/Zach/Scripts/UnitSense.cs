@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using AlexM;
 using Anthill.AI;
 using Damien;
 using TimPearson;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 
@@ -20,7 +22,15 @@ namespace ZachFrench
 
         public Transform playerTarget;
         //public List<GameObject> Players;
-        
+        public NavMeshAgent NavMeshAgent;
+
+        public VFXTesting vfx;
+
+        private void Start()
+        {
+            vfx = this.gameObject.GetComponentInChildren<VFXTesting>();
+        }
+
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
             LookingForPlayers();
@@ -47,12 +57,17 @@ namespace ZachFrench
                     else
                     {
                         playerTarget = null;
+                        vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
                     }
                 }
             }
             else
             {
                 playerTarget = null;
+                if (vfx != null)
+                {
+                    vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
+                }
             }
         }
 
@@ -62,9 +77,14 @@ namespace ZachFrench
             {
                 lowEnergy = true;
             }
-            else if (Energy.CurrentAmount > 5f)
+            else if (Energy.CurrentAmount > Energy.MaxAmount - 1f)
             {
                 lowEnergy = false;
+                NavMeshAgent.isStopped = false;
+                if (vfx != null)
+                {
+                    vfx.stateSwitch = VFXTesting.GradientSwitch.Calm;
+                }
             }
         }
         

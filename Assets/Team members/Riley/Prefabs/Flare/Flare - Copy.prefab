@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 137210732733335705}
   - component: {fileID: 137210732733335706}
   - component: {fileID: 137210732733335707}
-  - component: {fileID: 137210732733335684}
   - component: {fileID: 137210732733335685}
   - component: {fileID: 137210732733335711}
   - component: {fileID: 137210732733335704}
   - component: {fileID: 3140245361700027563}
+  - component: {fileID: 2587609250287847024}
   m_Layer: 0
   m_Name: Flare - Copy
   m_TagString: Untagged
@@ -86,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &137210732733335684
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137210732733335686}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &137210732733335685
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,8 +100,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!198 &137210732733335711
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4927,3 +4913,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flareDuration: 40
+--- !u!135 &2587609250287847024
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137210732733335686}
+  m_Material: {fileID: 13400000, guid: 98eda8ac7bf442c47870cfa90d79910a, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

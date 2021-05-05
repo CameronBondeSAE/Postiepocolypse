@@ -20,12 +20,13 @@ namespace JonathonMiles
         public override void Enter()
         {
             base.Enter();
-            
+            Debug.Log("Entering See Player State");
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
         }
     } 
 }

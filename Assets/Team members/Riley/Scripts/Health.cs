@@ -25,7 +25,9 @@ namespace RileyMcGowan
         public event Action<Health> deathEvent;
         public event Action<Health, float, DamageType> damagedEvent;
         public event Action<Health> healedEvent;
-        
+
+        //So we can check if health changed
+        private float previousHealth;
         
         void Start()
         {
@@ -45,16 +47,23 @@ namespace RileyMcGowan
 
         void FixedUpdate()
         {
-            //If we take damage that makes the objects health 0 then invoke death
-            if (currentHealth <= 0 && invincible != true)
+            //Did the value of health change in the last update
+            if (Math.Abs(currentHealth - previousHealth) > .001f)
             {
-                currentHealth = 0;
-                DestroyObject();
+                //If so check health variables
+                if (currentHealth <= 0 && invincible != true)
+                {
+                    //Has health hit 0
+                    currentHealth = 0;
+                    DestroyObject();
+                }
+                if (currentHealth > maxHealth)
+                {
+                    //Is health over the maximum
+                    currentHealth = maxHealth;
+                }
             }
-            if (currentHealth > maxHealth)
-            {
-                currentHealth = maxHealth;
-            }
+            previousHealth = currentHealth;
         }
         
         /// DO DAMAGE AND HEALING ///

@@ -53,10 +53,9 @@ MonoBehaviour:
   randomSpawn: 0
   ySpawnGroundOffset: 1
   yAdjustablePosition: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
   yGroundTestOffset: 5
+  spawnOnPatrolPoints: 1
+  patrolManager: {fileID: 0}
 --- !u!114 &-1248257494764712657
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,8 +13,6 @@ namespace ZachFrench
         
         public AntAIAgent antAIAgent;
 
-        public LayerMask playerLayer;
-
         private void Start()
         {
             antAIAgent.SetGoal("Patrol");

@@ -38,14 +38,11 @@ namespace JonathonMiles
                 owner.GetComponent<NavMain>().currentTarget = target;
             }
             
+            Finish();
+            
         }
         //execute is called repeatedly while the state is active
-        public override void Execute(float aDeltaTime, float aTimeScale)
-        {
-            base.Execute(aDeltaTime, aTimeScale);
-            
-
-        }
+        
     } 
 }
 

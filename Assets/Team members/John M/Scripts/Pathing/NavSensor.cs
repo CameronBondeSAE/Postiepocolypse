@@ -1,21 +1,33 @@
 ﻿using Anthill.AI;
+using Damien;
 using UnityEngine;
-public class NavSensor : MonoBehaviour, ISense
+
+namespace JonathonMiles
 {
-    public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
+
+
+    public class NavSensor : MonoBehaviour, ISense
     {
         
-        aWorldState.BeginUpdate(aAgent.planner);
-        aWorldState.Set("Found Item", false);
-        aWorldState.Set("Move To Item", false);
-        aWorldState.Set("Collect Item", false);
-        aWorldState.Set("See Player", false);
-        aWorldState.Set("Retreat", false);
-        aWorldState.Set("Deposit Item", false);
-        aWorldState.Set("Move To Deposit", false);
-        aWorldState.Set("Has Target", aAgent.GetComponent<NavMain>().currentTarget != null);
-        aWorldState.Set("Arrived At Target", false);
-        aWorldState.EndUpdate();
+        
+
+        public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
+        {
+            
+            aWorldState.BeginUpdate(aAgent.planner);
+            aWorldState.Set("Found Item", false);
+            aWorldState.Set("Move To Item", aAgent.GetComponent<NavMain>().itemTarget != null);
+            aWorldState.Set("Collect Item", false);
+            aWorldState.Set("See Player", false);
+            aWorldState.Set("Retreat", false);
+            aWorldState.Set("Deposit Item", false);
+            aWorldState.Set("Move To Deposit", false);
+            aWorldState.Set("Has Target", aAgent.GetComponent<NavMain>().currentTarget != null);
+            aWorldState.Set("Arrived At Target", false);
+            aWorldState.EndUpdate();
+        }
+
+        
     }
-    
 }
+

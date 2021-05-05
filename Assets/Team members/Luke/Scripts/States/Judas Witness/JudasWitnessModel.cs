@@ -1,30 +1,39 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using AlexM;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 using ZachFrench;
-using Random = UnityEngine.Random;
 
 namespace Luke
 {
     public class JudasWitnessModel : CreatureBase
     {
-        [Header("Other considerations")] 
-        public AntAIAgent antAIAgent;
+        [Header("Other considerations")] public AntAIAgent antAIAgent;
+
         public NavMeshAgent navMeshAgent;
-        public AudioSource audioSource;
-        public AudioChorusFilter chorusFilter;
         public float timeGathering;
 
-        [Header("Patrol variables")] 
-        public PatrolManager patrolManager;
-        public float patrolSpeed;
+        [Header("Patrol variables")] public PatrolManager patrolManager;
 
+        public float patrolSpeed;
+        public float maxPatrolWaitTime;
+
+        [Header("Resource state variables")] public List<WaterTarget> waterTargets;
+
+        public WaterTarget currentWaterTarget;
         public Vector3 spawnPos;
 
-        [Header("Audio")] 
+        [Header("Attacking state variables")] public GameObject currentPlayerTarget;
+
+        public int playerFoundIntensity;
+        public float playerFoundGradient;
+
+        [Header("Audio")] public AudioSource audioSource;
+
+        public AudioChorusFilter chorusFilter;
         public float timeBetweenAudio;
         public float audioRepeatRate;
         public float maxWetMix;
@@ -33,30 +42,20 @@ namespace Luke
 
         public void Start()
         {
-            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            antAIAgent.worldState.Set("gotResource", false);
-            antAIAgent.worldState.Set("playerFound", false);
-            antAIAgent.worldState.Set("needRecharge", false);
-            antAIAgent.worldState.Set("foundResource", false);
-            antAIAgent.worldState.Set("deliveredResource", false);
-            antAIAgent.worldState.Set("atAttackRange", false);
-            antAIAgent.worldState.Set("atResourcePos", false);
-            antAIAgent.worldState.Set("foundRecharge", false);
-            antAIAgent.worldState.Set("atRechargePos", false);
-            antAIAgent.worldState.EndUpdate();
+            ResetPlanner();
 
-            
             patrolManager = FindObjectOfType<PatrolManager>();
+            if (patrolManager == null)
+            {
+                return;
+            }
+
             navMeshAgent = FindObjectOfType<NavMeshAgent>();
 
             InvokeRepeating("BasicNoises", timeBetweenAudio, audioRepeatRate);
-        }
 
-        public void Awake()
-        {
             spawnPos = transform.position;
         }
-
 
         public void BasicNoises()
         {
@@ -70,22 +69,66 @@ namespace Luke
             }
         }
 
-        public void DirectionRaycast()
-        {
-            Debug.DrawRay(transform.position, transform.forward, Color.magenta);
-        }
-
         public void Wander()
         {
             if (patrolManager == null)
             {
                 patrolManager = FindObjectOfType<PatrolManager>();
+                if (patrolManager == null)
+                {
+                    return;
+                }
             }
+
             if (patrolManager.pathsWithIndoors != null)
             {
                 navMeshAgent.speed = patrolSpeed;
-                navMeshAgent.SetDestination(patrolManager.pathsWithIndoors[Random.Range(0, patrolManager.pathsWithIndoors.Count)].transform.position);
             }
+        }
+
+        //TODO not working yet because stuck between default and other states
+        public IEnumerator WanderWaitTime()
+        {
+            yield return new WaitForSeconds(Random.Range(0, maxPatrolWaitTime));
+        }
+
+        public void SetWaterTarget()
+        {
+            if (waterTargets != null)
+            {
+                waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
+                
+                foreach (WaterTarget player in waterTargets.ToList())
+                {
+                    if (player.GetComponentInParent<PlayerMovement>())
+                    {
+                        waterTargets.Remove(player);
+                    }
+                }
+            }
+
+
+            if (waterTargets.Count != 0)
+            {
+                currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
+                navMeshAgent.SetDestination(currentWaterTarget.transform.position);
+            }
+        }
+
+        public void ResetPlanner()
+        {
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("gotResource", false);
+            antAIAgent.worldState.Set("playerFound", false);
+            antAIAgent.worldState.Set("needRecharge", false);
+            antAIAgent.worldState.Set("foundResource", false);
+            antAIAgent.worldState.Set("deliveredResource", false);
+            antAIAgent.worldState.Set("atAttackRange", false);
+            antAIAgent.worldState.Set("atResourcePos", false);
+            antAIAgent.worldState.Set("foundRecharge", false);
+            antAIAgent.worldState.Set("atRechargePos", false);
+            antAIAgent.worldState.Set("wander", false);
+            antAIAgent.worldState.EndUpdate();
         }
     }
 }

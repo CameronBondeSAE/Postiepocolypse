@@ -9,37 +9,43 @@ namespace Damien
 
         public FOV fieldOfView;
 
-        public float targetViewRadius = 30f;
+        public int targetViewRadius = 30;
 
+        private GameObject currTarget;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
             owner = aGameObject;
-            fieldOfView = owner.GetComponentInParent<FOV>();
+            fieldOfView = owner.GetComponent<FOV>();
         }
 
         public override void Enter()
         {
             base.Enter();
+            AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
             //Debug.Log("Pick Target");
-            owner.GetComponentInParent<FOV>().targets = LayerMask.GetMask("Player");
-            owner.GetComponentInParent<FOV>().viewRadius = targetViewRadius;
+            fieldOfView.targets = LayerMask.GetMask("Player");
+            fieldOfView.viewRadius = targetViewRadius;
 
 
             //Sends the target to the parent if the FOV has targets to send
             if (fieldOfView.listOfTargets.Count > 0)
             {
-                owner.GetComponentInParent<Blinder>().target = fieldOfView.listOfTargets[0];
-                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-               // antAIAgent.worldState.Set("Target Chosen", antAIAgent.GetComponent<Blinder>().target != null);
-                antAIAgent.worldState.Set("Target Chosen", true);
-                antAIAgent.worldState.EndUpdate();
+                for (int i = 0; i < fieldOfView.listOfTargets.Count; i++)
+                {
+                    if (currTarget == null && fieldOfView.listOfTargets[i].layer == LayerMask.NameToLayer("Player"))
+                    {
+                        currTarget = fieldOfView.listOfTargets[i];
+                        owner.GetComponent<Blinder>().target = currTarget;
+                        //antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                        //antAIAgent.worldState.Set("Target in View Range", true);
+                        //antAIAgent.worldState.EndUpdate();
+                    }
+                }
             }
 
             // Debug.DrawLine(owner.transform.position, owner.GetComponent<Blinder>().target.transform.position, Color.red);
-
 
             Finish();
         }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Interactive Planner
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 203, y: 186}
+    position: {x: 116, y: 140}
     list:
     - id: 0
       name: Am I here
@@ -26,7 +26,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 2126619104131154009, guid: 70d67b5d0ab824e498905035ec03edc4, type: 3}
     cost: 0
-    position: {x: 464, y: 185}
+    position: {x: 377, y: 139}
     pre:
     - id: 1
       value: 0
@@ -37,7 +37,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 857565436825519571, guid: d6adc7555d2042b4cbe7a04ab0afc077, type: 3}
     cost: 0
-    position: {x: 680, y: 186}
+    position: {x: 593, y: 140}
     pre:
     - id: 1
       value: 1
@@ -48,14 +48,14 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 2295964584969949828, guid: 2ae8ce32cee75ff499fa1f4a27d103ed, type: 3}
     cost: 0
-    position: {x: 1128, y: 188}
+    position: {x: 1041, y: 142}
     pre: []
     post: []
   - name: Runaway
     isDefault: 0
     state: {fileID: 8495471962953497997, guid: 7eb7862204ce58d4a82ccd1be025f4d8, type: 3}
     cost: 0
-    position: {x: 902, y: 186}
+    position: {x: 815, y: 140}
     pre:
     - id: 0
       value: 1
@@ -65,12 +65,12 @@ MonoBehaviour:
   goals:
   - name: At Target
     isDefault: 1
-    position: {x: 206, y: 305}
+    position: {x: 119, y: 259}
     conditions:
     - id: 2
       value: 1
   worldStates:
-  - position: {x: 206, y: 527}
+  - position: {x: 119, y: 481}
     list:
     - id: 0
       value: 0

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using AlexM;
 using Mirror;
+using RileyMcGowan;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,8 +15,9 @@ namespace AlexM
 		public float  maxSpeed         = 100f;
 		public float  sprintMultiplier = 1.5f;
 
-		public float jumpForce = 70f;
-
+		public float jumpForce    = 70f;
+		public float onGroundDrag = 5f;
+		public float inAirDrag    = 0f;
 
 		[SerializeField, Header("= Debug =")]
 		private float _speed;
@@ -29,6 +31,13 @@ namespace AlexM
 		{
 			GetReferences();
 			originalSpeed = maxSpeed;
+
+			GetComponent<Health>().deathEvent += OnDeathEvent;
+		}
+
+		private void OnDeathEvent(Health health)
+		{
+			// audioSource.Play();
 		}
 
 		private void OnEnable()
@@ -94,6 +103,15 @@ namespace AlexM
 			var rayDown = Physics.Raycast(_gripStub.transform.position, Vector3.down, out _groundHitInfo, 0.35f);
 
 			_isGrounded = rayDown;
+
+			if (_isGrounded)
+			{
+				_rb.drag = onGroundDrag;
+			}
+			else
+			{
+				_rb.drag = inAirDrag;
+			}
 		}
 
 		private float GetSpeed()
@@ -223,11 +241,11 @@ namespace AlexM
 			{
 				if (GetSpeed() < maxSpeed)
 				{
-					if (_isSprinting)
+					if (_isSprinting && _isGrounded)
 					{
 						_rb.AddForce(_movement.normalized * ((maxSpeed * sprintMultiplier) * Time.fixedDeltaTime), ForceMode.VelocityChange);
 					}
-					else
+					else if (_isGrounded)
 					{
 						// if (GetSpeed() < 10f)
 						// {

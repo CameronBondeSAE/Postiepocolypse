@@ -7,16 +7,31 @@ namespace Damien
     {
         public GameObject owner;
 
-        // Start is called before the first frame update
-        void Start()
+        //Reset states function call
+        public override void Create(GameObject aGameObject)
         {
+            base.Create(aGameObject);
+            owner = aGameObject;
+            
+        }
+        public override void Enter()
+        {
+            base.Enter();
+            owner.GetComponent<Blinder>().StartCoroutine("FlashPlayer");
+            //owner.GetComponent<Blinder>().ResetStates();
+            Finish();
+
 
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void Execute(float aDeltaTime, float aTimeScale)
         {
-
+            base.Execute(aDeltaTime, aTimeScale);
+            
+            
+            
         }
+
+        
     }
 }
