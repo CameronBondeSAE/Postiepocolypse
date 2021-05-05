@@ -7,10 +7,11 @@ using UnityEngine.AI;
 namespace JonathonMiles
 {
     
-    public class MoveToItem : AntAIState
+    public class CollectItem : AntAIState
     {
         private GameObject owner;
         private NavMeshAgent _navMeshAgent;
+        
         
         public override void Create(GameObject aGameObject)
         {
@@ -29,10 +30,9 @@ namespace JonathonMiles
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            if (_navMeshAgent.remainingDistance < 1f)
+            if (_navMeshAgent.remainingDistance <= 1f)
             {
                 owner.GetComponent<NavMain>().itemTarget = null;
-                //add code to add item to inventory and remove item from scene
                 Finish();
             }
         }
