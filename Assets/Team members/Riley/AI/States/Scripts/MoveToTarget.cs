@@ -29,6 +29,19 @@ namespace RileyMcGowan
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
+            if (creatureMainRef.vfxComp.GetInt("MaxParticles") < 3000)
+            {
+                int particalRef;
+                particalRef = creatureMainRef.vfxComp.GetInt("MaxParticles") + 500;
+                creatureMainRef.vfxComp.SetInt("MaxParticles", particalRef);
+            }
+            if (creatureMainRef.vfxComp.GetFloat("Radius") < 2f)
+            {
+                float radiusRef;
+                radiusRef = creatureMainRef.vfxComp.GetFloat("Radius") + 0.5f;
+                creatureMainRef.vfxComp.SetFloat("Radius", radiusRef);
+            }
             if (creatureMainRef.playerTarget != null)
             {
                 Finish();
