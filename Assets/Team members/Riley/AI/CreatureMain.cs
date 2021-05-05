@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
+using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
@@ -9,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace RileyMcGowan
 {
-    public class CreatureMain : MonoBehaviour
+    public class CreatureMain : NetworkBehaviour
     {
         //Private Vars
         private Rigidbody rb;
@@ -38,36 +39,41 @@ namespace RileyMcGowan
             //Grab all the components needed for reference
             if (GetComponentInChildren<VisualEffect>() != null)
             {
-                vfxComp = GetComponentInChildren<VisualEffect>();
-                vfxComp.SetFloat("ParticleSpawnRate", 0.5f); //vfx.setfloat("Name", number);
-                vfxComp.SetFloat("Radius", 1f);
-                vfxComp.SetInt("MaxParticles", 2000);
+                //Grab all the components needed for reference
+                if (GetComponentInChildren<VisualEffect>() != null)
+                {
+                    vfxComp = GetComponentInChildren<VisualEffect>();
+                    vfxComp.SetFloat("ParticleSpawnRate", 0.5f); //vfx.setfloat("Name", number);
+                    vfxComp.SetFloat("Radius", 1f);
+                    vfxComp.SetInt("MaxParticles", 2000);
+                }
+                if (GetComponentInChildren<CreatureDamage>() != null)
+                {
+                    childHaveDamaged = GetComponentInChildren<CreatureDamage>();
+                }
+                if (GetComponent<Rigidbody>() != null)
+                {
+                    rb = GetComponent<Rigidbody>();
+                }
+                if (GetComponentInChildren<RaycastHandler>() != null)
+                {
+                    childRaycastHandler = GetComponentInChildren<RaycastHandler>();
+                }
+                if (GetComponent<AntAIAgent>() != null)
+                {
+                    antAIRef = GetComponent<AntAIAgent>();
+                }
+                if (GetComponent<NavMeshAgent>() != null)
+                {
+                    navMeshRef = GetComponent<NavMeshAgent>();
+                }
+                if (GetComponent<Damien.FOV>() != null)
+                {
+                    currentFOV = GetComponent<Damien.FOV>();
+                }
+                ResetPlanner();
             }
-            if (GetComponentInChildren<CreatureDamage>() != null)
-            {
-                childHaveDamaged = GetComponentInChildren<CreatureDamage>();
-            }
-            if (GetComponent<Rigidbody>() != null)
-            {
-                rb = GetComponent<Rigidbody>();
-            }
-            if (GetComponentInChildren<RaycastHandler>() != null)
-            {
-                childRaycastHandler = GetComponentInChildren<RaycastHandler>();
-            }
-            if (GetComponent<AntAIAgent>() != null)
-            {
-                antAIRef = GetComponent<AntAIAgent>();
-            }
-            if (GetComponent<NavMeshAgent>() != null)
-            {
-                navMeshRef = GetComponent<NavMeshAgent>();
-            }
-            if (GetComponent<Damien.FOV>() != null)
-            {
-                currentFOV = GetComponent<Damien.FOV>();
-            }
-            ResetPlanner();
+            
         }
         
         private void FixedUpdate()

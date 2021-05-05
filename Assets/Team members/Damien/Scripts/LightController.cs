@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Mirror;
+using UnityEngine;
 
-public class LightController : MonoBehaviour
+public class LightController : NetworkBehaviour
 {
     public Light light;
     
@@ -9,14 +10,20 @@ public class LightController : MonoBehaviour
 
     private void Start()
     {
-       
-        flashOn = false;
+        if (isClient)
+        {
+            flashOn = false;
+            RpcFlash(flashOn);
+        }
+        
         
     }
 
     private void Update()
     {
-       
+
+        
+        
             if (flashOn)
             {
                 light.intensity = 200000000f;
@@ -30,7 +37,17 @@ public class LightController : MonoBehaviour
                 //Debug.Log("Flash Off");
             }
         
-        
-        
+            
+    }
+
+    void RpcFlash(bool flashEnabled)
+    {
+        flashOn = flashEnabled;
+    }
+
+    void IsOnOff()
+    {
+        flashOn = !flashOn;
+        RpcFlash(flashOn);
     }
 }
