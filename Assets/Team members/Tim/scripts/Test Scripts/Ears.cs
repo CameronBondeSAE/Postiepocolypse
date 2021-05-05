@@ -6,17 +6,15 @@ namespace TimPearson
 {
     public class Ears : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public Vector3 target;
 
-        // Update is called once per frame
-        void Update()
+        public void Hearing(Vector3 target)
         {
-        
+            Debug.Log("Heard Target");
+            this.target = target;
         }
+        
+        
     }
 
 }
