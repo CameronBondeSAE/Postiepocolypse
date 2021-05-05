@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using EditedDamien;
+using Mirror;
 using Tanks;
 using UnityEngine;
 
 namespace RileyMcGowan
 {
-    public class MinimapRadarMain : MonoBehaviour
+    public class MinimapRadarMain : NetworkBehaviour
     {
         //Main Vars
         private MinimapFOV minimapFOV;
-        private int timeToLive = 5;
+        private int timeToLive = 10;
         private GameObject instantiate;
         private GameObject tempRef;
         public float radarSpeed;
@@ -27,24 +28,27 @@ namespace RileyMcGowan
 
         void Update()
         {
-            transform.Rotate(0,radarSpeed,0);
-            if (minimapFOV.listOfTargets.Count > 0)
+            if (isClient)
             {
-                foreach (GameObject targetInFOV in minimapFOV.listOfTargets)
+                RpcResetRotation();
+                if (minimapFOV.listOfTargets.Count > 0)
                 {
-                    if (targetInFOV.GetComponentInChildren<MarkerHandler>() == null)
+                    foreach (GameObject targetInFOV in minimapFOV.listOfTargets)
                     {
-                        if (targetInFOV.layer == 8)
+                        if (targetInFOV.GetComponentInChildren<MarkerHandler>() == null)
                         {
-                            SpawnMarker(targetInFOV, playerMarker);
-                        }
-                        if (targetInFOV.layer == 14)
-                        {
-                            SpawnMarker(targetInFOV, enemyMarker);
-                        }
-                        if (targetInFOV.layer == 15)
-                        {
-                            SpawnMarker(targetInFOV, itemMarker);
+                            if (targetInFOV.layer == 8)
+                            {
+                                SpawnMarker(targetInFOV, playerMarker);
+                            }
+                            if (targetInFOV.layer == 14)
+                            {
+                                SpawnMarker(targetInFOV, enemyMarker);
+                            }
+                            if (targetInFOV.layer == 15)
+                            {
+                                SpawnMarker(targetInFOV, itemMarker);
+                            }
                         }
                     }
                 }
@@ -57,6 +61,12 @@ namespace RileyMcGowan
             instantiate = Instantiate<GameObject>(markerToSpawn, currentPos, transform.rotation);
             instantiate.transform.parent = currentTransform.transform;
             instantiate.GetComponent<MarkerHandler>().timeToLive = timeToLive;
+        }
+        
+        [ClientRpc]
+        private void RpcResetRotation()
+        {
+            transform.Rotate(0,radarSpeed,0);
         }
     }
 }

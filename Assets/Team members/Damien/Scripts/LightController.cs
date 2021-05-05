@@ -1,34 +1,33 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LightController : MonoBehaviour
 {
     public Light light;
-
-    public bool blindPlayer;
+    
     public bool flashOn;
     
 
     private void Start()
     {
-        blindPlayer = false;
+       
         flashOn = false;
+        
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
        
             if (flashOn)
             {
                 light.intensity = 200000000f;
+                Debug.Log("Flash On");
                 flashOn = false;
             }
 
             if (!flashOn)
             {
                 light.intensity = 0.2f;
+                //Debug.Log("Flash Off");
             }
         
         

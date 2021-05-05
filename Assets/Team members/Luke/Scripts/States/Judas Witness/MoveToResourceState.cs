@@ -30,29 +30,23 @@ namespace Luke
              base.Enter();
              
              Debug.Log("Move to resource state");
-             
-             //need this here so the wait time for gathering is realised
-             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-             antAIAgent.worldState.Set("foundResource", false);
-             antAIAgent.worldState.EndUpdate();
-             
-             judasWitnessModel.SetWaterTarget();
+
+             if (judasWitnessModel.waterTargets.Count < 1)
+             {
+                 Debug.Log("waterTarget Null");
+                 Finish();
+             }
          }
          
          public override void Execute(float aDeltaTime, float aTimeScale)
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             if (judasWitnessModel.waterTargets == null)
-             {
-                 Debug.Log("waterTarget Null");
-                 Finish();
-             }
-             
              if (navMeshAgent.remainingDistance < remainingDistance)
              {
                  Finish();
              }
+             
          }
 
          public override void Exit()

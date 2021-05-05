@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NavPlanner
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: 25, y: 47}
+    position: {x: 65, y: 74}
     list:
     - id: 0
       name: Has Target Patrol
@@ -30,7 +30,7 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 1717104106964401100, guid: 4c933270b17341b4cb51d7c7b88e9bac, type: 3}
     cost: 2
-    position: {x: 306, y: 52}
+    position: {x: 346, y: 79}
     pre:
     - id: 0
       value: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 6138840715368551018, guid: 87e2600531e93614f9c45bca7721559a, type: 3}
     cost: 2
-    position: {x: 505, y: 51}
+    position: {x: 545, y: 78}
     pre:
     - id: 0
       value: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 2790763053214894716, guid: ae2aaad62e359f142a04f22619c6c819, type: 3}
     cost: 1
-    position: {x: 711, y: 49}
+    position: {x: 751, y: 76}
     pre:
     - id: 2
       value: 1
@@ -79,7 +79,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 763654668733567742, guid: 20c0125caed851941b8d61464e974c48, type: 3}
     cost: 0
-    position: {x: 303, y: 316}
+    position: {x: 343, y: 343}
     pre:
     - id: 4
       value: 1
@@ -89,12 +89,12 @@ MonoBehaviour:
   goals:
   - name: Patrol
     isDefault: 1
-    position: {x: 21, y: 385}
+    position: {x: 61, y: 412}
     conditions:
     - id: 1
       value: 1
   worldStates:
-  - position: {x: 21, y: 491}
+  - position: {x: 61, y: 518}
     list:
     - id: 0
       value: 0

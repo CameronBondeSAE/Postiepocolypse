@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4616580834976620454}
   - component: {fileID: 4616580834976620453}
   - component: {fileID: 4616580834976620452}
+  - component: {fileID: -3562482560669622106}
   m_Layer: 0
   m_Name: MinimapRadar
   m_TagString: Untagged
@@ -129,10 +130,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489ca70732018254785215b9c0bab995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  radarSpeed: 0.8
   playerMarker: {fileID: 9084442935422052300, guid: dd165d8916dd67d429d41af1d72b0c9f, type: 3}
   enemyMarker: {fileID: 7034074015497551509, guid: be14e8ccd536e54478f594d25a70c067, type: 3}
   itemMarker: {fileID: 9084442935422052300, guid: c5876438ce5c568479d08a2ed562ed84, type: 3}
-  radarSpeed: 0.8
+--- !u!114 &-3562482560669622106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616580834976620443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &4836390160524199721
 PrefabInstance:
   m_ObjectHideFlags: 0

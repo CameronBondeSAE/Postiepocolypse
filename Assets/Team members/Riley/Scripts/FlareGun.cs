@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UIElements;
 
 namespace RileyMcGowan
@@ -20,30 +21,39 @@ namespace RileyMcGowan
         public bool flareAvailable;
 
         [Tooltip("Delay between flares. Expects 1-30.")]
-        public int flareDelay;
-
-        [Tooltip("The distance to spawn the flare from player. Expects 1-3.")]
-        public float spawnDifference;
+        public int flareDelay = 5;
 
         [Tooltip("Force to fire flare. Expects 1-5.")]
-        public int flareForce;
+        public int flareForce = 2000;
 
         [Tooltip("Changeable by other scripts.")]
-        public int currentFlares;
+        public int currentFlares = 1;
 
         [Tooltip("Height for flare to travel at max. Works at 100.")]
-        public int flareHeight;
+        public int flareHeight = 2000;
         
         [Tooltip("Flare Drag. Expects between 1-10.")]
         public int flareDecent = 10;
+
+        public GameObject placeToSpawn;
+
+        private GameObject cameraRef;
         
         private void Start()
         {
             StartCoroutine(FlareDelay());
+            if (GetComponentInChildren<HDAdditionalCameraData>() != null)
+            {
+                cameraRef = GetComponentInChildren<HDAdditionalCameraData>().gameObject;
+            }
         }
 
         void Update()
         {
+            if (cameraRef == null && GetComponentInChildren<HDAdditionalCameraData>() != null)
+            {
+                cameraRef = GetComponentInChildren<HDAdditionalCameraData>().gameObject;
+            }
             FireFlare();
             if (flareAvailable == true && isCoroutineRunning == true)
             {
@@ -54,14 +64,21 @@ namespace RileyMcGowan
 
         public void FireFlare()
         {
-            if (InputSystem.GetDevice<Keyboard>().fKey.isPressed && currentFlares > 0 && flareAvailable == true)
+            if (InputSystem.GetDevice<Keyboard>().digit2Key.isPressed && currentFlares > 0 && flareAvailable == true)
             {
-                spawnLocation = new Vector3(transform.position.x, transform.position.y + spawnDifference, transform.position.z + spawnDifference / 2);
-                flareDirection = new Vector3(transform.position.x, transform.position.y + flareHeight, transform.position.z); //Where to fire the flare
-                instantiate = Instantiate<GameObject>(objectToSpawn, spawnLocation, this.transform.rotation); //Store our flare to influence
+                if (placeToSpawn != null)
+                {
+                    spawnLocation = placeToSpawn.transform.position;
+                }
+                else
+                {
+                    spawnLocation = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+                }
+                //Where to fire the flare
+                instantiate = Instantiate<GameObject>(objectToSpawn, spawnLocation, cameraRef.transform.rotation); //Store our flare to influence
                 currentFlareRigidbody = instantiate.GetComponent<Rigidbody>();
                 StartCoroutine(DragController());
-                currentFlareRigidbody.AddRelativeForce(flareDirection * flareForce); //Force added to the flare
+                currentFlareRigidbody.AddForce(cameraRef.transform.forward * flareForce, ForceMode.Impulse); //Force added to the flare
                 currentFlares -= 1; //Remove a flare from inventory
                 flareAvailable = false;
                 StartCoroutine(FlareDelay());

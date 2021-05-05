@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using AlexM;
 using Anthill.AI;
+using ParadoxNotion;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,12 +12,14 @@ namespace Luke
     {
         public GameObject owner;
         public JudasWitnessModel judasWitnessModel;
+        public AntAIAgent antAIAgent;
 
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
+            antAIAgent = owner.GetComponent<AntAIAgent>();
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
         }
 
@@ -23,37 +28,48 @@ namespace Luke
             base.Enter();
 
             Debug.Log("Find resource state");
-        }
-
-        public override void Execute(float aDeltaTime, float aTimeScale)
-        {
-            base.Execute(aDeltaTime, aTimeScale);
             
-            if (judasWitnessModel.waterTargets != null)
+            if (judasWitnessModel.waterTargets.Count >= 1)
             {
                 //setting the world condition
-                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("foundResource", judasWitnessModel.waterTargets != null);
+                antAIAgent.worldState.Set("foundResource", true);
                 antAIAgent.worldState.EndUpdate();
-                Debug.Log("Found resource");
                 
-                Finish();
+                Debug.Log("Found resource");
             }
 
             else
             {
                 Debug.Log("No more waterTargets");
+                
+                antAIAgent.SetDefaultState();
+                
                 Finish();
             }
+        }
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+
+            //remove the players from this list
+            judasWitnessModel.SetWaterTarget();
+            
+            Finish();
         }
 
         public override void Exit()
         {
             base.Exit();
-            Debug.Log("Exit find resource state");
+            
+            if (judasWitnessModel.waterTargets != null)
+            {
+                judasWitnessModel.SetWaterTarget();
+                judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
+            }
 
-            Finish();
+            Debug.Log("Exit find resource state");
         }
     }
 }

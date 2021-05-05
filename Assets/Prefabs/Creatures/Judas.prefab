@@ -201,13 +201,53 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 2
+        m_Name: AttackIntensity
+        m_Overridden: 1
+      - m_Value: 0
+        m_Name: colourChange
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: attackIntensity
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
       m_Array: []
     m_Gradient:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 0.0627451, g: 0, b: 8, a: 1}
+          key1: {r: 1.4980392, g: 0.32941177, b: 0.007843138, a: 1}
+          key2: {r: 11.984314, g: 0, b: 0, a: 0.8}
+          key3: {r: 0, g: 0, b: 0, a: 1}
+          key4: {r: 0, g: 0, b: 0, a: 1}
+          key5: {r: 0, g: 0, b: 0, a: 0}
+          key6: {r: 0, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 578
+          ctime1: 32382
+          ctime2: 65535
+          ctime3: 0
+          ctime4: 0
+          ctime5: 0
+          ctime6: 0
+          ctime7: 0
+          atime0: 33153
+          atime1: 65150
+          atime2: 65342
+          atime3: 65535
+          atime4: 65535
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_NumColorKeys: 3
+          m_NumAlphaKeys: 4
+        m_Name: attackGradient
+        m_Overridden: 1
     m_NamedObject:
       m_Array: []
     m_Bool:
@@ -337,14 +377,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   antAIAgent: {fileID: 6410610709035693269}
   navMeshAgent: {fileID: 6794730730155927835}
-  audioSource: {fileID: 3680741728346999298}
-  chorusFilter: {fileID: 8261083863869696342}
   timeGathering: 10
   patrolManager: {fileID: 0}
   patrolSpeed: 5
+  maxPatrolWaitTime: 6
   waterTargets: []
   currentWaterTarget: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
+  currentPlayerTarget: {fileID: 0}
+  attackIntensity: 2
+  gradientTime: 0
+  audioSource: {fileID: 3680741728346999298}
+  chorusFilter: {fileID: 8261083863869696342}
   timeBetweenAudio: 20
   audioRepeatRate: 1
   maxWetMix: 1.35
@@ -363,6 +407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   judasWitnessModel: {fileID: 7667564812406049628}
+  fov: {fileID: 7020842292826884857}
+  playerTargets: []
 --- !u!195 &6794730730155927835
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -433,9 +479,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets:
     serializedVersion: 2
-    m_Bits: 0
-  viewRadius: 30
-  viewAngle: 90
+    m_Bits: 256
+  viewRadius: 25
+  viewAngle: 135
   listOfTargets: []
 --- !u!114 &775556024857065438
 MonoBehaviour:
@@ -471,6 +517,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
+  damageType: 1
+  damageOverDistance: 0
+  sphereCollider: {fileID: 3367743676390579978}
   inCollider: []
 --- !u!135 &3367743676390579978
 SphereCollider:
@@ -480,8 +529,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6794730728925289216}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7.5
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}

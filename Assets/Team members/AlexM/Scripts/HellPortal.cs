@@ -17,7 +17,7 @@ namespace AlexM
 
 		private void Start()
 		{
-			InvokeRepeating("PulseScale", 1f, 3f);
+			// InvokeRepeating("PulseScale", 1f, 3f);
 		}
 
 

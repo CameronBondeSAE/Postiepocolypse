@@ -1,5 +1,6 @@
 ﻿using Anthill.AI;
 using UnityEngine;
+using UnityEngine.VFX;
 using ZachFrench;
 
 namespace TimPearson
@@ -15,6 +16,7 @@ namespace TimPearson
         public bool rayOn = true;
         public Damage damage;
         public float knockbackMultiplier;
+        public VisualEffect visualEffect;
        
 
         // Start is called before the first frame update
@@ -45,11 +47,17 @@ namespace TimPearson
                     {
                         Debug.DrawLine(ray.origin, raycastBoost.point, Color.green);
                         sprint.isBoosting = true;
+                        visualEffect.SetVector4("Color",new Vector4(253,0,0,1));
                     }
                     else
                     {
-                        Debug.DrawLine(transform.position, currentTarget.transform.position);
-                        sprint.isBoosting = false;
+                        if (currentTarget != null)
+                        {
+                            Debug.DrawLine(transform.position, currentTarget.transform.position);
+                            sprint.isBoosting = false;
+                            visualEffect.SetVector4("Color",new Vector4(15,250,0,1));
+                        }
+                        
                     }
                 }
             }
