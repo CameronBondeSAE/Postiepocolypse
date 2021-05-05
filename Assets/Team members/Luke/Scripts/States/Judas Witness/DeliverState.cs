@@ -30,11 +30,6 @@ namespace Luke
             Debug.Log("Delivering");
 
             navMeshAgent.SetDestination(judasWitnessModel.spawnPos);
-            
-            //setting the world condition
-            // antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            // antAIAgent.worldState.Set("atResourcePos", false);
-            // antAIAgent.worldState.EndUpdate();
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -47,8 +42,6 @@ namespace Luke
             // Have we got to the target position?
             if (distanceBetweenPosAndSpawn < 3f)
             {
-                
-
                 StartCoroutine(DeliveredWaitTime());
             }
         }
@@ -69,30 +62,9 @@ namespace Luke
         public override void Exit()
         {
             base.Exit();
-
             
             judasWitnessModel.currentWaterTarget = null;
             judasWitnessModel.ResetPlanner();
-            
-            // if (judasWitnessModel.currentWaterTarget != null)
-            {
-                // if (judasWitnessModel.waterTargets.Count > 0)
-                {
-                    judasWitnessModel.currentWaterTarget = null;
-                    
-                    // antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                    // antAIAgent.worldState.Set("deliveredResource", false);
-                    // antAIAgent.worldState.Set("gotResource", false);
-                    // antAIAgent.worldState.Set("foundResource", false);
-                    // antAIAgent.worldState.EndUpdate();
-                }
-                
-            }
-            // else
-            {
-                // judasWitnessModel.ResetPlanner();
-            }
-            
         }
     }
 }

@@ -39,8 +39,6 @@ namespace Luke
             
             if (judasWitnessModel.waterTargets.Count > 0)
             {
-                judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
-                
                 //setting the world condition
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("foundResource", judasWitnessModel.currentWaterTarget != null);

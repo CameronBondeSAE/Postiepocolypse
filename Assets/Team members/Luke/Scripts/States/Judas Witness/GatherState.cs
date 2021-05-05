@@ -26,6 +26,7 @@ namespace Luke
         {
             base.Enter();
             Debug.Log("Gather state");
+            
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -42,8 +43,7 @@ namespace Luke
         {
             Debug.Log("Gathering wait time");
             yield return new WaitForSeconds(judasWitnessModel.timeGathering);
-            judasWitnessModel.currentWaterTarget = null;
-
+            
             Finish();
         }
 
@@ -51,6 +51,7 @@ namespace Luke
         {
             base.Exit();
 
+            judasWitnessModel.gatheredWaterTargets.Add(judasWitnessModel.currentWaterTarget);
             judasWitnessModel.currentWaterTarget = null;
             
             //setting the world condition

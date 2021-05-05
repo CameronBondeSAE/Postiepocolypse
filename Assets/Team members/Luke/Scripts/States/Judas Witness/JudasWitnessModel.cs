@@ -11,28 +11,29 @@ namespace Luke
 {
     public class JudasWitnessModel : CreatureBase
     {
-        [Header("Other considerations")] public AntAIAgent antAIAgent;
-
+        [Header("Other considerations")] 
+        public AntAIAgent antAIAgent;
         public NavMeshAgent navMeshAgent;
         public float timeGathering;
 
-        [Header("Patrol variables")] public PatrolManager patrolManager;
-
+        [Header("Patrol variables")] 
+        public PatrolManager patrolManager;
         public float patrolSpeed;
         public float maxPatrolWaitTime;
 
-        [Header("Resource state variables")] public List<WaterTarget> waterTargets;
-
-        public WaterTarget currentWaterTarget;
+        [Header("Resource state variables")]
+        public List<PatrolPoint> waterTargets;
+        public List<PatrolPoint> gatheredWaterTargets;
+        public PatrolPoint currentWaterTarget;
         public Vector3 spawnPos;
 
-        [Header("Attacking state variables")] public GameObject currentPlayerTarget;
-
+        [Header("Attacking state variables")]
+        public GameObject currentPlayerTarget;
         public int playerFoundIntensity;
         public float playerFoundGradient;
 
-        [Header("Audio")] public AudioSource audioSource;
-
+        [Header("Audio")] 
+        public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
         public float timeBetweenAudio;
         public float audioRepeatRate;
@@ -94,22 +95,21 @@ namespace Luke
 
         public void SetWaterTarget()
         {
-            waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
-            //if (waterTargets == null)
-            //{
-                
-            //}
-            
-            if (waterTargets != null)
+            if (waterTargets.Count > 0)
             {
-                foreach (WaterTarget player in waterTargets.ToList())
+                foreach (PatrolPoint target in waterTargets)
                 {
-                    if (player.GetComponentInParent<PlayerMovement>())
+                    if (target == gatheredWaterTargets.Contains(target))
                     {
-                        waterTargets.Remove(player);
+                        waterTargets.Remove(target);
                     }
                 }
             }
+            else if(gatheredWaterTargets.Count <= 0)
+            {
+                waterTargets.AddRange(patrolManager.waterTargets);
+            }
+            
         }
 
         public void ResetPlanner()

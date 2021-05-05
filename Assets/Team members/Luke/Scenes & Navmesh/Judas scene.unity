@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 32ed9945feb70a5449abaefa015d0160, type: 2}
+--- !u!114 &10163972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2216561115962245100, guid: 94700a349770d9647abf994480f42c9b, type: 3}
+  m_PrefabInstance: {fileID: 61645787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d97e75452cd5b44b6ceadde924d014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &16808990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -334,41 +345,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1636507480890146595, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_PropertySheet.m_Int.m_Array.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1636507480890146595, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1636507480890146595, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_PropertySheet.m_Int.m_Array.Array.data[3].m_Name
-      value: gradientInt
-      objectReference: {fileID: 0}
-    - target: {fileID: 1636507480890146595, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
-      value: gradientTime
-      objectReference: {fileID: 0}
-    - target: {fileID: 1636507480890146595, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_PropertySheet.m_Int.m_Array.Array.data[3].m_Overridden
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1636507480890146595, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2450397370497296085, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3680741728346999298, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3680741728346999298, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6794730728925289216, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
       propertyPath: m_Name
@@ -425,34 +404,6 @@ PrefabInstance:
     - target: {fileID: 6805969491227737825, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
       propertyPath: m_AssetId
       value: 4aa15b064fa9d2e4991235f52fff0c61
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667564812406049628, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: gradientTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667564812406049628, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: attackIntensity
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667564812406049628, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: playerFoundGradient
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667564812406049628, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: playerFoundIntensity
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799542814387449722, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: damageType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799542814387449722, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: damageAmount
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799542814387449722, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
-      propertyPath: damageOverDistance
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
@@ -1130,6 +1081,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d68f364b4721aa419aa4c62e28aebcd, type: 3}
+--- !u!114 &1580526911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2216561115962245100, guid: 94700a349770d9647abf994480f42c9b, type: 3}
+  m_PrefabInstance: {fileID: 1037769406}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d97e75452cd5b44b6ceadde924d014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1598545700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1253,7 +1215,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
       propertyPath: waterTargets.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
       propertyPath: waterTargets.Array.data[0]
@@ -1263,6 +1225,14 @@ PrefabInstance:
       propertyPath: waterTargets.Array.data[1]
       value: 
       objectReference: {fileID: 881758085}
+    - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
+      propertyPath: waterTargets.Array.data[2]
+      value: 
+      objectReference: {fileID: 10163972}
+    - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
+      propertyPath: waterTargets.Array.data[3]
+      value: 
+      objectReference: {fileID: 1580526911}
     - target: {fileID: 750106768172150419, guid: 7f8bf9c9842f3e546ae411e74c11c8f9, type: 3}
       propertyPath: pathsWithIndoors.Array.size
       value: 4

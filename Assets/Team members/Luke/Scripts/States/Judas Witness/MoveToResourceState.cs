@@ -55,7 +55,7 @@ namespace Luke
                          Debug.Log("At resource position");
                                   
                          judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
-                         
+
                          antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                          antAIAgent.worldState.Set("atResourcePos", true);
                          antAIAgent.worldState.EndUpdate();
@@ -71,13 +71,6 @@ namespace Luke
                  Finish();
              }
              
-         }
-
-         public override void Exit()
-         {
-             base.Exit();
-             
-
          }
     }
 }
