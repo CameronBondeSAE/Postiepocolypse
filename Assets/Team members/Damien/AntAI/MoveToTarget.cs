@@ -31,7 +31,7 @@ namespace Damien
             base.Execute(aDeltaTime, aTimeScale);
             
 
-            if (_navMeshAgent.remainingDistance < 1f)
+            if (_navMeshAgent.remainingDistance < 5f)
             {
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("Close to Target", true);

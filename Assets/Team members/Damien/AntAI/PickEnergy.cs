@@ -1,5 +1,6 @@
 ﻿using Anthill.AI;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Damien
 {
@@ -9,9 +10,12 @@ namespace Damien
 
         public FOV fieldOfView;
 
-        private float energyViewRadius = 100f;
-        
+        private int energyViewRadius = 1;
+        private int maxViewRadius = 100;
+
         private GameObject currTarget;
+
+        private NavMeshAgent _navMeshAgent;
 
 
         public override void Create(GameObject aGameObject)
@@ -19,27 +23,30 @@ namespace Damien
             base.Create(aGameObject);
             owner = aGameObject;
             fieldOfView = owner.GetComponent<FOV>();
+            _navMeshAgent = owner.GetComponent<NavMeshAgent>();
         }
 
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Pick Energy");
-            fieldOfView.targets = LayerMask.GetMask("Energy");
+            //Debug.Log("Pick Energy");
+            fieldOfView.targets = LayerMask.GetMask("Item");
             fieldOfView.viewRadius = energyViewRadius;
 
 
-            //Sends the target to the parent if the FOV has targets to send
-           //if (fieldOfView.listOfTargets.Count > 0)
-           //{
-           //    owner.GetComponent<Blinder>().energyTarget = fieldOfView.listOfTargets[0];
-           //    AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-           //}
+           
+           
+           if (fieldOfView.listOfTargets.Count == 0 && energyViewRadius <= maxViewRadius)
+           {
+               energyViewRadius++;
+           }
+           
+           //Sends the target to the parent if the FOV has targets to send
            if (fieldOfView.listOfTargets.Count > 0)
            {
                for (int i = 0; i < fieldOfView.listOfTargets.Count; i++)
                {
-                   if (currTarget == null && fieldOfView.listOfTargets[i].layer == LayerMask.NameToLayer("Energy"))
+                   if (currTarget == null && fieldOfView.listOfTargets[i].layer == LayerMask.NameToLayer("Item"))
                    {
                        currTarget = fieldOfView.listOfTargets[i];
                        owner.GetComponent<Blinder>().energyTarget = currTarget;
@@ -47,9 +54,7 @@ namespace Damien
                    }
                }
            }
-
-
-            Finish();
+           Finish();
         }
     }
 }

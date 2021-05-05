@@ -54,7 +54,6 @@ namespace Damien
                 antAIAgent.worldState.EndUpdate();
                 Finish();
             }
-            
         }
     }
 }

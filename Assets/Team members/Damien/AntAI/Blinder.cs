@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Anthill.AI;
 using UnityEngine;
 
@@ -8,19 +7,35 @@ namespace Damien
     public class Blinder : MonoBehaviour
     {
         public GameObject owner;
+        
         public AntAIAgent antAIAgent;
+        
         public GameObject target;
         public GameObject energyTarget;
+        
         public Light flash;
+        
         public float flashBrightness = 200000000f;
         public float flashOffBrightness = 0.5f;
+
+        private int flashSoundNumber;
+        private int screamSoundNumber;
+        
         public bool targetsInView;
+
+        public AudioSource flashSoundsSource;
+        public AudioClip[] flashSoundsArray;
+
+        public AudioSource screamSoundsSource;
+        public AudioClip[] screamSoundsArray;
 
 
         // Start is called before the first frame update
         void Start()
         {
             antAIAgent.SetGoal("Disorient Target");
+            flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
+            screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
             ResetStates();
         }
 
@@ -50,6 +65,18 @@ namespace Damien
             }
         }
 
+        public void PlayFlashSound()
+        {
+            flashSoundNumber = Random.Range(0, 4);
+            flashSoundsSource.PlayOneShot(flashSoundsArray[flashSoundNumber]);
+        }
+
+        public void PlayScream()
+        {
+            screamSoundNumber = Random.Range(0, 3);
+            screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
+        }
+
 
         public void ResetStates()
         {
@@ -68,6 +95,7 @@ namespace Damien
         {
             yield return new WaitForSeconds(2f);
             flash.intensity = flashBrightness;
+            PlayFlashSound();
             yield return new WaitForSeconds(.1f);
             flash.intensity = flashOffBrightness;
             
