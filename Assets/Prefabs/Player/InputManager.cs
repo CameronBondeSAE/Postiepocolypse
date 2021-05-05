@@ -52,7 +52,7 @@ namespace AlexM
 			_controls.Movement.Use.canceled         += _interactRay.Use;
 			_controls.Movement.Pickup.performed     += _interactRay.PickUp;
 			_controls.Movement.Pickup.canceled      += _interactRay.PickUp;
-			_controls.Movement.Drop.performed		+= _inventory.Drop;
+			_controls.Movement.Drop.performed		+= _inventory.DropAction;
 
 			// if (_gameManager)
 			// {

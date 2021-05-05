@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using JonathonMiles;
 using Mirror;
 using RileyMcGowan;
 using UnityEngine;
@@ -26,6 +27,8 @@ namespace ZachFrench
 
         public int numberOfPlayers;
 
+        public Transform baseOrigin;
+
         public List<GameObject> civilians;
 
         public List<GameObject> players;
@@ -33,8 +36,8 @@ namespace ZachFrench
         public PostieNetworkManager postieNetworkManager;
 
         public Luke.Spawner civSpawn;
-        
-        
+
+
         // Civilian don't get created instead are still currently part of the list
         public override void OnStartServer()
         {
@@ -50,7 +53,11 @@ namespace ZachFrench
 
             for (int i = 0; i < numberOfCivilian; i++)
             {
-                civilians.Add(civSpawn.SpawnSingle(civilianPrefab));
+                GameObject o = civSpawn.SpawnSingle(civilianPrefab);
+                civilians.Add(o);
+                // Civs look to center of base for respawning
+                Vector3 lookAtWithoutCaringAboutTheY = new Vector3(baseOrigin.position.x, o.transform.position.y, baseOrigin.position.z);
+                o.transform.LookAt(lookAtWithoutCaringAboutTheY);
             }
         }
 
@@ -72,9 +79,25 @@ namespace ZachFrench
             if (civilians.Count > 0)
             {
                 GameObject civilianToDelete = civilians[Random.Range(0,civilians.Count)];
-                DestroyImmediate(civilianToDelete,true);
                 civilians.Remove(civilianToDelete);
+
+
+                Inventory inventory = obj.GetComponent<Inventory>();
+
+                // Drop everything
+                foreach (ItemBase itemBase in inventory.items)
+                {
+                    inventory.Drop();
+                }
+
                 obj.transform.position = civilianToDelete.transform.position;
+                obj.transform.rotation = civilianToDelete.transform.rotation;
+                obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                obj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                obj.GetComponent<Health>().currentHealth = civilianToDelete.GetComponent<Health>().currentHealth;
+                
+                // DestroyImmediate(civilianToDelete,true);
+                Destroy(civilianToDelete);
                 //civilians[numberOfCivilian].GetComponent<Health>().deathEvent -= RespawnAfterDeath;
             }
             else
