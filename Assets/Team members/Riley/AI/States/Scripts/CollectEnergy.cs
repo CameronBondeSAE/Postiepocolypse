@@ -28,12 +28,7 @@ namespace RileyMcGowan
             //Check the distance the creature has until it's finished
             if (navMeshRef.remainingDistance < safeDistance)
             {
-                antAIRef.worldState.BeginUpdate(antAIRef.planner);
-                antAIRef.worldState.Set("EnergyCollected", true);
-                antAIRef.worldState.EndUpdate();
-                creatureMainRef.currentWaterTarget = null;
-                //Stop navigation and finish
-                Finish();
+                creatureMainRef.StartCollectEnergy();
             }
         }
     }

@@ -24,12 +24,13 @@ namespace RileyMcGowan
             currentTarget = creatureMainRef.currentPatrolPoint;
             targetLocation = currentTarget.transform.position;
             navMeshRef.SetDestination(targetLocation);
+            Gradient defaultColour = creatureMainRef.vfxComp.GetGradient("DefaultColour");
+            creatureMainRef.vfxComp.SetGradient("ActiveColour", defaultColour);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
             if (creatureMainRef.vfxComp.GetInt("MaxParticles") < 3000)
             {
                 int particalRef;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
@@ -142,6 +142,22 @@ namespace RileyMcGowan
             antAIRef.worldState.EndUpdate();
         }
         
-        
+        //CollectEnergy
+        public void StartCollectEnergy()
+        {
+            StartCoroutine(CollectEnergy());
+        }
+
+        IEnumerator CollectEnergy()
+        {
+            Gradient energyColour = vfxComp.GetGradient("EnergyCollect");
+            vfxComp.SetGradient("ActiveColour", energyColour);
+            yield return new WaitForSeconds(5);
+            antAIRef.worldState.BeginUpdate(antAIRef.planner);
+            antAIRef.worldState.Set("EnergyCollected", true);
+            antAIRef.worldState.EndUpdate();
+            currentWaterTarget = null;
+            GetComponentInChildren<CollectEnergy>().Finish();
+        }
     }
 }
