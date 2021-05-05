@@ -32,9 +32,9 @@ namespace Luke
             navMeshAgent.SetDestination(judasWitnessModel.spawnPos);
             
             //setting the world condition
-            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            antAIAgent.worldState.Set("atResourcePos", false);
-            antAIAgent.worldState.EndUpdate();
+            // antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            // antAIAgent.worldState.Set("atResourcePos", false);
+            // antAIAgent.worldState.EndUpdate();
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -47,20 +47,22 @@ namespace Luke
             // Have we got to the target position?
             if (distanceBetweenPosAndSpawn < 3f)
             {
-                //setting the world condition
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("deliveredResource", true);
-                antAIAgent.worldState.EndUpdate();
-                            
-                Debug.Log("Delivered resource");
+                
 
-                DeliveredWaitTime();
+                StartCoroutine(DeliveredWaitTime());
             }
         }
 
         public IEnumerator DeliveredWaitTime()
         {
             yield return new WaitForSeconds(4f);
+
+            //setting the world condition
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("deliveredResource", true);
+            antAIAgent.worldState.EndUpdate();
+                            
+            Debug.Log("Delivered resource");
             Finish();
         }
 
@@ -68,23 +70,27 @@ namespace Luke
         {
             base.Exit();
 
-            if (judasWitnessModel.currentWaterTarget != null)
+            
+            judasWitnessModel.currentWaterTarget = null;
+            judasWitnessModel.ResetPlanner();
+            
+            // if (judasWitnessModel.currentWaterTarget != null)
             {
-                if (judasWitnessModel.waterTargets != null)
+                // if (judasWitnessModel.waterTargets.Count > 0)
                 {
                     judasWitnessModel.currentWaterTarget = null;
                     
-                    antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                    antAIAgent.worldState.Set("deliveredResource", false);
-                    antAIAgent.worldState.Set("gotResource", false);
-                    antAIAgent.worldState.Set("foundResource", false);
-                    antAIAgent.worldState.EndUpdate();
+                    // antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                    // antAIAgent.worldState.Set("deliveredResource", false);
+                    // antAIAgent.worldState.Set("gotResource", false);
+                    // antAIAgent.worldState.Set("foundResource", false);
+                    // antAIAgent.worldState.EndUpdate();
                 }
                 
             }
-            else
+            // else
             {
-                judasWitnessModel.ResetPlanner();
+                // judasWitnessModel.ResetPlanner();
             }
             
         }

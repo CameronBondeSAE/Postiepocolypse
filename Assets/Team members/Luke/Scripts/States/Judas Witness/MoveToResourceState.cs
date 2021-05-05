@@ -12,7 +12,7 @@ namespace Luke
          public GameObject owner;
          public JudasWitnessModel judasWitnessModel;
          public AntAIAgent antAIAgent;
-         public float remainingDistance = 3f;
+         public float minDistance = 3f;
          
          public override void Create(GameObject aGameObject)
          {
@@ -21,7 +21,7 @@ namespace Luke
              owner = aGameObject;
              antAIAgent = owner.GetComponent<AntAIAgent>();
              judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
-             remainingDistance = 3f;
+             minDistance = 3f;
          }
          
          public override void Enter()
@@ -30,7 +30,7 @@ namespace Luke
              
              Debug.Log("Move to resource state");
 
-             if (judasWitnessModel.waterTargets.Count < 0)
+             if (judasWitnessModel.waterTargets.Count <= 0)
              {
                  Debug.Log("waterTarget Null");
                  Finish();
@@ -50,13 +50,18 @@ namespace Luke
                      Debug.DrawLine( judasWitnessModel.transform.position, 
                          judasWitnessModel.currentWaterTarget.transform.position,Color.blue);
                  
-                     if (betweenPosAndResource < remainingDistance)
+                     if (betweenPosAndResource < minDistance)
                      {
                          Debug.Log("At resource position");
                                   
                          judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
-                                  
+                         
+                         antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                         antAIAgent.worldState.Set("atResourcePos", true);
+                         antAIAgent.worldState.EndUpdate();
+                         
                          Finish();
+                         
                      }
                  }
              }
@@ -72,9 +77,7 @@ namespace Luke
          {
              base.Exit();
              
-             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-             antAIAgent.worldState.Set("atResourcePos", true);
-             antAIAgent.worldState.EndUpdate();
+
          }
     }
 }

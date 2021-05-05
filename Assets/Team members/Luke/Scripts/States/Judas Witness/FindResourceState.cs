@@ -31,14 +31,13 @@ namespace Luke
             //remove the players from this list
             judasWitnessModel.SetWaterTarget();
             judasWitnessModel.currentWaterTarget = judasWitnessModel.waterTargets[Random.Range(0, judasWitnessModel.waterTargets.Count)];
-            
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
             
-            if (judasWitnessModel.waterTargets != null)
+            if (judasWitnessModel.waterTargets.Count > 0)
             {
                 judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
                 
@@ -51,7 +50,6 @@ namespace Luke
                 
                 Finish();
             }
-
             else
             {
                 Debug.Log("No more waterTargets");
