@@ -22,6 +22,7 @@ namespace RileyMcGowan
             targetLocation = creatureMainRef.playerTarget.transform.position;
             navMeshRef.SetDestination(targetLocation);
             timeToFollow = 0;
+            creatureMainRef.swapColour = true;
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
