@@ -37,7 +37,35 @@ namespace RileyMcGowan
         {
             base.Execute(aDeltaTime, aTimeScale);
             safeDistance = creatureMainRef.safeDistance;
-            
+            if (creatureMainRef.vfxComp.GetInt("MaxParticles") > 2000)
+            {
+                int particalRef;
+                particalRef = creatureMainRef.vfxComp.GetInt("MaxParticles") - 10;
+                if (particalRef < 2000)
+                {
+                    particalRef = 2000;
+                    creatureMainRef.vfxComp.SetInt("MaxParticles", particalRef);
+                }
+                else
+                {
+                    creatureMainRef.vfxComp.SetInt("MaxParticles", particalRef);
+                }
+            }
+            if (creatureMainRef.vfxComp.GetFloat("Radius") > 1)
+            {
+                float radiusRef;
+                radiusRef = creatureMainRef.vfxComp.GetFloat("Radius") - 0.5f;
+                if (radiusRef < 1)
+                {
+                    radiusRef = 1;
+                    creatureMainRef.vfxComp.SetFloat("Radius", radiusRef);
+                }
+                else
+                {
+                    creatureMainRef.vfxComp.SetFloat("Radius", radiusRef);
+                }
+            }
+
             //Check the distance the creature has until it's finished
             if (navMeshRef.remainingDistance < safeDistance)
             {

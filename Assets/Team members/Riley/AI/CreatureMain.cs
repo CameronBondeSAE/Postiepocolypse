@@ -17,7 +17,7 @@ namespace RileyMcGowan
         private CreatureDamage childHaveDamaged;
         private AntAIAgent antAIRef;
         private Damien.FOV currentFOV;
-        private VisualEffect vfxComp;
+        
 
         //Public Vars
         public GameObject portalTarget;
@@ -27,6 +27,7 @@ namespace RileyMcGowan
         public float floatingHeight;
         public NavMeshAgent navMeshRef;
         public float safeDistance = 1f;
+        public VisualEffect vfxComp;
         
         
         void Start()
@@ -36,6 +37,8 @@ namespace RileyMcGowan
             {
                 vfxComp = GetComponentInChildren<VisualEffect>();
                 vfxComp.SetFloat("ParticleSpawnRate", 0.5f); //vfx.setfloat("Name", number);
+                vfxComp.SetFloat("Radius", 1f);
+                vfxComp.SetInt("MaxParticles", 2000);
             }
             if (GetComponentInChildren<CreatureDamage>() != null)
             {
