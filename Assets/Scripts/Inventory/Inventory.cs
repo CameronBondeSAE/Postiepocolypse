@@ -19,21 +19,10 @@ namespace JonathonMiles
 
         private void Update()
         {
-            if (InputSystem.GetDevice<Keyboard>().vKey.wasPressedThisFrame)
-            {
-                if (items.Count == 0)
-                {
-                    Debug.Log("Nothing in Inventory");
-                    return;
-                }
-
-                Drop();
-            }
-
-            if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
-            {
-                Use(items[0]);
-            }
+            // if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
+            // {
+            //     Use(items[0]);
+            // }
         }
 
         [Command]
@@ -63,8 +52,14 @@ namespace JonathonMiles
             items.RemoveAt(0);
         }
 
-        public void Drop()
+        public void Drop(InputAction.CallbackContext callbackContext)
         {
+            if (items.Count == 0)
+            {
+                Debug.Log("Nothing in Inventory");
+                return;
+            }
+            
             CmdDrop();
         }
 
