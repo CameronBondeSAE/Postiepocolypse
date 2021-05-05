@@ -8,8 +8,6 @@ namespace Damien
     {
         public GameObject owner;
         NavMeshAgent _navMeshAgent;
-        private float energyDistance;
-        private float energyCollectDistance;
         private Blinder blinder;
         public AntAIAgent antAIAgent;
 

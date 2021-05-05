@@ -38,9 +38,7 @@ namespace Damien
                     {
                         currTarget = fieldOfView.listOfTargets[i];
                         owner.GetComponent<Blinder>().target = currTarget;
-                        //antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                        //antAIAgent.worldState.Set("Target in View Range", true);
-                        //antAIAgent.worldState.EndUpdate();
+                        currTarget = null;
                     }
                 }
             }

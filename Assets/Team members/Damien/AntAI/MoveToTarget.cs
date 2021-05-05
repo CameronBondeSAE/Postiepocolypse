@@ -9,7 +9,6 @@ namespace Damien
         public GameObject owner;
         NavMeshAgent _navMeshAgent;
         private Blinder blinder;
-
         public AntAIAgent antAIAgent;
 
         public override void Create(GameObject aGameObject)
@@ -24,13 +23,13 @@ namespace Damien
         public override void Enter()
         {
             base.Enter();
-            
+            _navMeshAgent.SetDestination(owner.GetComponent<Blinder>().target.transform.position);
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            _navMeshAgent.SetDestination(owner.GetComponent<Blinder>().target.transform.position);
+            
 
             if (_navMeshAgent.remainingDistance < 1f)
             {
