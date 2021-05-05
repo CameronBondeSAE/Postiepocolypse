@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 2228857321506447193}
   - component: {fileID: 3411472063979927375}
   - component: {fileID: 86339251342403916}
+  - component: {fileID: 7428895171471212859}
   m_Layer: 8
   m_Name: Player_WithRigidbody
   m_TagString: Untagged
@@ -377,7 +378,7 @@ MonoBehaviour:
   _isGrounded: 0
   _slip: {fileID: 0}
   _grip: {fileID: 0}
-  _gripStub: {fileID: 0}
+  _gripStub: {fileID: 6271187259283767326}
   _isSprinting: 0
   _groundAngle: 0
   _groundAngleOffset: 0
@@ -514,6 +515,7 @@ MonoBehaviour:
   Drain: 0
   MoveDrainScale: 0
   StandingDrain: 1
+  regenOnLowEnergy: 0
   Regen: 0
   distance: 0
   speed: 0
@@ -596,6 +598,22 @@ MonoBehaviour:
   flareHeight: 2500
   flareDecent: 15
   placeToSpawn: {fileID: 7524519435191800825}
+--- !u!114 &7428895171471212859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271187260368080590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c873623cdce9dd544a7830511ba3534c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  flashlight: {fileID: 6732787804643739882}
+  lightOn: 0
 --- !u!1 &6271187260610386039
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +706,8 @@ GameObject:
   - component: {fileID: 4604193975535477227}
   - component: {fileID: 5989070166137169129}
   - component: {fileID: 6540053507443709124}
+  - component: {fileID: 1040561608237316292}
+  - component: {fileID: 3296443016505588664}
   m_Layer: 8
   m_Name: Sounds
   m_TagString: Untagged
@@ -765,7 +785,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -817,8 +837,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308f941eb23623148ac8b4dc8a580dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathClip: {fileID: 0}
+  stepClip: {fileID: 0}
   health: {fileID: 8299417107634708922}
   audioSource: {fileID: 5989070166137169129}
+  soundEmitter: {fileID: 0}
+--- !u!114 &1040561608237316292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957212586931375641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce67c7e615019f844a7de0fb2507b93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundRadius1: 10
+  listOfEars: []
+--- !u!135 &3296443016505588664
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6957212586931375641}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 9.94
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7271636079834535862
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,8 +880,6 @@ GameObject:
   - component: {fileID: 271114681989653612}
   - component: {fileID: 6732787804643739882}
   - component: {fileID: 4110902543837761244}
-  - component: {fileID: 123701548263798781}
-  - component: {fileID: 8617372069523753631}
   m_Layer: 8
   m_Name: Spot Light
   m_TagString: Untagged
@@ -1025,38 +1073,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
---- !u!114 &123701548263798781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271636079834535862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
---- !u!114 &8617372069523753631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271636079834535862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c873623cdce9dd544a7830511ba3534c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  flashlight: {fileID: 6732787804643739882}
-  lightOn: 0
 --- !u!1 &7524519435191800825
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,7 +39,11 @@ namespace TimPearson
 
         private void OnTriggerExit(Collider other)
         {
-            listOfEars.Remove(ears.gameObject);
+            ears = other.GetComponent<Ears>();
+            if (ears)
+            {
+                listOfEars.Remove(ears.gameObject);
+            }
         }
 
         public void EmitSound(Vector3 sourcePosition)

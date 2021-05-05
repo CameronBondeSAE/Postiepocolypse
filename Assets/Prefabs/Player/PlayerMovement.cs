@@ -58,7 +58,7 @@ namespace AlexM
 			_inputManager = GetComponent<InputManager>();
 			_slip         = Resources.Load<PhysicMaterial>("Materials/Slip");
 			_grip         = Resources.Load<PhysicMaterial>("Materials/Grip");
-			_gripStub     = GetComponentInChildren<SphereCollider>();
+			// _gripStub     = GetComponentInChildren<SphereCollider>();
 		}
 
 		private Vector3 GetForward()
@@ -102,6 +102,8 @@ namespace AlexM
 		{
 			var rayDown = Physics.Raycast(_gripStub.transform.position, Vector3.down, out _groundHitInfo, 0.35f);
 
+			Debug.DrawLine(_gripStub.transform.forward, _groundHitInfo.point, Color.green);
+			
 			_isGrounded = rayDown;
 
 			if (_isGrounded)

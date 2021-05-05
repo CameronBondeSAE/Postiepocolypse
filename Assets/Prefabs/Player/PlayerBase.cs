@@ -25,13 +25,13 @@ public class PlayerBase : NetworkBehaviour
 	public Vector3        _fwdDirection;
 	[HideInInspector]
 	public Vector3        _rightDirection;
-	[HideInInspector]
+	// [HideInInspector]
 	public bool           _isGrounded;
 	[HideInInspector]
 	public PhysicMaterial _slip;
 	[HideInInspector]
 	public PhysicMaterial _grip;
-	[HideInInspector]
+	// [HideInInspector]
 	public SphereCollider _gripStub;
 	[HideInInspector]
 	public bool           _isSprinting;

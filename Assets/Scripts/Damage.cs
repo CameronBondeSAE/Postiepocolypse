@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using RileyMcGowan;
 using UnityEngine;
 using UnityEngine.Serialization;
-[RequireComponent(typeof(SphereCollider))]
+// [RequireComponent(typeof(SphereCollider))]
 public class Damage : MonoBehaviour
 {
      /// <summary>
@@ -36,7 +36,14 @@ public class Damage : MonoBehaviour
           {
                if (damageOverDistance)
                {
-                    x.GetComponent<Health>().DoDamage((sphereCollider.radius - damageAmount), damageType);
+                    if (sphereCollider == null)
+                    {
+                         Debug.LogWarning("You need a sphere collider for damage based on distance");
+                    }
+                    else
+                    {
+                         x.GetComponent<Health>().DoDamage((sphereCollider.radius - Vector3.Distance(transform.position, x.transform.position))*damageAmount, damageType);
+                    }
                }
                else
                {

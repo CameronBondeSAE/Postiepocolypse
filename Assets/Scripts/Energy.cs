@@ -15,6 +15,7 @@ public class Energy : MonoBehaviour
     public float Drain = 2f;
     public float MoveDrainScale;
     public float StandingDrain = 1f;
+    public bool regenOnLowEnergy = false;
     public float Regen = 0f;
     private Vector3 currentPos;
     private Vector3 lastPos;
@@ -23,6 +24,8 @@ public class Energy : MonoBehaviour
     public event Action<Energy> lowEnergy;
 
     private Rigidbody rb;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +72,10 @@ public class Energy : MonoBehaviour
             if (CurrentAmount < MinAmount)
             {
                 CurrentAmount = MinAmount;
-                Regen = Drain *2;
+                if (regenOnLowEnergy)
+                {
+                    Regen = Drain *2;
+                }
                 lowEnergy?.Invoke(this);
             }
             

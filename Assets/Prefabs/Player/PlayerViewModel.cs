@@ -2,12 +2,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TimPearson;
 using UnityEngine;
 
 public class PlayerViewModel : MonoBehaviour
 {
+	public AudioClip deathClip;
+	public AudioClip stepClip;
+	
 	public Health      health;
 	public AudioSource audioSource;
+	public SoundEmitter soundEmitter;
 
 	void OnEnable()
 	{
@@ -21,6 +26,17 @@ public class PlayerViewModel : MonoBehaviour
 
 	void HealthOndeathEvent(Health health)
 	{
+		audioSource.spatialBlend = 0.75f; // Keep death sound slightly audible
+		audioSource.clip = deathClip;
 		audioSource.Play();
+	}
+
+	void StepSound()
+	{
+		audioSource.spatialBlend = 1f;
+		audioSource.clip = stepClip;
+
+		audioSource.Play();
+		// soundEmitter.emit
 	}
 }

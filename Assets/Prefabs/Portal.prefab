@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 211089926295112690}
   - component: {fileID: 5775224301136106522}
   - component: {fileID: 211089926295112691}
+  - component: {fileID: 1939958594561978676}
+  - component: {fileID: 2812918482029896507}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -142,6 +144,36 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!135 &1939958594561978676
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211089926295112692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2812918482029896507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211089926295112692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbd3071f9e87f04a8d96a9eb26115ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 99999999
+  damageType: 0
+  damageOverDistance: 0
+  sphereCollider: {fileID: 0}
+  inCollider: []
 --- !u!1001 &1264892719664629707
 PrefabInstance:
   m_ObjectHideFlags: 0

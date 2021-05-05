@@ -58,7 +58,13 @@ namespace ZachFrench
                 // Civs look to center of base for respawning
                 Vector3 lookAtWithoutCaringAboutTheY = new Vector3(baseOrigin.position.x, o.transform.position.y, baseOrigin.position.z);
                 o.transform.LookAt(lookAtWithoutCaringAboutTheY);
+                o.GetComponent<Health>().deathEvent += OndeathEvent;
             }
+        }
+
+        private void OndeathEvent(Health health)
+        {
+            civilians.Remove(health.gameObject);
         }
 
         private void PostieNetworkManagerOnNewPlayerEvent(GameObject obj)
