@@ -398,7 +398,8 @@ MonoBehaviour:
   playerFoundGradient: 0.5
   attackingIntensity: 10
   attackingGradient: 1
-  speedIncrease: 5
+  speedIncrease: 7
+  waterReduction: 100
   audioSource: {fileID: 3680741728346999298}
   chorusFilter: {fileID: 8261083863869696342}
   timeBetweenAudio: 20

@@ -12,6 +12,7 @@ namespace Luke
         public GameObject owner;
         public JudasWitnessModel judasWitnessModel;
         public NavMeshAgent navMeshAgent;
+        public WaterTarget waterDepth;
 
         public override void Create(GameObject aGameObject)
         {
@@ -42,6 +43,13 @@ namespace Luke
         public IEnumerator GatheringResources()
         {
             Debug.Log("Gathering wait time");
+
+            if (judasWitnessModel.currentWaterTarget != null)
+            {
+                waterDepth = judasWitnessModel.currentWaterTarget.GetComponent<WaterTarget>();
+                waterDepth.depth -= judasWitnessModel.waterReduction;
+            }
+
             yield return new WaitForSeconds(judasWitnessModel.timeGathering);
             
             Finish();

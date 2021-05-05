@@ -62,7 +62,9 @@ namespace Luke
             
             else if (judasWitnessModel.currentPlayerTarget == null)
             {
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                vfx.SetInt("attackIntensity", judasWitnessModel.normalIntensity);
+                vfx.SetFloat("gradientTime", judasWitnessModel.normalGradient);
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);  
                 antAIAgent.worldState.Set("playerFound", false);
                 antAIAgent.worldState.EndUpdate();
                 Finish();

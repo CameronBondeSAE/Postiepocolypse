@@ -37,6 +37,9 @@ namespace Luke
         public float attackingGradient;
         public float speedIncrease;
 
+        [Header("Gather state variables")] 
+        public float waterReduction;
+
         [Header("Audio")] 
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;

@@ -39,7 +39,7 @@ namespace Luke
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
-            
+
             if (fov.listOfTargets.Count <= 0)
             {
                 judasWitnessModel.currentPlayerTarget = null;
@@ -55,6 +55,8 @@ namespace Luke
             
             if (judasWitnessModel.currentPlayerTarget == null)
             {
+                vfx.SetInt("attackIntensity", judasWitnessModel.normalIntensity);
+                vfx.SetFloat("gradientTime", judasWitnessModel.normalGradient);
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("playerFound", false);
                 antAIAgent.worldState.EndUpdate();
