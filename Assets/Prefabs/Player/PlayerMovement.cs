@@ -15,9 +15,9 @@ namespace AlexM
 		public float  maxSpeed         = 100f;
 		public float  sprintMultiplier = 1.5f;
 
-		public float jumpForce = 70f;
+		public float jumpForce    = 70f;
 		public float onGroundDrag = 5f;
-		public float inAirDrag = 0f;
+		public float inAirDrag    = 0f;
 
 		[SerializeField, Header("= Debug =")]
 		private float _speed;
@@ -31,7 +31,7 @@ namespace AlexM
 		{
 			GetReferences();
 			originalSpeed = maxSpeed;
-			
+
 			GetComponent<Health>().deathEvent += OnDeathEvent;
 		}
 
@@ -241,11 +241,11 @@ namespace AlexM
 			{
 				if (GetSpeed() < maxSpeed)
 				{
-					if (_isSprinting)
+					if (_isSprinting && _isGrounded)
 					{
 						_rb.AddForce(_movement.normalized * ((maxSpeed * sprintMultiplier) * Time.fixedDeltaTime), ForceMode.VelocityChange);
 					}
-					else
+					else if (_isGrounded)
 					{
 						// if (GetSpeed() < 10f)
 						// {
