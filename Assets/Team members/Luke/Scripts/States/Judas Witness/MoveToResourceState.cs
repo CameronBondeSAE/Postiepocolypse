@@ -10,10 +10,9 @@ namespace Luke
     public class MoveToResourceState : AntAIState
     {
          public GameObject owner;
-         public NavMeshAgent navMeshAgent;
          public JudasWitnessModel judasWitnessModel;
          public AntAIAgent antAIAgent;
-         public float remainingDistance = .5f;
+         public float remainingDistance = 3f;
          
          public override void Create(GameObject aGameObject)
          {
@@ -21,8 +20,8 @@ namespace Luke
     
              owner = aGameObject;
              antAIAgent = owner.GetComponent<AntAIAgent>();
-             navMeshAgent = owner.GetComponent<NavMeshAgent>();
              judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
+             remainingDistance = 3f;
          }
          
          public override void Enter()
@@ -31,7 +30,7 @@ namespace Luke
              
              Debug.Log("Move to resource state");
 
-             if (judasWitnessModel.waterTargets.Count < 1)
+             if (judasWitnessModel.waterTargets.Count < 0)
              {
                  Debug.Log("waterTarget Null");
                  Finish();
@@ -42,7 +41,27 @@ namespace Luke
          {
              base.Execute(aDeltaTime, aTimeScale);
 
-             if (navMeshAgent.remainingDistance < remainingDistance)
+             if (judasWitnessModel.waterTargets.Count > 0)
+             {
+                 if (judasWitnessModel.currentWaterTarget != null)
+                 {
+                     float betweenPosAndResource = 
+                         Vector3.Distance(judasWitnessModel.transform.position, judasWitnessModel.currentWaterTarget.transform.position);
+                     Debug.DrawLine( judasWitnessModel.transform.position, 
+                         judasWitnessModel.currentWaterTarget.transform.position,Color.blue);
+                 
+                     if (betweenPosAndResource < remainingDistance)
+                     {
+                         Debug.Log("At resource position");
+                                  
+                         judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
+                                  
+                         Finish();
+                     }
+                 }
+             }
+
+             if (judasWitnessModel.currentWaterTarget == null)
              {
                  Finish();
              }
@@ -56,8 +75,6 @@ namespace Luke
              antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
              antAIAgent.worldState.Set("atResourcePos", true);
              antAIAgent.worldState.EndUpdate();
-             
-             Debug.Log("At resource position");
          }
     }
 }

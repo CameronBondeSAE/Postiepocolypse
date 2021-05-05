@@ -94,10 +94,14 @@ namespace Luke
 
         public void SetWaterTarget()
         {
+            waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
+            //if (waterTargets == null)
+            //{
+                
+            //}
+            
             if (waterTargets != null)
             {
-                waterTargets.AddRange(FindObjectsOfType<WaterTarget>());
-                
                 foreach (WaterTarget player in waterTargets.ToList())
                 {
                     if (player.GetComponentInParent<PlayerMovement>())
@@ -105,13 +109,6 @@ namespace Luke
                         waterTargets.Remove(player);
                     }
                 }
-            }
-
-
-            if (waterTargets.Count != 0)
-            {
-                currentWaterTarget = waterTargets[Random.Range(0, waterTargets.Count)];
-                navMeshAgent.SetDestination(currentWaterTarget.transform.position);
             }
         }
 
@@ -127,7 +124,6 @@ namespace Luke
             antAIAgent.worldState.Set("atResourcePos", false);
             antAIAgent.worldState.Set("foundRecharge", false);
             antAIAgent.worldState.Set("atRechargePos", false);
-            antAIAgent.worldState.Set("wander", false);
             antAIAgent.worldState.EndUpdate();
         }
     }

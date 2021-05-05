@@ -7,9 +7,6 @@ using UnityEngine.AI;
 
 namespace Luke
 {
-    /// <summary>
-    /// Change VFX colour to slowly change to red instead of blue + DO DAMAGE
-    /// </summary>
     public class AttackPlayerState : AntAIState
     {
         public GameObject owner;
@@ -30,6 +27,8 @@ namespace Luke
         public override void Enter()
         {
             base.Enter();
+            
+            Debug.Log("Enter attack player state");
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -38,6 +37,10 @@ namespace Luke
             
             if (judasWitnessModel.currentPlayerTarget == null)
             {
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("playerFound", false);
+                antAIAgent.worldState.EndUpdate();
+                
                 Finish();
             }
         }

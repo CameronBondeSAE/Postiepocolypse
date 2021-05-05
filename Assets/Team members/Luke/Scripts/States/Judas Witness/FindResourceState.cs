@@ -28,15 +28,28 @@ namespace Luke
             base.Enter();
 
             Debug.Log("Find resource state");
+            //remove the players from this list
+            judasWitnessModel.SetWaterTarget();
+            judasWitnessModel.currentWaterTarget = judasWitnessModel.waterTargets[Random.Range(0, judasWitnessModel.waterTargets.Count)];
             
-            if (judasWitnessModel.waterTargets.Count >= 1)
+        }
+
+        public override void Execute(float aDeltaTime, float aTimeScale)
+        {
+            base.Execute(aDeltaTime, aTimeScale);
+            
+            if (judasWitnessModel.waterTargets != null)
             {
+                judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
+                
                 //setting the world condition
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("foundResource", true);
+                antAIAgent.worldState.Set("foundResource", judasWitnessModel.currentWaterTarget != null);
                 antAIAgent.worldState.EndUpdate();
                 
                 Debug.Log("Found resource");
+                
+                Finish();
             }
 
             else
@@ -49,24 +62,16 @@ namespace Luke
             }
         }
 
-        public override void Execute(float aDeltaTime, float aTimeScale)
-        {
-            base.Execute(aDeltaTime, aTimeScale);
-
-            //remove the players from this list
-            judasWitnessModel.SetWaterTarget();
-            
-            Finish();
-        }
-
         public override void Exit()
         {
             base.Exit();
             
             if (judasWitnessModel.waterTargets != null)
             {
-                judasWitnessModel.SetWaterTarget();
-                judasWitnessModel.waterTargets.Remove(judasWitnessModel.currentWaterTarget);
+                if (judasWitnessModel.currentWaterTarget != null)
+                {
+                    judasWitnessModel.navMeshAgent.SetDestination( judasWitnessModel.currentWaterTarget.transform.position);
+                }
             }
 
             Debug.Log("Exit find resource state");

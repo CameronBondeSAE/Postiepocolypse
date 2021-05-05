@@ -7,9 +7,6 @@ using UnityEngine.AI;
 
 namespace Luke
 {
-    /// <summary>
-    /// change vfx colour to red. Move towards player pos
-    /// </summary>
     public class MoveToPlayerState : AntAIState
     {
         public GameObject owner;
@@ -35,6 +32,8 @@ namespace Luke
             {
                 navMeshAgent.SetDestination(judasWitnessModel.currentPlayerTarget.transform.position);
             }
+            
+            Debug.Log("Moving to player");
         }
 
         public override void Execute(float aDeltaTime, float aTimeScale)
@@ -60,9 +59,5 @@ namespace Luke
                 Finish();
             }
         }
-
-
-        
-        
     }
 }

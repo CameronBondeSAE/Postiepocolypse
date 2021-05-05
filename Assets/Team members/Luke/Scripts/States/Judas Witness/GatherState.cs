@@ -32,10 +32,10 @@ namespace Luke
         {
             base.Execute(aDeltaTime, aTimeScale);
 
-            if (navMeshAgent.remainingDistance < .5f)
+            if (navMeshAgent.remainingDistance < 3f)
             {
                 StartCoroutine(GatheringResources());
-            }
+            }   
         }
 
         public IEnumerator GatheringResources()
@@ -57,7 +57,6 @@ namespace Luke
             AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
             antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
             antAIAgent.worldState.Set("atResourcePos", false);
-            antAIAgent.worldState.Set("foundResource", false);
             antAIAgent.worldState.Set("gotResource", true);
             antAIAgent.worldState.EndUpdate();
         }

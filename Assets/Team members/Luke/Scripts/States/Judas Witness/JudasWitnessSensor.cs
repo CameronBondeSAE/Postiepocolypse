@@ -14,14 +14,19 @@ namespace Luke
         public JudasWitnessModel judasWitnessModel;
         public FOV fov;
         public List <GameObject> playerTargets;
-        
+
+        public void Start()
+        {
+            judasWitnessModel = GetComponent<JudasWitnessModel>();
+            fov = GetComponent<FOV>();
+        }
 
         public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
         {
-            lookForPlayers();
-
             aWorldState.BeginUpdate(aAgent.planner);
             {
+                lookForPlayers();
+
                 aWorldState.Set("playerFound", judasWitnessModel.currentPlayerTarget != null);
                 aWorldState.Set("foundResource", judasWitnessModel.waterTargets.Count >= 1);
             }
@@ -30,21 +35,19 @@ namespace Luke
 
         public void lookForPlayers()
         {
-            judasWitnessModel = GetComponent<JudasWitnessModel>();
-            fov = GetComponent<FOV>();
-            
             if (fov.listOfTargets.Count > 0)
             {
                 foreach (GameObject playerTarget in fov.listOfTargets)
                 {
                     float distance = Vector3.Distance(transform.position, playerTarget.transform.position);
 
-                    if (distance < fov.viewRadius)
+                    if (playerTarget != judasWitnessModel.currentPlayerTarget)
                     {
-                        playerTargets.Add(playerTarget);
-                        judasWitnessModel.currentPlayerTarget = playerTarget;
+                       if (distance < fov.viewRadius)
+                       {
+                           judasWitnessModel.currentPlayerTarget = playerTarget;
+                       } 
                     }
-
                     if (distance > fov.viewRadius)
                     {
                         playerTargets.Remove(playerTarget);
@@ -52,6 +55,19 @@ namespace Luke
                     }
                 }
             }
+
+            if (judasWitnessModel.currentPlayerTarget != null)
+            {
+                float distanceFromCurrentPlayer =
+                    Vector3.Distance(transform.position, judasWitnessModel.currentPlayerTarget.transform.position);
+                
+                if (distanceFromCurrentPlayer > fov.viewAngle)
+                {
+                    playerTargets.Remove(judasWitnessModel.currentPlayerTarget);
+                    judasWitnessModel.currentPlayerTarget = null;
+                }
+            }
+            
         }
     }
 }

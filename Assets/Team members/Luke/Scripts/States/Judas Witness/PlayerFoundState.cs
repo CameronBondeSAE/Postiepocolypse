@@ -1,20 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
-using Damien;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
 
 namespace Luke
 {
-    /// <summary>
-    /// change colour to orange
-    /// </summary>
     public class PlayerFoundState : AntAIState
     {
         public GameObject owner;
         public JudasWitnessModel judasWitnessModel;
+        public JudasWitnessSensor judasWitnessSensor;
         public VisualEffect vfx;
 
         public override void Create(GameObject aGameObject)
@@ -33,8 +30,7 @@ namespace Luke
             if (judasWitnessModel.currentPlayerTarget != null)
             {
                 Debug.Log("Player found");
-
-                judasWitnessModel.ResetPlanner();
+                
                 AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("playerFound", true);
@@ -64,11 +60,6 @@ namespace Luke
             {
                 Finish();
             }
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
         }
     }
 }
