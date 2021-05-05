@@ -76,10 +76,9 @@ namespace Luke
 		/// </summary>
 		public GameObject SpawnSingle(GameObject prefab)
 		{
-			GameObject spawnedInstance = null;
-
 			if (isServer)
 			{
+				GameObject spawnedInstance = null;
 				//random position for spawn + an adjustable y position in case of very large prefabs
 				Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), transform.position.y + yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
 
