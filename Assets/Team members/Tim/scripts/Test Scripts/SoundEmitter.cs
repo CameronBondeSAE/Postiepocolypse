@@ -37,7 +37,7 @@ namespace TimPearson
             }
         }
 
-        private void OnTriggerExit(Collider soundLevel1)
+        private void OnTriggerExit(Collider other)
         {
             listOfEars.Remove(ears.gameObject);
         }
