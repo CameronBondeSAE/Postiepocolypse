@@ -466,6 +466,18 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 4aa15b064fa9d2e4991235f52fff0c61
       objectReference: {fileID: 0}
+    - target: {fileID: 7667564812406049628, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
+      propertyPath: normalIntensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667564812406049628, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
+      propertyPath: attackingGradient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667564812406049628, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
+      propertyPath: attackingIntensity
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aa15b064fa9d2e4991235f52fff0c61, type: 3}
 --- !u!1001 &1037769406

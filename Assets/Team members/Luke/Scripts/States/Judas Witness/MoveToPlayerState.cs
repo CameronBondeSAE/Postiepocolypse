@@ -4,6 +4,7 @@ using Anthill.AI;
 using Damien;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 namespace Luke
 {
@@ -14,6 +15,7 @@ namespace Luke
         public JudasWitnessModel judasWitnessModel;
         public AntAIAgent antAIAgent;
         public FOV fov;
+        public VisualEffect vfx;
 
         public override void Create(GameObject aGameObject)
         {
@@ -24,6 +26,7 @@ namespace Luke
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
             antAIAgent = owner.GetComponent<AntAIAgent>();
             fov = owner.GetComponent<FOV>();
+            vfx = owner.GetComponentInChildren<VisualEffect>();
         }
 
         public override void Enter()
@@ -32,6 +35,9 @@ namespace Luke
 
             if (judasWitnessModel.currentPlayerTarget != null)
             {
+                navMeshAgent.speed += judasWitnessModel.speedIncrease;
+                vfx.SetInt("attackIntensity", judasWitnessModel.playerFoundIntensity);
+                vfx.SetFloat("gradientTime", judasWitnessModel.playerFoundGradient);
                 navMeshAgent.SetDestination(judasWitnessModel.currentPlayerTarget.transform.position);
             }
             
@@ -44,7 +50,8 @@ namespace Luke
 
             if (judasWitnessModel.currentPlayerTarget != null && navMeshAgent.remainingDistance < .5f)
             {
-                //set vfx colour to red
+                vfx.SetInt("attackIntensity", judasWitnessModel.attackingIntensity);
+                vfx.SetFloat("gradientTime", judasWitnessModel.attackingGradient);
                 
                 //setting the world condition
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
@@ -64,6 +71,9 @@ namespace Luke
             if (fov.listOfTargets.Count <= 0)
             {
                 judasWitnessModel.currentPlayerTarget = null;
+                navMeshAgent.speed = judasWitnessModel.patrolSpeed;
+                vfx.SetInt("attackIntensity", judasWitnessModel.normalIntensity);
+                vfx.SetFloat("gradientTime", judasWitnessModel.normalGradient);
                 //setting the world condition
                 antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
                 antAIAgent.worldState.Set("atAttackRange", false);

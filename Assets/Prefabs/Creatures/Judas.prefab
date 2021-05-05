@@ -388,11 +388,17 @@ MonoBehaviour:
   patrolSpeed: 5
   maxPatrolWaitTime: 6
   waterTargets: []
+  gatheredWaterTargets: []
   currentWaterTarget: {fileID: 0}
   spawnPos: {x: 0, y: 0, z: 0}
   currentPlayerTarget: {fileID: 0}
+  normalIntensity: 2
+  normalGradient: 0
   playerFoundIntensity: 4
   playerFoundGradient: 0.5
+  attackingIntensity: 10
+  attackingGradient: 1
+  speedIncrease: 5
   audioSource: {fileID: 3680741728346999298}
   chorusFilter: {fileID: 8261083863869696342}
   timeBetweenAudio: 20

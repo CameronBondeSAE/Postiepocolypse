@@ -12,17 +12,16 @@ namespace Luke
     {
         public GameObject owner;
         public JudasWitnessModel judasWitnessModel;
-        public FOV fov;
-        public VisualEffect vfx;
 
+        /// <summary>
+        ///  TODO This whole state is skipped by a sensor check!!!!!!!!!! 
+        /// </summary>
         public override void Create(GameObject aGameObject)
         {
             base.Create(aGameObject);
 
             owner = aGameObject;
             judasWitnessModel = owner.GetComponent<JudasWitnessModel>();
-            vfx = owner.GetComponentInChildren<VisualEffect>();
-            fov = owner.GetComponent<FOV>();
         }
 
         public override void Enter()
@@ -32,11 +31,6 @@ namespace Luke
             if (judasWitnessModel.currentPlayerTarget != null)
             {
                 Debug.Log("Player found");
-                
-                AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("playerFound", true);
-                antAIAgent.worldState.EndUpdate();
             }
 
             else
@@ -50,23 +44,7 @@ namespace Luke
         {
             base.Execute(aDeltaTime, aTimeScale);
 
-            if (judasWitnessModel.currentPlayerTarget != null)
-            {
-                vfx.SetInt("attackIntensity", judasWitnessModel.playerFoundIntensity);
-                vfx.SetFloat("gradientTime", judasWitnessModel.playerFoundGradient);
-                
-                Finish();
-            }
-
-            if (fov.listOfTargets.Count <= 0)
-            {
-                judasWitnessModel.currentPlayerTarget = null;
-            }
-
-            else
-            {
-                Finish();
-            }
+            Finish();
         }
     }
 }

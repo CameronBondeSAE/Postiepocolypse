@@ -29,8 +29,13 @@ namespace Luke
 
         [Header("Attacking state variables")]
         public GameObject currentPlayerTarget;
+        public int normalIntensity;
+        public float normalGradient;
         public int playerFoundIntensity;
         public float playerFoundGradient;
+        public int attackingIntensity;
+        public float attackingGradient;
+        public float speedIncrease;
 
         [Header("Audio")] 
         public AudioSource audioSource;
