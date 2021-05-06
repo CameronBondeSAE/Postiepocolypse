@@ -116,8 +116,6 @@ MonoBehaviour:
     - id: 1
       value: 0
     - id: 3
-      value: 0
-    - id: 3
       value: 1
     post:
     - id: 6
