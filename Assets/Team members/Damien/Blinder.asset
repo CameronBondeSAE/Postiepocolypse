@@ -134,7 +134,7 @@ MonoBehaviour:
       value: 1
   - name: Fill Energy
     isDefault: 0
-    position: {x: 1030, y: 64}
+    position: {x: 1020, y: 57}
     conditions:
     - id: 5
       value: 1

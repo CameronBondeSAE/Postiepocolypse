@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Anthill.AI;
 using UnityEngine;
+using ZachFrench;
 
 namespace Damien
 {
@@ -28,6 +29,8 @@ namespace Damien
 
         public AudioSource screamSoundsSource;
         public AudioClip[] screamSoundsArray;
+        
+        public PatrolManager patrolManager;
 
 
         // Start is called before the first frame update
@@ -76,6 +79,19 @@ namespace Damien
             screamSoundNumber = Random.Range(0, 3);
             screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
         }
+        
+        public void Idle()
+        {
+            if (patrolManager == null)
+            {
+                patrolManager = FindObjectOfType<PatrolManager>();
+                if (patrolManager == null)
+                {
+                    return;
+                }
+            }
+            
+        }
 
 
         public void ResetStates()
@@ -93,7 +109,7 @@ namespace Damien
 
         IEnumerator FlashPlayer()
         {
-            yield return new WaitForSeconds(2f);
+            //yield return new WaitForSeconds(2f);
             flash.intensity = flashBrightness;
             PlayFlashSound();
             yield return new WaitForSeconds(.1f);
@@ -106,7 +122,17 @@ namespace Damien
             
             yield return new WaitForSeconds(.1f);
             flash.intensity = flashBrightness;
+            yield return new WaitForSeconds(.2f);
+            flash.intensity = flashOffBrightness;
+            
             yield return new WaitForSeconds(.1f);
+            flash.intensity = flashBrightness;
+            yield return new WaitForSeconds(.1f);
+            flash.intensity = flashOffBrightness;
+            
+            yield return new WaitForSeconds(.1f);
+            flash.intensity = flashBrightness;
+            yield return new WaitForSeconds(.2f);
             flash.intensity = flashOffBrightness;
             
             ResetStates();
