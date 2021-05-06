@@ -560,7 +560,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   viewRadius: 50
-  viewAngle: 20
+  viewAngle: 45
   listOfTargets: []
 --- !u!114 &467360615
 MonoBehaviour:

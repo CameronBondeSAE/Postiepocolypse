@@ -170,6 +170,7 @@ namespace RileyMcGowan
             vfxComp.SetGradient("ActiveColour", energyColour);
             yield return new WaitForSeconds(4);
             currentWaterTarget = null;
+            playerTarget = null;
             yield return new WaitForSeconds(1);
             antAIRef.worldState.BeginUpdate(antAIRef.planner);
             antAIRef.worldState.Set("EnergyCollected", true);

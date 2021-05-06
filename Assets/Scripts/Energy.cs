@@ -83,12 +83,11 @@ public class Energy : MonoBehaviour
         if (CurrentAmount <= MaxAmount)
         {
             CurrentAmount += Regen * Time.deltaTime;
-            if (CurrentAmount > MaxAmount)
-            {
-                CurrentAmount = MaxAmount;
-                Regen = 0f;
-            }
-            
+        }
+        if (CurrentAmount > MaxAmount)
+        {
+            CurrentAmount = MaxAmount;
+            Regen = 0f;
         }
         lastPos = currentPos;
     }
