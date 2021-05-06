@@ -69,26 +69,27 @@ public class Energy : MonoBehaviour
         {
             CurrentAmount -= Drain * Time.deltaTime;
             // Reduce energy by the Drain value per second
-            if (CurrentAmount < MinAmount)
+            if (CurrentAmount <= MinAmount)
             {
+                Regen = Drain *2;
                 CurrentAmount = MinAmount;
-                if (regenOnLowEnergy)
-                {
-                    Regen = Drain *2;
-                }
                 lowEnergy?.Invoke(this);
             }
             
         }
+
         if (CurrentAmount <= MaxAmount)
         {
             CurrentAmount += Regen * Time.deltaTime;
         }
+
         if (CurrentAmount > MaxAmount)
         {
             CurrentAmount = MaxAmount;
             Regen = 0f;
         }
+            
+        
         lastPos = currentPos;
     }
 

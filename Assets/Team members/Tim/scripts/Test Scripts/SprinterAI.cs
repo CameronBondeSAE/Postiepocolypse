@@ -1,4 +1,6 @@
-﻿using Anthill.AI;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Anthill.AI;
 using UnityEngine;
 using UnityEngine.VFX;
 using ZachFrench;
@@ -17,6 +19,7 @@ namespace TimPearson
         public Damage damage;
         public float knockbackMultiplier;
         public VisualEffect visualEffect;
+        public AudioSource audioSource;
        
 
         // Start is called before the first frame update
@@ -34,6 +37,7 @@ namespace TimPearson
         {
             sprintRay();
             KnockBack();
+            StartCoroutine(PlaySound());
         }
         public void sprintRay()
         {
@@ -72,6 +76,15 @@ namespace TimPearson
                 {
                     obj.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(50,0,100)*knockbackMultiplier);
                 }
+            }
+        }
+
+        public IEnumerator PlaySound()
+        {
+            yield return new WaitForSeconds(2f);
+            if (audioSource.isPlaying == false)
+            {
+                audioSource.Play();
             }
         }
     }

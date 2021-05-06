@@ -13,22 +13,22 @@ namespace RileyMcGowan
         
         //Private Vars
         private float safeDistance;
+        private GameObject currentTarget;
 
         public override void Enter()
         {
             base.Enter();
             navMeshRef = creatureMainRef.navMeshRef;
             //Store all possible targets of type Targer in targetArray
-            GameObject currentTarget = FindObjectOfType<HellPortal>().gameObject;
-            //Tell the parent what the target is
-            if (currentTarget != null)
+            if (FindObjectOfType<HellPortal>() != null)
             {
+                currentTarget = FindObjectOfType<HellPortal>().gameObject;
                 creatureMainRef.portalTarget = currentTarget;
                 navMeshRef.SetDestination(currentTarget.transform.position);
             }
             else
             {
-                Debug.Log("No Portals are Available " + owner);
+                Debug.Log(owner + " Does not have a reference for hell portal");
                 Finish();
             }
         }
