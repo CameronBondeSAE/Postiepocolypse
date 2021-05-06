@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using Anthill.AI;
+using Mirror;
 using UnityEngine;
 using ZachFrench;
 
 namespace Damien
 {
-    public class Blinder : MonoBehaviour
+    public class Blinder : NetworkBehaviour
     {
         public GameObject owner;
         
@@ -36,35 +37,45 @@ namespace Damien
         // Start is called before the first frame update
         void Start()
         {
-            antAIAgent.SetGoal("Disorient Target");
-            flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
-            screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
-            ResetStates();
-        }
-
-        private void Update()
-        {
-            if (GetComponent<FOV>().listOfTargets.Count > 0)
+            if (isServer)
             {
-                targetsInView = true;
+                antAIAgent.SetGoal("Disorient Target");
+                flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
+                screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
+                ResetStates();
             }
             else
             {
-                targetsInView = false;
+                antAIAgent.enabled = false;
             }
-
-            if (targetsInView)
+            
+        }
+        private void Update()
+        {
+            if (isServer)
             {
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("Target in View Range", true);
-                antAIAgent.worldState.EndUpdate();
-            }
+                if (GetComponent<FOV>().listOfTargets.Count > 0)
+                {
+                    targetsInView = true;
+                }
+                else
+                {
+                    targetsInView = false;
+                }
 
-            if (!targetsInView)
-            {
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("Target in View Range", false);
-                antAIAgent.worldState.EndUpdate();
+                if (targetsInView)
+                {
+                    antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                    antAIAgent.worldState.Set("Target in View Range", true);
+                    antAIAgent.worldState.EndUpdate();
+                }
+
+                if (!targetsInView)
+                {
+                    antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                    antAIAgent.worldState.Set("Target in View Range", false);
+                    antAIAgent.worldState.EndUpdate();
+                }
             }
         }
 
@@ -82,17 +93,18 @@ namespace Damien
         
         public void Idle()
         {
-            if (patrolManager == null)
+            if (isServer)
             {
-                patrolManager = FindObjectOfType<PatrolManager>();
                 if (patrolManager == null)
                 {
-                    return;
+                    patrolManager = FindObjectOfType<PatrolManager>();
+                    if (patrolManager == null)
+                    {
+                        return;
+                    }
                 }
             }
-            
         }
-
 
         public void ResetStates()
         {
@@ -107,6 +119,7 @@ namespace Damien
             antAIAgent.worldState.EndUpdate();
         }
 
+        
         IEnumerator FlashPlayer()
         {
             //yield return new WaitForSeconds(2f);
@@ -114,29 +127,33 @@ namespace Damien
             PlayFlashSound();
             yield return new WaitForSeconds(.1f);
             flash.intensity = flashOffBrightness;
-            
+
             yield return new WaitForSeconds(.1f);
             flash.intensity = flashBrightness;
             yield return new WaitForSeconds(.1f);
             flash.intensity = flashOffBrightness;
-            
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashBrightness;
-            yield return new WaitForSeconds(.2f);
-            flash.intensity = flashOffBrightness;
-            
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashBrightness;
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashOffBrightness;
-            
+
             yield return new WaitForSeconds(.1f);
             flash.intensity = flashBrightness;
             yield return new WaitForSeconds(.2f);
             flash.intensity = flashOffBrightness;
-            
+
+            yield return new WaitForSeconds(.1f);
+            flash.intensity = flashBrightness;
+            yield return new WaitForSeconds(.1f);
+            flash.intensity = flashOffBrightness;
+
+            yield return new WaitForSeconds(.1f);
+            flash.intensity = flashBrightness;
+            yield return new WaitForSeconds(.2f);
+            flash.intensity = flashOffBrightness;
             ResetStates();
-            
+        }
+
+        [ClientRpc]
+        public void RpcFlashPlay()
+        {
+            StartCoroutine(FlashPlayer());
         }
     }
 }
