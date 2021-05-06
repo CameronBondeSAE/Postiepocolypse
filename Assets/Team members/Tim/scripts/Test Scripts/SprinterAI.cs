@@ -5,7 +5,7 @@ using ZachFrench;
 
 namespace TimPearson
 {
-    public class SprinterAI : MonoBehaviour
+    public class SprinterAI : CreatureBase
     {
         public PatrolManager target;
         public AntAIAgent antAIAgent;
