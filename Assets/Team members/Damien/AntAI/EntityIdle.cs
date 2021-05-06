@@ -58,8 +58,8 @@ namespace Damien
 
             if (_navMeshAgent.remainingDistance < 1f)
             {
-                _navMeshAgent.SetDestination(_patrolManager.paths[Random.Range(0, _patrolManager.paths.Count)].transform
-                    .position);
+                //_navMeshAgent.SetDestination(_patrolManager.paths[Random.Range(0, _patrolManager.paths.Count)].transform.position);
+                _blinder.SetDestination();
             }
 
             if (owner.GetComponent<FOV>().listOfTargets.Count != 0)

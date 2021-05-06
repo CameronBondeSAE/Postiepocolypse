@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Anthill.AI;
 using UnityEngine;
+using UnityEngine.AI;
 using ZachFrench;
 
 namespace Damien
@@ -31,11 +32,15 @@ namespace Damien
         public AudioClip[] screamSoundsArray;
         
         public PatrolManager patrolManager;
+        public NavMeshAgent navMeshAgent;
+
+        private int destinationNumber;
 
 
         // Start is called before the first frame update
         void Start()
         {
+            navMeshAgent = owner.GetComponent<NavMeshAgent>();
             antAIAgent.SetGoal("Disorient Target");
             flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
             screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
@@ -91,6 +96,12 @@ namespace Damien
                 }
             }
             
+        }
+
+        public void SetDestination()
+        {
+            destinationNumber = Random.Range(0, patrolManager.paths.Count);
+            navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
         }
 
 
