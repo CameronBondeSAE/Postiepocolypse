@@ -1873,6 +1873,7 @@ GameObject:
   - component: {fileID: 3699416323647111360}
   - component: {fileID: 4677099595509363551}
   - component: {fileID: 1622969728085720890}
+  - component: {fileID: 1055797148231286676}
   m_Layer: 14
   m_Name: OuterSphere
   m_TagString: Untagged
@@ -1952,11 +1953,28 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6642301740245682791}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1055797148231286676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6642301740245682791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbd3071f9e87f04a8d96a9eb26115ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
+  damageType: 0
+  damageOverDistance: 1
+  sphereCollider: {fileID: 1622969728085720890}
+  inCollider: []
 --- !u!1 &7058318616107597939
 GameObject:
   m_ObjectHideFlags: 0
