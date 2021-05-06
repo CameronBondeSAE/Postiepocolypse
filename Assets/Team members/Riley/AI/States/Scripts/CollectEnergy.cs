@@ -26,9 +26,10 @@ namespace RileyMcGowan
             safeDistance = creatureMainRef.safeDistance;
             
             //Check the distance the creature has until it's finished
-            if (navMeshRef.remainingDistance < safeDistance)
+            if (navMeshRef.remainingDistance < safeDistance && creatureMainRef.energyCollecting != true)
             {
                 creatureMainRef.StartCollectEnergy();
+                Finish();
             }
         }
     }

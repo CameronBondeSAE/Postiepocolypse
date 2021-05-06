@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
 using Mirror;
+using TimPearson;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
@@ -19,7 +20,7 @@ namespace RileyMcGowan
         private AntAIAgent antAIRef;
         private Damien.FOV currentFOV;
         private bool colourHasSwapped;
-        
+        private Energy energyRef;
 
         //Public Vars
         public GameObject portalTarget;
@@ -31,10 +32,13 @@ namespace RileyMcGowan
         public float safeDistance = 1f;
         public VisualEffect vfxComp;
         public bool swapColour;
+        public bool energyCollecting;
         
         
         void Start()
         {
+            energyCollecting = false;
+            energyRef = GetComponent<Energy>();
             swapColour = false;
             //Grab all the components needed for reference
             if (GetComponentInChildren<VisualEffect>() != null)
@@ -130,6 +134,11 @@ namespace RileyMcGowan
             {
                 antAIRef.SetGoal("PatrolLoop");
             }
+
+            if (energyCollecting != false)
+            {
+                energyRef.CurrentAmount += .2f;
+            }
         }
 
         public void ResetPlanner()
@@ -145,19 +154,27 @@ namespace RileyMcGowan
         //CollectEnergy
         public void StartCollectEnergy()
         {
-            StartCoroutine(CollectEnergy());
+            if (energyCollecting != true)
+            {
+                StartCoroutine(CollectEnergy());
+            }
         }
 
         IEnumerator CollectEnergy()
         {
+            energyCollecting = true;
+            antAIRef.worldState.BeginUpdate(antAIRef.planner);
+            antAIRef.worldState.Set("PlayerReached", false);
+            antAIRef.worldState.EndUpdate();
             Gradient energyColour = vfxComp.GetGradient("EnergyCollect");
             vfxComp.SetGradient("ActiveColour", energyColour);
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(4);
+            currentWaterTarget = null;
+            yield return new WaitForSeconds(1);
             antAIRef.worldState.BeginUpdate(antAIRef.planner);
             antAIRef.worldState.Set("EnergyCollected", true);
             antAIRef.worldState.EndUpdate();
-            currentWaterTarget = null;
-            GetComponentInChildren<CollectEnergy>().Finish();
+            energyCollecting = false;
         }
     }
 }

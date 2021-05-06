@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 1435332727}
   - component: {fileID: 1435332728}
   - component: {fileID: 843785365}
+  - component: {fileID: 63177777194168302}
   m_Layer: 14
   m_Name: Audio
   m_TagString: Untagged
@@ -303,6 +304,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ebf027c008d1bf489320f7039e92325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &63177777194168302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435332724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ebf027c008d1bf489320f7039e92325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2552460577428112600
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +336,7 @@ GameObject:
   - component: {fileID: 1881397177}
   - component: {fileID: 1881397178}
   - component: {fileID: 1881397179}
+  - component: {fileID: 467360615}
   m_Layer: 14
   m_Name: RunawayPoker
   m_TagString: Untagged
@@ -529,6 +543,7 @@ MonoBehaviour:
   safeDistance: 1
   vfxComp: {fileID: 0}
   swapColour: 0
+  energyCollecting: 0
 --- !u!114 &1881397179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,6 +562,28 @@ MonoBehaviour:
   viewRadius: 50
   viewAngle: 20
   listOfTargets: []
+--- !u!114 &467360615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552460577428112600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468f955eae133164fafd23edbeca5183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinAmount: 0
+  CurrentAmount: 0
+  MaxAmount: 100
+  Drain: 1
+  MoveDrainScale: 0
+  StandingDrain: 1
+  regenOnLowEnergy: 0
+  Regen: 0
+  distance: 0
+  speed: 0
 --- !u!1 &2552460577630369638
 GameObject:
   m_ObjectHideFlags: 0

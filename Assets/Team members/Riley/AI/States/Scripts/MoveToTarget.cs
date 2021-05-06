@@ -43,6 +43,12 @@ namespace RileyMcGowan
                 radiusRef = creatureMainRef.vfxComp.GetFloat("Radius") + 0.5f;
                 creatureMainRef.vfxComp.SetFloat("Radius", radiusRef);
             }
+            if (energyRef.CurrentAmount < energyRef.MaxAmount / 4)
+            {
+                GameObject playerFake = owner;
+                creatureMainRef.playerTarget = playerFake;
+            }
+
             if (creatureMainRef.playerTarget != null)
             {
                 Finish();
