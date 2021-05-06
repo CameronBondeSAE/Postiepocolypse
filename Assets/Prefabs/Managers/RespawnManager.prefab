@@ -49,13 +49,15 @@ MonoBehaviour:
   syncInterval: 0.1
   homeSpawn: {x: 0, y: 0, z: 0}
   playerSpawn: {x: 0, y: 0, z: 0}
-  civilianPrefab: {fileID: 5300904820060497483, guid: 5f225be61f23361489c7676488472793, type: 3}
+  civilianPrefab: {fileID: 8536333146997084895, guid: 58883ba369d55004cae72bc037f73bdb, type: 3}
   numberOfCivilian: 6
   numberOfPlayers: 0
+  baseOrigin: {fileID: 0}
   civilians: []
   players: []
   postieNetworkManager: {fileID: 0}
   civSpawn: {fileID: 1577826189}
+  gameOver: {fileID: 0}
 --- !u!114 &1577826189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,15 +74,14 @@ MonoBehaviour:
   syncInterval: 0.1
   setsOfPrefabs: 0
   prefabs: []
-  spawnRange: 0
+  spawnRange: 2.5
   spawnOnStart: 0
   randomSpawn: 0
   ySpawnGroundOffset: 1
   yAdjustablePosition: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  yGroundTestOffset: 5
+  yGroundTestOffset: 2
+  spawnOnPatrolPoints: 0
+  patrolManager: {fileID: 0}
 --- !u!114 &6993873170710992513
 MonoBehaviour:
   m_ObjectHideFlags: 0

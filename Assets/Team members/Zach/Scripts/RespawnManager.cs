@@ -6,6 +6,7 @@ using Mirror;
 using RileyMcGowan;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 
 namespace ZachFrench
@@ -37,6 +38,8 @@ namespace ZachFrench
 
         public Luke.Spawner civSpawn;
 
+        public Canvas gameOver;
+
 
         // Civilian don't get created instead are still currently part of the list
         public override void OnStartServer()
@@ -47,6 +50,8 @@ namespace ZachFrench
             {
                 return;
             }
+
+            gameOver.enabled = false;
             homeSpawn = transform.position;
             postieNetworkManager.newPlayerEvent += PostieNetworkManagerOnNewPlayerEvent;
             postieNetworkManager.playerDisconnectedEvent += PostieNetworkManagerOnPlayerDisconnectedEvent;
@@ -108,6 +113,7 @@ namespace ZachFrench
             }
             else
             {
+                gameOver.enabled = true;
                 Debug.Log("You have run out of lives");
             }
             
