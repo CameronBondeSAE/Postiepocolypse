@@ -42,6 +42,7 @@ namespace Damien
         void Start()
         {
             navMeshAgent = owner.GetComponent<NavMeshAgent>();
+            if (isServer)
             {
                 antAIAgent.SetGoal("Disorient Target");
                 flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
@@ -81,6 +82,12 @@ namespace Damien
                     antAIAgent.worldState.EndUpdate();
                 }
             }
+        }
+
+        public void SetDestination()
+        {
+            destinationNumber = Random.Range(0, patrolManager.paths.Count);
+            navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
         }
 
         public void PlayFlashSound()
