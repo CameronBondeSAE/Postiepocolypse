@@ -14,14 +14,12 @@ namespace RileyMcGowan
         private float safeDistance;
         private GameObject currentTarget;
         private Vector3 targetLocation;
-        private int timeToFollow;
 
         public override void Enter()
         {
             base.Enter();
             targetLocation = creatureMainRef.playerTarget.transform.position;
             navMeshRef.SetDestination(targetLocation);
-            timeToFollow = 0;
             creatureMainRef.swapColour = true;
         }
 
@@ -30,11 +28,14 @@ namespace RileyMcGowan
             base.Execute(aDeltaTime, aTimeScale);
             //Take the safeDistance from the main script so all controls are on the main script
             safeDistance = creatureMainRef.safeDistance;
-            if (targetLocation != creatureMainRef.playerTarget.transform.position && timeToFollow < 100)
+            if (targetLocation != creatureMainRef.playerTarget.transform.position && energyRef.CurrentAmount > energyRef.MaxAmount/3)
             {
-                timeToFollow += 1;
                 navMeshRef.SetDestination(creatureMainRef.playerTarget.transform.position);
                 targetLocation = creatureMainRef.playerTarget.transform.position;
+            }
+            else if (energyRef.CurrentAmount < energyRef.MaxAmount/3)
+            {
+                FinishState();
             }
             
             if (creatureMainRef.vfxComp.GetInt("MaxParticles") < 5000)
@@ -54,7 +55,7 @@ namespace RileyMcGowan
             if (creatureMainRef.vfxComp.GetFloat("Radius") > 1 || creatureMainRef.vfxComp.GetFloat("Radius") < 5)
             {
                 float radiusRef;
-                radiusRef = navMeshRef.remainingDistance;
+                radiusRef = navMeshRef.remainingDistance * energyRef.CurrentAmount/130;
                 if (radiusRef < 1)
                 {
                     radiusRef = 1;
@@ -77,14 +78,17 @@ namespace RileyMcGowan
             //Check the distance the creature has until it's finished
             if (navMeshRef.remainingDistance < safeDistance)
             {
-                //Do the state machines job for it...
-                antAIRef.worldState.BeginUpdate(antAIRef.planner);
-                antAIRef.worldState.Set("PlayerReached", true);
-                antAIRef.worldState.EndUpdate();
-                creatureMainRef.currentPatrolPoint = null;
-                //Stop navigation and finish
-                Finish();
+                FinishState();
             }
+        }
+
+        void FinishState()
+        {
+            antAIRef.worldState.BeginUpdate(antAIRef.planner);
+            antAIRef.worldState.Set("PlayerReached", true);
+            antAIRef.worldState.EndUpdate();
+            creatureMainRef.currentPatrolPoint = null;
+            Finish();
         }
     }
 }

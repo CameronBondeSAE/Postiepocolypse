@@ -22,6 +22,12 @@ namespace RileyMcGowan
         public override void Execute(float aDeltaTime, float aTimeScale)
         {
             base.Execute(aDeltaTime, aTimeScale);
+            
+            if (creatureMainRef.vfxComp.GetFloat("Radius") > 1)
+            {
+                float radiusRef = creatureMainRef.vfxComp.GetFloat("Radius") - .1f;
+                creatureMainRef.vfxComp.SetFloat("Radius", radiusRef);
+            }
             //Take the safeDistance from the main script so all controls are on the main script
             safeDistance = creatureMainRef.safeDistance;
             
