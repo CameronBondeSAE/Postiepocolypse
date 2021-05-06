@@ -86,8 +86,11 @@ namespace Damien
 
         public void SetDestination()
         {
-            destinationNumber = Random.Range(0, patrolManager.paths.Count);
-            navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
+            if (isServer)
+            {
+                destinationNumber = Random.Range(0, patrolManager.paths.Count);
+                navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
+            }
         }
 
         public void PlayFlashSound()
@@ -134,32 +137,36 @@ namespace Damien
         
         IEnumerator FlashPlayer()
         {
-            //yield return new WaitForSeconds(2f);
-            flash.intensity = flashBrightness;
-            PlayFlashSound();
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashOffBrightness;
-
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashBrightness;
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashOffBrightness;
-
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashBrightness;
-            yield return new WaitForSeconds(.2f);
-            flash.intensity = flashOffBrightness;
-
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashBrightness;
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashOffBrightness;
-
-            yield return new WaitForSeconds(.1f);
-            flash.intensity = flashBrightness;
-            yield return new WaitForSeconds(.2f);
-            flash.intensity = flashOffBrightness;
-            ResetStates();
+            if (isServer)
+            {
+                yield return new WaitForSeconds(2f);
+                flash.intensity = flashBrightness;
+                PlayFlashSound();
+                yield return new WaitForSeconds(.1f);
+                flash.intensity = flashOffBrightness;
+                
+                yield return new WaitForSeconds(.1f);
+                flash.intensity = flashBrightness;
+                yield return new WaitForSeconds(.1f);
+                flash.intensity = flashOffBrightness;
+                
+                yield return new WaitForSeconds(.1f);
+                flash.intensity = flashBrightness;
+                yield return new WaitForSeconds(.2f);
+                flash.intensity = flashOffBrightness;
+                //
+                //yield return new WaitForSeconds(.1f);
+                //flash.intensity = flashBrightness;
+                //yield return new WaitForSeconds(.1f);
+                //flash.intensity = flashOffBrightness;
+                //
+                //yield return new WaitForSeconds(.1f);
+                //flash.intensity = flashBrightness;
+                //yield return new WaitForSeconds(.2f);
+                //flash.intensity = flashOffBrightness;
+                ResetStates();
+            }
+            
         }
 
         [ClientRpc]
