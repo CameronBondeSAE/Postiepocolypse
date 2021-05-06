@@ -476,11 +476,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinAmount: 0
-  CurrentAmount: 20
-  MaxAmount: 20
+  CurrentAmount: 35
+  MaxAmount: 35
   Drain: 1.5
   MoveDrainScale: 2
   StandingDrain: 0.5
+  regenOnLowEnergy: 0
   Regen: 0
   distance: 0
   speed: 0
