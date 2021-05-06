@@ -27,8 +27,7 @@ public class PlayerViewModel : MonoBehaviour
 	void HealthOndeathEvent(Health health)
 	{
 		audioSource.spatialBlend = 0.75f; // Keep death sound slightly audible
-		audioSource.clip = deathClip;
-		audioSource.Play();
+		audioSource.PlayOneShot(deathClip);
 	}
 
 	void StepSound()

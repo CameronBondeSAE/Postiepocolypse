@@ -1072,8 +1072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308f941eb23623148ac8b4dc8a580dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathClip: {fileID: 0}
-  stepClip: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: cdbf82332703d1e4da322315f3d403f6, type: 3}
+  stepClip: {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
   health: {fileID: 8299417107634708922}
   audioSource: {fileID: 5989070166137169129}
   soundEmitter: {fileID: 0}

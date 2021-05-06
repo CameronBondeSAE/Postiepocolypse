@@ -40,8 +40,13 @@ namespace ZachFrench
 
         public Canvas gameOver;
 
+		public void Awake()
+		{
+			
+			gameOver.enabled = false;
+		}
 
-        // Civilian don't get created instead are still currently part of the list
+		// Civilian don't get created instead are still currently part of the list
         public override void OnStartServer()
         {
             base.OnStartServer();
@@ -101,12 +106,14 @@ namespace ZachFrench
                     inventory.Drop();
                 }
 
-                obj.transform.position = civilianToDelete.transform.position;
-                obj.transform.rotation = civilianToDelete.transform.rotation;
-                obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                obj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                // obj.transform.position = civilianToDelete.transform.position;
+                // obj.transform.rotation = civilianToDelete.transform.rotation;
+                // obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                // obj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 obj.GetComponent<Health>().currentHealth = civilianToDelete.GetComponent<Health>().currentHealth;
                 
+				RpcRespawnAfterDeath(obj.gameObject.GetComponent<NetworkIdentity>(), civilianToDelete.transform.position, civilianToDelete.transform.rotation);
+				
                 // DestroyImmediate(civilianToDelete,true);
                 Destroy(civilianToDelete);
                 //civilians[numberOfCivilian].GetComponent<Health>().deathEvent -= RespawnAfterDeath;
@@ -120,6 +127,15 @@ namespace ZachFrench
             }
             
         }
+
+		[ClientRpc]
+		public void RpcRespawnAfterDeath(NetworkIdentity netID, Vector3 pos, Quaternion rot)
+		{
+			netID.transform.position                        = pos;
+			netID.transform.rotation                        = rot;
+			netID.GetComponent<Rigidbody>().velocity        = Vector3.zero;
+			netID.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+		}
 
 		[ClientRpc]
 		public void RpcShowGameOverScreen()
