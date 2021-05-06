@@ -7,7 +7,7 @@ using UnityEngine;
 namespace ZachFrench
 {
 
-    public class NavDudeBody : MonoBehaviour
+    public class NavDudeBody : CreatureBase
     {
         public PatrolPoint target;
         
