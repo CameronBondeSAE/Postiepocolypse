@@ -41,9 +41,9 @@ namespace Damien
         // Start is called before the first frame update
         void Start()
         {
-            navMeshAgent = owner.GetComponent<NavMeshAgent>();
-            if (isServer)
+            if(isServer)
             {
+                navMeshAgent = owner.GetComponent<NavMeshAgent>();
                 antAIAgent.SetGoal("Disorient Target");
                 flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
                 screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
