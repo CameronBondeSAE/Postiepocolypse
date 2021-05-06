@@ -58,11 +58,17 @@ namespace RileyMcGowan
             safeDistance = creatureMainRef.safeDistance;
             
             //Check the distance the creature has until it's finished
-            if (navMeshRef.remainingDistance < safeDistance)
+            if (creatureMainRef.currentPatrolPoint && owner != null)
             {
-                //Stop navigation and finish
-                creatureMainRef.currentPatrolPoint = null;
-                Finish();
+                if (Vector3.Distance(owner.transform.position, creatureMainRef.currentPatrolPoint.transform.position) < safeDistance)
+                {
+                    //Stop navigation and finish
+                    creatureMainRef.currentPatrolPoint = null;
+                    antAIRef.worldState.BeginUpdate(antAIRef.planner);
+                    antAIRef.worldState.Set("TargetFound", false);
+                    antAIRef.worldState.EndUpdate();
+                    Finish();
+                }
             }
         }
     }

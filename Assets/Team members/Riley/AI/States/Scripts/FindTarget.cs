@@ -16,6 +16,10 @@ namespace RileyMcGowan
         public override void Enter()
         {
             base.Enter();
+            antAIRef.worldState.BeginUpdate(antAIRef.planner);
+            antAIRef.worldState.Set("PatrolCompleted", false);
+            antAIRef.worldState.EndUpdate();
+            creatureMainRef.currentPatrolPoint = null;
             //Store all possible targets of type Targer in targetArray
             targetArray = FindObjectsOfType<PatrolPoint>();
             //Set the target using a random target from the array and make it currentTarget
