@@ -16,9 +16,6 @@ GameObject:
   - component: {fileID: -1056631025556253633}
   - component: {fileID: 1926790911}
   - component: {fileID: 4748934127193777109}
-  - component: {fileID: -8817464447747381165}
-  - component: {fileID: -1346940156759396770}
-  - component: {fileID: 955022043711498751}
   - component: {fileID: -6766821657254434207}
   m_Layer: 14
   m_Name: TransparentSphere
@@ -152,7 +149,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   scale: {x: 100, y: 2, z: 100}
-  timeScale: 0.01
+  timeScale: 0.31
 --- !u!114 &4748934127193777109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,54 +165,8 @@ MonoBehaviour:
   damageAmount: 10
   damageType: 0
   damageOverDistance: 0
-  sphereCollider: {fileID: 0}
+  sphereCollider: {fileID: 2626232103756770634}
   inCollider: []
---- !u!114 &-8817464447747381165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2626232103756770635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c40800b51a7ff26449005d39f92cf4bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  antAIAgent: {fileID: 4979934498223357702, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
---- !u!114 &-1346940156759396770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2626232103756770635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 822f3ad56406749478ef4e583cc6137d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fov: {fileID: 1959558857, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
-  Energy: {fileID: 269401513, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
-  lowEnergy: 0
-  playerTarget: {fileID: 0}
-  NavMeshAgent: {fileID: 4979934498223357697, guid: 5b536c5d9a67a8b49ab9de14c7df93e5, type: 3}
---- !u!114 &955022043711498751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2626232103756770635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e724e36405834fa192b36cd6a4e6059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manualUpdate: 0
-  thinkInterval: 0.1
-  scenario: {fileID: 11400000, guid: 73593b4e0ce8e67439348c2a1ffcb521, type: 2}
 --- !u!195 &-6766821657254434207
 NavMeshAgent:
   m_ObjectHideFlags: 0
