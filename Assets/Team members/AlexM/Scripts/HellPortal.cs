@@ -15,6 +15,25 @@ namespace AlexM
 		[SyncVar,HideInInspector]
 		public Vector3 scale;
 
+		public float attractForce = 100000;
+
+
+		void OnTriggerStay(Collider other)
+		{
+			if (other.GetComponent<PlayerMovement>())
+			{
+				Vector3 otherTransformPos = other.transform.position;
+				Vector3 portalPositionNoY = new Vector3(transform.position.x, 0, transform.position.z);
+				Vector3 otherPosNoY           = new Vector3(otherTransformPos.x,  0, otherTransformPos.z);
+				
+				Vector3 direction         = (portalPositionNoY - otherPosNoY).normalized;
+				// Debug.Log("dir = "+direction);
+				float   invertedDistance  = GetComponent<CapsuleCollider>().radius - Vector3.Distance(portalPositionNoY, otherPosNoY);
+				// Debug.Log("invertedDist = "+invertedDistance);
+				other.GetComponent<Rigidbody>().AddForce(direction* invertedDistance * attractForce * Time.deltaTime);
+			}
+		}
+
 		private void Start()
 		{
 			// InvokeRepeating("PulseScale", 1f, 3f);
@@ -47,5 +66,5 @@ namespace AlexM
 		}
 	#endregion
 	}
-
+	
 }

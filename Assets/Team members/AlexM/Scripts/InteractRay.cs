@@ -1,18 +1,21 @@
 ﻿using JonathonMiles;
+using Mirror;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace AlexM
 {
-	public class InteractRay : MonoBehaviour
+	public class InteractRay : NetworkBehaviour
 	{
 		private bool         Ray;
 		private CamMouseLook _camMouseLook;
+
 		[HideInInspector]
 		public RaycastHit hit;
 
 		public event Action<GameObject> hitObjEvent;
+
 		private void Awake()
 		{
 			_camMouseLook = GetComponentInChildren<CamMouseLook>();
@@ -20,7 +23,6 @@ namespace AlexM
 
 		private void FixedUpdate()
 		{
-			
 		}
 
 		void Update()
@@ -30,34 +32,53 @@ namespace AlexM
 
 		public void Use(InputAction.CallbackContext obj)
 		{
-			if (obj.performed)
+			// Only the actual owned player GO
+			if (isLocalPlayer)
 			{
-				ShootRay();
-
-				// TODO Cam hack
-				Interactable interactable = hit.transform.GetComponent<Interactable>();
-				if (interactable)
+				if (obj.performed)
 				{
-					interactable.Interact(gameObject);
+					CmdUse();
 				}
+			}
+		}
+
+		[Command]
+		public void CmdUse()
+		{
+			ShootRay();
+
+			// TODO Cam hack
+			Interactable interactable = hit.transform.GetComponent<Interactable>();
+			if (interactable)
+			{
+				interactable.Interact(gameObject);
 			}
 		}
 
 		public void PickUp(InputAction.CallbackContext obj)
 		{
-			if (obj.performed)
+			// Only the actual owned player GO
+			if (isLocalPlayer)
 			{
-				ShootRay();
-
-				// TODO Cam hack
-				PickUpItem pickUpItem = hit.transform.GetComponent<PickUpItem>();
-				if (pickUpItem)
+				if (obj.performed)
 				{
-					pickUpItem.PickUp(gameObject);
-					
-					
-					GetComponent<Inventory>().CmdAdd(pickUpItem.item);
+					CmdPickup();
 				}
+			}
+		}
+
+		[Command]
+		public void CmdPickup()
+		{
+			ShootRay();
+
+			// TODO Cam hack
+			PickUpItem pickUpItem = hit.transform.GetComponent<PickUpItem>();
+			if (pickUpItem)
+			{
+				pickUpItem.PickUp(gameObject);
+
+				GetComponent<Inventory>().CmdAdd(pickUpItem.item);
 			}
 		}
 

@@ -14,7 +14,7 @@ public class CamItem : ItemBase
 		base.Use(owner);
 		
 		Debug.Log("CamItem got USED!");
-		owner.GetComponent<Health>().DoHeal(100000);
+		owner.GetComponent<Health>().DoHeal(50f);
 	}
 
 	public override void Pickup(GameObject owner)

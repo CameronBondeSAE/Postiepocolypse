@@ -10,6 +10,10 @@ namespace JonathonMiles
         public void Interact(GameObject owner)
 		{
 			item.Use(owner);
+			if (item.isConsumable)
+			{
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }

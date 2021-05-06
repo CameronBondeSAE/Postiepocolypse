@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NavScenario
   m_EditorClassIdentifier: 
   conditions:
-    position: {x: -8, y: 206}
+    position: {x: 114, y: -122}
     list:
     - id: 0
       name: Found Item
@@ -40,7 +40,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5623208080860181825, guid: fd355983336667e488174572cd89c1c6, type: 3}
     cost: 0
-    position: {x: 1708, y: 101}
+    position: {x: 1830, y: -227}
     pre:
     - id: 0
       value: 1
@@ -51,7 +51,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 4610834287423321265, guid: cb0299538182d40468358cfca0202c57, type: 3}
     cost: 0
-    position: {x: 612, y: 201}
+    position: {x: 734, y: -127}
     pre:
     - id: 1
       value: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 416806764062995789, guid: 132c5f951a1def54387bf35613a34c9a, type: 3}
     cost: 0
-    position: {x: 202, y: 434}
+    position: {x: 324, y: 106}
     pre:
     - id: 2
       value: 1
@@ -75,7 +75,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 258945532927391298, guid: c592cc1f400d03c449ea91b361a5477b, type: 3}
     cost: 0
-    position: {x: 200, y: 621}
+    position: {x: 322, y: 293}
     pre:
     - id: 3
       value: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5541841800217564314, guid: f6c8620e3906ec14fa7868781b255339, type: 3}
     cost: 0
-    position: {x: 405, y: 437}
+    position: {x: 527, y: 109}
     pre:
     - id: 6
       value: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 807449006840413732, guid: ca78d41981895cf4fab67be16417b221, type: 3}
     cost: 0
-    position: {x: 408, y: 624}
+    position: {x: 530, y: 296}
     pre:
     - id: 4
       value: 1
@@ -108,7 +108,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 3864041967078596820, guid: 7656f6d20231bb048b0304ecd560e932, type: 3}
     cost: 0
-    position: {x: 1515, y: 104}
+    position: {x: 1637, y: -224}
     pre:
     - id: 0
       value: 0
@@ -123,14 +123,14 @@ MonoBehaviour:
     isDefault: 1
     state: {fileID: 5207508835890789557, guid: 278b8c0aa6d341e418c244172cab5edc, type: 3}
     cost: 0
-    position: {x: -21, y: 467}
+    position: {x: 101, y: 139}
     pre: []
     post: []
   - name: Pick A Target
     isDefault: 0
     state: {fileID: 5328860923978580379, guid: 93985f3a676f03c49b04c1412b9faac5, type: 3}
     cost: 2
-    position: {x: 209, y: 833}
+    position: {x: 331, y: 505}
     pre:
     - id: 8
       value: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5581026121193848253, guid: 2c3b00a6a8757224eb2fa386870a4ae1, type: 3}
     cost: 2
-    position: {x: 433, y: 841}
+    position: {x: 555, y: 513}
     pre:
     - id: 8
       value: 1
@@ -159,30 +159,30 @@ MonoBehaviour:
   goals:
   - name: Collect Item
     isDefault: 0
-    position: {x: 815, y: 202}
+    position: {x: 937, y: -126}
     conditions:
     - id: 2
       value: 1
   - name: Deposit Item
     isDefault: 1
-    position: {x: 609, y: 441}
+    position: {x: 731, y: 113}
     conditions:
     - id: 5
       value: 1
   - name: Hidden From Player
     isDefault: 0
-    position: {x: 619, y: 626}
+    position: {x: 741, y: 298}
     conditions:
     - id: 7
       value: 1
   - name: Arrived at Target
     isDefault: 0
-    position: {x: 658, y: 836}
+    position: {x: 780, y: 508}
     conditions:
     - id: 9
       value: 1
   worldStates:
-  - position: {x: -22, y: 788}
+  - position: {x: 100, y: 460}
     list:
     - id: 0
       value: 0

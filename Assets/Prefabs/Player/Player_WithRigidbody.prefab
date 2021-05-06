@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1432595868428586471}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Compass Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6271187259181377452}
   - component: {fileID: 1941906584391736464}
   - component: {fileID: 3311125302654075880}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 6271187259283767327}
   - component: {fileID: 6271187259283767297}
   - component: {fileID: 6271187259283767326}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GripStub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 3411472063979927375}
   - component: {fileID: 86339251342403916}
   - component: {fileID: 7428895171471212859}
+  - component: {fileID: 6109204530860881421}
   m_Layer: 8
   m_Name: Player_WithRigidbody
   m_TagString: Untagged
@@ -614,6 +615,238 @@ MonoBehaviour:
   syncInterval: 0.1
   flashlight: {fileID: 6732787804643739882}
   lightOn: 0
+--- !u!114 &6109204530860881421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271187260368080590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ac430644dede14b987737e21430218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  JSON: "{ \t\"Items\":\t[     {         \"city\": \"Sydney\",          \"lat\":
+    \"-33.8650\",          \"lng\": \"151.2094\",          \"country\": \"Australia\",         
+    \"iso2\": \"AU\",          \"admin_name\": \"New South Wales\",          \"capital\":
+    \"admin\",          \"population\": \"5312163\",          \"population_proper\":
+    \"4840600\"     },      {         \"city\": \"Melbourne\",          \"lat\":
+    \"-37.8136\",          \"lng\": \"144.9631\",          \"country\": \"Australia\",         
+    \"iso2\": \"AU\",          \"admin_name\": \"Victoria\",          \"capital\":
+    \"admin\",          \"population\": \"5078193\",          \"population_proper\":
+    \"4529500\"     },      {         \"city\": \"Brisbane\",          \"lat\": \"-27.4678\",         
+    \"lng\": \"153.0281\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Queensland\",          \"capital\": \"admin\",         
+    \"population\": \"2514184\",          \"population_proper\": \"2360241\"    
+    },      {         \"city\": \"Perth\",          \"lat\": \"-31.9522\",         
+    \"lng\": \"115.8589\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Western Australia\",          \"capital\":
+    \"admin\",          \"population\": \"2059484\",          \"population_proper\":
+    \"2039200\"     },      {         \"city\": \"Adelaide\",          \"lat\": \"-34.9289\",         
+    \"lng\": \"138.6011\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"South Australia\",          \"capital\": \"admin\",         
+    \"population\": \"1345777\",          \"population_proper\": \"1295714\"    
+    },      {         \"city\": \"Gold Coast\",          \"lat\": \"-28.0167\",         
+    \"lng\": \"153.4000\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Queensland\",          \"capital\": \"\",         
+    \"population\": \"679127\",          \"population_proper\": \"638090\"     },     
+    {         \"city\": \"Canberra\",          \"lat\": \"-35.2931\",          \"lng\":
+    \"149.1269\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"Australian Capital Territory\",          \"capital\": \"primary\",         
+    \"population\": \"426704\",          \"population_proper\": \"381488\"     },     
+    {         \"city\": \"Newcastle\",          \"lat\": \"-32.9167\",          \"lng\":
+    \"151.7500\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"New South Wales\",          \"capital\": \"\",          \"population\":
+    \"322278\",          \"population_proper\": \"152984\"     },      {        
+    \"city\": \"Wollongong\",          \"lat\": \"-34.4331\",          \"lng\": \"150.8831\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"New South Wales\",          \"capital\": \"\",          \"population\": \"302739\",         
+    \"population_proper\": \"289236\"     },      {         \"city\": \"Geelong\",         
+    \"lat\": \"-38.1500\",          \"lng\": \"144.3500\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Victoria\",         
+    \"capital\": \"\",          \"population\": \"263280\",          \"population_proper\":
+    \"191440\"     },      {         \"city\": \"Hobart\",          \"lat\": \"-42.8806\",         
+    \"lng\": \"147.3250\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Tasmania\",          \"capital\": \"admin\",         
+    \"population\": \"240342\",          \"population_proper\": \"222356\"     },     
+    {         \"city\": \"Townsville\",          \"lat\": \"-19.2564\",         
+    \"lng\": \"146.8183\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Queensland\",          \"capital\": \"\",         
+    \"population\": \"180820\",          \"population_proper\": \"178649\"     },     
+    {         \"city\": \"Ipswich\",          \"lat\": \"-27.6167\",          \"lng\":
+    \"152.7667\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"Queensland\",          \"capital\": \"\",          \"population\":
+    \"163000\",          \"population_proper\": \"163000\"     },      {        
+    \"city\": \"Cairns\",          \"lat\": \"-16.9303\",          \"lng\": \"145.7703\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"Queensland\",          \"capital\": \"\",          \"population\": \"152729\",         
+    \"population_proper\": \"146778\"     },      {         \"city\": \"Toowoomba\",         
+    \"lat\": \"-27.5667\",          \"lng\": \"151.9500\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Queensland\",         
+    \"capital\": \"\",          \"population\": \"136861\",          \"population_proper\":
+    \"135631\"     },      {         \"city\": \"Darwin\",          \"lat\": \"-12.4381\",         
+    \"lng\": \"130.8411\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Northern Territory\",          \"capital\":
+    \"admin\",          \"population\": \"136828\",          \"population_proper\":
+    \"136828\"     },      {         \"city\": \"Ballarat\",          \"lat\": \"-37.5500\",         
+    \"lng\": \"143.8500\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Victoria\",          \"capital\": \"\",         
+    \"population\": \"105471\",          \"population_proper\": \"98543\"     },     
+    {         \"city\": \"Bendigo\",          \"lat\": \"-36.7500\",          \"lng\":
+    \"144.2667\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"Victoria\",          \"capital\": \"\",          \"population\":
+    \"99122\",          \"population_proper\": \"95587\"     },      {         \"city\":
+    \"Launceston\",          \"lat\": \"-41.4419\",          \"lng\": \"147.1450\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"Tasmania\",          \"capital\": \"\",          \"population\": \"87328\",         
+    \"population_proper\": \"87328\"     },      {         \"city\": \"Mackay\",         
+    \"lat\": \"-21.1411\",          \"lng\": \"149.1861\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Queensland\",         
+    \"capital\": \"\",          \"population\": \"80148\",          \"population_proper\":
+    \"3659\"     },      {         \"city\": \"Rockhampton\",          \"lat\": \"-23.3750\",         
+    \"lng\": \"150.5117\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Queensland\",          \"capital\": \"\",         
+    \"population\": \"78592\",          \"population_proper\": \"78592\"     },     
+    {         \"city\": \"Maitland\",          \"lat\": \"-32.7167\",          \"lng\":
+    \"151.5500\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"New South Wales\",          \"capital\": \"\",          \"population\":
+    \"78015\",          \"population_proper\": \"1885\"     },      {         \"city\":
+    \"Bunbury\",          \"lat\": \"-33.3333\",          \"lng\": \"115.6333\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"Western Australia\",          \"capital\": \"\",          \"population\": \"74363\",         
+    \"population_proper\": \"71090\"     },      {         \"city\": \"Coffs Harbour\",         
+    \"lat\": \"-30.3022\",          \"lng\": \"153.1189\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"New South
+    Wales\",          \"capital\": \"\",          \"population\": \"71822\",         
+    \"population_proper\": \"25752\"     },      {         \"city\": \"Bundaberg\",         
+    \"lat\": \"-24.8500\",          \"lng\": \"152.3500\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Queensland\",         
+    \"capital\": \"\",          \"population\": \"70921\",          \"population_proper\":
+    \"70540\"     },      {         \"city\": \"Wagga Wagga\",          \"lat\":
+    \"-35.1189\",          \"lng\": \"147.3689\",          \"country\": \"Australia\",         
+    \"iso2\": \"AU\",          \"admin_name\": \"New South Wales\",          \"capital\":
+    \"\",          \"population\": \"56442\",          \"population_proper\": \"54411\"    
+    },      {         \"city\": \"Hervey Bay\",          \"lat\": \"-25.2853\",         
+    \"lng\": \"152.8728\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Queensland\",          \"capital\": \"\",         
+    \"population\": \"54674\",          \"population_proper\": \"54674\"     },     
+    {         \"city\": \"Shepparton\",          \"lat\": \"-36.3833\",         
+    \"lng\": \"145.4000\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Victoria\",          \"capital\": \"\",         
+    \"population\": \"51631\",          \"population_proper\": \"31197\"     },     
+    {         \"city\": \"Albury\",          \"lat\": \"-36.0806\",          \"lng\":
+    \"146.9158\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"New South Wales\",          \"capital\": \"\",          \"population\":
+    \"47974\",          \"population_proper\": \"4804\"     },      {         \"city\":
+    \"Port Macquarie\",          \"lat\": \"-31.4333\",          \"lng\": \"152.9000\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"New South Wales\",          \"capital\": \"\",          \"population\": \"47973\",         
+    \"population_proper\": \"44830\"     },      {         \"city\": \"Pakenham\",         
+    \"lat\": \"-38.0712\",          \"lng\": \"145.4878\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Victoria\",         
+    \"capital\": \"\",          \"population\": \"46421\",          \"population_proper\":
+    \"46421\"     },      {         \"city\": \"Tamworth\",          \"lat\": \"-31.0833\",         
+    \"lng\": \"150.9167\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"New South Wales\",          \"capital\": \"\",         
+    \"population\": \"42872\",          \"population_proper\": \"180\"     },     
+    {         \"city\": \"Caloundra\",          \"lat\": \"-26.7986\",          \"lng\":
+    \"153.1289\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"Queensland\",          \"capital\": \"\",          \"population\":
+    \"41293\",          \"population_proper\": \"41293\"     },      {         \"city\":
+    \"Orange\",          \"lat\": \"-33.2833\",          \"lng\": \"149.1000\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"New South Wales\",          \"capital\": \"\",          \"population\": \"40493\",         
+    \"population_proper\": \"38097\"     },      {         \"city\": \"Dubbo\",         
+    \"lat\": \"-32.2569\",          \"lng\": \"148.6011\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"New South
+    Wales\",          \"capital\": \"\",          \"population\": \"38392\",         
+    \"population_proper\": \"38392\"     },      {         \"city\": \"Geraldton\",         
+    \"lat\": \"-28.7744\",          \"lng\": \"114.6089\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Western
+    Australia\",          \"capital\": \"\",          \"population\": \"37648\",         
+    \"population_proper\": \"37648\"     },      {         \"city\": \"Nowra\",         
+    \"lat\": \"-34.8833\",          \"lng\": \"150.6000\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"New South
+    Wales\",          \"capital\": \"\",          \"population\": \"37420\",         
+    \"population_proper\": \"9193\"     },      {         \"city\": \"Bathurst\",         
+    \"lat\": \"-33.4200\",          \"lng\": \"149.5778\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"New South
+    Wales\",          \"capital\": \"\",          \"population\": \"36801\",         
+    \"population_proper\": \"35020\"     },      {         \"city\": \"Queanbeyan\",         
+    \"lat\": \"-35.3533\",          \"lng\": \"149.2342\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"New South
+    Wales\",          \"capital\": \"\",          \"population\": \"36348\",         
+    \"population_proper\": \"6237\"     },      {         \"city\": \"Frankston\",         
+    \"lat\": \"-38.1580\",          \"lng\": \"145.1350\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Victoria\",         
+    \"capital\": \"\",          \"population\": \"36097\",          \"population_proper\":
+    \"36097\"     },      {         \"city\": \"Sunbury\",          \"lat\": \"-37.5811\",         
+    \"lng\": \"144.7139\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Victoria\",          \"capital\": \"\",         
+    \"population\": \"36084\",          \"population_proper\": \"36084\"     },     
+    {         \"city\": \"Warrnambool\",          \"lat\": \"-38.3833\",         
+    \"lng\": \"142.4833\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Victoria\",          \"capital\": \"\",         
+    \"population\": \"35214\",          \"population_proper\": \"29661\"     },     
+    {         \"city\": \"Wodonga\",          \"lat\": \"-36.1214\",          \"lng\":
+    \"146.8881\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"Victoria\",          \"capital\": \"\",          \"population\":
+    \"35130\",          \"population_proper\": \"18948\"     },      {         \"city\":
+    \"Albany\",          \"lat\": \"-35.0228\",          \"lng\": \"117.8814\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"Western Australia\",          \"capital\": \"\",          \"population\": \"34205\",         
+    \"population_proper\": \"29373\"     },      {         \"city\": \"Gladstone\",         
+    \"lat\": \"-23.8489\",          \"lng\": \"151.2625\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Queensland\",         
+    \"capital\": \"\",          \"population\": \"33418\",          \"population_proper\":
+    \"33418\"     },      {         \"city\": \"Mildura\",          \"lat\": \"-34.1889\",         
+    \"lng\": \"142.1583\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Victoria\",          \"capital\": \"\",         
+    \"population\": \"32738\",          \"population_proper\": \"32738\"     },     
+    {         \"city\": \"Southport\",          \"lat\": \"-27.9667\",          \"lng\":
+    \"153.4000\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"Queensland\",          \"capital\": \"\",          \"population\":
+    \"31908\",          \"population_proper\": \"31908\"     },      {         \"city\":
+    \"Dandenong\",          \"lat\": \"-37.9810\",          \"lng\": \"145.2150\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"Victoria\",          \"capital\": \"\",          \"population\": \"29906\",         
+    \"population_proper\": \"29906\"     },      {         \"city\": \"Kalgoorlie\",         
+    \"lat\": \"-30.7489\",          \"lng\": \"121.4658\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"Western
+    Australia\",          \"capital\": \"\",          \"population\": \"29849\",         
+    \"population_proper\": \"29849\"     },      {         \"city\": \"Mount Gambier\",         
+    \"lat\": \"-37.8294\",          \"lng\": \"140.7828\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"South Australia\",         
+    \"capital\": \"\",          \"population\": \"29639\",          \"population_proper\":
+    \"25512\"     },      {         \"city\": \"Lismore\",          \"lat\": \"-28.8167\",         
+    \"lng\": \"153.2833\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"New South Wales\",          \"capital\": \"\",         
+    \"population\": \"28720\",          \"population_proper\": \"3579\"     },     
+    {         \"city\": \"Maryborough\",          \"lat\": \"-25.5375\",         
+    \"lng\": \"152.7019\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"Queensland\",          \"capital\": \"\",         
+    \"population\": \"27282\",          \"population_proper\": \"15406\"     },     
+    {         \"city\": \"Quakers Hill\",          \"lat\": \"-33.7344\",         
+    \"lng\": \"150.8789\",          \"country\": \"Australia\",          \"iso2\":
+    \"AU\",          \"admin_name\": \"New South Wales\",          \"capital\": \"\",         
+    \"population\": \"27080\",          \"population_proper\": \"27080\"     },     
+    {         \"city\": \"Gawler\",          \"lat\": \"-34.5981\",          \"lng\":
+    \"138.7450\",          \"country\": \"Australia\",          \"iso2\": \"AU\",         
+    \"admin_name\": \"South Australia\",          \"capital\": \"\",          \"population\":
+    \"26472\",          \"population_proper\": \"650\"     },      {         \"city\":
+    \"Caboolture\",          \"lat\": \"-27.0667\",          \"lng\": \"152.9670\",         
+    \"country\": \"Australia\",          \"iso2\": \"AU\",          \"admin_name\":
+    \"Queensland\",          \"capital\": \"\",          \"population\": \"26433\",         
+    \"population_proper\": \"26433\"     },      {         \"city\": \"Ballina\",         
+    \"lat\": \"-28.8333\",          \"lng\": \"153.5333\",          \"country\":
+    \"Australia\",          \"iso2\": \"AU\",          \"admin_name\": \"New South
+    Wales\",          \"capital\": \"\",          \"population\": \"26381\",         
+    \"population_proper\": \"3023\"     } ] }"
+  cityData: []
+  playerName: 
 --- !u!1 &6271187260610386039
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +858,7 @@ GameObject:
   - component: {fileID: 6271187260610386038}
   - component: {fileID: 6271187260610386043}
   - component: {fileID: 6271187260610386040}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: VisualBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +941,7 @@ GameObject:
   - component: {fileID: 6540053507443709124}
   - component: {fileID: 1040561608237316292}
   - component: {fileID: 3296443016505588664}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -880,7 +1113,7 @@ GameObject:
   - component: {fileID: 271114681989653612}
   - component: {fileID: 6732787804643739882}
   - component: {fileID: 4110902543837761244}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4459827645430392477}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -1111,9 +1344,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1432595868428586471}
     m_Modifications:
+    - target: {fileID: 2628108219087970174, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190656326413148958, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3190656326445412385, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
       propertyPath: m_Name
       value: Compass
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190656326445412385, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3190656326445412397, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
       propertyPath: m_RootOrder
@@ -1159,6 +1404,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3190656326500256954, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190656326585195854, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190656327090313801, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3190656327090313802, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
@@ -1166,6 +1423,10 @@ PrefabInstance:
     - target: {fileID: 3190656327090313802, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190656327112239443, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
@@ -1187,7 +1448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2216561116682925801, guid: 94700a349770d9647abf994480f42c9b, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2216561116682925806, guid: 94700a349770d9647abf994480f42c9b, type: 3}
       propertyPath: m_RootOrder
