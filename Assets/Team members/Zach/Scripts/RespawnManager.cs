@@ -45,13 +45,13 @@ namespace ZachFrench
         public override void OnStartServer()
         {
             base.OnStartServer();
+			gameOver.enabled = false;
 
             if (!isServer)
             {
                 return;
             }
 
-            gameOver.enabled = false;
             homeSpawn = transform.position;
             postieNetworkManager.newPlayerEvent += PostieNetworkManagerOnNewPlayerEvent;
             postieNetworkManager.playerDisconnectedEvent += PostieNetworkManagerOnPlayerDisconnectedEvent;
@@ -113,13 +113,19 @@ namespace ZachFrench
             }
             else
             {
-                gameOver.enabled = true;
-                Debug.Log("You have run out of lives");
+				if (isServer)
+				{
+					RpcShowGameOverScreen();
+				}
             }
             
         }
-        
 
-        
-    }
+		[ClientRpc]
+		public void RpcShowGameOverScreen()
+		{
+			gameOver.enabled = true;
+			Debug.Log("You have run out of lives");
+		}
+	}
 }
