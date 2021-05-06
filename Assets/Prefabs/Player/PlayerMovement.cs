@@ -35,8 +35,23 @@ namespace AlexM
 			GetComponent<Health>().deathEvent += OnDeathEvent;
 		}
 
+		public override void OnStartServer()
+		{
+			base.OnStartServer();
+
+			if (isLocalPlayer)
+			{
+				GetComponentInChildren<AudioListener>().enabled = true;
+			}
+			else
+			{
+				GetComponentInChildren<AudioListener>().enabled = false;
+			}
+		}
+
 		private void OnDeathEvent(Health health)
 		{
+			Debug.Log("DEAD");
 			// audioSource.Play();
 		}
 

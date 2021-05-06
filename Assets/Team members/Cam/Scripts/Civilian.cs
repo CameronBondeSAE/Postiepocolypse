@@ -45,7 +45,7 @@ public class Civilian : MonoBehaviour
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         GetComponent<Rigidbody>().AddTorque(Random.Range(-fallOverPushForce, fallOverPushForce),
             Random.Range(-fallOverPushForce, fallOverPushForce), Random.Range(-fallOverPushForce, fallOverPushForce));
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 4f);
     }
 
     private void OndamagedEvent(Health health, float damageDealt, Health.DamageType damageType)

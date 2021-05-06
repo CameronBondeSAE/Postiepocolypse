@@ -11,7 +11,7 @@ namespace RileyMcGowan
     {
         //Main Vars
         private MinimapFOV minimapFOV;
-        private int timeToLive = 10;
+        private int timeToLive = 6;
         private GameObject instantiate;
         private GameObject tempRef;
         public float radarSpeed;
@@ -28,9 +28,10 @@ namespace RileyMcGowan
 
         void Update()
         {
-            if (isClient)
+			RpcResetRotation();
+
+			if (isClient)
             {
-                RpcResetRotation();
                 if (minimapFOV.listOfTargets.Count > 0)
                 {
                     foreach (GameObject targetInFOV in minimapFOV.listOfTargets)

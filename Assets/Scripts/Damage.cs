@@ -34,6 +34,11 @@ public class Damage : MonoBehaviour
           //this loop goes through all objects in the list and deals damage to them
           foreach (var x in inCollider)
           {
+			  // CAM: If there was a null entry, it would break the loop
+			  if (x == null)
+			  {
+				  continue;
+			  }
                if (damageOverDistance)
                {
                     if (sphereCollider == null)
