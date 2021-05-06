@@ -381,9 +381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429fe07d00155a34a928555339046245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   antAIAgent: {fileID: 6410610709035693269}
   navMeshAgent: {fileID: 6794730730155927835}
-  timeGathering: 10
   patrolManager: {fileID: 0}
   patrolSpeed: 5
   maxPatrolWaitTime: 6
@@ -399,7 +400,8 @@ MonoBehaviour:
   attackingIntensity: 10
   attackingGradient: 1
   speedIncrease: 7
-  waterReduction: 100
+  waterReduction: 50
+  timeGathering: 10
   audioSource: {fileID: 3680741728346999298}
   chorusFilter: {fileID: 8261083863869696342}
   timeBetweenAudio: 20
@@ -530,9 +532,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbd3071f9e87f04a8d96a9eb26115ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 50
+  damageAmount: 45
   damageType: 0
-  damageOverDistance: 0
+  damageOverDistance: 1
   sphereCollider: {fileID: 3367743676390579978}
   inCollider: []
 --- !u!135 &3367743676390579978
@@ -546,5 +548,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
