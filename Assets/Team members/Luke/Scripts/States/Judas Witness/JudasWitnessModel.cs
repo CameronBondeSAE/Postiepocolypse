@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using AlexM;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,7 +12,6 @@ namespace Luke
         [Header("Other considerations")] 
         public AntAIAgent antAIAgent;
         public NavMeshAgent navMeshAgent;
-        public float timeGathering;
 
         [Header("Patrol variables")] 
         public PatrolManager patrolManager;
@@ -38,8 +35,9 @@ namespace Luke
         public float speedIncrease;
 
         [Header("Gather state variables")] 
-        public float waterReduction;
-
+        public float waterReduction; 
+        public float timeGathering;
+        
         [Header("Audio")] 
         public AudioSource audioSource;
         public AudioChorusFilter chorusFilter;
