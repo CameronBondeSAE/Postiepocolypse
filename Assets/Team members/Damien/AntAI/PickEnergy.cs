@@ -30,7 +30,7 @@ namespace Damien
         {
             base.Enter();
             //Debug.Log("Pick Energy");
-            fieldOfView.targets = LayerMask.GetMask("Portal");
+            fieldOfView.targets = LayerMask.GetMask("Creature");
             fieldOfView.viewRadius = energyViewRadius;
 
 
@@ -46,7 +46,7 @@ namespace Damien
            {
                for (int i = 0; i < fieldOfView.listOfTargets.Count; i++)
                {
-                   if (currTarget == null && fieldOfView.listOfTargets[i].layer == LayerMask.NameToLayer("Portal"))
+                   if (currTarget == null && fieldOfView.listOfTargets[i].layer == LayerMask.NameToLayer("Creature"))
                    {
                        currTarget = fieldOfView.listOfTargets[i];
                        owner.GetComponent<Blinder>().energyTarget = currTarget;

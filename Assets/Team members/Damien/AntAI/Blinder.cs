@@ -46,6 +46,7 @@ namespace Damien
 			if(isServer)
             {
                 navMeshAgent = owner.GetComponent<NavMeshAgent>();
+                patrolManager = FindObjectOfType<PatrolManager>();
                 antAIAgent.SetGoal("Disorient Target");
                 flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
                 screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
