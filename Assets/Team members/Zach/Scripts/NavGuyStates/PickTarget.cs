@@ -27,7 +27,7 @@ namespace ZachFrench
 
             if (patrolManager != null)
             {
-                targets = patrolManager.paths;
+                targets = patrolManager.pathsWithIndoors;
             }
 
             if (targets.Count > 0)
