@@ -28,7 +28,8 @@ namespace RileyMcGowan
 
         void Update()
         {
-			RpcResetRotation();
+			transform.Rotate(0, radarSpeed*Time.deltaTime, 0);
+			RpcResetRotation(transform.rotation);
 
 			if (isClient)
             {
@@ -63,11 +64,11 @@ namespace RileyMcGowan
             instantiate.transform.parent = currentTransform.transform;
             instantiate.GetComponent<MarkerHandler>().timeToLive = timeToLive;
         }
-        
-        [ClientRpc]
-        private void RpcResetRotation()
+
+		[ClientRpc]
+		private void RpcResetRotation(Quaternion angle)
         {
-            transform.Rotate(0,radarSpeed,0);
+            transform.rotation = angle;
         }
     }
 }
