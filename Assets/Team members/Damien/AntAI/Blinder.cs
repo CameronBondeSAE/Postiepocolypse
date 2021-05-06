@@ -39,9 +39,11 @@ namespace Damien
 
 
         // Start is called before the first frame update
-        void Start()
-        {
-            if(isServer)
+		public override void OnStartServer()
+		{
+			base.OnStartServer();
+
+			if(isServer)
             {
                 navMeshAgent = owner.GetComponent<NavMeshAgent>();
                 antAIAgent.SetGoal("Disorient Target");

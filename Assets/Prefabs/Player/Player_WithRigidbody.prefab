@@ -424,6 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843d5bb44687e25449cf6b3f95219373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &6868612393043126525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,7 +1380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3190656326445412397, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7071068
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3190656326445412397, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1426,6 +1428,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3190656327112239443, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134524308475272770, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134524308475272770, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134524308475272770, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134524308475272770, guid: cdc901f21857bb34597dfbfbf3d01f7f, type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
