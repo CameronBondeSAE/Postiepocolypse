@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: ScavengerAI
+  m_EditorClassIdentifier: 
+  conditions:
+    position: {x: 71, y: 122}
+    list:
+    - id: 0
+      name: See Item
+    - id: 1
+      name: Inventory Full
+    - id: 2
+      name: Inventory Empty
+    - id: 3
+      name: Items Delivered
+    - id: 4
+      name: Has Target
+    - id: 5
+      name: Arrived At Target
+  actions:
+  - name: Collect Item
+    isDefault: 1
+    state: {fileID: 2381995908791689373, guid: 1651dde8aae28da45ac53819bcd3daca, type: 3}
+    cost: 0
+    position: {x: 321, y: 127}
+    pre:
+    - id: 0
+      value: 1
+    post:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 1
+  - name: Deliver Item
+    isDefault: 0
+    state: {fileID: 859751175767371670, guid: 96f8b45ea0fb76342877c7196cccc467, type: 3}
+    cost: 0
+    position: {x: 552, y: 124}
+    pre:
+    - id: 1
+      value: 1
+    - id: 4
+      value: 0
+    post:
+    - id: 2
+      value: 1
+    - id: 3
+      value: 1
+  - name: Pick A Target
+    isDefault: 0
+    state: {fileID: 2105755858125733738, guid: d1f53867ffc37bf4898289ed7d474e9c, type: 3}
+    cost: 0
+    position: {x: 327, y: 499}
+    pre:
+    - id: 4
+      value: 0
+    - id: 1
+      value: 0
+    - id: 0
+      value: 0
+    post:
+    - id: 4
+      value: 1
+  - name: Move To Target
+    isDefault: 0
+    state: {fileID: 6287272204109736279, guid: 84c7054ab9922004bbf1841fc6e9b6e1, type: 3}
+    cost: 0
+    position: {x: 525, y: 501}
+    pre:
+    - id: 4
+      value: 1
+    - id: 0
+      value: 0
+    post:
+    - id: 5
+      value: 1
+    - id: 4
+      value: 0
+  goals:
+  - name: Deliver Items
+    isDefault: 1
+    position: {x: 775, y: 124}
+    conditions:
+    - id: 3
+      value: 1
+  - name: Arrived At Target
+    isDefault: 0
+    position: {x: 744, y: 504}
+    conditions:
+    - id: 5
+      value: 1
+  worldStates:
+  - position: {x: 78, y: 523}
+    list:
+    - id: 0
+      value: 1
+    - id: 1
+      value: 0
+    - id: 2
+      value: 0
+    - id: 3
+      value: 0
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0

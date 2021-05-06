@@ -139,7 +139,6 @@ namespace Damien
         {
             if (isServer)
             {
-                yield return new WaitForSeconds(2f);
                 flash.intensity = flashBrightness;
                 PlayFlashSound();
                 yield return new WaitForSeconds(.1f);
@@ -154,19 +153,18 @@ namespace Damien
                 flash.intensity = flashBrightness;
                 yield return new WaitForSeconds(.2f);
                 flash.intensity = flashOffBrightness;
-                //
-                //yield return new WaitForSeconds(.1f);
-                //flash.intensity = flashBrightness;
-                //yield return new WaitForSeconds(.1f);
-                //flash.intensity = flashOffBrightness;
-                //
-                //yield return new WaitForSeconds(.1f);
-                //flash.intensity = flashBrightness;
-                //yield return new WaitForSeconds(.2f);
-                //flash.intensity = flashOffBrightness;
+                
+                yield return new WaitForSeconds(.1f);
+                flash.intensity = flashBrightness;
+                yield return new WaitForSeconds(.1f);
+                flash.intensity = flashOffBrightness;
+                
+                yield return new WaitForSeconds(.1f);
+                flash.intensity = flashBrightness;
+                yield return new WaitForSeconds(.2f);
+                flash.intensity = flashOffBrightness;
                 ResetStates();
             }
-            
         }
 
         [ClientRpc]

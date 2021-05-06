@@ -1540,7 +1540,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.81761, b: 0.81761, a: 1}
-  m_Intensity: 0.015915494
+  m_Intensity: 0
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1609,13 +1609,13 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 0.2
+  m_Intensity: 0
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
   m_LightDimmer: 1
   m_VolumetricDimmer: 1
-  m_LightUnit: 0
+  m_LightUnit: 2
   m_FadeDistance: 10000
   m_AffectDiffuse: 1
   m_AffectSpecular: 1
@@ -2135,7 +2135,6 @@ GameObject:
   - component: {fileID: 3956812273395593936}
   - component: {fileID: 215902256}
   - component: {fileID: 215902257}
-  - component: {fileID: 215902258}
   - component: {fileID: 215902250}
   - component: {fileID: 5190809701841526850}
   - component: {fileID: 3464585275034954302}
@@ -2271,6 +2270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0548a8365998240a8868affe0a4009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   owner: {fileID: 7058318617128531734}
   antAIAgent: {fileID: 215902256}
   target: {fileID: 0}
@@ -2283,22 +2284,8 @@ MonoBehaviour:
   flashSoundsArray: []
   screamSoundsSource: {fileID: 1251727165}
   screamSoundsArray: []
---- !u!114 &215902258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7058318617128531734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7358f952c78704d8e74f5eb6861980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  light: {fileID: 6025210774468816826}
-  flashOn: 0
+  patrolManager: {fileID: 0}
+  navMeshAgent: {fileID: 0}
 --- !u!114 &215902250
 MonoBehaviour:
   m_ObjectHideFlags: 0

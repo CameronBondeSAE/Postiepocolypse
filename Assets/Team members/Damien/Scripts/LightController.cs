@@ -10,7 +10,7 @@ public class LightController : NetworkBehaviour
 
     private void Update()
     {
-        if (isClient)
+        //if (isServer)
         {
             RpcFlash();
         }
@@ -20,7 +20,7 @@ public class LightController : NetworkBehaviour
     [ClientRpc]
     void RpcFlash()
     {
-        if (isClient)
+        //if (isServer)
         {
             if (flashOn)
             {
