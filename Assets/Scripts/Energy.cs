@@ -83,12 +83,18 @@ public class Energy : MonoBehaviour
         if (CurrentAmount <= MaxAmount)
         {
             CurrentAmount += Regen * Time.deltaTime;
+<<<<<<< Updated upstream
         }
+=======
+        }   
+>>>>>>> Stashed changes
         if (CurrentAmount > MaxAmount)
         {
             CurrentAmount = MaxAmount;
             Regen = 0f;
         }
+            
+        
         lastPos = currentPos;
     }
 

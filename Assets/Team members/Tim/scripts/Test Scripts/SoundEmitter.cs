@@ -10,7 +10,7 @@ namespace TimPearson
         private SphereCollider soundLevel1;
         private SphereCollider soundLevel2;
         private SphereCollider soundLevel3;
-        public float soundRadius1;
+        public float soundRadius1 = 10;
         public List<GameObject> listOfEars = new List<GameObject>();
         private Ears ears;
 
@@ -18,7 +18,7 @@ namespace TimPearson
         {
             soundLevel1 = gameObject.AddComponent<SphereCollider>();
             soundLevel1.isTrigger = true;
-            soundRadius1 = 10;
+            //soundRadius1 = 10;
             ears = GetComponent<Ears>();
         }
 
