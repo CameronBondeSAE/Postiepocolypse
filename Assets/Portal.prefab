@@ -262,7 +262,7 @@ MonoBehaviour:
   spawnOnStart: 1
   randomSpawn: 0
   ySpawnGroundOffset: 1
-  yAdjustablePosition: -50
+  yAdjustablePosition: 0
   yGroundTestOffset: 5
   spawnOnPatrolPoints: 0
   patrolManager: {fileID: 0}

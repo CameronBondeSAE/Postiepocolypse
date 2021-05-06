@@ -50,7 +50,7 @@ public class Civilian : NetworkBehaviour
 		if (isServer)
 		{
 			health.DoDamage(10f, Health.DamageType.Normal);
-			energy.CurrentAmount = 5f;
+			energy.CurrentAmount = 25f;
 		}
 	}
 
