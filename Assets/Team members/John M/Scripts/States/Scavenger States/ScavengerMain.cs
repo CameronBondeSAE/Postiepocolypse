@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Anthill.AI;
 using Damien;
+using Mirror;
 using UnityEngine;
 
 namespace JonathonMiles
@@ -26,31 +27,32 @@ namespace JonathonMiles
         // Update is called once per frame
         void Update()
         {
-            
-            FindItem();
-            FullInventroy();
-            
+            RpcFindItem();
+            RpcFullInventroy();
         }
 
-        void FindItem()
+        [ClientRpc]
+        void RpcFindItem()
         {
-            if (fov.listOfTargets.Count != null)
+            if (isServer)
             {
-                if (fov.listOfTargets.Count > 0)
+                if (fov.listOfTargets.Count != null)
                 {
-                    foreach (GameObject item in fov.listOfTargets)
+                    if (fov.listOfTargets.Count > 0)
                     {
-                        Debug.Log("Item has been found");
-                        itemTarget = item;
-                        currentTarget = null;
-
+                        foreach (GameObject item in fov.listOfTargets)
+                        {
+                            Debug.Log("Item has been found");
+                            itemTarget = item;
+                            currentTarget = null;
+                        }
                     }
                 }
             }
-            
         }
 
-        void FullInventroy()
+        [ClientRpc]
+        void RpcFullInventroy()
         {
             if (inventory.inventorySpace == inventory.items.Count)
             {
