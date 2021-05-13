@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Anthill.AI;
 using UnityEngine;
 using UnityEngine.AI;
 using ZachFrench;
+using Random = UnityEngine.Random;
 
 namespace Luke
 {
@@ -47,8 +49,12 @@ namespace Luke
         public float maxRate;
         public float maxDepth;
 
+        private NetworkJudas _networkJudas;
+        
         public void Start()
         {
+            _networkJudas = GetComponent<NetworkJudas>();
+            
             ResetPlanner();
 
             patrolManager = FindObjectOfType<PatrolManager>();
@@ -66,30 +72,17 @@ namespace Luke
 
         public void BasicNoises()
         {
-            chorusFilter.wetMix1 = Mathf.PerlinNoise(Time.time / maxWetMix, 0);
-            chorusFilter.rate = Mathf.PerlinNoise(Time.time / maxRate, 0);
-            chorusFilter.depth = Mathf.PerlinNoise(Time.time / maxDepth, 0);
-
-            if (!audioSource.isPlaying)
+            if (isServer)
             {
-                audioSource.Play();
+                _networkJudas.BasicNoises();
             }
         }
 
         public void Wander()
         {
-            if (patrolManager == null)
+            if (isServer)
             {
-                patrolManager = FindObjectOfType<PatrolManager>();
-                if (patrolManager == null)
-                {
-                    return;
-                }
-            }
-
-            if (patrolManager.pathsWithIndoors != null)
-            {
-                navMeshAgent.speed = patrolSpeed;
+                _networkJudas.Wander();
             }
         }
 
@@ -101,36 +94,18 @@ namespace Luke
 
         public void SetWaterTarget()
         {
-            if (waterTargets.Count > 0)
+            if (isServer)
             {
-                foreach (PatrolPoint target in waterTargets)
-                {
-                    if (target == gatheredWaterTargets.Contains(target))
-                    {
-                        waterTargets.Remove(target);
-                    }
-                }
+                _networkJudas.SetWaterTarget();
             }
-            else if(gatheredWaterTargets.Count <= 0)
-            {
-                waterTargets.AddRange(patrolManager.waterTargets);
-            }
-            
         }
 
         public void ResetPlanner()
         {
-            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            antAIAgent.worldState.Set("gotResource", false);
-            antAIAgent.worldState.Set("playerFound", false);
-            antAIAgent.worldState.Set("needRecharge", false);
-            antAIAgent.worldState.Set("foundResource", false);
-            antAIAgent.worldState.Set("deliveredResource", false);
-            antAIAgent.worldState.Set("atAttackRange", false);
-            antAIAgent.worldState.Set("atResourcePos", false);
-            antAIAgent.worldState.Set("foundRecharge", false);
-            antAIAgent.worldState.Set("atRechargePos", false);
-            antAIAgent.worldState.EndUpdate();
+            if (isServer)
+            {
+                _networkJudas.ResetPlanner();
+            }
         }
     }
 }

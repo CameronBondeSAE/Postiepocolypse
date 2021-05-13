@@ -21,8 +21,8 @@ namespace Damien
         public float flashBrightness = 200000000f;
         public float flashOffBrightness = 0.5f;
 
-        private int flashSoundNumber;
-        private int screamSoundNumber;
+        public int flashSoundNumber;
+        public int screamSoundNumber;
         
         public bool targetsInView;
 
@@ -37,6 +37,7 @@ namespace Damien
 
         private int destinationNumber;
 
+        private BlinderFunctions _blinderFunctions;
 
         // Start is called before the first frame update
 		public override void OnStartServer()
@@ -45,12 +46,13 @@ namespace Damien
 
 			if(isServer)
             {
+                BlinderFunctions _blinderFunctions = GetComponent<BlinderFunctions>();
                 navMeshAgent = owner.GetComponent<NavMeshAgent>();
                 patrolManager = FindObjectOfType<PatrolManager>();
                 antAIAgent.SetGoal("Disorient Target");
                 flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
                 screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
-                ResetStates();
+                _blinderFunctions.ResetStates();
             }
             else
             {
@@ -123,57 +125,30 @@ namespace Damien
             }
         }
 
-
-        public void ResetStates()
-        {
-            target = null;
-            energyTarget = null;
-            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            antAIAgent.worldState.Set("Light Energy is Full", false);
-            antAIAgent.worldState.Set("Target Blinded", false);
-            antAIAgent.worldState.Set("Close to Target", false);
-            antAIAgent.worldState.Set("Arrived at Energy", false);
-            antAIAgent.worldState.Set("Target in View Range", false);
-            antAIAgent.worldState.EndUpdate();
-        }
-
-        
-        IEnumerator FlashPlayer()
+        public void ResetStatesHere()
         {
             if (isServer)
             {
-                flash.intensity = flashBrightness;
-                PlayFlashSound();
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.2f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.2f);
-                flash.intensity = flashOffBrightness;
-                ResetStates();
+                _blinderFunctions.ResetStates();
             }
         }
 
-        [ClientRpc]
-        public void RpcFlashPlay()
+        public void FlashPlayerHere()
         {
-            StartCoroutine(FlashPlayer());
+            if (isServer)
+            {
+                _blinderFunctions.RpcFlashPlayer();
+            }
+        }
+
+        public void PlayerFlashSoundHere()
+        {
+
+            if (isServer)
+            {
+                _blinderFunctions.PlayFlashSound();
+            }
         }
     }
 }
+
