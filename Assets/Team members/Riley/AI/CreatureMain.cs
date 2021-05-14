@@ -23,18 +23,18 @@ namespace RileyMcGowan
         private Energy energyRef;
 
         //Public Vars
-        public GameObject portalTarget;
-        public GameObject playerTarget;
-        public GameObject currentPatrolPoint;
-        public GameObject currentWaterTarget;
+       [SyncVar] public GameObject portalTarget;
+       [SyncVar] public GameObject playerTarget;
+       [SyncVar] public GameObject currentPatrolPoint;
+       [SyncVar] public GameObject currentWaterTarget;
         public float floatingHeight;
         public NavMeshAgent navMeshRef;
         public float safeDistance = 1f;
         public VisualEffect vfxComp;
-        public bool swapColour;
-        public bool energyCollecting;
-        
-        
+        [SyncVar] public bool swapColour;
+        [SyncVar] public bool energyCollecting;
+
+
         void Start()
         {
             energyCollecting = false;
@@ -51,72 +51,112 @@ namespace RileyMcGowan
                     vfxComp.SetFloat("Radius", 1f);
                     vfxComp.SetInt("MaxParticles", 2000);
                 }
+
                 if (GetComponentInChildren<CreatureDamage>() != null)
                 {
                     childHaveDamaged = GetComponentInChildren<CreatureDamage>();
                 }
+
                 if (GetComponent<Rigidbody>() != null)
                 {
                     rb = GetComponent<Rigidbody>();
                 }
+
                 if (GetComponentInChildren<RaycastHandler>() != null)
                 {
                     childRaycastHandler = GetComponentInChildren<RaycastHandler>();
                 }
+
                 if (GetComponent<AntAIAgent>() != null)
                 {
                     antAIRef = GetComponent<AntAIAgent>();
                 }
+
                 if (GetComponent<NavMeshAgent>() != null)
                 {
                     navMeshRef = GetComponent<NavMeshAgent>();
                 }
+
                 if (GetComponent<Damien.FOV>() != null)
                 {
                     currentFOV = GetComponent<Damien.FOV>();
                 }
-                ResetPlanner();
-            }
-            
-        }
-        
-        private void FixedUpdate()
-        {
-            vfxComp.SetFloat("ParticleSpawnRate", Random.Range(0.0f, 0.5f));
-            //Raycast leveling
-            if (swapColour != true && colourHasSwapped != true)
-            {
-                colourHasSwapped = true;
-                Gradient defaultColour = vfxComp.GetGradient("DefaultColour");
-                vfxComp.SetGradient("ActiveColour", defaultColour);
-            }
-            else if (swapColour != false && colourHasSwapped != false)
-            {
-                colourHasSwapped = false;
-                Gradient angryColour = vfxComp.GetGradient("EnemySpottedColour");
-                vfxComp.SetGradient("ActiveColour", angryColour);
-            }
 
-            if (childRaycastHandler.distanceToPlatformInfo > floatingHeight && childRaycastHandler != null)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z);
-            }
-            else
-            {
-                if (childRaycastHandler.distanceToPlatformInfo != floatingHeight && childRaycastHandler != null)
+                if (isServer)
                 {
-                    transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
+                    ResetPlanner();
                 }
             }
-            
+        }
+
+        [ClientRpc]
+        public void RpcvfxDefault(Gradient gradient)
+        {
+            vfxComp.SetGradient("ActiveColour", gradient);
+            colourHasSwapped = true;
+        }
+
+        [ClientRpc]
+        public void RpcvfxAngry(Gradient gradient)
+        {
+            vfxComp.SetGradient("ActiveColour", gradient);
+            colourHasSwapped = false;
+        }
+
+        [ClientRpc]
+        public void RpcPos(Vector3 pos)
+        {
+            transform.position = pos;
+        }
+
+        private void FixedUpdate()
+        {
+
+            if (isServer)
+            {
+                vfxComp.SetFloat("ParticleSpawnRate", Random.Range(0.0f, 0.5f));
+                //Raycast leveling
+                if (swapColour != true && colourHasSwapped != true)
+                {
+                    Gradient defaultColour = vfxComp.GetGradient("DefaultColour");
+                    RpcvfxDefault(defaultColour);
+                }
+                else if (swapColour != false && colourHasSwapped != false)
+                {
+                    Gradient angryColour = vfxComp.GetGradient("EnemySpottedColour");
+                    RpcvfxAngry(angryColour);
+                }
+
+
+                if (childRaycastHandler.distanceToPlatformInfo > floatingHeight && childRaycastHandler != null)
+                {
+
+                    Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z);
+                   RpcPos(pos);
+
+                }
+                else
+                {
+                    if (childRaycastHandler.distanceToPlatformInfo != floatingHeight && childRaycastHandler != null)
+                    {
+
+                        Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.01f,
+                            transform.position.z);
+                        RpcPos(pos);
+
+                    }
+                }
+            }
+
             //Check the FOV for a player target
             if (currentFOV.listOfTargets.Count > 0)
             {
                 playerTarget = currentFOV.listOfTargets[0];
             }
-            
+
             //Check if the object should be moving
-            if (playerTarget != null || currentWaterTarget != null || currentPatrolPoint != null || portalTarget != null)
+            if (playerTarget != null || currentWaterTarget != null || currentPatrolPoint != null ||
+                portalTarget != null)
             {
                 navMeshRef.isStopped = false;
             }
@@ -124,7 +164,7 @@ namespace RileyMcGowan
             {
                 navMeshRef.isStopped = true;
             }
-            
+
             //Planner do we have a player target
             if (playerTarget != null && antAIRef != null)
             {
@@ -150,13 +190,16 @@ namespace RileyMcGowan
             antAIRef.worldState.Set("PatrolCompleted", false);
             antAIRef.worldState.EndUpdate();
         }
-        
+
         //CollectEnergy
         public void StartCollectEnergy()
         {
             if (energyCollecting != true)
             {
-                StartCoroutine(CollectEnergy());
+                if (isServer)
+                {
+                    StartCoroutine(CollectEnergy());
+                }
             }
         }
 
