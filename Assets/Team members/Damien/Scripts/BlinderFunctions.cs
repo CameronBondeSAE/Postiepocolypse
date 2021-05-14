@@ -58,7 +58,7 @@ public class BlinderFunctions : NetworkBehaviour
       }
    }
    
-   [Command]
+   
    public void ResetStates()
    {
       if (isServer)

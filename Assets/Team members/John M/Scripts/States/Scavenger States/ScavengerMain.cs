@@ -28,7 +28,7 @@ namespace JonathonMiles
         void Update()
         {
             RpcFindItem();
-            RpcFullInventroy();
+            FullInventroy();
         }
 
         [ClientRpc]
@@ -51,8 +51,8 @@ namespace JonathonMiles
             }
         }
 
-        [ClientRpc]
-        void RpcFullInventroy()
+        
+        void FullInventroy()
         {
             if (inventory.inventorySpace == inventory.items.Count)
             {
