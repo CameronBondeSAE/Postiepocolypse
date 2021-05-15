@@ -80,7 +80,8 @@ namespace Luke
 			{
 				GameObject spawnedInstance = null;
 				//random position for spawn + an adjustable y position in case of very large prefabs
-				Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
+				Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRange, spawnRange), 
+					yAdjustablePosition, Random.Range(-spawnRange, spawnRange));
 
 				if (spawnOnPatrolPoints && patrolManager != null)
 				{

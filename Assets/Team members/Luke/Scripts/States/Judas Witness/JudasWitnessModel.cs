@@ -72,7 +72,7 @@ namespace Luke
 
         public void BasicNoises()
         {
-            if (isServer)
+            if (isClient)
             {
                 _networkJudas.BasicNoises();
             }
@@ -80,7 +80,7 @@ namespace Luke
 
         public void Wander()
         {
-            if (isServer)
+            if (isClient)
             {
                 _networkJudas.Wander();
             }
@@ -94,7 +94,7 @@ namespace Luke
 
         public void SetWaterTarget()
         {
-            if (isServer)
+            if (isClient)
             {
                 _networkJudas.SetWaterTarget();
             }
@@ -102,7 +102,7 @@ namespace Luke
 
         public void ResetPlanner()
         {
-            if (isServer)
+            if (isClient)
             {
                 _networkJudas.ResetPlanner();
             }
