@@ -636,6 +636,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1881397178, guid: 89fcd738a9a71ec46a4aad60ff59bb70, type: 3}
+      propertyPath: swapColour
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2552460577428112418, guid: 89fcd738a9a71ec46a4aad60ff59bb70, type: 3}
       propertyPath: m_RootOrder
       value: 1
