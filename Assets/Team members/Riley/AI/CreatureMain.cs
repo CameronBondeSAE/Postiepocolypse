@@ -27,22 +27,30 @@ namespace RileyMcGowan
        [SyncVar] public GameObject playerTarget;
        [SyncVar] public GameObject currentPatrolPoint;
        [SyncVar] public GameObject currentWaterTarget;
-        public float floatingHeight;
+       [SyncVar] public float floatingHeight;
         public NavMeshAgent navMeshRef;
         public float safeDistance = 1f;
         public VisualEffect vfxComp;
         [SyncVar] public bool swapColour;
         [SyncVar] public bool energyCollecting;
 
+        private NetworkTransform networkPos;
 
-        void Start()
+        public override void OnStartClient()
         {
-            energyCollecting = false;
-            energyRef = GetComponent<Energy>();
-            swapColour = false;
-            //Grab all the components needed for reference
+           RefChecker();
+        }
+
+        public override void OnStartServer()
+        {
+            RefChecker();
+        }
+
+        public void RefChecker()
+        {
             if (GetComponentInChildren<VisualEffect>() != null)
             {
+
                 //Grab all the components needed for reference
                 if (GetComponentInChildren<VisualEffect>() != null)
                 {
@@ -84,27 +92,30 @@ namespace RileyMcGowan
 
                 if (isServer)
                 {
+                    networkPos = GetComponent<NetworkTransform>();
                     ResetPlanner();
                 }
             }
         }
 
         [ClientRpc]
-        public void RpcvfxDefault(Gradient gradient)
+         void RpcvfxDefault()
         {
-            vfxComp.SetGradient("ActiveColour", gradient);
+            Gradient defaultColour = vfxComp.GetGradient("DefaultColour");
+            vfxComp.SetGradient("ActiveColour", defaultColour);
             colourHasSwapped = true;
         }
 
         [ClientRpc]
-        public void RpcvfxAngry(Gradient gradient)
+         void RpcvfxAngry()
         {
-            vfxComp.SetGradient("ActiveColour", gradient);
+            Gradient angryColour = vfxComp.GetGradient("EnemySpottedColour");
+            vfxComp.SetGradient("ActiveColour", angryColour);
             colourHasSwapped = false;
         }
 
         [ClientRpc]
-        public void RpcPos(Vector3 pos)
+         void RpcPos(Vector3 pos)
         {
             transform.position = pos;
         }
@@ -118,13 +129,11 @@ namespace RileyMcGowan
                 //Raycast leveling
                 if (swapColour != true && colourHasSwapped != true)
                 {
-                    Gradient defaultColour = vfxComp.GetGradient("DefaultColour");
-                    RpcvfxDefault(defaultColour);
+                    RpcvfxDefault();
                 }
                 else if (swapColour != false && colourHasSwapped != false)
                 {
-                    Gradient angryColour = vfxComp.GetGradient("EnemySpottedColour");
-                    RpcvfxAngry(angryColour);
+                    RpcvfxAngry();
                 }
 
 
@@ -132,7 +141,6 @@ namespace RileyMcGowan
                 {
 
                     Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z);
-                   RpcPos(pos);
 
                 }
                 else
@@ -142,10 +150,12 @@ namespace RileyMcGowan
 
                         Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.01f,
                             transform.position.z);
-                        RpcPos(pos);
 
                     }
                 }
+                
+                RpcPos(networkPos.transform.position);
+                
             }
 
             //Check the FOV for a player target
@@ -196,10 +206,9 @@ namespace RileyMcGowan
         {
             if (energyCollecting != true)
             {
-                if (isServer)
-                {
-                    StartCoroutine(CollectEnergy());
-                }
+                
+                StartCoroutine(CollectEnergy());
+                
             }
         }
 
