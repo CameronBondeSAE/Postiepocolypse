@@ -98,16 +98,14 @@ namespace Damien
             }
         }
 
-        public void PlayFlashSound()
-        {
-            flashSoundNumber = Random.Range(0, 4);
-            flashSoundsSource.PlayOneShot(flashSoundsArray[flashSoundNumber]);
-        }
-
         public void PlayScream()
         {
-            screamSoundNumber = Random.Range(0, 3);
-            screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
+            if (isServer)
+            {
+                screamSoundNumber = Random.Range(0, 3);
+                screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
+            }
+            
         }
         
         public void Idle()

@@ -37,10 +37,10 @@ namespace Damien
             owner.GetComponentInParent<FOV>().targets = LayerMask.GetMask("Player");
             owner.GetComponentInParent<FOV>().viewRadius = targetViewRadius;
               
-            //AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
-            //antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-            //antAIAgent.worldState.Set("Target in View Range", false);
-            //antAIAgent.worldState.EndUpdate();
+            /*AntAIAgent antAIAgent = owner.GetComponent<AntAIAgent>();
+            antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+            antAIAgent.worldState.Set("Target in View Range", false);
+            antAIAgent.worldState.EndUpdate();*/
 
             
 
