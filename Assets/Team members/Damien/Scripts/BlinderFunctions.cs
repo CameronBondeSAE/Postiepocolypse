@@ -7,14 +7,14 @@ using UnityEngine;
 
 public class BlinderFunctions : NetworkBehaviour
 {
-   public Blinder mainScript;
-   public AudioSource flashSoundsSource;
-   public AudioClip[] flashSoundsArray;
+   private Blinder mainScript;
+   private AudioSource flashSoundsSource;
+   private AudioClip[] flashSoundsArray;
    
    [ClientRpc]
    public void RpcFlashPlayer()
    {
-      if (isServer)
+      if (isClient)
       {
          mainScript = GetComponent<Blinder>();
          StartCoroutine(FlashPlayer());
@@ -23,7 +23,7 @@ public class BlinderFunctions : NetworkBehaviour
    }
    IEnumerator FlashPlayer()
    {
-      if (isServer)
+      if (isClient)
       {
          Light flash = mainScript.flash;
          float flashBrightness = mainScript.flashBrightness;
@@ -61,7 +61,7 @@ public class BlinderFunctions : NetworkBehaviour
    
    public void ResetStates()
    {
-      if (isServer)
+      if (isClient)
       {
          Blinder mainScript = GetComponent<Blinder>();
          mainScript.ResetStatesHere();
@@ -80,7 +80,7 @@ public class BlinderFunctions : NetworkBehaviour
    
    public void PlayFlashSound()
    {
-      if (isServer)
+      if (isClient)
       {
          this.mainScript.PlayerFlashSoundHere();
          Blinder mainScript = GetComponent<Blinder>();

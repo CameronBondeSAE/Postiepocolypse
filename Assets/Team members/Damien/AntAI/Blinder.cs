@@ -62,7 +62,7 @@ namespace Damien
         }
         private void Update()
         {
-            if (isServer)
+            if (isClient)
             {
                 if (GetComponent<FOV>().listOfTargets.Count > 0)
                 {
@@ -91,7 +91,7 @@ namespace Damien
 
         public void SetDestination()
         {
-            if (isServer)
+            if (isClient)
             {
                 destinationNumber = Random.Range(0, patrolManager.paths.Count);
                 navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
@@ -100,7 +100,7 @@ namespace Damien
 
         public void PlayScream()
         {
-            if (isServer)
+            if (isClient)
             {
                 screamSoundNumber = Random.Range(0, 3);
                 screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
@@ -110,7 +110,7 @@ namespace Damien
         
         public void Idle()
         {
-            if (isServer)
+            if (isClient)
             {
                 if (patrolManager == null)
                 {
@@ -125,7 +125,7 @@ namespace Damien
 
         public void ResetStatesHere()
         {
-            if (isServer)
+            if (isClient)
             {
                 _blinderFunctions.ResetStates();
             }
@@ -133,7 +133,7 @@ namespace Damien
 
         public void FlashPlayerHere()
         {
-            if (isServer)
+            if (isClient)
             {
                 _blinderFunctions.RpcFlashPlayer();
             }
@@ -142,7 +142,7 @@ namespace Damien
         public void PlayerFlashSoundHere()
         {
 
-            if (isServer)
+            if (isClient)
             {
                 _blinderFunctions.PlayFlashSound();
             }
