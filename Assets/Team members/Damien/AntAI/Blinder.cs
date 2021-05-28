@@ -52,7 +52,7 @@ namespace Damien
                 antAIAgent.SetGoal("Disorient Target");
                 flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
                 screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
-                _blinderFunctions.ResetStates();
+                //_blinderFunctions.ResetStates();  This nulls
             }
             else
             {

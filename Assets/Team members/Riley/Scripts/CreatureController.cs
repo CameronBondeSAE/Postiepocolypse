@@ -19,7 +19,7 @@ namespace RileyMcGowan
         private float signedToTarget;
         private Rigidbody rb;
         private CreatureDamage childHaveDamaged;
-        private float safeDistance = 2;
+        private float _safeDistance = 2;
         private float speed;
         private float rotateSpeed;
         private float perlinNoise;

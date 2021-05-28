@@ -20,7 +20,7 @@ namespace Damien
         {
             base.Enter();
             //owner.GetComponent<Blinder>().StartCoroutine("RpcFlashPlay");
-            //owner.GetComponent<Blinder>().StartCoroutine("");
+            
             owner.GetComponent<BlinderFunctions>().RpcFlashPlayer();
             Finish();
         }

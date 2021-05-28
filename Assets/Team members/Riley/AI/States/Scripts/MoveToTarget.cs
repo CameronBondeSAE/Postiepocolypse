@@ -11,15 +11,15 @@ namespace RileyMcGowan
         //Public Vars
         
         //Private Vars
-        private bool isFinished;
-        private float safeDistance;
+        private bool _isFinished;
+        private float _safeDistance;
         private GameObject currentTarget;
         private Vector3 targetLocation;
 
         public override void Enter()
         {
             base.Enter();
-            isFinished = false;
+            _isFinished = false;
             navMeshRef = creatureMainRef.navMeshRef;
             currentTarget = creatureMainRef.currentPatrolPoint;
             targetLocation = currentTarget.transform.position;
@@ -55,12 +55,12 @@ namespace RileyMcGowan
                 Finish();
             }
             //Take the safeDistance from the main script so all controls are on the main script
-            safeDistance = creatureMainRef.safeDistance;
+            _safeDistance = creatureMainRef.safeDistance;
             
             //Check the distance the creature has until it's finished
             if (creatureMainRef.currentPatrolPoint && owner != null)
             {
-                if (Vector3.Distance(owner.transform.position, creatureMainRef.currentPatrolPoint.transform.position) < safeDistance)
+                if (Vector3.Distance(owner.transform.position, creatureMainRef.currentPatrolPoint.transform.position) < _safeDistance)
                 {
                     //Stop navigation and finish
                     creatureMainRef.currentPatrolPoint = null;
