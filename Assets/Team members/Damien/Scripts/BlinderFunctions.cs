@@ -4,7 +4,7 @@ using Anthill.AI;
 using Damien;
 using Mirror;
 using UnityEngine;
-
+/*
 public class BlinderFunctions : NetworkBehaviour
 {
    private Blinder mainScript;
@@ -21,7 +21,7 @@ public class BlinderFunctions : NetworkBehaviour
          Debug.Log("CoroutineStarted");
       }
    }
-   IEnumerator FlashPlayer()
+   /*IEnumerator FlashPlayer()
    {
       if (isClient)
       {
@@ -56,8 +56,8 @@ public class BlinderFunctions : NetworkBehaviour
          RpcFlashPlayer();
          ResetStates();
       }
-   }
-   
+   }*/
+   /*
    
    public void ResetStates()
    {
@@ -76,20 +76,20 @@ public class BlinderFunctions : NetworkBehaviour
          antAIAgent.worldState.Set("Target in View Range", false);
          antAIAgent.worldState.EndUpdate();
       }
-   }
-   
+   }*/
+  /* 
    public void PlayFlashSound()
    {
       if (isClient)
       {
-         this.mainScript.PlayerFlashSoundHere();
+         //this.mainScript.PlayerFlashSoundHere();
          Blinder mainScript = GetComponent<Blinder>();
          int flashSoundNumber = mainScript.flashSoundNumber;
          flashSoundNumber = Random.Range(0, 4);
          flashSoundsSource.PlayOneShot(flashSoundsArray[flashSoundNumber]);
       }
    }
-}
+}*/
 
 
 
