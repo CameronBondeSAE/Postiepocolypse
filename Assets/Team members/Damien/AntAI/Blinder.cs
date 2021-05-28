@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Anthill.AI;
 using Mirror;
+using Mono.CecilX.Cil;
 using UnityEngine;
 using UnityEngine.AI;
 using ZachFrench;
@@ -60,7 +61,7 @@ namespace Damien
         }
         private void Update()
         {
-            if (isServer)
+            if (isClient)
             {
                 if (GetComponent<FOV>().listOfTargets.Count > 0)
                 {
@@ -89,7 +90,7 @@ namespace Damien
 
         public void SetDestination()
         {
-            if (isServer)
+            if (isClient)
             {
                 destinationNumber = Random.Range(0, patrolManager.paths.Count);
                 navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
@@ -110,7 +111,7 @@ namespace Damien
         
         public void Idle()
         {
-            if (isServer)
+            if (isClient)
             {
                 if (patrolManager == null)
                 {
@@ -140,34 +141,25 @@ namespace Damien
         
         IEnumerator FlashPlayer()
         {
-            if (isServer)
+            if (isClient)
             {
+                yield return new WaitForSeconds(.5f);
                 flash.intensity = flashBrightness;
                 PlayFlashSound();
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
+                yield return new WaitForSeconds(.5f);
+                FlashOff();
+                yield return new WaitForSeconds(.5f);
                 flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.2f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashOffBrightness;
-                
-                yield return new WaitForSeconds(.1f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.2f);
-                flash.intensity = flashOffBrightness;
+                yield return new WaitForSeconds(.5f);
+                FlashOff();
                 ResetStates();
             }
+        }
+        
+        public void FlashOff()
+        {
+            flash.intensity = 0.5f;
+            Debug.Log("hello");
         }
 
         [ClientRpc]
