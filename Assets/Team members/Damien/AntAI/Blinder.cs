@@ -40,11 +40,9 @@ namespace Damien
 
 
         // Start is called before the first frame update
-		public override void OnStartServer()
+		private void Start()
 		{
-			base.OnStartServer();
-
-			if(isServer)
+            if(isServer)
             {
                 navMeshAgent = owner.GetComponent<NavMeshAgent>();
                 patrolManager = FindObjectOfType<PatrolManager>();
@@ -57,69 +55,73 @@ namespace Damien
             {
                 antAIAgent.enabled = false;
             }
-            
         }
+        
         private void Update()
         {
-            if (isClient)
+            if (GetComponent<FOV>().listOfTargets.Count > 0)
             {
-                if (GetComponent<FOV>().listOfTargets.Count > 0)
-                {
-                    targetsInView = true;
-                }
-                else
-                {
-                    targetsInView = false;
-                }
+                targetsInView = true;
+            }
+            else
+            {
+                targetsInView = false;
+            }
 
-                if (targetsInView)
-                {
-                    antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                    antAIAgent.worldState.Set("Target in View Range", true);
-                    antAIAgent.worldState.EndUpdate();
-                }
+            if (targetsInView)
+            {
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("Target in View Range", true);
+                antAIAgent.worldState.EndUpdate();
+            }
 
-                if (!targetsInView)
-                {
-                    antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                    antAIAgent.worldState.Set("Target in View Range", false);
-                    antAIAgent.worldState.EndUpdate();
-                }
+            if (!targetsInView)
+            {
+                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                antAIAgent.worldState.Set("Target in View Range", false);
+                antAIAgent.worldState.EndUpdate();
             }
         }
 
+        
+        [ClientRpc]
+        public void RpcFlashPlay()
+        {
+            StartCoroutine(FlashPlayer());
+        }
+        
         public void SetDestination()
         {
-            if (isClient)
-            {
-                destinationNumber = Random.Range(0, patrolManager.paths.Count);
-                navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
-            }
+            destinationNumber = Random.Range(0, patrolManager.paths.Count);
+            navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
         }
 
         public void PlayFlashSound()
         {
-            flashSoundNumber = Random.Range(0, 4);
-            flashSoundsSource.PlayOneShot(flashSoundsArray[flashSoundNumber]);
+            if (isClient)
+            {
+                flashSoundNumber = Random.Range(0, 4);
+                flashSoundsSource.PlayOneShot(flashSoundsArray[flashSoundNumber]);
+            }
         }
 
         public void PlayScream()
         {
-            screamSoundNumber = Random.Range(0, 3);
-            screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
+            if (isClient)
+            {
+                screamSoundNumber = Random.Range(0, 3);
+                screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
+            }
         }
         
         public void Idle()
         {
-            if (isClient)
+            if (patrolManager == null)
             {
+                patrolManager = FindObjectOfType<PatrolManager>();
                 if (patrolManager == null)
-                {
-                    patrolManager = FindObjectOfType<PatrolManager>();
-                    if (patrolManager == null)
-                    {
-                        return;
-                    }
+                { 
+                    return;
                 }
             }
         }
@@ -138,34 +140,28 @@ namespace Damien
             antAIAgent.worldState.EndUpdate();
         }
 
-        
-        IEnumerator FlashPlayer()
+        public void FlashOff()
         {
             if (isClient)
             {
-                yield return new WaitForSeconds(.5f);
-                flash.intensity = flashBrightness;
-                PlayFlashSound();
-                yield return new WaitForSeconds(.5f);
-                FlashOff();
-                yield return new WaitForSeconds(.5f);
-                flash.intensity = flashBrightness;
-                yield return new WaitForSeconds(.5f);
-                FlashOff();
-                ResetStates();
+                flash.intensity = 0.5f;
+                Debug.Log("hello");
             }
         }
         
-        public void FlashOff()
+        IEnumerator FlashPlayer()
         {
-            flash.intensity = 0.5f;
-            Debug.Log("hello");
-        }
-
-        [ClientRpc]
-        public void RpcFlashPlay()
-        {
-            StartCoroutine(FlashPlayer());
+            yield return new WaitForSeconds(.5f);
+            flash.intensity = flashBrightness;
+            PlayFlashSound();
+            yield return new WaitForSeconds(.5f);
+            FlashOff();
+            /*yield return new WaitForSeconds(.5f);
+            flash.intensity = flashBrightness;
+            yield return new WaitForSeconds(.5f);
+            FlashOff();*/
+            ResetStates();
+            
         }
     }
 }

@@ -19,15 +19,8 @@ namespace Damien
         public override void Enter()
         {
             base.Enter();
-            //owner.GetComponent<Blinder>().StartCoroutine("RpcFlashPlay");
-            //owner.GetComponent<Blinder>().StartCoroutine("");
             owner.GetComponent<Blinder>().RpcFlashPlay();
             Finish();
-        }
-
-        public override void Execute(float aDeltaTime, float aTimeScale)
-        {
-            base.Execute(aDeltaTime, aTimeScale);
         }
     }
 }
