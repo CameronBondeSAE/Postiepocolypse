@@ -47,39 +47,42 @@ namespace Damien
                 navMeshAgent = owner.GetComponent<NavMeshAgent>();
                 patrolManager = FindObjectOfType<PatrolManager>();
                 antAIAgent.SetGoal("Disorient Target");
-                flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
-                screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
                 ResetStates();
             }
             else
             {
+                flashSoundsArray = Resources.LoadAll<AudioClip>("FlashSounds");
+                screamSoundsArray = Resources.LoadAll<AudioClip>("BlinderScream");
                 antAIAgent.enabled = false;
             }
         }
         
         private void Update()
         {
-            if (GetComponent<FOV>().listOfTargets.Count > 0)
+            if (isServer)
             {
-                targetsInView = true;
-            }
-            else
-            {
-                targetsInView = false;
-            }
+                if (GetComponent<FOV>().listOfTargets.Count > 0)
+                {
+                    targetsInView = true;
+                }
+                else
+                {
+                    targetsInView = false;
+                }
 
-            if (targetsInView)
-            {
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("Target in View Range", true);
-                antAIAgent.worldState.EndUpdate();
-            }
+                if (targetsInView)
+                {
+                    antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                    antAIAgent.worldState.Set("Target in View Range", true);
+                    antAIAgent.worldState.EndUpdate();
+                }
 
-            if (!targetsInView)
-            {
-                antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
-                antAIAgent.worldState.Set("Target in View Range", false);
-                antAIAgent.worldState.EndUpdate();
+                if (!targetsInView)
+                {
+                    antAIAgent.worldState.BeginUpdate(antAIAgent.planner);
+                    antAIAgent.worldState.Set("Target in View Range", false);
+                    antAIAgent.worldState.EndUpdate();
+                }
             }
         }
 
@@ -96,8 +99,15 @@ namespace Damien
             navMeshAgent.SetDestination(patrolManager.paths[destinationNumber].transform.position);
         }
 
-        public void PlayFlashSound()
+        #region client
+
+        
+
+        
+        [ClientRpc]
+        public void RpcPlayFlashSound()
         {
+            //sound
             if (isClient)
             {
                 flashSoundNumber = Random.Range(0, 4);
@@ -105,15 +115,17 @@ namespace Damien
             }
         }
 
-        public void PlayScream()
+        [ClientRpc]
+        public void RpcPlayScream()
         {
+            //sound
             if (isClient)
             {
                 screamSoundNumber = Random.Range(0, 3);
                 screamSoundsSource.PlayOneShot((screamSoundsArray[screamSoundNumber]));
             }
         }
-        
+        #endregion
         public void Idle()
         {
             if (patrolManager == null)
@@ -144,24 +156,35 @@ namespace Damien
         {
             if (isClient)
             {
+                //flash off
                 flash.intensity = 0.5f;
-                Debug.Log("hello");
+                Debug.Log("Flash Off");
             }
         }
         
         IEnumerator FlashPlayer()
         {
-            yield return new WaitForSeconds(.5f);
-            flash.intensity = flashBrightness;
-            PlayFlashSound();
-            yield return new WaitForSeconds(.5f);
-            FlashOff();
-            /*yield return new WaitForSeconds(.5f);
-            flash.intensity = flashBrightness;
-            yield return new WaitForSeconds(.5f);
-            FlashOff();*/
-            ResetStates();
-            
+            if (isClient)
+            {
+                //flashes
+                yield return new WaitForSeconds(.5f);
+                flash.intensity = flashBrightness;
+                RpcPlayFlashSound();
+                yield return new WaitForSeconds(.5f);
+                FlashOff();
+                yield return new WaitForSeconds(.5f);
+                flash.intensity = flashBrightness;
+                yield return new WaitForSeconds(.5f);
+                FlashOff();
+                
+            }
+            else
+            {
+                if (isServer)
+                {
+                    ResetStates();
+                }
+            }
         }
     }
 }

@@ -19,10 +19,7 @@ namespace Damien
 
         private void Start()
         {
-            if (isServer)
-            {
-                StartCoroutine("SeeThings", 0.2f);
-            }
+            StartCoroutine("SeeThings", 0.2f);
         }
 
         IEnumerator SeeThings(float delay)

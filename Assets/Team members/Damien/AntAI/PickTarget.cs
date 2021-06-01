@@ -38,7 +38,7 @@ namespace Damien
                     {
                         currTarget = fieldOfView.listOfTargets[i];
                         owner.GetComponent<Blinder>().target = currTarget;
-                        owner.GetComponent<Blinder>().PlayScream();
+                        owner.GetComponent<Blinder>().RpcPlayScream();
                         currTarget = null;
                     }
                 }
